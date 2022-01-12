@@ -107,7 +107,7 @@ export default function Footer() {
                     <svg
                       width="52"
                       height="52"
-                      class="cursor-pointer bg-gray-100 hover:bg-red-400 rounded-full"
+                      className="cursor-pointer bg-gray-100 hover:bg-red-400 rounded-full"
                     >
                       <path d="M19.72 12h11.83c4.808 0 8.72 3.912 8.72 8.72v11.83c0 4.808-3.912 8.72-8.72 8.72H19.72c-4.808 0-8.72-3.912-8.72-8.72V20.72c0-4.808 3.912-8.72 8.72-8.72zm11.83 26.325a5.775 5.775 0 005.775-5.775V20.72a5.775 5.775 0 00-5.775-5.775H19.72a5.775 5.775 0 00-5.775 5.775v11.83a5.775 5.775 0 005.775 5.775h11.83z"></path>
                       <path d="M18.12 26.634c0-4.143 3.37-7.515 7.514-7.515s7.516 3.371 7.516 7.515-3.372 7.516-7.516 7.516c-4.143 0-7.515-3.372-7.515-7.516zm2.922 0a4.592 4.592 0 109.184 0 4.592 4.592 0 00-9.184 0z"></path>
@@ -163,8 +163,8 @@ export default function Footer() {
 
       <footer className="bg-gray-300 py-2">
         <div className="p-4 container bg-white mx-auto py-1  rounded-[15px] pb-4 ">
-          <div class="flex justify-between pt-6">
-            <div class="flex space-x-6 items-center">
+          <div className="flex justify-between pt-6">
+            <div className="flex space-x-6 items-center">
               <div className="flex items-center">
                 <div className=" py-3 px-3 flex items-center w-14 h-14 relative cursor-pointer">
                   <Image

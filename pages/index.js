@@ -9,7 +9,7 @@ export default function Home() {
     <div>
     <Head>
       <title>Kuku Deals The most rewarding shopping experience</title>
-      <link rel='icon' href='icons/kuku deals logo file variants-4.png' />
+      <link rel='icon' href='icons/black-logo-small.png' />
    </Head>
     <Navbar />
     <Banner />

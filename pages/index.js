@@ -1,10 +1,20 @@
+import Banner from '@/components/Banner'
+import Footer from '@/components/Footer'
 import Head from 'next/head'
 import Image from 'next/image'
+import Navbar from '@/components/Navbar'
 
 export default function Home() {
   return (
-    <h1 className="text-2xl font-bold">
-      Hello world! 
-    </h1>
+    <div>
+    <Head>
+      <title>Kuku Deals The most rewarding shopping experience</title>
+      <link rel='icon' href='icons/kuku deals logo file variants-4.png' />
+   </Head>
+    <Navbar />
+    <Banner />
+    <Footer />  
+  </div>
+  
   )
 }

@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <>
-      <footer className="bg-gray-300 py-2">
+      <footer className="bg-gray-200 py-2">
         <div className="container bg-white mx-auto py-2 px-4  rounded-[15px]">
           <div className=" p-4 flex justify-between">
             <div className="flex">
@@ -161,21 +161,18 @@ export default function Footer() {
         </div>
       </footer>
 
-      <footer className="bg-gray-300 py-2">
+      <footer className="bg-gray-200 py-2">
         <div className="p-4 container bg-white mx-auto py-1  rounded-[15px] pb-4 ">
           <div className="flex justify-between pt-6">
-            <div className="flex space-x-6 items-center">
-              <div className="flex items-center">
-                <div className=" py-3 px-3 flex items-center w-14 h-14 relative cursor-pointer">
+            <div className=" flex space-x-6 items-center">
+              <div className="flex text-center">
+                <div className="flex w-36 h-14 relative cursor-pointer">
                   <Image
-                    src="/icons/black-logo-small.png"
+                    src="/icons/kukudealslogo-black.png"
                     layout="fill"
                     alt="kuku logo"
                   />
                 </div>
-                <span className="font-bold pl-6x text-3xl cursor-pointer">
-                  deals
-                </span>
               </div>
               <a className=""></a>© 2022. All rights reserved
               <ul className="flex space-x-6 ">

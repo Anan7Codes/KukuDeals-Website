@@ -3,42 +3,55 @@ import Image from "next/image";
 
 function Navbar() {
   return (
-    <nav className="bg-gray-300 py-2 font-title">
-      <div className=" container bg-white mx-auto py-1  rounded-[15px]">
+    <nav className="pb-3  ">
+      <div className=" container bg-white mx-auto py-2 rounded-[15px]">
         <div className=" flex justify-between ">
-          <div className="flex space-x-6 pl-2">
-            {/* <div className="py-3 px-3 flex items-center">
-              <Image src="icons/black-logo-small.png" className="w-14 h-14 cursor-pointer"/>
-              <span className="font-bold text-3xl cursor-pointer">deals</span>
-            </div> */}
-            <div className="flex items-center">
-
-            <div className=" py-3 px-3 flex items-center w-14 h-14 relative cursor-pointer">
-   <Image src="/icons/black-logo-small.png" layout="fill" alt="kuku logo"/>
-</div>
-              <span className="font-bold pl-6x text-3xl cursor-pointer">deals</span>
+          <div className="flex space-x-6 pl-2 text-base">
+            <div className="flex text-center p-2">
+              <div className="flex items-center w-32 h-12 relative cursor-pointer">
+                <Image
+                  src="/icons/kukudealslogo-black.png"
+                  layout="fill"
+                  alt="kuku logo"
+                />
+              </div>
             </div>
             <div className="flex items-center space-x-3">
-              <a href="" className="py-4 px-3 text-lg text-gray-400 font-medium hover:text-red-400">
+              <a
+                href=""
+                className="py-4 px-3  text-[#4a4a4a] font-bold hover:text-red-400 "
+              >
                 PRODUCTS
               </a>
-              <a href="" className="py-4 px-3 text-lg text-gray-400 font-medium hover:text-red-400">
+              <a
+                href=""
+                className="py-4 px-3  text-[#4a4a4a] font-bold hover:text-red-400"
+              >
                 WINNERS
               </a>
             </div>
           </div>
-          <div className="flex items-center space-x-6 pr-4">
-            <a href="" className="py-4 px-3 text-lg text-gray-400 font-medium hover:text-red-400">
+          <div className="flex items-center space-x-6 pr-4 text-base">
+            <a
+              href=""
+              className="py-4 px-3  text-[#4a4a4a] font-medium hover:text-red-400"
+            >
               Need Help? Contact us
             </a>
-            <a href="" className="py-4 px-3 text-[#0073ff] text-lg">
+            <a href="" className="py-4 px-3 text-[#0073ff] ">
               <b>Call 0800-KUKU</b>
             </a>
 
-            <a href="" className="py-4 px-3 text-lg text-gray-400 font-medium hover:text-red-400">
+            <a
+              href=""
+              className="py-4 px-3  text-[#4a4a4a] font-medium hover:text-red-400"
+            >
               العربية
             </a>
-            <a href="" className="py-2 px-3 text-lg text-gray-400 font-medium hover:text-red-400 ">
+            <a
+              href=""
+              className="py-2 px-3  text-[#4a4a4a] font-medium hover:text-red-400 "
+            >
               Register/Login
             </a>
           </div>

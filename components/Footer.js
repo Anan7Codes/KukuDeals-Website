@@ -3,12 +3,12 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <>
-      <footer className="bg-gray-200 py-2">
-        <div className="container bg-white mx-auto py-2 px-4  rounded-[15px]">
+      <footer className="py-2">
+        <div className="container bg-white mx-auto py-2 px-4 rounded-[15px]">
           <div className=" p-4 flex justify-between">
             <div className="flex">
               <div className="pr-10 ">
-                <div className="font-medium text-xl  text-gray-700 font-medium cursor-pointer hover:text-red-400">
+                <div className="font-medium text-xl text-gray-700 font-medium cursor-pointer hover:text-red-400">
                   Quick Links
                 </div>
                 <ul className="text-lg pt-3">
@@ -161,7 +161,7 @@ export default function Footer() {
         </div>
       </footer>
 
-      <footer className="bg-gray-200 py-2">
+      <footer className="py-2">
         <div className="p-4 container bg-white mx-auto py-1  rounded-[15px] pb-4 ">
           <div className="flex justify-between pt-6">
             <div className=" flex space-x-6 items-center">
@@ -186,7 +186,7 @@ export default function Footer() {
             </div>
             <div className="flex ">
               <ul className="flex space-x-3 items-center">
-                <li classNameName="pr-5"> We accept</li>
+                <li className="pr-5">We accept</li>
                 <li className=" h-9 w-12 relative ">
                   <Image
                     src="/icons/footerIcons/pay.png"

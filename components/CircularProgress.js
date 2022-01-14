@@ -17,7 +17,7 @@ function CircularProgressbar() {
 
   return (
     <div style={{marginLeft:100, marginTop:200}}>
-      <CircularProgress color="secondary" variant="determinate" class="bg-yellow-500 rounded-full  w-44 h-44"  value={30} />
+      <CircularProgress color="secondary" variant="determinate" className="bg-yellow-500 rounded-full w-44 h-44" value={30} />
     </div>
   );
 }

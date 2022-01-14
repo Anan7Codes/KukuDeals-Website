@@ -7,7 +7,6 @@ import Section2 from "@/components/Section2";
 import Section3 from "@/components/Section3";
 import Section4 from "@/components/Section4";
 import Section5 from "@/components/Section5";
-import CircularProgress from "@/components/CircularProgress";
 
 export default function Home() {
   return (
@@ -16,7 +15,7 @@ export default function Home() {
         <title>Kuku Deals The most rewarding shopping experience</title>
         <link rel="icon" href="icons/black-logo-small.png" />
       </Head>
-      <body className="bg-gray-200 ml-12 mr-12 mt-4">
+      <body className="bg-gray-100 px-8 mt-4 overflow-x-hidden">
         <Navbar />
         <Banner />
         <Section1 />
@@ -25,7 +24,6 @@ export default function Home() {
         <Section4 />
         <Section5 />
         <Footer />
-        <CircularProgress/>
       </body>
     </div>
   );

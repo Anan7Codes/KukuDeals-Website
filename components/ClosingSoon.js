@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function ClosingSoon() {
   return (
-    <div className="w-[17.5rem] h-[20rem] bg-white rounded-[15px] overflow-hidden shadow-lg transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-105  duration-900 ">
+    <div className="w-[16rem] h-[20rem] bg-white rounded-[15px] overflow-hidden shadow-lg transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-105  duration-900 ">
       <div className="pt-4 mx-auto text-center">654 sold out of 725</div>
       <div className="relative px-4">
         <div className="overflow-hidden h-2 mb-4 text-xs flex rounded-[25px] bg-gray-200">

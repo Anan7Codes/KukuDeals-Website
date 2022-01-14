@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Soldout1() {
   return (
     <div>
-      <div className=" grid grid-cols-2 gap-60 w-80 h-[28rem] bg-white rounded-[15px] overflow-hidden shadow-lg ">
+      <div className=" grid grid-cols-4 gap-10  h-[28rem] bg-white rounded-[15px] overflow-hidden shadow-lg ">
         <div className="relative justify-self-center">
           <div className=" cursor-pointer absolute top-0 left-0 mt-24 ml-4 hover:shadow-outline w-60 h-44 cursor-pointer">
             <Image

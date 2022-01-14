@@ -7,7 +7,7 @@ import Section2 from "@/components/Section2";
 import Section3 from "@/components/Section3";
 import Section4 from "@/components/Section4";
 import Section5 from "@/components/Section5";
-import CircularProgress from "@/components/CircularProgress";
+import Circular from "@/components/Circular";
 
 export default function Home() {
   return (
@@ -25,7 +25,6 @@ export default function Home() {
         <Section4 />
         <Section5 />
         <Footer />
-        <CircularProgress/>
       </body>
     </div>
   );

@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function Navbar() {
   return (
-    <nav className="pb-3  ">
+    <nav className="pb-3">
       <div className=" container bg-white mx-auto py-2 rounded-[15px]">
         <div className=" flex justify-between ">
           <div className="flex space-x-6 pl-2 text-base">
@@ -19,7 +19,7 @@ function Navbar() {
             <div className="flex items-center space-x-3">
               <a
                 href=""
-                className="py-4 px-3  text-[#4a4a4a] font-bold hover:text-red-400 "
+                className="py-4 px-3 text-[#4a4a4a] font-bold hover:text-red-400 "
               >
                 PRODUCTS
               </a>
@@ -34,7 +34,7 @@ function Navbar() {
           <div className="flex items-center space-x-6 pr-4 text-base">
             <a
               href=""
-              className="py-4 px-3  text-[#4a4a4a] font-medium hover:text-red-400"
+              className="py-4 px-3 text-[#4a4a4a] font-medium hover:text-red-400"
             >
               Need Help? Contact us
             </a>
@@ -50,7 +50,7 @@ function Navbar() {
             </a>
             <a
               href=""
-              className="py-2 px-3  text-[#4a4a4a] font-medium hover:text-red-400 "
+              className="py-2 px-3 text-[#4a4a4a] font-medium hover:text-red-400 "
             >
               Register/Login
             </a>

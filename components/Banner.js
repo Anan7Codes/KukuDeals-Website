@@ -1,7 +1,7 @@
 export default function Banner() {
   return (
     <div className="py-2">
-      <div className="container bg-white mx-auto py-1 w-full h-96 bg-cover bg-no-repeat  rounded-[30px] bg-[url('/icons/banner.png')] ">
+      <div className="container bg-white mx-auto py-1 w-full h-96 bg-cover bg-no-repeat rounded-[30px] bg-[url('/icons/banner.png')] ">
         <div>
           <div>
             <div className="flex justify-end">
@@ -17,7 +17,7 @@ export default function Banner() {
                   <br />
                   and make it yours!
                 </div>
-                <button className="bg-white text-red-500 font-bold text-lg hover:bg-gray-200  rounded-[15px] w-44 h-14">
+                <button className="bg-white text-red-500 font-bold text-lg hover:bg-gray-200 rounded-[15px] w-44 h-14">
                   See details
                 </button>
               </div>

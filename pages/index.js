@@ -9,6 +9,7 @@ import Section4 from "@/components/Section4";
 import Section5 from "@/components/Section5";
 import Circular from "@/components/Circular";
 
+
 export default function Home() {
   return (
     <div>
@@ -16,7 +17,7 @@ export default function Home() {
         <title>Kuku Deals The most rewarding shopping experience</title>
         <link rel="icon" href="icons/black-logo-small.png" />
       </Head>
-      <body className="bg-gray-200 ml-12 mr-12 mt-4">
+      <body className="bg-gray-100 px-8 mt-4 overflow-x-hidden">
         <Navbar />
         <Banner />
         <Section1 />

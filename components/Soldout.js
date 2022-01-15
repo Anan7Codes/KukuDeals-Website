@@ -9,28 +9,28 @@ const responsive = {
   1024: { items: 4 },
 };
 const items = [
-  <div className="item" data-value="0">
+  <div className="item" id="0" id="0" data-value="0">
     <Soldout1 />
   </div>,
-  <div className="item" data-value="1">
+  <div className="item" id="1"  data-value="1">
     <Soldout1 />
   </div>,
-  <div className="item" data-value="2">
+  <div className="item" id="2"  data-value="2">
     <Soldout1 />
   </div>,
-  <div className="item" data-value="3">
+  <div className="item" id="3"  data-value="3">
     <Soldout1 />
   </div>,
-  <div className="item" data-value="4">
+  <div className="item" id="4"  data-value="4">
     <Soldout1 />
   </div>,
-  <div className="item" data-value="5">
+  <div className="item" id="5"  data-value="5">
     <Soldout1 />
   </div>,
-  <div className="item" data-value="6">
+  <div className="item" id="6"  data-value="6">
     <Soldout1 />
   </div>,
-  <div className="item" data-value="7">
+  <div className="item" id="7"  data-value="7">
     <Soldout1 />
   </div>,
 ];
@@ -50,7 +50,8 @@ export default function Soldout() {
               draw dates are listed below
             </div>
             <div className="">
-              <AliceCarousel
+              <AliceCarousel 
+              key={items.id}
                 mouseTracking
                 items={items}
                 responsive={responsive}

@@ -3,15 +3,15 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <>
-      <footer className="py-2">
+      <footer className="pb-2">
         <div className="container bg-white mx-auto py-2 px-4 rounded-[15px]">
           <div className=" p-4 flex justify-between">
-            <div className="flex">
+            <div className="flex tracking-tight	">
               <div className="pr-10 ">
-                <div className="font-medium text-xl text-gray-700 font-medium cursor-pointer hover:text-red-400">
+                <div className="font-medium text-lg text-gray-700 font-medium cursor-pointer hover:text-red-400">
                   Quick Links
                 </div>
-                <ul className="text-lg pt-3">
+                <ul className="text-base  pt-3 leading-extra-loose	">
                   <li>
                     <a className="text-gray-700 cursor-pointer hover:text-red-400  ">
                       About Kuku
@@ -30,11 +30,11 @@ export default function Footer() {
                 </ul>
               </div>
 
-              <div className="pl-6">
-                <div className=" text-xl text-gray-700 font-medium cursor-pointer hover:text-red-400">
+              <div className="pl-20">
+                <div className=" text-lg text-gray-700 font-medium cursor-pointer hover:text-red-400">
                   Customer Service
                 </div>
-                <ul className="text-lg pt-3">
+                <ul className="text-base  pt-3 leading-extra-loose	">
                   <li>
                     <a className="text-gray-700  cursor-pointer hover:text-red-400">
                       Contact Us
@@ -126,19 +126,19 @@ export default function Footer() {
                   </a>
                 </li>
               </ul>
-              <p className="flex justify-center p-3 mt-4 text-medium">
+              <p className="flex justify-center p-3 mt-2 text-sm">
                 Download the Kuku app for the ultimate <br /> shopping
                 experience!
               </p>
-              <ul className="space-x-10 flex justify-center  pt-5">
-                <li className=" h-16 w-44 relative ">
+              <ul className="space-x-10 flex justify-center  pt-2">
+                <li className=" h-12 w-36 relative ">
                   <Image
                     src="/icons/footerIcons/appstore.png"
                     layout="fill"
                     alt="googleplay logo"
                   />
                 </li>
-                <li className=" h-16 w-44 relative ">
+                <li className=" h-12 w-36 relative">
                   <Image
                     src="/icons/footerIcons/google play.png"
                     layout="fill"
@@ -148,7 +148,7 @@ export default function Footer() {
               </ul>
 
               <div className="pt-5">
-                <div className=" w-30 h-16 relative ">
+                <div className=" w-[23rem] h-12 relative ">
                   <Image
                     src="/icons/footerIcons/Islamic.png"
                     layout="fill"
@@ -162,11 +162,11 @@ export default function Footer() {
       </footer>
 
       <footer className="py-2">
-        <div className="p-4 container bg-white mx-auto py-1  rounded-[15px] pb-4 ">
+        <div className="pl-4 pr-5 container bg-white mx-auto  rounded-[15px] pb-2 ">
           <div className="flex justify-between pt-6">
             <div className=" flex space-x-6 items-center">
               <div className="flex text-center">
-                <div className="flex w-36 h-14 relative cursor-pointer">
+              <div className="flex items-center w-20 h-7 relative cursor-pointer">
                   <Image
                     src="/icons/kukudealslogo-black.png"
                     layout="fill"
@@ -174,8 +174,8 @@ export default function Footer() {
                   />
                 </div>
               </div>
-              <a className=""></a>© 2022. All rights reserved
-              <ul className="flex space-x-6 ">
+              <p className="text-xs">© 2022. All rights reserved</p>
+              <ul className="flex space-x-6 text-xs">
                 <li className="cursor-pointer hover:text-red-400">
                   <a>User Agreement</a>
                 </li>
@@ -184,38 +184,38 @@ export default function Footer() {
                 </li>
               </ul>
             </div>
-            <div className="flex ">
-              <ul className="flex space-x-3 items-center">
-                <li className="pr-5">We accept</li>
-                <li className=" h-9 w-12 relative ">
+            <div className="flex text-xs">
+              <ul className="flex space-x-2 items-center">
+                <li className="">We accept</li>
+                <li className=" h-6  w-9 relative ">
                   <Image
                     src="/icons/footerIcons/pay.png"
                     layout="fill"
                     alt="g pay logo"
                   />
                 </li>
-                <li className=" h-9 w-12 relative ">
+                <li className="h-6  w-9 relative ">
                   <Image
                     src="/icons/footerIcons/Visa.png"
                     layout="fill"
                     alt="g pay logo"
                   />
                 </li>
-                <li className=" h-9 w-12 relative ">
+                <li className=" h-6  w-9 relative ">
                   <Image
                     src="/icons/footerIcons/Mastercard.png"
                     layout="fill"
                     alt="g pay logo"
                   />
                 </li>
-                <li className=" h-9 w-12 relative ">
+                <li className=" h-6  w-9 relative ">
                   <Image
                     src="/icons/footerIcons/American-express.png"
                     layout="fill"
                     alt="g pay logo"
                   />
                 </li>
-                <li className=" h-9 w-12 relative ">
+                <li className=" h-6  w-9 relative ">
                   <Image
                     src="/icons/footerIcons/gpay.png"
                     layout="fill"

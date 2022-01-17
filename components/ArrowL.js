@@ -1,8 +1,9 @@
 import React from "react";
 
 export default function ArrowL() {
+    
   return (
-    <div className="relative flex justify-end">
+    <div className="relative flex justify-end ">
       <div className=" absolute text-white w-14 h-12 cursor-pointer border border-white rounded-[15px] text-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -4,12 +4,12 @@ export default function Winners() {
     return (
         <div>
             <div className="py-8">
-                <div className="bg-[#7000ff] h-[40rem]  rounded-[15px] px-6 py-5  text-white">
-                    <div className="p-4 ml-3">
-                        <div className="font-[1000] text-4xl">Winners</div>
-                        <div className="text-lg font-bold">
+                <div className="bg-[#7000ff] h-[36rem]  rounded-[15px] px-6 pr-2 py-5  text-white">
+                    <div className="p-2">
+                        <p className="font-[700] tracking-tighter text-3xl">Winners</p>
+                        <p className="text-normal font-bold">
                             All our winners are announced in this section
-                        </div>
+                        </p>
                     </div>
                     <div className="p-4 flex justify-between">
                         <Winners1 />

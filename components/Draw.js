@@ -4,15 +4,14 @@ export default function Draw() {
     return (
         <div>
             <div className="">
-                <div className=" bg-white h-[50rem]  rounded-[15px] px-6 py-5  text-gray-700">
-                    <div className="p-4 ml-3">
-                        <div className="font-[1000] text-4xl">Draws</div>
-                        <div className="text-lg font-bold">
+                <div className=" bg-white h-[40rem] mb-6 rounded-[15px] px-6 py-5  ">
+                    <div className="p-2 ">
+                        <div className="font-[1000] pb-2 text-3xl text-gray-700">Draws</div>
+                        <p className="text-base text-gray-700 font-semibold tracking-tight	leading-5	">
                             See all of our upcoming draws here for all campaigns and <br /> the campaigns you participated in.
-
-                        </div>
+                        </p>
                     </div>
-                    <div className="p-4 flex justify-between ">
+                    <div className="p-2 flex justify-between ">
                         <Draw1 />
                         <Draw1 />
                         <Draw1 />

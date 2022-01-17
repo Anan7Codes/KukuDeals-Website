@@ -16,7 +16,7 @@ export default function Home() {
         <title>Kuku Deals The most rewarding shopping experience</title>
         <link rel="icon" href="icons/black-logo-small.png" />
       </Head>
-      <body className="bg-gray-100 px-8 mt-4 overflow-x-hidden">
+      <body className="bg-gray-100 px-5 mt-4 overflow-x-hidden">
         <Navbar />
         <Banner />
         <Section1 />

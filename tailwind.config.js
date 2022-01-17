@@ -12,6 +12,12 @@ module.exports = {
         title: ["'Josefin Sans',sans-serif"],
       }
     },
+    extend: {
+      lineHeight: {
+        'extra-loose': '2.5',
+        '12': '3rem',
+      }
+    }
   },
   plugins: [],
 }

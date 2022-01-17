@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export default function ClosingSoon() {
   return (
-    <div className="w-[16rem] h-[20rem] bg-white rounded-[15px] overflow-hidden shadow-lg transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-105  duration-900 ">
-      <div className="pt-4 mx-auto text-center">654 sold out of 725</div>
+    <div className="w-[11.5rem] h-[16.5rem] bg-white rounded-[15px] overflow-hidden  shadow-lg transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-105  duration-1000 ">
+      <div className="pt-4 mx-auto text-center text-xs tracking-tight	">654 Sold out of 725</div>
       <div className="relative px-4">
         <div className="overflow-hidden h-2 mb-4 text-xs flex rounded-[25px] bg-gray-200">
           <div
@@ -12,22 +12,22 @@ export default function ClosingSoon() {
           ></div>
         </div>
       </div>
-      <div className=" py-3 px-3 flex items-center w-full h-28 relative cursor-pointer">
+      <div className=" py-3 px-3 flex items-center w-full h-24 relative cursor-pointer">
         <Image
           src="/icons/products/product.png"
           layout="fill"
           alt="product logo"
         />
       </div>
-      <div className="px-6 py-4 text-center tracking-tight ">
-        <div className="font-bold text-xl ">
+      <div className="px-4 pt-3 text-center tracking-tight leading-3 ">
+        <p className=" text-sm tracking-tighter	 ">
           Get a chance to
-          <span className="text-red-500 italic">Win</span>
-        </div>
-        <p className="text-gray-700 text-base font-bold">AED 25,000 Cash</p>
+          <span className="text-red-500 font-bold italic"> Win</span>
+        </p>
+        <p className="text-gray-700 text-sm font-bold tracking-tighter 	">AED 25,000 Cash</p>
       </div>
-      <div className="  text-center">
-        <button className="w-36 h-10  border-2 border-black rounded-[20px]  text-sm font-semibold hover:bg-blue-500 hover:text-white hover:font-bold hover:border-none text-gray-700 mr-2 mb-2">
+      <div className="text-center tracking-tighter pt-2	">
+        <button className="w-28 h-7  border border-gray-500 rounded-[20px]  text-xs font-bold hover:bg-blue-500 hover:text-white hover:font-bold hover:border-none text-gray-600 tracking-tight	">
           Add to Cart
         </button>
       </div>

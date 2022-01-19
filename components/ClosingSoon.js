@@ -12,7 +12,7 @@ export default function ClosingSoon() {
           ></div>
         </div>
       </div>
-      <div className=" py-3 px-3 flex items-center w-full h-24 relative cursor-pointer">
+      <div className=" py-3 px-3 flex items-center relative h-24 	cursor-pointer">
         <Image
           src="/icons/products/product.png"
           layout="fill"

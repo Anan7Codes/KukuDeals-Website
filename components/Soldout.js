@@ -1,4 +1,4 @@
-import Soldout1 from "./Soldout1";
+import Soldout1 from "./SoldoutCard";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import ArrowL from "./ArrowL";

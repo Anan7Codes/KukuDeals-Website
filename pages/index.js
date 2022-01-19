@@ -7,6 +7,7 @@ import Section2 from "@/components/Section2";
 import Section3 from "@/components/Section3";
 import Section4 from "@/components/Section4";
 import Section5 from "@/components/Section5";
+import CartButton from "@/components/CartButton";
 
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
       </Head>
       <body className="bg-gray-100 px-5 mt-4 overflow-x-hidden">
         <Navbar />
+        <CartButton/> 
         <Banner />
         <Section1 />
         <Section2 />

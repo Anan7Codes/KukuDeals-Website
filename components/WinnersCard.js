@@ -1,9 +1,8 @@
 import Image from 'next/image'
 
-export default function Winners1() {
+export default function WinnersCard() {
     return (
         <div className="grid grid-cols-4 gap-2">
-
             <div className="w-[16rem] h-[24rem] bg-white rounded-[25px] overflow-hidden shadow-lg ">
                 <div className="relative justify-self-center">
                     <div className=" cursor-pointer absolute top-0 left-0 mt-4 ml-2 hover:shadow-outline w-60 h-44 cursor-pointer">
@@ -13,7 +12,6 @@ export default function Winners1() {
                             alt="product logo"
                         />
                     </div>
-
                 </div>
                 <div className="col-span-2 ">
                     <div className="text-center tracking-tighter  pt-48">

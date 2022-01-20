@@ -4,11 +4,12 @@ import Navbar from "@/components/Navbar";
 
 export default function cart() {
     return (
-        <div className="bg-gray-100 px-5 mt-4 overflow-x-hidden">
-            <Navbar/>
-            <Cart/>
-            <Footer/>
-
+        <div className="">
+            <body className="bg-gray-100 px-5 mt-4 overflow-x-hidden">
+                <Navbar />
+                <Cart />
+                <Footer />
+            </body>
         </div>
     )
 }

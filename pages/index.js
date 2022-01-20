@@ -9,17 +9,13 @@ import Section4 from "@/components/Section4";
 import Section5 from "@/components/Section5";
 import CartButton from "@/components/CartButton";
 
-
 export default function Home() {
   return (
     <div>
-      <Head>
-        <title>Kuku Deals The most rewarding shopping experience</title>
-        <link rel="icon" href="icons/black-logo-small.png" />
-      </Head>
+      <Head></Head>
       <body className="bg-gray-100 px-5 mt-4 overflow-x-hidden">
         <Navbar />
-        <CartButton/> 
+        <CartButton />
         <Banner />
         <Section1 />
         <Section2 />
@@ -27,7 +23,6 @@ export default function Home() {
         <Section4 />
         <Section5 />
         <Footer />
-    
       </body>
     </div>
   );

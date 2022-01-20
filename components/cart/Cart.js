@@ -1,6 +1,6 @@
 import Image from "next/image";
 import ToggleSwitch from "@/components/ToggleSwitch";
-import Total from "./Total";
+import Total from "@/components/cart/Total";
 export default function Cart() {
   return (
     <div className="container mb-6 flex justify-between">

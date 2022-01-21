@@ -1,4 +1,4 @@
-import Explore from "@/components/Explore";
+import Explore from "@/components/home/Explore";
 
 export default function Section2() {
     return (

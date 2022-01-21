@@ -13,7 +13,7 @@ export default function DrawBox() {
         </div>
       </div>
 
-      <div className=" w-[16rem] h-[20rem] bg-white rounded-[25px] overflow-hidden shadow-lg ">
+      <div className=" w-[16rem] h-[20rem] bg-white rounded-b-3xl overflow-hidden shadow-lg ">
         <div className="relative justify-self-center">
           <div className=" cursor-pointer absolute top-0 left-0 opacity-50  hover:shadow-outline w-60 h-36 cursor-pointer">
             <Image

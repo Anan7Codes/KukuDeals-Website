@@ -1,38 +1,31 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import CartButton from "./CartButton";
 
 export default function CartRight(props) {
   const [showCart, setShowCart] = useState(true);
-//   const onClose = () => {
-//     props.showCart(false);
-//   };
+  const router = useRouter()
+  //   const onClose = () => {
+  //     props.showCart(false);
+  //   };
   const handleCart = (e) => {
     setShowCart(false);
   };
+  const handleClick = () => {
+    router.push('/cart')
+  }
   return (
     <div>
       {showCart ? (
-        <div className="grid justify-items-end absolute" onMouseLeave={handleCart}>
+        <div
+          className="grid justify-items-end absolute"
+          onMouseLeave={handleCart}
+        >
           <div className="bg-gray-100 drop-shadow-lg container w-[25rem] h-[22rem] bottom-3  right-10 rounded-[15px] fixed z-20">
             <div className=" text-sm font-semibold text-gray-700 pl-6 pr-6 pt-2">
               <div className="flex justify-between">
                 <p>Donatable Product(s)</p>
-                {/* <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  onClick={onClose}
-                  className="h-6 w-6 flex cursor-pointer"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg> */}
               </div>
               <div className="flex justify-between pt-4">
                 <div className=" bg-white cursor-pointer rounded-[15px] object-fit -left-2 relative w-32 h-24 cursor-pointer">
@@ -121,7 +114,8 @@ export default function CartRight(props) {
                   </p>
                 </div>
               </div>
-              <button className="bg-blue-500 rounded-[15px] text-base font-medium hover:bg-[#2A547E] text-white w-64 h-12 ml-16 mt-2 mb-4 ">
+
+              <button onClick={handleClick} className="bg-blue-500 rounded-[15px] text-base font-medium hover:bg-[#2A547E] text-white w-64 h-12 ml-16 mt-2 mb-4 ">
                 Continue to Checkout
               </button>
             </div>

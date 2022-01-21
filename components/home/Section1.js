@@ -1,4 +1,4 @@
-import ClosingSoon from "@/components/ClosingSoon";
+import ClosingSoon from "@/components/home/ClosingSoon";
 
 export default function Section1() {
   return (

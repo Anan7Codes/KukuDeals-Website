@@ -20,10 +20,6 @@ export default function Address() {
           placeholder="Area"
           className="border border-gray-300 placeholder:text-xs text-lg  pl-3 mr-3 w-[36rem] mt-4 outline-none  text-xs rounded-[5px]  h-14  border-gray-300 "
         />
-        <input
-          placeholder="Current Password"
-          className="border border-gray-300 placeholder:text-xs text-lg  pl-3 mr-3 w-[36rem] mt-4 outline-none  text-xs rounded-[5px]  h-14  border-gray-300 "
-        />
         <RegionDropdown
           defaultOptionLabel="City"
           country={country}

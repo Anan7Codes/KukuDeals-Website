@@ -1,4 +1,4 @@
-import Winners from "@/components/Winners";
+import Winners from "@/components/home/Winners";
 
 export default function Section4() {
   return (

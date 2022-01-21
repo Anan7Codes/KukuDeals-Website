@@ -89,7 +89,7 @@ export default function ProfileDetails() {
             }
           />
         </RadioGroup>
-        <button className="bg-blue-500 w-40 h-16 mt-3 text-white font-semibold rounded-[15px]">
+        <button className="bg-blue-500 w-40 h-16 mt-3 text-white hover:bg-blue-600 font-semibold rounded-[15px]">
           Update
         </button>
       </div>

@@ -1,13 +1,13 @@
-import Banner from "@/components/Banner";
+import Banner from "@/components/home/Banner";
 import Footer from "@/components/Footer";
 import Head from "next/head";
 import Navbar from "@/components/Navbar";
-import Section1 from "@/components/Section1";
-import Section2 from "@/components/Section2";
-import Section3 from "@/components/Section3";
-import Section4 from "@/components/Section4";
-import Section5 from "@/components/Section5";
-import CartButton from "@/components/CartButton";
+import Section1 from "@/components/home/Section1";
+import Section2 from "@/components/home/Section2";
+import Section3 from "@/components/home/Section3";
+import Section4 from "@/components/home/Section4";
+import Section5 from "@/components/home/Section5";
+import CartButton from "@/components/cart/CartButton";
 
 export default function Home() {
   return (

@@ -1,8 +1,8 @@
-import Winners1 from "@/components/WinnersCard";
+import Winners1 from "@/components/home/WinnersCard";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import ArrowL from "./ArrowL";
-import ArrowR from "./ArrowR";
+import ArrowL from "@/components/home/ArrowL";
+import ArrowR from "@/components/home/ArrowR";
 import { useState } from "react";
 
 const responsive = {

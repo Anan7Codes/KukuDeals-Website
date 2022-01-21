@@ -7,7 +7,7 @@ export default function Explore() {
     <div className="w-full h-80 relative my-6">
       <div className="flex flex-row h-80 bg-white cursor-pointer rounded-[15px] overflow-visible shadow-lg transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-[102%] duration-300">
         <div className=" justify-self-center">
-          <div className="cursor-pointer absolute top-0 left-0 mt-6 ml-4 w-24 h-9 hover:shadow-outline w-60 h-44 cursor-pointer">
+          <div className="cursor-pointer absolute top-0 left-0 mt-6 ml-4 w-24 h-9 hover:shadow-outline w-full h-10 cursor-pointer">
             <Image
               src="/icons/explore/shop-logo.png"
               layout="fill"

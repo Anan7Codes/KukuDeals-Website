@@ -3,9 +3,9 @@ import Image from "next/image";
 function Navbar() {
   return (
     <nav className="pb-3">
-      <div className=" container bg-white mx-auto  rounded-[15px]">
-        <div className=" flex justify-between text-sm">
-          <div className="flex space-x-6 pl-2 ">
+      <div className="bg-white mx-auto rounded-[15px]">
+        <div className="flex justify-between text-sm">
+          <div className="flex space-x-6 pl-2">
             <div className="flex text-center p-2">
               <div className="flex items-center w-28 h-10 relative cursor-pointer">
                 <Image

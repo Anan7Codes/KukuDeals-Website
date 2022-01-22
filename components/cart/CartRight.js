@@ -22,13 +22,13 @@ export default function CartRight(props) {
           className="grid justify-items-end absolute"
           onMouseLeave={handleCart}
         >
-          <div className="bg-gray-100 drop-shadow-lg container w-[25rem] h-[22rem] bottom-3  right-10 rounded-[15px] fixed z-20">
+          <div className="bg-gray-100 drop-shadow-lg container w-[25rem] h-[22rem] bottom-6 right-2 rounded-[15px] fixed z-20">
             <div className=" text-sm font-semibold text-gray-700 pl-6 pr-6 pt-2">
               <div className="flex justify-between">
                 <p>Donatable Product(s)</p>
               </div>
               <div className="flex justify-between pt-4">
-                <div className=" bg-white cursor-pointer rounded-[15px] object-fit -left-2 relative w-32 h-24 cursor-pointer">
+                <div className=" bg-white cursor-pointer rounded-[15px] object-fit -left-2 relative w-32 h-24">
                   <Image
                     src="/icons/products/product.png"
                     layout="fill"

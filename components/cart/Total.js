@@ -14,8 +14,8 @@ export default function Total() {
     }
   return (
     <div className="conatainer">
-      <div className="   bg-white rounded-[15px] mb-4 mt-3 p-5 leading-extra-loose h-60 w-[20rem] divide-y">
-        <div className="flex text-2xl font-bold justify-between  pb-6">
+      <div className="bg-white rounded-[15px] mb-4 mt-3 p-5 leading-extra-loose h-60 w-[20rem] divide-y">
+        <div className="flex text-2xl font-bold justify-between pb-6">
           <p>Total</p>
           <p className="pt-3 absolute mt-4 text-sm font-normal">
             Inclusive of VAT
@@ -30,7 +30,7 @@ export default function Total() {
           <p>VAT</p>
           <p>AED28.57</p>
         </div>
-        <div className="flex pt-3 text-center text-sm pb-3 pt-3">
+        <div className="flex pt-3 text-center text-sm pb-3">
           <ToggleSwitch />
           <p className="pl-3 text-sm ">Use points Avl.50(AED5.00)</p>
         </div>
@@ -39,7 +39,7 @@ export default function Total() {
         <div className="bg-white w-[20rem] h-[4.5rem] mb-4 rounded-[15px]">
           <input
             placeholder="Promo Code"
-            className="border border-gray-400 pl-3  ml-5 mt-4 outline-none text-xs rounded w-48 h-9  border-black text-sm"
+            className="border border-gray-400 pl-3  ml-5 mt-4 outline-none text-xs rounded w-48 h-9"
           />
           <button className="ml-3 text-blue-500 border h-9 w-20 rounded text-xs font-semibold border-blue-500">
             Apply
@@ -67,16 +67,16 @@ export default function Total() {
             <div className="ml-4 mr-4">
             <input
             placeholder="Credit or Debit Card Number"
-            className="border border-gray-400 pl-3 w-full   mt-4 outline-none  text-xs rounded-[10px]  h-14  border-black text-sm"
+            className="border border-gray-400 pl-3 w-full mt-4 outline-none text-xs rounded-[10px] h-14"
           />
          
           <div className="flex justify-between mt-4">
           <input
             placeholder="Expiry Date"
-            className="border border-gray-400 pl-3 outline-none text-xs rounded-[10px] w-36 h-14  border-black text-sm"
+            className="border border-gray-400 pl-3 outline-none text-xs rounded-[10px] w-36 h-14"
           /> <input
             placeholder="Security Code"
-        className="border border-gray-400 pl-3   outline-none text-xs rounded-[10px] w-32 h-14  border-black text-sm"
+        className="border border-gray-400 pl-3 outline-none text-xs rounded-[10px] w-32 h-14"
           />
           </div>
             </div>

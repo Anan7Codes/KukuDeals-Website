@@ -15,7 +15,7 @@ export default function DrawBox() {
 
       <div className=" w-[16rem] h-[20rem] bg-white rounded-b-3xl overflow-hidden shadow-lg ">
         <div className="relative justify-self-center">
-          <div className=" cursor-pointer absolute top-0 left-0 opacity-50  hover:shadow-outline w-60 h-36 cursor-pointer">
+          <div className=" cursor-pointer absolute top-0 left-0 opacity-50  hover:shadow-outline w-60 h-36">
             <Image
               src="/icons/explore/explore-banner.png"
               layout="fill"

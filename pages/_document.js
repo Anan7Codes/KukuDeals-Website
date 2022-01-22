@@ -10,7 +10,6 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <title>Kuku Deals The most rewarding shopping experience</title>
                     <link rel="icon" href="icons/black-logo-small.png" />
                     <link rel="preconnect" href="https://fonts.googleapis.com" />
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />

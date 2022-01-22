@@ -8,7 +8,7 @@ export default function Footer() {
           <div className=" p-4 flex justify-between">
             <div className="flex tracking-tight	">
               <div className="pr-10 ">
-                <div className="font-medium text-lg text-gray-700 font-medium cursor-pointer hover:text-red-400">
+                <div className="font-medium text-lg text-gray-700 cursor-pointer hover:text-red-400">
                   Quick Links
                 </div>
                 <ul className="text-base  pt-3 leading-extra-loose	">
@@ -162,7 +162,7 @@ export default function Footer() {
       </footer>
 
       <footer className="py-2">
-        <div className="pl-4 pr-5 container bg-white mx-auto  rounded-[15px] pb-2 ">
+        <div className="pl-4 pr-5 container bg-white mx-auto rounded-[15px] pb-2 ">
           <div className="flex justify-between pt-6">
             <div className=" flex space-x-6 items-center">
               <div className="flex text-center">

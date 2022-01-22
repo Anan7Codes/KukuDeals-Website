@@ -1,15 +1,16 @@
+import Head from "next/head";
+import Layout from "@/components/Layout";
 import Cart from "@/components/cart/Cart";
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
 
 export default function cart() {
     return (
-        <div className="">
-            <body className="bg-gray-100 px-5 mt-4 overflow-x-hidden">
-                <Navbar />
-                <Cart />
-                <Footer />
-            </body>
+        <div className="bg-gray-100">
+            <Head>
+                <title>Kuku Deals</title>
+            </Head>
+            <Layout>
+                <Cart/>
+            </Layout>
         </div>
     )
 }

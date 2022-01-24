@@ -1,15 +1,17 @@
-import Footer from '@/components/Footer'
-import Navbar from '@/components/Navbar'
+import Head from "next/head";
+
 import Profile from '@/components/profile/Profile'
+import Layout from "@/components/Layout";
 
 export default function profile() {
     return (
-        <div className="">
-                  <body className="bg-gray-100 px-5 mt-4 overflow-x-hidden">
-            <Navbar/>
-            <Profile/>
-            <Footer/>
-            </body>
+        <div className="bg-gray-100">
+            <Head>
+                <title>Kuku Deals</title>
+            </Head>
+            <Layout>
+                <Profile/>
+            </Layout>
         </div>
     )
 }

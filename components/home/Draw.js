@@ -8,7 +8,6 @@ import { useState } from "react";
 const responsive = {
     0: { items: 1 },
     1024: { items: 4 },
-    1736: { items: 5 },
 };
 const items = [
     <div className="item" data-value="0" key="0">

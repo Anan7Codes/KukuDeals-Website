@@ -4,10 +4,10 @@ import "react-circular-progressbar/dist/styles.css";
 
 export default function Explore() {
   return (
-    <div className="w-full h-80 relative my-6">
+    <div className="w-full h-80 relative my-10">
       <div className="flex flex-row h-80 bg-white cursor-pointer rounded-[15px] overflow-visible shadow-lg transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-[102%] duration-300">
         <div className=" justify-self-center">
-          <div className="cursor-pointer absolute top-0 left-0 mt-6 ml-4 w-24 h-9 hover:shadow-outline w-full h-10 cursor-pointer">
+          <div className="cursor-pointer absolute top-0 left-0 mt-6 ml-4 hover:shadow-outline w-24 h-10">
             <Image
               src="/icons/explore/shop-logo.png"
               layout="fill"
@@ -24,7 +24,7 @@ export default function Explore() {
         </div>
         <div className="flex flex-col  w-full ">
           <div className="ml-[30rem] pt-8">
-            <p className="text-[5rem] font-bold leading-none	 italic text-[#f22] font-[1000]">
+            <p className="text-[5rem] font-bold leading-none italic text-[#f22]">
               Win
             </p>
             <p className="text-3xl text-gray-600  tracking-tighter	font-extrabold leading-7 ml-4">

@@ -6,7 +6,7 @@ export default function SoldoutBox() {
 
       <div className="w-[16rem] h-[22rem] bg-white rounded-[25px] overflow-hidden shadow-lg ">
       <div className="relative justify-self-center">
-      <div className=" cursor-pointer absolute top-0 left-0 mt-12 opacity-60 ml-2 hover:shadow-outline w-52 h-44 cursor-pointer">
+      <div className=" cursor-pointer absolute top-0 left-0 mt-12 opacity-60 ml-2 hover:shadow-outline w-52 h-44">
             <Image
               src="/icons/explore/explore-banner.png"
               layout="fill"

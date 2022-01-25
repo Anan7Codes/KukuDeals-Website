@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { FaAddressCard } from "react-icons/fa";
 import { RiCoupon2Fill, RiLogoutBoxRLine } from "react-icons/ri";
-import Address from "./Address";
-import Coupon from "./Coupon";
-import ProfileDetails from "./ProfileDetails";
-import Settings from "./Settings";
+import Address from "@/components/profile/Address";
+import Coupon from "@/components/profile/Coupon";
+import ProfileDetails from "@/components/profile/ProfileDetails";
+import Settings from "@/components/profile/Settings";
 
 export default function Sidebar() {
   const [showPersonalDetails, setShowPersonalDetails] = useState(true);

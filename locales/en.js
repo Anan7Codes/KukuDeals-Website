@@ -1,0 +1,9 @@
+export default {
+
+    products: "PRODUCTS",
+    winners: "WINNERS",
+    need_help: "Need Help? Contact us",
+    call: "Call 0800-KUKU",
+    register: "Register/Login"
+
+}

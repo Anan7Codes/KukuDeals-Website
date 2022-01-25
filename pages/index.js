@@ -15,6 +15,8 @@ export default function Home() {
       <Head>
         <title>Kuku Deals</title>
       </Head>
+      {/* const {t} = useTranslation();
+    return <h2>{t('welcome_to_react')}</h2> */}
       <Layout>
         <Banner />
         <Section1 />

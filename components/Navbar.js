@@ -1,6 +1,9 @@
+import { useContext } from 'react';
+import { LanguageContext } from '@/contexts/language'
 import Image from "next/image";
 
 function Navbar() {
+  const { english, setEnglish } = useContext(LanguageContext)
   return (
     <nav className="pb-3">
       <div className="bg-white mx-auto rounded-[15px]">
@@ -41,12 +44,12 @@ function Navbar() {
               <b>Call 0800-KUKU</b>
             </a>
 
-            <a
-              href=""
-              className="py-4 px-3  text-[#4a4a4a] font-medium hover:text-red-400"
+            <div
+              onClick={() => setEnglish(!english)}
+              className="py-4 px-3 hover:cursor-pointer  text-[#4a4a4a] font-medium hover:text-red-400"
             >
-              العربية
-            </a>
+              {english ? 'العربية' : 'English'}
+            </div>
             <a
               href=""
               className="py-2 px-3 text-[#4a4a4a] font-medium hover:text-red-400 "

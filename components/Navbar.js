@@ -1,72 +1,66 @@
-import { useRouter,useEffect } from "next/router";
-import { useState } from "react";
-import Nav from "./Nav";
-import cookies from 'js-cookie'
-import en from '../locales/en';
-import ar from '../locales/ar';
-
-
+import { useContext } from 'react';
+import { LanguageContext } from '@/contexts/language'
+import Image from "next/image";
 
 function Navbar() {
-  const [direction, setDirection] = useState(true);
-  const [language,setLanguage] = useState('en-US');
-  const router = useRouter();
-  const { locale } = router;
-  const languages = [
-      {
-          code: 'en-US',
-          name: 'English',
-          dir: 'ltr'
-
-      },
-      {
-          code: 'ar',
-          name: 'العربية',
-          dir: 'rtl'
-      }
-  ]
-  const currentLanguageCode = cookies.get('i18next') || 'en-US';
-  const currentLanguage = languages.find(l => l.code === currentLanguageCode)
-
-  locale === 'en-US' ? en : ar
-
-  useEffect(() => {
-      document.body.dir = currentLanguage.dir || 'ltr'
-      console.log("currentLanguage", currentLanguage);
-      console.log("currentLanguageCode", currentLanguageCode);
-      console.log(props);
-  }, [currentLanguage])
-
-  const handleDirection = (e) => {
-    e.preventDefault();
-    setDirection(!direction);
-    setLanguage('ar')
-    console.log("direction", direction);
-    console.log("language", language);
-
-
-  };
-
+  const { english, setEnglish } = useContext(LanguageContext)
   return (
-    <>
-      <nav className="pb-3">
-        {direction ? (
-          <Nav handleDirection={handleDirection} 
-          setDirection={setDirection}  />
-        ) : (
-          <div dir="rtl">
-            <Nav
-              handleDirection={handleDirection}
-              setDirection={setDirection} 
-            />
+    <nav className="pb-3">
+      <div className="bg-white mx-auto rounded-[15px]">
+        <div className="flex justify-between text-sm">
+          <div className="flex space-x-6 pl-2">
+            <div className="flex text-center p-2">
+              <div className="flex items-center w-28 h-10 relative cursor-pointer">
+                <Image
+                  src="/icons/kukudealslogo-black.png"
+                  layout="fill"
+                  alt="kuku logo"
+                />
+              </div>
+            </div>
+            <div className="flex  items-center space-x-3">
+              <a
+                href=""
+                className="py-4  text-[#4a4a4a] font-bold hover:text-red-400 "
+              >
+                PRODUCTS
+              </a>
+              <a
+                href=""
+                className="py-4 px-3  text-[#4a4a4a] font-bold hover:text-red-400"
+              >
+                WINNERS
+              </a>
+            </div>
           </div>
-        )}
-      </nav>
-    </>
+          <div className="flex items-center space-x-6 pr-4 ">
+            <a
+              href=""
+              className="py-4 px-3 text-[#4a4a4a] font-medium hover:text-red-400"
+            >
+              Need Help? Contact us
+            </a>
+            <a href="" className="py-4 px-3 font-medium text-[#0073ff] ">
+              <b>Call 0800-KUKU</b>
+            </a>
+
+            <div
+              onClick={() => setEnglish(!english)}
+              className="py-4 px-3 hover:cursor-pointer  text-[#4a4a4a] font-medium hover:text-red-400"
+            >
+              {english ? 'العربية' : 'English'}
+            </div>
+            <a
+              href=""
+              className="py-2 px-3 text-[#4a4a4a] font-medium hover:text-red-400 "
+            >
+              Register/Login
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
   );
 }
 
 export default Navbar;
-// export {
-//   MyContext
-// }

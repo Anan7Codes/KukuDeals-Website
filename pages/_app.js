@@ -1,26 +1,14 @@
-import React, { useState } from 'react';
 import '../styles/globals.css'
+import { useState } from 'react'
+import { LanguageContext } from '@/contexts/language'
 
-const MyContext = React.createContext()
 function MyApp({ Component, pageProps }) {
-
-  const [translator, setTranslator] = useState(true)
-  const handleLanguages = (e) => {
-    e.preventDefault();
-    setTranslator(!translator)
-    console.log("translator", translator);
-
-  };
-
+  const [ english, setEnglish ] = useState(true)
   return (
-    <MyContext.Provider value={setTranslator}>
+    <LanguageContext.Provider value={{english, setEnglish}}>
       <Component {...pageProps} />
-    </MyContext.Provider>
-
+    </LanguageContext.Provider>
   )
 }
 
 export default MyApp
-export {
-  MyContext
-}

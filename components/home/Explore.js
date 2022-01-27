@@ -22,7 +22,7 @@ export default function Explore() {
             />
           </div>
         </div>
-        <div className="flex-col w-full">        
+        <div className="flex-col w-full pb-6 lg:pb-0">        
           <div className="justify-center">
             <div className="text-sm text-center sm:pl-4 sm:pt-2 lg:text-justify	 lg:text-3xl">
               <div className="lg:pt-8">

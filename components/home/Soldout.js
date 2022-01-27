@@ -41,17 +41,16 @@ export default function Soldout() {
   return (
     <div>
       <div className="">
-        <div className="bg-[#f53435] h-[35rem] rounded-[45px] px-6 py-5 text-white">
+        <div className="bg-[#f53435]  rounded-[45px] px-6 py-5 text-white">
           <div className="pt-2 ml-3 relative">
             <div className="flex justify-between">
               <p className="font-[700]  tracking-tighter text-3xl">Sold Out</p>
             </div>
-            <div className="flex justify-between"></div>
-            <div className="text-normal leading-5 font-semibold">
+            <div className="text-xs lg:text-base leading-5 font-semibold">
               All our sold out campaigns along with their <br /> corresponding
               draw dates are listed below
             </div>
-            <div className="mt-6">
+            <div className="hidden lg:flex mt-6 relative left-6 lg:pl-0">
               <AliceCarousel
                 mouseTracking
                 items={items}
@@ -84,6 +83,10 @@ export default function Soldout() {
                 disableDotsControls="true"
                 controlsStrategy="alternate"
               />
+            </div>
+            <div className="lg:hidden pt-3 space-y-4 flex flex-col">
+          <Soldout1/>
+          <Soldout1/>
             </div>
           </div>
         </div>

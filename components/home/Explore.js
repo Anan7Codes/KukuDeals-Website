@@ -9,7 +9,7 @@ export default function Explore() {
         <div className="mt-[60px] lg:mt-0">
           <div className="cursor-pointer absolute top-0 left-0 mt-6 ml-4 hover:shadow-outline w-24 h-10">
             <Image
-              src="/icons/explore/shop-logo.png"
+              src="/icons/explore/shop-logo.png"  
               layout="fill"
               alt="product logo"
             />

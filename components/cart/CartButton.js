@@ -11,7 +11,7 @@ export default function CartButton() {
 
   return (
     <>
-      {/* <div className='container content-center fixed bottom-4 grid justify-items-end pr-6 z-20'>
+      <div className='container content-center fixed bottom-4 grid justify-items-end pr-6 z-20'>
         {showButton ? (
           <div onMouseOver={handleMouseIn} className="bg-[#0073ff] h-[56px] w-[186px] text-white rounded-[15px] pt-3 ">
             <button className="pl-7 font-normal ">
@@ -29,7 +29,7 @@ export default function CartButton() {
           </div>
         ) : null}
       </div>
-      {showCart ? <CartRight showCart={setshowCart} /> : null} */}
+      {showCart ? <CartRight showCart={setshowCart} /> : null}
     </>
   );
 }

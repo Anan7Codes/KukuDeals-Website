@@ -41,14 +41,14 @@ export default function Winners() {
     return (
         <div>
             <div className="py-8">
-                <div className="bg-[#7000ff] h-[36rem]  rounded-[15px] px-6 pr-2 py-5  text-white">
+                <div className="bg-[#7000ff]   rounded-[15px] px-6 pr-2 py-5  text-white">
                     <div className="p-2">
                         <p className="font-[700] tracking-tighter text-3xl">Winners</p>
                         <p className="text-normal font-bold">
                             All our winners are announced in this section
                         </p>
                     </div>
-                    <div className="mt-6">
+                    <div className="mt-6 hidden lg:flex">
                         <AliceCarousel
                             mouseTracking
                             items={items}
@@ -81,6 +81,10 @@ export default function Winners() {
                             disableDotsControls="true"
                             controlsStrategy="alternate"
                         />
+                    </div>
+                    <div className="lg:hidden w-full pt-3 space-y-4 pl-6 flex-col">
+                        <Winners1 />
+                        <Winners1 />
                     </div>
                 </div>
             </div>

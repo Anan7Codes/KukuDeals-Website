@@ -50,7 +50,7 @@ export default function Soldout() {
               All our sold out campaigns along with their <br /> corresponding
               draw dates are listed below
             </div>
-            <div className="hidden lg:flex mt-6 relative left-6 lg:pl-0">
+            <div className="hidden lg:flex mt-6 relative ">
               <AliceCarousel
                 mouseTracking
                 items={items}
@@ -84,8 +84,8 @@ export default function Soldout() {
                 controlsStrategy="alternate"
               />
             </div>
-            <div className="lg:hidden pt-3 space-y-4 flex flex-col">
-          <Soldout1/>
+            <div className="lg:hidden w-full pt-3 space-y-4 pl-3 flex-col">
+          <Soldout1 />
           <Soldout1/>
             </div>
           </div>

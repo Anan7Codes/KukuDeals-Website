@@ -33,7 +33,7 @@ export default function Cart() {
               </p>
             </div>
 
-            <div className=" sm:flex lg:flex pt-3 sm:ml-12 lg:ml-16 leading-extra-loose">
+            <div className=" sm:flex lg:flex  sm:ml-12 lg:ml-16 leading-extra-loose">
               <div className="hidden sm:flex lg:flex">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

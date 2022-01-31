@@ -4,31 +4,31 @@ import { nhost } from "@/utils/nhost"
 
 export default function Section2() {
     const [ campaigns, setCampaigns ] = useState([])
-    const fetchCampaigns = async () => {
-        try {
-            const { data } = await nhost.graphql.request(`
-                query MyQuery {
-                    Campaigns {
-                        id
-                        ProductName
-                        ProductDescription
-                        GiftName
-                        GiftDescription
-                        SoldOutCoupons
-                        TotalCoupons
-                        Price
-                        DrawDate
-                        Image
-                    }
-                }
-            `);
-            setCampaigns(data.Campaigns)
-            console.log(data);
-        } catch (e) {
-            console.error('Error')
-        }
-    }
     useEffect(() => {
+        const fetchCampaigns = async () => {
+            try {
+                const { data } = await nhost.graphql.request(`
+                    query MyQuery {
+                        Campaigns {
+                            id
+                            ProductName
+                            ProductDescription
+                            GiftName
+                            GiftDescription
+                            SoldOutCoupons
+                            TotalCoupons
+                            Price
+                            DrawDate
+                            Image
+                        }
+                    }
+                `);
+                setCampaigns(data.Campaigns)
+                console.log(data);
+            } catch (e) {
+                console.error('Error')
+            }
+        }
         fetchCampaigns()
     },[])
     

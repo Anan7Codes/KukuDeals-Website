@@ -236,12 +236,9 @@ export default function Explore({ campaign }) {
                         </button>
                       </div>
                       <p>Get a chance to win:</p>
-                      <p>iPhone 13 Pro</p>
+                      <p>{campaign?.GiftName.en}</p>
                       <p className="text-sm text-gray-500">
-                        The latest and greatest from Apple, the iPhone 13 Pro
-                        brings with it Apple's biggest camera upgrade ever, it's
-                        fastest chip ever and it's most powerful battery ever.
-                        
+                      {campaign?.GiftDescription.en}                       
                       </p>
                     </>
                   ) : null}
@@ -297,15 +294,11 @@ export default function Explore({ campaign }) {
                         </button>
                       </div>
                       <div className="flex justify-between mr-10">
-                        <p>Blanco Set</p>
-                        <p className="text-blue-500 font-bold pt-2 pb-2">AED30.00</p>
+                        <p>{campaign?.ProductName.en}</p>
+                        <p className="text-blue-500 font-bold pt-2 pb-2">AED {campaign?.Price}</p>
                       </div>
                       <p className="text-sm text-gray-500">
-                        Blanco Set will take your art to a whole new level!
-                        Ideal for writing, drawing, sketching. Perfect for
-                        budding artists and amateurs of all ages looking to
-                        develop their writing and drawing skills.
-                        
+                      {campaign?.ProductDescription.en}                        
                       </p>
                     </>
                   ) : null}
@@ -313,8 +306,8 @@ export default function Explore({ campaign }) {
                 <div className="flex justify-between  pt-4 pb-4">
                   <div className="flex-col ">
 
-                  <p className="text-xl">Buy Blanco Pencil</p>
-                  <p className="text-base text-blue-500 font-bold">AED15.00</p>
+                  <p className="text-xl">Buy {campaign?.ProductName.en}</p>
+                  <p className="text-base text-blue-500 font-bold">AED {campaign?.Price}</p>
                   <p className="text-xs">Inclusive of VAT</p>
                   </div>
                   <button onClick={handleClick} className="bg-blue-500  rounded-[15px] text-white font-bold h-16 w-[60%]">Add to Cart</button>

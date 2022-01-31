@@ -11,7 +11,7 @@ export default function Explore({campaign}) {
             <Image
               src="/icons/explore/shop-logo.png"  
               layout="fill"
-              alt="product logo"
+              alt="sponsor logo"
             />
           </div>
           <div className="relative lg:top-5 lg:left-6 flex justify-center items-center lg:w-[28rem] h-36 w-60 lg:h-64">

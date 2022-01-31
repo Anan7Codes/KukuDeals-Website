@@ -1,16 +1,48 @@
+import { useState, useEffect } from 'react'
 import Explore from "@/components/home/Explore";
+import { nhost } from "@/utils/nhost"
 
 export default function Section2() {
+    const [ campaigns, setCampaigns ] = useState([])
+    const fetchCampaigns = async () => {
+        try {
+            const { data } = await nhost.graphql.request(`
+                query MyQuery {
+                    Campaigns {
+                        id
+                        ProductName
+                        ProductDescription
+                        GiftName
+                        GiftDescription
+                        SoldOutCoupons
+                        TotalCoupons
+                        Price
+                        DrawDate
+                        Image
+                    }
+                }
+            `);
+            setCampaigns(data.Campaigns)
+        } catch (e) {
+            console.error('Error')
+        }
+    }
+    useEffect(() => {
+        fetchCampaigns()
+        console.log(campaigns)
+    },[])
+    
+    if(!campaigns) return <p>No Campaigns</p>
+
     return (
         <div>
-      <p className="text-[21px] text-gray-700 pt-5 font-bold ">
-                Explore campaigns</p>
+            <p className="text-[21px] text-gray-700 pt-5 font-bold">Explore campaigns</p>
             <div className=" z-0 mx-auto rounded-[15px]">
-                <Explore />
-                <Explore />
-                <Explore />
-                <Explore />
-                <Explore />
+                {campaigns?.map(campaign => {
+                    return (
+                        <Explore campaign={campaign} key={campaign.id}/>
+                    )
+                })}
             </div>
         </div>
     )

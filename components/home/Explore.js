@@ -18,7 +18,7 @@ export default function Explore({campaign}) {
             <Image
               src={campaign?.Image}
               layout="fill"
-              alt="product logo"
+              alt="Campaign Image"
             />
           </div>
         </div>

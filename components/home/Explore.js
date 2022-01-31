@@ -56,7 +56,7 @@ export default function Explore({campaign}) {
               maxValue={campaign?.TotalCoupons}
               strokeWidth={10}
               styles={buildStyles({
-                pathColor: "#329b24",
+                pathColor: `${campaign?.SoldOutCoupons <= campaign?.TotalCoupons*1/3 ? '#0abf28' : campaign?.SoldOutCoupons > campaign?.TotalCoupons*1/3 && campaign?.SoldOutCoupons <= campaign?.TotalCoupons*2/3 ? '#ffff00' : '#ff471a'}`,
                 trailColor: "#e6e6e6",
               })}
             />

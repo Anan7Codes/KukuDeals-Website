@@ -29,7 +29,6 @@ export default function Section2() {
     }
     useEffect(() => {
         fetchCampaigns()
-        console.log(campaigns)
     },[])
     
     if(!campaigns) return <p>No Campaigns</p>
@@ -37,7 +36,7 @@ export default function Section2() {
     return (
         <div>
             <p className="text-[21px] text-gray-700 pt-5 font-bold">Explore campaigns</p>
-            <div className=" z-0 mx-auto rounded-[15px]">
+            <div className="z-0 mx-auto rounded-[15px]">
                 {campaigns?.map(campaign => {
                     return (
                         <Explore campaign={campaign} key={campaign.id}/>

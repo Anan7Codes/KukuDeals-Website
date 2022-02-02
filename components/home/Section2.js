@@ -24,7 +24,6 @@ export default function Section2() {
                     }
                 `);
                 setCampaigns(data.Campaigns)
-                console.log(data);
             } catch (e) {
                 console.error('Error')
             }

@@ -1,15 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
+import { nhost } from "@/utils/nhost";
 
 export default function ProfileDetails() {
+  const [firstname, setFirstName] = useState();
+  const [lastname, setLastName] = useState();
+  const [email, setEmail] = useState();
   const [value, setValue] = useState();
   const [country, setCountry] = useState("");
   const [region, setRegion] = useState("");
+  useEffect(() => {
+    const InsertProfileData = async () => {
+      try {
+        const { data, error } = await nhost.graphql.request(`    
+            mutation MyMutation {
+              insert_Profiles(objects: {amountSpent: 50, countryOfResidence: "India", gender: false, id: "6fb9a7de-e1db-4c71-abd2-d2d2030211b6", nationality: "UAE", phoneNumber: "", shippingAddress: ""})
+              {
+                returning {
+                  id
+                  amountSpent
+                  body
+                  countryOfResidence
+                }
+            }    
+          `);
+        console.log("data",data);
+        console.log(error);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    InsertProfileData();
+    // const userInfo = nhost.auth.getUser();
+  }, []);
 
   return (
     <div>
@@ -17,20 +45,27 @@ export default function ProfileDetails() {
         <p className="pt-5 text-3xl font-bold text-gray-700 ">
           Personal Details
         </p>
+        {/* <form onSubmit={handleSubmit} className=""> */}
         <div className="lg:flex text-lg">
           <input
             placeholder="First Name"
             className="border placeholder:text-xs text-lg pl-3 mr-3 w-full lg:w-72 mt-4 outline-none  rounded-[5px]  h-14  border-gray-300 "
+            value={firstname}
+            onChange={(e) => setFirstName(e.target.value)}
           />
           <input
             placeholder="Last Name"
-            className="border border-gray-300 placeholder:text-xs   w-72 mt-4 pl-3 outline-none  text-xs rounded-[5px]  h-14   "
+            className="border placeholder:text-xs text-lg pl-3 mr-3 w-full lg:w-72 mt-4 outline-none  rounded-[5px]  h-14  border-gray-300 "
+            value={lastname}
+            onChange={(e) => setLastName(e.target.value)}
           />
         </div>
         <div className="flex flex-col">
           <input
             placeholder="Email"
-            className="border placeholder:text-xs   pl-3 mr-3 w-72 mt-4 outline-none  text-xs rounded-[5px]  h-14  border-gray-300 "
+            className="border placeholder:text-xs text-lg pl-3 mr-3 w-full lg:w-[98%] mt-4 outline-none  rounded-[5px]  h-14  border-gray-300 "
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <PhoneInput
@@ -47,7 +82,7 @@ export default function ProfileDetails() {
             background: "",
             fontSize: "11px",
             height: "3.5rem",
-            width: "18rem",
+            width: "98%",
             fontSize: "11px",
           }}
           enableSearch="true"
@@ -94,6 +129,7 @@ export default function ProfileDetails() {
             Update
           </button>
         </div>
+        {/* </form> */}
       </div>
     </div>
   );

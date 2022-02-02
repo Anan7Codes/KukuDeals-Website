@@ -5,13 +5,17 @@ import Address from "@/components/profile/Address";
 import Coupon from "@/components/profile/Coupon";
 import ProfileDetails from "@/components/profile/ProfileDetails";
 import Settings from "@/components/profile/Settings";
+import { nhost } from "@/utils/nhost";
+import User from "./User";
+import { useRouter } from "next/router";
 
 export default function Sidebar() {
   const [showPersonalDetails, setShowPersonalDetails] = useState(false);
   const [showActiveCoupon, setShowActiveCoupon] = useState(false);
   const [showsSettings, setShowSettings] = useState(false);
-  const [showShippingAddress, setShowShippingAddress] = useState(false);
+  const [showShippingAddress, setShowShippingAddress] = useState(true);
   const [showSidebar, setShowSidebar] = useState(true);
+  const router = useRouter();
 
   const handlePersonalDetails = () => {
     setShowSidebar(false);
@@ -76,19 +80,14 @@ export default function Sidebar() {
     setShowSettings(false);
     setShowShippingAddress(false);
   };
+  const handleLogout = () => {
+    nhost.auth.signOut();
+    router.push("/");
+  };
   return (
     <div>
       <div className=" lg:grid grid-rows-2 grid-flow-col justify-start">
-        <div className="col-span-2  mb-4  flex mt-5 shadow-lg bg-gradient-to-b from-[#175198] lg:w-[21rem] h-[20rem] rounded-[25px] items-center justify-center text-center ">
-          <div>
-            <p className="text-3xl font-bold text-gray-800">MOHAMMED HAFIZ</p>
-            <p className="text-xs">mohammedhafizba@gmail.com</p>
-            <p className="flex justify-center text-sm">
-              Amount spent : AED
-              <p className="text-red-500 text-sm font-bold"> 30.00</p>
-            </p>
-          </div>
-        </div>
+        <User />
         <div>
           {showSidebar ? (
             <div className=" row-span-2 col-span-2 bg-white lg:w-[21rem] divide-y mb-5 rounded-[25px] text-sm text-gray-700 cursor-pointer">
@@ -309,7 +308,10 @@ export default function Sidebar() {
               </div>
               <div className="flex p-4">
                 <RiLogoutBoxRLine className="h-6 w-6" />
-                <p className="pl-3">Logout</p>
+                <p className="pl-3" onClick={handleLogout}>
+                  Logout
+                </p>
+
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5 hidden lg:flex ml-[12.5rem] text-gray-200"

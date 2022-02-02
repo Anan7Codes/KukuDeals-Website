@@ -1,10 +1,34 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { LanguageContext } from "@/contexts/language";
 import Image from "next/image";
+import { nhost } from "@/utils/nhost";
+import { useNhostAuth, NhostAuthProvider } from "@nhost/react-auth";
+import { useRouter } from "next/router";
 
 function Navbar() {
+  // const { isLoading, isAuthenticated } = useNhostAuth();
+
+  // console.log({ isLoading });
+  // console.log({ isAuthenticated });
+
+  // if (isLoading) {
+  //   console.log("Loading...");
+  // }
+
+  // if (!isAuthenticated) {
+  //   console.log("User is not authenticated");
+  // }
+
+  // console.log("User is authenticated");
+  const router = useRouter()
   const [showMenu, setShowMenu] = useState(false);
   const { english, setEnglish } = useContext(LanguageContext);
+  const userInfo = nhost.auth.getUser();
+  const handleLogin = (e)=>{ 
+    e.preventDefault();
+    router.push('/login')
+  }
+  console.log(userInfo);
   return (
     <nav className="pb-3 relative">
       <div className="bg-white mx-auto rounded-[15px]">
@@ -55,7 +79,7 @@ function Navbar() {
               href=""
               className="py-2 px-3 text-[#4a4a4a] font-medium hover:text-red-400 "
             >
-              Register/Login
+              {userInfo ? userInfo.displayName : <div onClick={handleLogin}>Login/Register</div>}
             </a>
           </div>
           <div className="lg:hidden flex items-center pr-4">
@@ -103,7 +127,7 @@ function Navbar() {
                 العربية
               </p>
               <p className="font-medium text-sm text-[#4a4a4a] mb-4 hover:cursor-pointer hover:text-yellow-500">
-                Register/Login
+                {userInfo ? userInfo.displayName : <div>Login/Register</div>}{" "}
               </p>
 
               <svg

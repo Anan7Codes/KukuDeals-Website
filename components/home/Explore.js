@@ -5,16 +5,15 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { useRouter } from "next/router";
 
-
 export default function Explore({ campaign }) {
   const [isOpen, setIsOpen] = useState(false);
   const [prizeDetails, setPrizeDetails] = useState(true);
   const [productDetails, setProductDetails] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
 
   const handleClick = () => {
-    router.push('/cart')
-  }
+    router.push("/cart");
+  };
   function closeModal() {
     setIsOpen(false);
   }
@@ -114,12 +113,8 @@ export default function Explore({ campaign }) {
           </div>
         </div>
       </div>
-      <Transition appear show={isOpen} as={Fragment} >
-        <Dialog
-          as="div"
-          className="fixed  inset-0 z-10 "
-          onClose={closeModal}
-        >
+      <Transition appear show={isOpen} as={Fragment}>
+        <Dialog as="div" className="fixed  inset-0 z-10 " onClose={closeModal}>
           <div className="min-h-screen px-4 text-center ">
             <Transition.Child
               as={Fragment}
@@ -129,10 +124,8 @@ export default function Explore({ campaign }) {
               leave="ease-in duration-200"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
-              
             >
               <Dialog.Overlay className="fixed inset-0 " />
-              
             </Transition.Child>
 
             <span
@@ -149,8 +142,7 @@ export default function Explore({ campaign }) {
               leave="ease-in duration-200"
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
-              style ={{backgroundColor:"#f7fafc"}}
-
+              style={{ backgroundColor: "#f7fafc" }}
             >
               <div className="inline-block w-full max-w-md p-6 my-8  text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <div className="flex justify-end">
@@ -238,13 +230,13 @@ export default function Explore({ campaign }) {
                       <p>Get a chance to win:</p>
                       <p>{campaign?.GiftName.en}</p>
                       <p className="text-sm text-gray-500">
-                      {campaign?.GiftDescription.en}                       
+                        {campaign?.GiftDescription.en}
                       </p>
                     </>
                   ) : null}
                   {productDetails ? (
                     <>
-                     <div className="absolute -top-8 -left-4   bg-white    lg:h-28 w-32  p-2  rounded-full">
+                      <div className="absolute -top-8 -left-4   bg-white    lg:h-28 w-32  p-2  rounded-full">
                         <CircularProgressbar
                           value={campaign?.SoldOutCoupons}
                           maxValue={campaign?.TotalCoupons}
@@ -295,22 +287,30 @@ export default function Explore({ campaign }) {
                       </div>
                       <div className="flex justify-between mr-10">
                         <p>{campaign?.ProductName.en}</p>
-                        <p className="text-blue-500 font-bold pt-2 pb-2">AED {campaign?.Price}</p>
+                        <p className="text-blue-500 font-bold pt-2 pb-2">
+                          AED {campaign?.Price}
+                        </p>
                       </div>
                       <p className="text-sm text-gray-500">
-                      {campaign?.ProductDescription.en}                        
+                        {campaign?.ProductDescription.en}
                       </p>
                     </>
                   ) : null}
                 </div>
                 <div className="flex justify-between  pt-4 pb-4">
                   <div className="flex-col ">
-
-                  <p className="text-xl">Buy {campaign?.ProductName.en}</p>
-                  <p className="text-base text-blue-500 font-bold">AED {campaign?.Price}</p>
-                  <p className="text-xs">Inclusive of VAT</p>
+                    <p className="text-xl">Buy {campaign?.ProductName.en}</p>
+                    <p className="text-base text-blue-500 font-bold">
+                      AED {campaign?.Price}
+                    </p>
+                    <p className="text-xs">Inclusive of VAT</p>
                   </div>
-                  <button onClick={handleClick} className="bg-blue-500  rounded-[15px] text-white font-bold h-16 w-[60%]">Add to Cart</button>
+                  <button
+                    onClick={handleClick}
+                    className="bg-blue-500  rounded-[15px] text-white font-bold h-16 w-[60%]"
+                  >
+                    Add to Cart
+                  </button>
                 </div>
               </div>
             </Transition.Child>

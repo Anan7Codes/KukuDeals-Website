@@ -1,8 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { nhost } from "@/utils/nhost";
+import { useNhostAuth } from '@nhost/react-auth';
 
 
 export default function User() {
+    const { isLoading, isAuthenticated } = useNhostAuth();
+
+    console.log({ isLoading });
+    console.log({ isAuthenticated });
+  
+    if (isLoading) {
+      console.log("Loading...");
+    }
+  
+    if (!isAuthenticated) {
+      console.log("User is not authenticated");
+    }
+  
+    console.log("User is authenticated");
     const [displayName, setDisplayName] = useState("")
     const [email, setEmail] = useState("")
     const [amountSpent, setAmountSpent] = useState(0)

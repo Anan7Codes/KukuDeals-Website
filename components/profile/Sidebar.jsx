@@ -15,7 +15,7 @@ export default function Sidebar() {
   const [showsSettings, setShowSettings] = useState(false);
   const [showShippingAddress, setShowShippingAddress] = useState(true);
   const [showSidebar, setShowSidebar] = useState(true);
-  const router = useRouter();
+  const router = useRouter()
 
   const handlePersonalDetails = () => {
     setShowSidebar(false);
@@ -81,13 +81,13 @@ export default function Sidebar() {
     setShowShippingAddress(false);
   };
   const handleLogout = () => {
-    nhost.auth.signOut();
-    router.push("/");
-  };
+    nhost.auth.signOut()
+    router.push('/');
+  }
   return (
     <div>
       <div className=" lg:grid grid-rows-2 grid-flow-col justify-start">
-        <User />
+       <User/>
         <div>
           {showSidebar ? (
             <div className=" row-span-2 col-span-2 bg-white lg:w-[21rem] divide-y mb-5 rounded-[25px] text-sm text-gray-700 cursor-pointer">
@@ -308,9 +308,7 @@ export default function Sidebar() {
               </div>
               <div className="flex p-4">
                 <RiLogoutBoxRLine className="h-6 w-6" />
-                <p className="pl-3" onClick={handleLogout}>
-                  Logout
-                </p>
+                <p className="pl-3" onClick={handleLogout}>Logout</p>
 
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

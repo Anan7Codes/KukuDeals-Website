@@ -6,20 +6,20 @@ import { useNhostAuth, NhostAuthProvider } from "@nhost/react-auth";
 import { useRouter } from "next/router";
 
 function Navbar() {
-  // const { isLoading, isAuthenticated } = useNhostAuth();
+  const { isLoading, isAuthenticated } = useNhostAuth();
 
-  // console.log({ isLoading });
-  // console.log({ isAuthenticated });
+  console.log({ isLoading });
+  console.log({ isAuthenticated });
 
-  // if (isLoading) {
-  //   console.log("Loading...");
-  // }
+  if (isLoading) {
+    console.log("Loading...");
+  }
 
-  // if (!isAuthenticated) {
-  //   console.log("User is not authenticated");
-  // }
+  if (!isAuthenticated) {
+    console.log("User is not authenticated");
+  }
 
-  // console.log("User is authenticated");
+  console.log("User is authenticated");
   const router = useRouter()
   const [showMenu, setShowMenu] = useState(false);
   const { english, setEnglish } = useContext(LanguageContext);

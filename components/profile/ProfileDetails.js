@@ -19,7 +19,7 @@ export default function ProfileDetails() {
       try {
         const { data, error } = await nhost.graphql.request(`    
             mutation MyMutation {
-              insert_Profiles(objects: {amountSpent: 50, countryOfResidence: "India", gender: false, id: "6fb9a7de-e1db-4c71-abd2-d2d2030211b6", nationality: "UAE", phoneNumber: "", shippingAddress: ""})
+              insert_Profiles(objects: [{amountSpent: 50, countryOfResidence: "India", gender: false, id: "6fb9a7de-e1db-4c71-abd2-d2d2030211b6", nationality: "UAE", phoneNumber: "", shippingAddress: ""}])
               {
                 returning {
                   id

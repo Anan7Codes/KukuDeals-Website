@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function Coupon() {
+export default function ActiveCoupons() {
     return (
         <div>
             <div className="flex flex-col  justify-center items-center lg:ml-48">

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
-export default function Address() {
+export default function ShippingAddress() {
   const [country, setCountry] = useState("United Arab Emirates");
   const [region, setRegion] = useState("");
   return (

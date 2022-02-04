@@ -3,8 +3,7 @@ import Login from '@/components/register/Login';
 
 export default function register() {
     return (
-        <div className="bg-gray-100">
-        
+        <div className="bg-gray-100">        
             <Layout>
                 <Login />
             </Layout>

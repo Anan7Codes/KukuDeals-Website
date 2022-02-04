@@ -2,19 +2,16 @@ import { useState, useContext, useEffect } from "react";
 import { LanguageContext } from "@/contexts/language";
 import Image from "next/image";
 import { nhost } from "@/utils/nhost";
-import { useNhostAuth, NhostAuthProvider } from "@nhost/react-auth";
+import { useNhostAuth } from "@nhost/react-auth";
 import { useRouter } from "next/router";
 
 function Navbar() {
   const { isLoading, isAuthenticated } = useNhostAuth();
-
   console.log({ isLoading });
   console.log({ isAuthenticated });
-
   if (isLoading) {
     console.log("Loading...");
   }
-
   if (!isAuthenticated) {
     console.log("User is not authenticated");
   }
@@ -23,14 +20,23 @@ function Navbar() {
   }
 
   const router = useRouter()
+
   const [showMenu, setShowMenu] = useState(false);
   const { english, setEnglish } = useContext(LanguageContext);
+
   const userInfo = nhost.auth.getUser();
-  const handleLogin = (e)=>{ 
+  console.log(userInfo);
+
+  const goToLogin = (e) => { 
     e.preventDefault();
     router.push('/login')
   }
-  console.log(userInfo);
+
+  const goToProfile = (e) => { 
+    e.preventDefault();
+    router.push('/profile/personal-details')
+  }
+  
   return (
     <nav className="pb-3 relative">
       <div className="bg-white mx-auto rounded-[15px]">
@@ -81,7 +87,7 @@ function Navbar() {
               href=""
               className="py-2 px-3 text-[#4a4a4a] font-medium hover:text-red-400 "
             >
-              {userInfo ? userInfo.displayName : <div onClick={handleLogin}>Login/Register</div>}
+              {userInfo ? <span onClick={goToProfile}>{userInfo?.displayName}</span>  : <div onClick={goToLogin}>Login/Register</div>}
             </a>
           </div>
           <div className="lg:hidden flex items-center pr-4">

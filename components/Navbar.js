@@ -18,8 +18,10 @@ function Navbar() {
   if (!isAuthenticated) {
     console.log("User is not authenticated");
   }
+  if (isAuthenticated) {
+    console.log("User is authenticated");
+  }
 
-  console.log("User is authenticated");
   const router = useRouter()
   const [showMenu, setShowMenu] = useState(false);
   const { english, setEnglish } = useContext(LanguageContext);

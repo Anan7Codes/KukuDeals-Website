@@ -25,7 +25,7 @@ function Register() {
         password,
         // phoneNumber: '+46123456789',
         options: {
-          displayName: firstname + lastname,
+          displayName: firstname+ ' '+ lastname,
         },
       });
     } catch (error) {

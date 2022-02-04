@@ -15,11 +15,12 @@ export default function Login() {
                 email,
                 password,
             });
+            alert("Login successful")
+            router.push('/')
         } catch (error) {
-            return alert("Login failed");
+             alert("Login failed");
+             console.log(error);
         }
-        alert("Login successful")
-        router.push('/')
     }
 
     return <div>

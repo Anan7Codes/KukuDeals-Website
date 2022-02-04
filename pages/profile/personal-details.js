@@ -1,16 +1,19 @@
 import Head from "next/head";
 
-import Profile from '@/components/profile/Profile'
+import Sidebar from "@/components/profile/Sidebar";
 import Layout from "@/components/Layout";
+import PersonalDetails from '@/components/profile/PersonalDetails'
 
-export default function profile() {
+export default function personaldetails() {
     return (
         <div className="bg-gray-100">
             <Head>
                 <title>Kuku Deals</title>
             </Head>
             <Layout>
-                <Profile/>
+                <Sidebar>
+                    <PersonalDetails/>
+                </Sidebar>
             </Layout>
         </div>
     )

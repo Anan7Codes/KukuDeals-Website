@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import { nhost } from "@/utils/nhost";
 import { useRouter } from 'next/router';
 
-
 export default function Login() {
     const router = useRouter()
     const [email, setEmail] = useState("");

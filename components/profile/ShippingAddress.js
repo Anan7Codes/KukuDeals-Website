@@ -27,7 +27,7 @@ export default function ShippingAddress() {
 
       const mutation = `
           mutation MyMutation($amountSpent: Int!, $countryOfResidence: String!, $gender: Boolean!, $nationality: String!, $phoneNumber: String!, $shippingAddress: jsonb!) {
-            insert_Profiles(objects: {countryOfResidence: $countryOfResidence, amountSpent: $amountSpent, gender: $gender, nationality: $nationality, phoneNumber: $phoneNumber, shippingAddress: $shippingAddress}) {
+            insert_profiles(objects: {countryOfResidence: $countryOfResidence, amountSpent: $amountSpent, gender: $gender, nationality: $nationality, phoneNumber: $phoneNumber, shippingAddress: $shippingAddress}) {
               affected_rows
               returning {
                 area

@@ -20,14 +20,14 @@ export default function PersonalDetails() {
       try {
         const { data, error } = await nhost.graphql.request(`            
               query MyQuery {
-                  Profiles {
-                  id
-                  amountSpent
-                  countryOfResidence
-                  gender
-                  nationality
-                  phoneNumber
-                  shippingAddress
+                  profiles {
+                    user_id
+                    amountSpent
+                    countryOfResidence
+                    gender
+                    nationality
+                    phoneNumber
+                    shippingAddress
                   }
               }
           `)

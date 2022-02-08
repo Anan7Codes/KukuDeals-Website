@@ -7,18 +7,6 @@ import { useRouter } from "next/router";
 
 function Navbar() {
   const { isLoading, isAuthenticated } = useNhostAuth();
-  console.log({ isLoading });
-  console.log({ isAuthenticated });
-  if (isLoading) {
-    console.log("Loading...");
-  }
-  if (!isAuthenticated) {
-    console.log("User is not authenticated");
-  }
-  if (isAuthenticated) {
-    console.log("User is authenticated");
-  }
-
   const router = useRouter()
 
   const [showMenu, setShowMenu] = useState(false);

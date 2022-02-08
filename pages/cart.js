@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Layout from "@/components/Layout";
-import Cart from "@/components/cart/Cart";
+import Cart from "@/components/cart/CartItem";
 
 export default function cart() {
     return (

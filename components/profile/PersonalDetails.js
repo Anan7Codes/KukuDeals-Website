@@ -21,13 +21,13 @@ export default function PersonalDetails() {
         const { data, error } = await nhost.graphql.request(`            
               query MyQuery {
                   profiles {
-                  user_id
-                  amountSpent
-                  countryOfResidence
-                  gender
-                  nationality
-                  phoneNumber
-                  shippingAddress
+                    user_id
+                    amountSpent
+                    countryOfResidence
+                    gender
+                    nationality
+                    phoneNumber
+                    shippingAddress
                   }
               }
           `)
@@ -52,7 +52,7 @@ export default function PersonalDetails() {
   const [countryOfResidence, setCountryOfResidence] = useState()
   // const [amountSpent, setAmountSpent] = useState(15)
 
-  async function InsertUserData(e) {
+  async function InsertPersonalDetails(e) {
     console.log("::::");
     e.preventDefault()
     try {
@@ -79,8 +79,7 @@ export default function PersonalDetails() {
       console.log(e);
     }
   }
-  // const handleSubmit = async (e) => {
-  //   console.log("inside");
+  // const UpdatePersonalDetails = async (e) => {
   //   e.preventDefault();
 
   //   const mutation = `mutation MyMutation($user_id: uuid!, $countryOfResidence: String!, $nationality: String!, $phoneNumber: String!, $gender: Boolean!) {
@@ -189,7 +188,7 @@ export default function PersonalDetails() {
               }
             />
           </RadioGroup>
-          <button onClick={InsertUserData} className="bg-blue-500 lg:justify-start w-full lg:w-40 h-16 mt-3 text-white  hover:bg-blue-600 font-semibold rounded-[15px]">
+          <button onClick={InsertPersonalDetails} className="bg-blue-500 lg:justify-start w-full lg:w-40 h-16 mt-3 text-white  hover:bg-blue-600 font-semibold rounded-[15px]">
             Update
           </button>
         </form>

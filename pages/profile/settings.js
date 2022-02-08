@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import Sidebar from "@/components/profile/Sidebar";
 import Layout from "@/components/Layout";
-import Settings from "@/components/profile/Settings";
+import Settings from "@/components/profile/ChangePassword";
 
 export default function settings() {
     return (

@@ -12,13 +12,13 @@ export default function User() {
                 const { data, error } = await nhost.graphql.request(`            
                     query MyQuery {
                         profiles {
-                        user_id
-                        amountSpent
-                        countryOfResidence
-                        gender
-                        nationality
-                        phoneNumber
-                        shippingAddress
+                            user_id
+                            amountSpent
+                            countryOfResidence
+                            gender
+                            nationality
+                            phoneNumber
+                            shippingAddress
                         }
                     }
                 `)

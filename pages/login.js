@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout';
-import Login from '@/components/register/Login';
+import Login from '@/components/SignIn';
 
 export default function register() {
     return (

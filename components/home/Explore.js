@@ -32,7 +32,7 @@ export default function Explore({ campaign }) {
   return (
     <>
       <div className="w-full relative my-10">
-        <div className="flex flex-col items-center justify-around lg:flex-row h-[50vh] pb-6 bg-white cursor-pointer rounded-[15px] overflow-visible shadow-lg transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-[102%] duration-300">
+        <div className="flex flex-col items-center justify-around lg:flex-row h-[50vh] pb-6 bg-white cursor-pointer rounded-[15px] overflow-visible shadow-lg transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-[101%] duration-700">
           <div className="mt-[60px] lg:mt-0">
             <div className="cursor-pointer absolute top-0 left-0 mt-6 ml-4 hover:shadow-outline w-24 h-10">
               <Image
@@ -48,21 +48,21 @@ export default function Explore({ campaign }) {
           <div className="flex-col w-full pb-6 lg:pb-0">
             <div className="justify-center">
               <div className="text-sm text-center sm:pl-4 sm:pt-2 lg:text-justify	 lg:text-3xl">
-                <div className="lg:pt-8">
+                <div className="lg:pt-4">
                   <p className="text-5xl lg:text-7xl font-bold lg:leading-none italic text-[#f22]">
                     Win
                   </p>
                 </div>
-                <p className="text-lg lg:text-3xl text-gray-600 tracking-tighter font-extrabold leading-6 lg:leading-none">
+                <p className="text-lg lg:text-2xl text-gray-600 tracking-tighter font-bold leading-6 lg:leading-normal">
                   {campaign?.GiftName.en}
                 </p>
-                <p className="text-lg lg:text-3xl text-gray-700 tracking-tighter leading-4 lg:leading-none font-medium">
+                <p className="text-lg lg:text-2xl text-gray-700 tracking-tighter leading-4 lg:leading-tight font-medium">
                   Buy a {campaign?.ProductName.en} and make it yours!
                 </p>
-                <p className="text-lg lg:text-3xl tracking-tighter font-bold text-blue-500 lg:leading-none">
+                <p className="text-lg lg:text-2xl tracking-tighter font-semibold text-blue-500 lg:leading-tight">
                   AED {campaign?.Price}
                 </p>
-                <div className="mt-4 space-x-2 text-sm lg:text-base">
+                <div className="mt-2 space-x-4 text-sm lg:text-base">
                   <button
                     onClick={openModal}
                     className="w-32 h-12 lg:w-44 lg:h-12  text-gray-700 font-semibold border border-gray-200 hover:bg-gray-200 rounded-[12px] "

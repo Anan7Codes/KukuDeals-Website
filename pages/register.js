@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout';
-import Register from '@/components/register/Register';
+import Register from '@/components/SignUp';
 
 export default function register() {
     return (

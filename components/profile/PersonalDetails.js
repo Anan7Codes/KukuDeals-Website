@@ -15,13 +15,13 @@ export default function PersonalDetails() {
     setFirstName(first)
     setLastName(last)
     setEmail(userInfo.email)
-    setId(userInfo.id)
+    setUserId(userInfo.user_id)
     const fetchProfile = async () => {
       try {
         const { data, error } = await nhost.graphql.request(`            
               query MyQuery {
-                  Profiles {
-                  id
+                  profiles {
+                  user_id
                   amountSpent
                   countryOfResidence
                   gender
@@ -32,17 +32,17 @@ export default function PersonalDetails() {
               }
           `)
         console.log("data in personal.js", data);
-        setPhoneNumber(data.Profiles[0].phoneNumber)
-        setNationality(data.Profiles[0].nationality)
-        setCountryOfResidence(data.Profiles[0].countryOfResidence)
-        setGender(data.Profiles[0].gender)
+        setPhoneNumber(data.profiles[0].phoneNumber)
+        setNationality(data.profiles[0].nationality)
+        setCountryOfResidence(data.profiles[0].countryOfResidence)
+        setGender(data.profiles[0].gender)
       } catch (err) {
         console.log(err);
       }
     }
     fetchProfile()
   }, [])
-  const [id, setId] = useState()
+  const [user_id, setUserId] = useState()
   const [firstname, setFirstName] = useState()
   const [lastname, setLastName] = useState()
   const [email, setEmail] = useState()
@@ -50,48 +50,57 @@ export default function PersonalDetails() {
   const [phoneNumber, setPhoneNumber] = useState()
   const [nationality, setNationality] = useState()
   const [countryOfResidence, setCountryOfResidence] = useState()
-  // const [shippingAddress, setShippingAddress] = useState({ area: "Test", streetName: "test", apartmentNo: "121A" })
   // const [amountSpent, setAmountSpent] = useState(15)
 
-  async function InsertUserData() {
+  async function InsertUserData(e) {
+    console.log("::::");
+    e.preventDefault()
     try {
       const mutation = `
-          mutation MyMutation($amountSpent: Int!, $countryOfResidence: String!, $gender: Boolean!, $nationality: String!, $phoneNumber: String!, $shippingAddress: jsonb!) {
-            insert_Profiles(objects: {countryOfResidence: $countryOfResidence, amountSpent: $amountSpent, gender: $gender, nationality: $nationality, phoneNumber: $phoneNumber, shippingAddress: $shippingAddress}) {
+          mutation MyMutation($countryOfResidence: String!, $gender: Boolean!, $nationality: String!, $phoneNumber: String!) {
+            insert_profiles(objects: {countryOfResidence: $countryOfResidence, gender: $gender, nationality: $nationality ,phoneNumber:$phoneNumber}) {
               affected_rows
               returning {
-                amountSpent
                 countryOfResidence
                 gender
-                id
+                user_id
                 nationality
                 phoneNumber
-                shippingAddress
+                
               }
             }
           } 
         `;
-      const variables = { gender, phoneNumber, nationality, countryOfResidence, shippingAddress, amountSpent };
+      const variables = { gender, nationality, countryOfResidence,phoneNumber };
       const { data, error } = await nhost.graphql.request(mutation, variables);
+      console.log("data",data);
+      console.log("error",error);
     } catch (e) {
       console.log(e);
     }
   }
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   console.log("inside");
+  //   e.preventDefault();
 
-    const mutation = `mutation MyMutation( $id: uuid!, $countryOfResidence: String! , $phoneNumber: String! ) {
-      update_Profiles_by_pk(pk_columns: {id: $id}, _set: {countryOfResidence: $countryOfResidence, phoneNumber: $phoneNumber}) {
-        countryOfResidence
-        gender
+  //   const mutation = `mutation MyMutation($user_id: uuid!, $countryOfResidence: String!, $nationality: String!, $phoneNumber: String!, $gender: Boolean!) {
+  //     update_profiles_by_pk(pk_columns: {user_id: $user_id}, _set: {countryOfResidence: $countryOfResidence, nationality: $nationality, phoneNumber: $phoneNumber, gender: $gender}) {
+  //       gender
+  //       nationality
+  //       phoneNumber
+  //       countryOfResidence
+  //       user_id
         
-      }
-    }`
+  //     }
+  //   }
+  //   `
 
-    const variables = { id, phoneNumber, countryOfResidence }
+  //   const variables = { user_id, phoneNumber, countryOfResidence }
 
-    const { data, error } = await nhost.graphql.request(mutation, variables);
-  }
+  //   const { data, error } = await nhost.graphql.request(mutation, variables);
+  //   console.log(data);
+  //   console.log(error);
+  // }
 
   return (
     <div>
@@ -99,7 +108,7 @@ export default function PersonalDetails() {
         <p className="pt-5 text-3xl font-bold text-gray-700 ">
           Personal Details
         </p>
-        <form onSubmit={handleSubmit} className="">
+        <form className="">
           <div className="lg:flex text-lg">
             <input
               placeholder="First Name"

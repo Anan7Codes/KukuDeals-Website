@@ -1,22 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { nhost } from "@/utils/nhost";
-import { useNhostAuth } from '@nhost/react-auth';
 
 export default function User() {
-    // const { isLoading, isAuthenticated } = useNhostAuth();
-
-    // console.log({ isLoading });
-    // console.log({ isAuthenticated });
-  
-    // if (isLoading) {
-    //   console.log("Loading...");
-    // }
-  
-    // if (!isAuthenticated) {
-    //   console.log("User is not authenticated");
-    // }
-  
-    // console.log("User is authenticated");
     const [displayName, setDisplayName] = useState("")
     const [email, setEmail] = useState("")
     const [amountSpent, setAmountSpent] = useState(0)
@@ -26,8 +11,8 @@ export default function User() {
             try {
                 const { data, error } = await nhost.graphql.request(`            
                     query MyQuery {
-                        Profiles {
-                        id
+                        profiles {
+                        user_id
                         amountSpent
                         countryOfResidence
                         gender
@@ -37,8 +22,8 @@ export default function User() {
                         }
                     }
                 `)
-                console.log("data in user.js",data);
-                if(data) setAmountSpent(data.Profiles[0]?.amountSpent)
+                console.log("data in user.js", data);
+                if (data) setAmountSpent(data.profiles[0]?.amountSpent)
             } catch (err) {
                 console.log(err);
             }
@@ -46,7 +31,7 @@ export default function User() {
         fetchProfile()
         const userInfo = nhost.auth.getUser()
         console.log("UI", userInfo)
-        if(userInfo) {
+        if (userInfo) {
             setDisplayName(userInfo?.displayName)
             setEmail(userInfo?.email)
         }

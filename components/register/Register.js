@@ -2,7 +2,7 @@ import { useState } from "react";
 import { nhost } from "@/utils/nhost";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
 function Register() {
@@ -12,50 +12,51 @@ function Register() {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [value, setValue] = useState();
+
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      console.log(email);
-      console.log(password);
-      console.log(firstname);
-      console.log(lastname);
-      console.log(value);
-      nhost.auth.signUp({
+      const res = await nhost.auth.signUp({
         email,
         password,
         // phoneNumber: '+46123456789',
         options: {
-          displayName: firstname+ ' '+ lastname,
+          displayName: firstname + " " + lastname,
         },
       });
+      console.log("res",res);
+      if (res.error) {
+        toast.error(res.error.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        return;
+      }
+      toast.success(
+        "Signed in succesfully!! Please check your Email to confirm your account",
+        {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
+      router.push("/");
     } catch (error) {
-      return alert("Registration failed");
+      alert("Login failed");
+      console.log(error);
     }
-    alert("Registration successful");
-    router.push('/')
-    // toast.success('🦄 Wow so easy!', {
-    //     position: "top-center",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     });
   }
   return (
     <>
-      {/* <ToastContainer
-position="top-center"
-autoClose={5000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-/> */}
       <div className="flex justify-center pt-20 pb-20">
         <div className="w-1/2  rounded-[25px]  bg-white mb-6 mt-10">
           <div className="ml-28 pt-4">

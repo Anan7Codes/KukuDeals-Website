@@ -9,7 +9,7 @@ export default function Section2() {
             try {
                 const { data } = await nhost.graphql.request(`
                     query MyQuery {
-                        Campaigns {
+                        campaigns {
                             id
                             ProductName
                             ProductDescription

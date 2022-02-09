@@ -9,8 +9,7 @@ export default function User() {
         const userInfo = supabase.auth.user();
         setUserName(userInfo.user_metadata.name)
         setEmail(userInfo.email)
-
-    })
+    },[])
     return (
         <div>
             <div className="col-span-2  mb-4  flex mt-5 shadow-lg bg-gradient-to-b from-[#175198] lg:w-[21rem] h-[20rem] rounded-[25px] items-center justify-center text-center ">

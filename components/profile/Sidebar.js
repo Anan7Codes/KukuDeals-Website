@@ -1,17 +1,13 @@
 import { useState } from "react";
 import { FaAddressCard } from "react-icons/fa";
 import { RiCoupon2Fill, RiLogoutBoxRLine } from "react-icons/ri";
-import { nhost } from "@/utils/nhost";
 import User from "./User";
 import { useRouter } from "next/router";
 
 export default function Sidebar({children}) {
   const router = useRouter();
 
-  const handleLogout = () => {
-    nhost.auth.signOut();
-    router.push("/");
-  };
+
   return (
     <div>
       <div className="lg:grid grid-rows-2 grid-flow-col justify-start">
@@ -228,7 +224,7 @@ export default function Sidebar({children}) {
           </div>
           <div className="flex p-4">
             <RiLogoutBoxRLine className="h-6 w-6" />
-            <p className="pl-3" onClick={handleLogout}>
+            <p className="pl-3">
               Logout
             </p>
 

@@ -1,8 +1,13 @@
-import { useState } from "react";
-import { nhost } from "@/utils/nhost";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
-import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
+import { CountryDropdown } from "react-country-region-selector";
+import { supabase } from '@/utils/supabaseClient';
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+
+
+
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -17,6 +22,8 @@ function SignUp() {
   const [nationality, setNationality] = useState();
   const [countryOfResidence, setCountryOfResidence] = useState();
   const [gender, setGender] = useState(true);
+  const [additionalProfileDetails, setAdditionalProfileDetails] = useState({})
+  const [phoneNumber, setPhoneNumber] = useState()
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -33,15 +40,29 @@ function SignUp() {
         });
         return;
       }
-      const res = await nhost.auth.signUp({
-        email: email,
-        password: password,
-        options: {
-          displayName: firstname + " " + lastname,
+      console.log(firstname, lastname, email, password, confirmPassword, gender, countryOfResidence, nationality,phoneNumber,additionalProfileDetails)
+      const { user, session, error } = await supabase.auth.signUp(
+        {
+          email,
+          password
         },
-      });
-      if (res.error) {
-        toast.error(res.error.message, {
+
+        {
+          data: { 
+            name: firstname + " " + lastname, 
+            gender: gender,
+            nationality:nationality,
+            countryOfResidence:countryOfResidence,
+            // phoneNumber: countryCode + " " + additionalProfileDetails.phoneNumber,
+            location: additionalProfileDetails.location,
+            buildingName: additionalProfileDetails.buildingName,
+            apartmentNo: additionalProfileDetails.apartmentNo
+          }
+        }
+      )
+      console.log(user, error, session)
+      if(error){
+        toast.error(error, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -50,23 +71,8 @@ function SignUp() {
           draggable: true,
           progress: undefined,
         });
-        return;
       }
-      toast.success(
-        "Signed Up Succesfully. Please verify your email before continuing",
-        {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        }
-      );
-      router.push("/login");
-    } catch (error) {
-      toast.error(error, {
+      toast.success("Successfully signed up. You'll have to verify your email to continue", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -75,6 +81,11 @@ function SignUp() {
         draggable: true,
         progress: undefined,
       });
+      router.push('/signin')
+      return
+    }
+    catch(e) {
+      console.log(e);
     }
   }
   return (
@@ -124,6 +135,7 @@ function SignUp() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
+              
 
               <div className="pt-4">
                 <p className="text-3xl text-gray-700 font-bold">
@@ -173,31 +185,6 @@ function SignUp() {
                       </div>
                     </div>
                   )}
-
-                  {/* 
-          <RadioGroup
-            className="mt-3 justify-start"
-            row
-            aria-labelledby="demo-row-radio-buttons-group-label"
-            name="row-radio-buttons-group"
-            defaultValue={gender}
-          >
-            <FormControlLabel
-              value={true}
-
-              control={<Radio />}
-              label={
-                <span style={{ fontSize: "14px", color: "gray" }}>Male</span>
-              }
-            />
-            <FormControlLabel
-              value={false}
-              control={<Radio />}
-              label={
-                <span style={{ fontSize: "14px", color: "gray" }}>Female</span>
-              }
-            />
-          </RadioGroup> */}
                 </div>
                 <div className="lg:flex ">
                   <CountryDropdown
@@ -215,11 +202,54 @@ function SignUp() {
                     onChange={(val) => setCountryOfResidence(val)}
                   />
                 </div>
+                <div className="lg:flex">
+                <PhoneInput
+            placeholder="Enter Mobile Number"
+            containerClass="my-container-class"
+            value={phoneNumber}
+            // onChange={(e)=> setPhoneNumber(e.target.value)}
+            inputClass="my-input-class"
+            containerStyle={{
+              border: "",
+              marginTop: "13px",
+            }}
+            inputStyle={{
+              background: "",
+              fontSize: "11px",
+              height: "3.5rem",
+              width: "98%",
+              fontSize: "11px",
+            }}
+            enableSearch="true"
+            country="ae"
+            regions={["north-america", "carribean", "middle-east", "asia"]}
+          />
+                </div>
               </div>
+                <input
+                type="text"
+                className="border placeholder:text-xs text-xs pl-3 mr-3 w-full lg:w-[98%] mt-4 outline-none  rounded-[5px]  h-14  border-gray-300 "
+                placeholder="Location"
+                value={additionalProfileDetails?.location} onChange={ e => setAdditionalProfileDetails({ ...additionalProfileDetails, location: e.target.value})}
+              />
+                 <input
+                type="text"
+                className="border placeholder:text-xs text-xs pl-3 mr-3 w-full lg:w-[98%] mt-4 outline-none  rounded-[5px]  h-14  border-gray-300 "
+                placeholder="Building Name"
+                // value={newShippingAddress.apartmentNo} onChange={e => setNewShippingAddress({ ...newShippingAddress, apartmentNo: e.target.value })}
+                value={additionalProfileDetails?.buildingName} onChange={ e => setAdditionalProfileDetails({ ...additionalProfileDetails, buildingName: e.target.value})}
+              />
+                 <input
+                type="text"
+                className="border placeholder:text-xs text-xs pl-3 mr-3 w-full lg:w-[98%] mt-4 outline-none  rounded-[5px]  h-14  border-gray-300 "
+                placeholder="Apartment No"
+                value={additionalProfileDetails?.apartmentNo} onChange={ e => setAdditionalProfileDetails({ ...additionalProfileDetails, apartmentNo: e.target.value})}
+              />
+
               <div className="pb-6 flex justify-between">
                 <p
                   className="text-blue-500  mr-3  pt-4 mt-4 w-full h-14 font-semibold text-base cursor-pointer "
-                  onClick={() => router.push("/login")}
+                  onClick={() => router.push("/signin")}
                 >
                   Existing User Login
                 </p>

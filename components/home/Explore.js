@@ -5,7 +5,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { useRouter } from "next/router";
 
-export default function Explore({ campaign }) {
+export default function Explore({ }) {
   const [isOpen, setIsOpen] = useState(false);
   const [prizeDetails, setPrizeDetails] = useState(true);
   const [productDetails, setProductDetails] = useState(false);
@@ -42,7 +42,7 @@ export default function Explore({ campaign }) {
               />
             </div>
             <div className="relative lg:top-5 lg:left-6 flex justify-center items-center lg:w-[28rem] h-36 w-60 lg:h-64">
-              <Image src={campaign?.Image} layout="fill" alt="Campaign Image" />
+              {/* <Image src={campaign?.Image} layout="fill" alt="Campaign Image" /> */}
             </div>
           </div>
           <div className="flex-col w-full pb-6 lg:pb-0">
@@ -54,13 +54,13 @@ export default function Explore({ campaign }) {
                   </p>
                 </div>
                 <p className="text-lg lg:text-2xl text-gray-600 tracking-tighter font-bold leading-6 lg:leading-normal">
-                  {campaign?.GiftName.en}
+                  {/* {campaign?.GiftName.en} */}
                 </p>
                 <p className="text-lg lg:text-2xl text-gray-700 tracking-tighter leading-4 lg:leading-tight font-medium">
-                  Buy a {campaign?.ProductName.en} and make it yours!
+                  {/* Buy a {campaign?.ProductName.en} and make it yours! */}
                 </p>
                 <p className="text-lg lg:text-2xl tracking-tighter font-semibold text-blue-500 lg:leading-tight">
-                  AED {campaign?.Price}
+                  {/* AED {campaign?.Price} */}
                 </p>
                 <div className="mt-2 space-x-4 text-sm lg:text-base">
                   <button
@@ -77,7 +77,7 @@ export default function Explore({ campaign }) {
             </div>
 
             <div className="absolute -top-4 -right-4 h-20 w-28  lg:h-28 lg:w-32 p-2 bg-white rounded-full">
-              <CircularProgressbar
+              {/* <CircularProgressbar
                 value={campaign?.SoldOutCoupons}
                 maxValue={campaign?.TotalCoupons}
                 strokeWidth={10}
@@ -94,10 +94,10 @@ export default function Explore({ campaign }) {
                   }`,
                   trailColor: "#e6e6e6",
                 })}
-              />
+              /> */}
               <div className="flex flex-col text-center absolute top-0 h-20 w-20 mt-7 ml-2 lg:ml-4">
                 <p className="text-lg lg:text-2xl font-semibold text-gray-600 leading-4 lg:leading-none">
-                  {campaign?.SoldOutCoupons}
+                  {/* {campaign?.SoldOutCoupons} */}
                 </p>
                 <p className="text-[9px] font-semibold text-gray-600 leading-3 lg:leading-1">
                   SOLD
@@ -106,7 +106,7 @@ export default function Explore({ campaign }) {
                   OUT OF
                 </p>
                 <p className="text-md lg:text-xl font-normal text-gray-300 leading-4 lg:leading-none">
-                  {campaign?.TotalCoupons}
+                  {/* {campaign?.TotalCoupons} */}
                 </p>
               </div>
             </div>
@@ -170,7 +170,7 @@ export default function Explore({ campaign }) {
                 <div className="mt-2">
                   <div className="relative flex justify-center items-center h-52">
                     <Image
-                      src={campaign?.Image}
+                      // src={campaign?.Image}
                       layout="fill"
                       alt="Campaign Image"
                     />
@@ -179,7 +179,7 @@ export default function Explore({ campaign }) {
                   {prizeDetails ? (
                     <>
                       <div className="absolute -top-8 -left-4   bg-white    lg:h-28 w-32  p-2  rounded-full">
-                        <CircularProgressbar
+                        {/* <CircularProgressbar
                           value={campaign?.SoldOutCoupons}
                           maxValue={campaign?.TotalCoupons}
                           strokeWidth={10}
@@ -197,10 +197,10 @@ export default function Explore({ campaign }) {
                             }`,
                             trailColor: "#e6e6e6",
                           })}
-                        />
+                        /> */}
                         <div className="flex flex-col text-center absolute top-0 h-20 w-20 mt-7 ml-2 lg:ml-4">
                           <p className="text-lg lg:text-2xl font-semibold text-gray-600 leading-4 lg:leading-none">
-                            {campaign?.SoldOutCoupons}
+                            {/* {campaign?.SoldOutCoupons} */}
                           </p>
                           <p className="text-[9px] font-semibold text-gray-600 leading-3 lg:leading-1">
                             SOLD
@@ -209,7 +209,7 @@ export default function Explore({ campaign }) {
                             OUT OF
                           </p>
                           <p className="text-md lg:text-xl font-normal text-gray-300 leading-4 lg:leading-none">
-                            {campaign?.TotalCoupons}
+                            {/* {campaign?.TotalCoupons} */}
                           </p>
                         </div>
                       </div>
@@ -228,16 +228,16 @@ export default function Explore({ campaign }) {
                         </button>
                       </div>
                       <p>Get a chance to win:</p>
-                      <p>{campaign?.GiftName.en}</p>
+                      {/* <p>{campaign?.GiftName.en}</p> */}
                       <p className="text-sm text-gray-500">
-                        {campaign?.GiftDescription.en}
+                        {/* {campaign?.GiftDescription.en} */}
                       </p>
                     </>
                   ) : null}
                   {productDetails ? (
                     <>
                       <div className="absolute -top-8 -left-4   bg-white    lg:h-28 w-32  p-2  rounded-full">
-                        <CircularProgressbar
+                        {/* <CircularProgressbar
                           value={campaign?.SoldOutCoupons}
                           maxValue={campaign?.TotalCoupons}
                           strokeWidth={10}
@@ -255,10 +255,10 @@ export default function Explore({ campaign }) {
                             }`,
                             trailColor: "#e6e6e6",
                           })}
-                        />
+                        /> */}
                         <div className="flex flex-col text-center absolute top-0 h-20 w-20 mt-7 ml-2 lg:ml-4">
                           <p className="text-lg lg:text-2xl font-semibold text-gray-600 leading-4 lg:leading-none">
-                            {campaign?.SoldOutCoupons}
+                            {/* {campaign?.SoldOutCoupons} */}
                           </p>
                           <p className="text-[9px] font-semibold text-gray-600 leading-3 lg:leading-1">
                             SOLD
@@ -267,7 +267,7 @@ export default function Explore({ campaign }) {
                             OUT OF
                           </p>
                           <p className="text-md lg:text-xl font-normal text-gray-300 leading-4 lg:leading-none">
-                            {campaign?.TotalCoupons}
+                            {/* {campaign?.TotalCoupons} */}
                           </p>
                         </div>
                       </div>
@@ -286,23 +286,23 @@ export default function Explore({ campaign }) {
                         </button>
                       </div>
                       <div className="flex justify-between mr-10">
-                        <p>{campaign?.ProductName.en}</p>
+                        {/* <p>{campaign?.ProductName.en}</p> */}
                         <p className="text-blue-500 font-bold pt-2 pb-2">
-                          AED {campaign?.Price}
+                          {/* AED {campaign?.Price} */}
                         </p>
                       </div>
                       <p className="text-sm text-gray-500">
-                        {campaign?.ProductDescription.en}
+                        {/* {campaign?.ProductDescription.en} */}
                       </p>
                     </>
                   ) : null}
                 </div>
                 <div className="flex justify-between  pt-4 pb-4">
                   <div className="flex-col ">
-                    <p className="text-xl">Buy {campaign?.ProductName.en}</p>
+                    {/* <p className="text-xl">Buy {campaign?.ProductName.en}</p>
                     <p className="text-base text-blue-500 font-bold">
                       AED {campaign?.Price}
-                    </p>
+                    </p> */}
                     <p className="text-xs">Inclusive of VAT</p>
                   </div>
                   <button

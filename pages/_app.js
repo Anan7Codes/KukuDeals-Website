@@ -1,20 +1,16 @@
 import '../styles/globals.css'
 import { useState } from 'react'
 import { LanguageContext } from '@/contexts/language'
-import { nhost } from '@/utils/nhost'
-import { NhostAuthProvider } from "@nhost/react-auth";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function MyApp({ Component, pageProps }) {
   const [ english, setEnglish ] = useState(true)
   return (
-    <NhostAuthProvider nhost={nhost}>
       <LanguageContext.Provider value={{english, setEnglish}}>
         <Component {...pageProps} />
         <ToastContainer />
       </LanguageContext.Provider>
-    </NhostAuthProvider>
   )
 }
 

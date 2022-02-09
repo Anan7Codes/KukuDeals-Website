@@ -1,30 +1,15 @@
 import { useState, useContext, useEffect } from "react";
 import { LanguageContext } from "@/contexts/language";
 import Image from "next/image";
-import { nhost } from "@/utils/nhost";
-import { useNhostAuth } from "@nhost/react-auth";
 import { useRouter } from "next/router";
+import { supabase } from "@/utils/supabaseClient";
 
 function Navbar() {
-  const { isLoading, isAuthenticated } = useNhostAuth();
-  const router = useRouter()
-
+  const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
   const { english, setEnglish } = useContext(LanguageContext);
 
-  const userInfo = nhost.auth.getUser();
-  console.log(userInfo);
-
-  const goToLogin = (e) => { 
-    e.preventDefault();
-    router.push('/login')
-  }
-
-  const goToProfile = (e) => { 
-    e.preventDefault();
-    router.push('/profile/personal-details')
-  }
-  
+  const userInfo = supabase.auth.user();
   return (
     <nav className="pb-3 relative">
       <div className="bg-white mx-auto rounded-[15px]">
@@ -75,7 +60,25 @@ function Navbar() {
               href=""
               className="py-2 px-3 text-[#4a4a4a] font-medium hover:text-red-400 "
             >
-              {userInfo ? <span onClick={goToProfile}>{userInfo?.displayName}</span>  : <div onClick={goToLogin}>Login/Register</div>}
+              {userInfo ? (
+                <span
+                  onClick={(e) => {
+                    e.preventDefault();
+                    router.push("/profile/personal-details");
+                  }}
+                >
+                  {userInfo.user_metadata.name}
+                </span>
+              ) : (
+                <div
+                  onClick={(e) => {
+                    e.preventDefault();
+                    router.push("/signin");
+                  }}
+                >
+                  Login/Register
+                </div>
+              )}
             </a>
           </div>
           <div className="lg:hidden flex items-center pr-4">
@@ -123,7 +126,11 @@ function Navbar() {
                 العربية
               </p>
               <p className="font-medium text-sm text-[#4a4a4a] mb-4 hover:cursor-pointer hover:text-yellow-500">
-                {userInfo ? userInfo.displayName : <div>Login/Register</div>}{" "}
+                {userInfo ? (
+                  userInfo.user_metadata.name
+                ) : (
+                  <div>Login/Register</div>
+                )}
               </p>
 
               <svg

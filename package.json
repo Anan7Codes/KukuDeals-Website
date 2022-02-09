@@ -15,7 +15,7 @@
     "@mui/material": "^5.3.0",
     "@nhost/nhost-js": "^0.3.6",
     "@nhost/react-apollo": "^2.1.0",
-    "@nhost/react-auth": "^2.0.3",
+    "@supabase/supabase-js": "^1.30.0",
     "graphql": "^16.3.0",
     "next": "12.0.7",
     "react": "17.0.2",

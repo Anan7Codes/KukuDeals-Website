@@ -1,33 +1,37 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { nhost } from "@/utils/nhost";
 import { useRouter } from "next/router";
+import { supabase } from '@/utils/supabaseClient';
+
 
 export default function SignIn() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  async function handleSubmit(e) {
+  const SignInUser = async (e) => {
     e.preventDefault();
     try {
-      const res = await nhost.auth.signIn({
-        email: email,
-        password: password,
-      });
-      if (res.error) {
-        toast.error(res.error.message, {
+      const { user, session, error } = await supabase.auth.signIn({
+        email,
+        password,
+      })
+      console.log("user",user)
+      console.log(user.user_metadata.name);
+      console.log("session",session);
+      if (error) {
+     toast.error(error, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
-          progress: undefined,
+          progress: undefined
         });
-        return;
+        return
       }
-      toast.success("Logged in succesfully", {
+      toast.success("Signed in successfully", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -35,11 +39,10 @@ export default function SignIn() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-      });
-      router.push("/");
-    } catch (error) {
-      alert("Login failed");
-      console.log(error);
+      })
+      return router.push('/')
+    } catch (e) {
+      console.log(e)
     }
   }
 
@@ -51,7 +54,7 @@ export default function SignIn() {
             <p className="text-3xl text-gray-700 font-bold">Sign In</p>
           </div>
           <form
-            onSubmit={handleSubmit}
+            onSubmit={SignInUser}
             className="flex justify-center pb-6 pt-2"
           >
             <div className="flex flex-col">
@@ -77,7 +80,7 @@ export default function SignIn() {
               <div className="flex justify-between text-xs">
                 <p
                   className="text-blue-500 cursor-pointer "
-                  onClick={() => router.push("/register")}
+                  onClick={() => router.push("/signup")}
                 >
                   Don&apos;t have an account yet?Click here to Signup
                 </p>

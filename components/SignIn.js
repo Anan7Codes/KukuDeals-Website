@@ -79,7 +79,7 @@ export default function SignIn() {
                   className="text-blue-500 cursor-pointer "
                   onClick={() => router.push("/register")}
                 >
-                  Don't have an account yet?Click here to Signup
+                  Don&apos;t have an account yet?Click here to Signup
                 </p>
                 {/* <p className="text-blue-500 cursor-pointer mr-3 ">
                   Forgot password

@@ -24,7 +24,7 @@ export default function CartRight(props) {
           onMouseLeave={handleCart}
         >
           <div className="bg-gray-100 drop-shadow-lg container w-[25rem] h-[30rem] bottom-6 right-2 rounded-[15px] fixed z-20">
-          <div class=" overflow-y-auto space-x-5 h-72"> 
+          <div className=" overflow-y-auto space-x-5 h-72"> 
           <CartItems/>
           <CartItems/>
           <CartItems/>

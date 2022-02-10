@@ -1,5 +1,10 @@
 import initStripe from 'stripe'
-import { supabaseAdmin } from "@/utils/supabaseClient";
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY
+
+const supabase = createClient(supabaseUrl, supabaseSecretKey)
 
 export default async function handler(req, res) {
     if(req.method !== 'POST') {
@@ -16,7 +21,7 @@ export default async function handler(req, res) {
         })
         console.log(customer)
 
-        const { data, error } = await supabaseAdmin
+        const { data, error } = await supabase
             .from('profiles')
             .update({ stripe_customer_id: customer.id })
             .eq('id', req.body.record.id)

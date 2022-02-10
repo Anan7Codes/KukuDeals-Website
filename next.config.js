@@ -6,6 +6,7 @@ module.exports = {
   // },
   images: {
     domains: ['kukudeals.vercel.app'],
+    domains: ['jipvpsiwfwiyqyxpssli.supabase.in']
   },
   
 }

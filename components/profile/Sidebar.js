@@ -3,8 +3,9 @@ import { FaAddressCard } from "react-icons/fa";
 import { RiCoupon2Fill, RiLogoutBoxRLine } from "react-icons/ri";
 import User from "./User";
 import { useRouter } from "next/router";
+import { supabase } from "@/utils/supabaseClient";
 
-export default function Sidebar({children}) {
+export default function Sidebar({ children }) {
   const router = useRouter();
 
 
@@ -224,7 +225,8 @@ export default function Sidebar({children}) {
           </div>
           <div className="flex p-4">
             <RiLogoutBoxRLine className="h-6 w-6" />
-            <p className="pl-3">
+            <p className="pl-3"
+              onClick={async () => { const { error } = await supabase.auth.signOut(); router.push('/') }}>
               Logout
             </p>
 

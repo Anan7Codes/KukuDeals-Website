@@ -7,7 +7,8 @@ export default function User() {
     const [amountSpent, setAmountSpent] = useState(0)
     useEffect(()=>{
         const userInfo = supabase.auth.user();
-        setUserName(userInfo.user_metadata.name)
+        const {name} = userInfo.user_metadata
+        setUserName(name)
         setEmail(userInfo.email)
     },[])
     return (

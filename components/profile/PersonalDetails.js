@@ -10,23 +10,18 @@ import { toast } from "react-toastify";
 
 export default function PersonalDetails() {
 
-  const [firstname, setFirstName] = useState()
-  const [lastname, setLastName] = useState()
-  const [newFirstname, setNewFirstName] = useState()
-  const [newLastname, setNewLastName] = useState()
+  
   const [email, setEmail] = useState()
   const [gender, setGender] = useState()
-  const [newGender, setNewGender] = useState()
   const [phoneNumber, setPhoneNumber] = useState()
   const [personalDetails, setPersonalDetails] = useState({})
   const [newPersonalDetails, setNewPersonalDetails] = useState({})
   // const [amountSpent, setAmountSpent] = useState(15)
 
-  useEffect(() => {
+  useEffect(async() => {
     const userInfo = supabase.auth.user()
     console.log(userInfo);
     const { nationality, countryOfResidence } = userInfo.user_metadata
-
     const { name, gender } = userInfo.user_metadata
     const { email } = userInfo
     const [firstname, lastname] = name.split(' ');
@@ -34,13 +29,10 @@ export default function PersonalDetails() {
     setNewPersonalDetails({ nationality, countryOfResidence, firstname, lastname, name})
     setGender(gender)
     setEmail(email)
-
   }, [])
 
   async function InsertPersonalDetails(e) {
     e.preventDefault()
-    console.log(personalDetails);
-    console.log(newPersonalDetails);
     if (JSON.stringify(personalDetails) === JSON.stringify(newPersonalDetails)) {
       toast.info("No change in PersonalDetails", {
         position: "top-right",

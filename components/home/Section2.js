@@ -1,17 +1,29 @@
 import { useState, useEffect } from 'react'
 import Explore from "@/components/home/Explore";
+import { supabase } from '@/utils/supabaseClient';
 
 export default function Section2() {
-    const [ campaigns, setCampaigns ] = useState([]) 
-    
+    const [campaigns, setCampaigns] = useState([])
+
+    useEffect(() => {
+        const FetchCampaigns = async () => {
+            console.log("first");
+            const { data, error } = await supabase
+                .from('campaigns')
+                .select('*')
+            console.log(data, error);
+            setCampaigns(data)
+        }
+        FetchCampaigns()
+    }, [])
+    if (!campaigns) return <p>No Data</p>
     return (
         <div>
             <p className="text-[26px] text-gray-700 pt-5 font-bold">Explore campaigns</p>
             <div className="z-0 mx-auto rounded-[15px]">
                 {campaigns?.map(campaign => {
                     return (
-                        // <Explore campaign={campaign} key={campaign.id}/>
-                        <Explore key={campaign.id}/>
+                        <Explore campaign={campaign} key={campaign.id} />
                     )
                 })}
             </div>

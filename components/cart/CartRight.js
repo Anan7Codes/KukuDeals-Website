@@ -1,19 +1,30 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CartButton from "./CartButton";
 import Cart from "./Cart";
+import { CartState } from "@/contexts/cart/CartContext";
 
-export default function CartRight(props) {
+export default function CartRight() {
   const [showCart, setShowCart] = useState(true);
-  const router = useRouter()
-  
+  const [couponCount, setCouponCount] = useState();
+  const router = useRouter();
+
   const handleCart = (e) => {
     setShowCart(false);
   };
   const handleClick = () => {
-    router.push('/cart')
-  }
+    router.push("/cart");
+  };
+  const {
+    state: { cart },
+  } = CartState();
+  const { dispatch } = CartState();
+  useEffect(() => {
+    setCouponCount(
+      cart.reduce((acc, curr) => acc + Number(curr.SoldOutCoupons), 0)
+    );
+  }, [cart]);
   return (
     <div>
       {showCart ? (
@@ -22,25 +33,23 @@ export default function CartRight(props) {
           onMouseLeave={handleCart}
         >
           <div className="bg-gray-100 drop-shadow-lg container w-[25rem] h-[30rem] bottom-6 right-2 rounded-[15px] fixed z-20">
-          <div className=" overflow-y-auto space-x-5 h-72"> 
-          <Cart/>
-          <Cart/>
-          <Cart/>
-          <Cart/>
-          <Cart/>
-          </div>
+            <div className=" overflow-y-auto space-x-5 h-72">
+              {cart.map((item) => {
+                return <Cart item={item} key={item.id} />;
+              })}
+            </div>
             <div className="bg-white rounded-b-2xl mt-6">
               <div className="ml-3 divide-y mr-3 leading-extra-loose text-[13px]">
                 <div className="flex justify-between  ">
                   <p>Total Product</p>
                   <div className="flex pr-4">
-                    <p>1</p>
+                    <p>{cart.length}</p>
                   </div>
                 </div>
                 <div className="flex justify-between">
                   <p>Total Coupons</p>
                   <div className="flex pr-4">
-                    <p>2</p>
+                    <p>{couponCount}</p>
                   </div>
                 </div>
                 <div className="flex">
@@ -63,10 +72,18 @@ export default function CartRight(props) {
                 </div>
               </div>
               <div className="flex justify-center">
-                
-              <button onClick={handleClick} className="bg-blue-500 rounded-[15px] text-base font-medium hover:bg-[#2A547E] text-white w-64 h-12  mt-2 mb-4 ">
-                Continue to Checkout
-              </button>
+                {cart.length > 0 ? (
+                  <button
+                    onClick={handleClick}
+                    className="bg-blue-500 rounded-[15px] text-base font-medium hover:bg-[#2A547E] text-white w-64 h-12  mt-2 mb-4 "
+                  >
+                    Continue to Checkout
+                  </button>
+                ) : (
+                  <div>
+                    <p>No items added to cart</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

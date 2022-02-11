@@ -1,0 +1,25 @@
+import Image from "next/image";
+import ToggleSwitch from "@/components/ToggleSwitch";
+import Payement from "@/components/cart/Payement";
+import { CartState } from "@/contexts/cart/CartContext";
+import { useEffect, useState } from "react";
+import CartItem from "./CartItem";
+
+export default function CartPage() {
+  const { state: { cart } } = CartState();
+  if (cart.length==0) return (<p>No items added to cart</p>)
+  return (
+    <div className="lg:grid grid-cols-12 my-4">
+      <div className="col-span-9 lg:w-[95%]">
+        <p className="text-4xl font-bold text-gray-700">Cart</p>
+        <div className="lg:hidden"></div>
+        {cart.map(item => {
+          return (<CartItem item={item} key={item.id} />)
+        })}
+      </div>
+      <div className="col-span-3">
+        <Payement />
+      </div>
+    </div>
+  );
+}

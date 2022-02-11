@@ -37,7 +37,6 @@ export default function Campaign({ campaign }) {
     state: { cart },
     dispatch
   } = CartState()
-  console.log(cart);
 
   useEffect(() => {
     cart.filter(c => c.id === campaign.id ? setQty(c.qty) : null)

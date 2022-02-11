@@ -2,14 +2,12 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import CartButton from "./CartButton";
-import CartItems from "./Cart";
+import Cart from "./Cart";
 
 export default function CartRight(props) {
   const [showCart, setShowCart] = useState(true);
   const router = useRouter()
-  //   const onClose = () => {
-  //     props.showCart(false);
-  //   };
+  
   const handleCart = (e) => {
     setShowCart(false);
   };
@@ -25,11 +23,11 @@ export default function CartRight(props) {
         >
           <div className="bg-gray-100 drop-shadow-lg container w-[25rem] h-[30rem] bottom-6 right-2 rounded-[15px] fixed z-20">
           <div className=" overflow-y-auto space-x-5 h-72"> 
-          <CartItems/>
-          <CartItems/>
-          <CartItems/>
-          <CartItems/>
-          <CartItems/>
+          <Cart/>
+          <Cart/>
+          <Cart/>
+          <Cart/>
+          <Cart/>
           </div>
             <div className="bg-white rounded-b-2xl mt-6">
               <div className="ml-3 divide-y mr-3 leading-extra-loose text-[13px]">

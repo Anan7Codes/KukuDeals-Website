@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Explore from "@/components/home/Explore";
+import Explore from "@/components/home/Campaign";
 import { supabase } from '@/utils/supabaseClient';
 
 export default function Section2() {
@@ -7,7 +7,6 @@ export default function Section2() {
 
     useEffect(() => {
         const FetchCampaigns = async () => {
-            console.log("first");
             const { data, error } = await supabase
                 .from('campaigns')
                 .select('*')

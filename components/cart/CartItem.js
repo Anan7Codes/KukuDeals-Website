@@ -1,8 +1,18 @@
 import Image from "next/image";
 import ToggleSwitch from "@/components/ToggleSwitch";
 import Payement from "@/components/cart/Payement";
-
-export default function CartItem() {
+import { CartState } from '@/contexts/cart/CartContext';
+import {useEffect} from 'react'
+export default function CartItem({item}) {
+  const {state :{cart}} = CartState();
+  console.log(cart);
+  const { dispatch } = CartState();
+  console.log(dispatch); 
+  useEffect(() =>{
+    console.log(cart);
+  },[cart])
+   
+  
   return (
     <div className="lg:grid grid-cols-12 my-4">
       <div className="col-span-9 lg:w-[95%]">
@@ -18,6 +28,9 @@ export default function CartItem() {
           </div>
           <div className="flex pl-1 pt-2 	">
             <div className="">
+              {cart.map((item)=>{
+                <span>{item.ProductName}</span>
+              })}
               <p className=" text-sm sm:text-base lg:text-xl font-bold leading-2">
                 2 DXB license plates
               </p>

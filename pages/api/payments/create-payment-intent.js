@@ -53,10 +53,23 @@ export default async function handler(req, res) {
         console.log("paymentIntent", paymentIntent)
         console.log("ephmeralKey", ephemeralKey)
         
+        const initiated_orders_response = await supabase
+            .from('initiated_orders')
+            .insert([
+                { 
+                    cart: req.body.cart, 
+                    amount: total, 
+                    verification_secret: ephemeralKey.secret,
+                    user_id: req.body.user_id
+                },
+            ])
+        console.log(initiated_orders_response)
+
         res.json({
             paymentIntent: paymentIntent.client_secret,
             ephemeralKey: ephemeralKey.secret,
             customer: data[0].stripe_customer_id,
+            initiated_order_id: initiated_orders_response.data[0].id
         });
     }
 }

@@ -16,6 +16,7 @@
     "@nhost/nhost-js": "^0.3.6",
     "@nhost/react-apollo": "^2.1.0",
     "@supabase/supabase-js": "^1.30.0",
+    "easyinvoice": "^2.2.6",
     "graphql": "^16.3.0",
     "modern-async": "^1.1.2",
     "next": "12.0.7",

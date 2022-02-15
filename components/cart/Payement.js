@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Checkbox from '@mui/material/Checkbox';
 import Total from "./Total";
+import mail from '@sendgrid/mail';
+mail.setApiKey(process.env)
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
@@ -11,6 +13,9 @@ export default function Payement() {
   }
   const handlePaymentOff = () => {
     setPaymentInfo(false)
+  }
+  const PdfGenerator = async() => {
+  
   }
   return (
     <div className="">
@@ -66,7 +71,7 @@ export default function Payement() {
               Add new card
             </p>
           </div>}
-        <button className="bg-gray-200 p-3 mt-4 w-full text-white font-bold h-16 rounded-[10px]">
+        <button onClick={PdfGenerator} className="bg-gray-200 p-3 mt-4 w-full text-white font-bold h-16 rounded-[10px]">
           Pay now
         </button>
       </div>

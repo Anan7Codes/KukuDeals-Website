@@ -50,8 +50,8 @@ export default async function handler(req, res) {
             },
         })
 
-        console.log("paymentIntent", paymentIntent)
-        console.log("ephmeralKey", ephemeralKey)
+        // console.log("paymentIntent", paymentIntent)
+        // console.log("ephmeralKey", ephemeralKey)
         
         const initiated_orders_response = await supabase
             .from('initiated_orders')
@@ -63,7 +63,7 @@ export default async function handler(req, res) {
                     user_id: req.body.user_id
                 },
             ])
-        console.log(initiated_orders_response)
+        // console.log(initiated_orders_response)
 
         res.json({
             paymentIntent: paymentIntent.client_secret,

@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Checkbox from '@mui/material/Checkbox';
 import Total from "./Total";
-import mail from '@sendgrid/mail';
-mail.setApiKey(process.env)
+import { CartState } from "@/contexts/cart/CartContext";
+
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
 export default function Payement() {
+  const { state: { cart } } = CartState();
+  const [ total, setTotal ] = useState(0)
+  useEffect(() => {
+    setTotal(cart.reduce((acc, curr) => acc + Number(curr.Price) * curr.qty, 0))
+  }, [cart])
   const [paymentInfo, setPaymentInfo] = useState(false)
   const handlePayingOptions = () => {
     setPaymentInfo(true)
@@ -15,7 +20,17 @@ export default function Payement() {
     setPaymentInfo(false)
   }
   const PdfGenerator = async() => {
-  
+    try{
+     
+      fetch('/api/mail/mail',{
+        method:'post',
+        body:JSON.stringify(cart)
+      })
+      console.log(total)
+        console.log("email succesfully sent")
+    }catch (error){
+      console.log(error)
+    }
   }
   return (
     <div className="">

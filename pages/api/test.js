@@ -29,20 +29,25 @@ const webhookHandler = async (req, res) => {
             return;
         }
 
-        if (event.type === 'payment_intent.succeeded') {
-            const paymentIntent = event.data.object
-            console.log("paymentIntent webhook", paymentIntent)
-        } else if (event.type === 'payment_intent.payment_failed') {
-            const paymentIntent = event.data.object
-            console.log(
-                `❌ Payment failed: ${paymentIntent.last_payment_error?.message}`
-            )
-        } else if (event.type === 'charge.succeeded') {
+        if (event.type === 'charge.succeeded') {
             const charge = event.data.object
             console.log("charged webhook", charge)
-        } else {
-            console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
         }
+
+        // if (event.type === 'payment_intent.succeeded') {
+        //     const paymentIntent = event.data.object
+        //     console.log("paymentIntent webhook", paymentIntent)
+        // } else if (event.type === 'payment_intent.payment_failed') {
+        //     const paymentIntent = event.data.object
+        //     console.log(
+        //         `❌ Payment failed: ${paymentIntent.last_payment_error?.message}`
+        //     )
+        // } else if (event.type === 'charge.succeeded') {
+        //     const charge = event.data.object
+        //     console.log("charged webhook", charge)
+        // } else {
+        //     console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
+        // }
             
         
         return res.send({ message: 'success'})

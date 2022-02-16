@@ -11,6 +11,8 @@ const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY
 const supabase = createClient(supabaseUrl, supabaseSecretKey)
 
 const endpointSecret = "whsec_aNIcwFv9jP5EcTDKftddfNTP6AWAU6XW"
+const test = process.env.WEBHOOK_SECRET
+console.log("test ev", test)
 
 export const config = {
     api: {

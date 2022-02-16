@@ -1,60 +1,105 @@
-import { createClient } from '@supabase/supabase-js'
+import { buffer } from 'micro'
 import { map } from 'modern-async'
+import { createClient } from '@supabase/supabase-js'
+import Stripe from 'stripe'
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {apiVersion: '2020-08-27'})
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY
 
 const supabase = createClient(supabaseUrl, supabaseSecretKey)
 
-export default async function handler(req, res) {
+const endpointSecret = process.env.WEBHOOK_SECRET
+
+export const config = {
+    api: {
+      bodyParser: false,
+    },
+}
+
+const webhookHandler = async (req, res) => {
     if(req.method !== 'POST') {
         return res.send({ success: false, message: 'Wrong request made'})
     }
     if(req.method === 'POST') {
-        
-        let initiated_orders = await supabase
-            .from('initiated_orders')
-            .select('*')
-            .eq("id", "51819eb7-9b61-4de5-a89b-7ef84fc3e640")
-            .eq("user_id", "37dec8a5-b519-4fa6-ad59-08dfc5359688")
-            .eq("verification_secret", "ek_test_YWNjdF8xS1JKek9MU3NDVXE4NFhFLEZWQ3p5d1Y4aU84WXBPaERVRXBTYmRIMWw1ZlpjQko_00zNpVW3me")
-            .single()
+        const buf = await buffer(req)
+        const sig = req.headers['stripe-signature'];
+        let event;
 
-        let completed_orders = await supabase
-            .from('completed_orders')
-            .select('*', { count: 'exact' }) 
+        try {
+            event = stripe.webhooks.constructEvent(buf.toString(), sig, endpointSecret);
+            console.log("event webhook", event)
+        } catch (err) {
+            console.log("err webhook", err)
+            res.status(400).send(`Webhook Error: ${err.message}`);
+            return;
+        }
 
-
-        let ordered_coupons = []
-        let donated_coupons = []
-        let coupons = []
-        await map(initiated_orders.data.cart, async (order, index) => {
-            coupons.push({ product_id: JSON.parse(order).id, product_coupons: [], product_qty: JSON.parse(order).qty})
-            for (let i = 1; i <= JSON.parse(order).qty; i++) {
-                ordered_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length + 1}O`)
-                coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}O`)
-                if(JSON.parse(order).donate === "true") {
-                    donated_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}D`)
-                    coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}D`)
-                }
+        if (event.type === 'payment_intent.succeeded') {
+            const paymentIntent = event.data.object            
+            const { error } = await supabase
+                .from('initiated_orders')
+                .update({ status: true })
+                .eq('verification_secret', paymentIntent.id)
+            if(error) {
+                console.log(error)
+                return res.send({ success: false, message: "Initiated order doesn't exist"})
             }
-        })
-        console.log("coupons", ordered_coupons)
-        console.log("donated_coupons", donated_coupons)
-        console.log("product_coupons", coupons)
 
-        const { data, error } = await supabase
-            .from('completed_orders')
-            .insert([
-                { 
-                    coupons, 
-                    user_id: initiated_orders.data.user_id,
-                    transaction_number: completed_orders.count + 1
-                },
-            ])
-        console.log(data, error)
+        } else if (event.type === 'charge.succeeded') {
+            const charge = event.data.object
+            let initiated_orders = await supabase
+                .from('initiated_orders')
+                .select('*')
+                .eq("verification_secret", charge.payment_intent)
+                .eq("status", true)
+                .single()
+
+            let completed_orders = await supabase
+                .from('completed_orders')
+                .select('*', { count: 'exact' }) 
+    
+            
+            console.log("Ini", initiated_orders)
+            console.log("Completed", completed_orders)
+            
+            let ordered_coupons = []
+            let donated_coupons = []
+            let coupons = []
+            await map(initiated_orders.data.cart, async (order, index) => {
+                coupons.push({ product_id: JSON.parse(order).id, product_coupons: [], product_qty: JSON.parse(order).qty})
+                for (let i = 1; i <= JSON.parse(order).qty; i++) {
+                    ordered_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length + 1}O`)
+                    coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}O`)
+                    if(JSON.parse(order).donate === "true") {
+                        donated_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}D`)
+                        coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}D`)
+                    }
+                }
+            })
+            console.log("coupons", ordered_coupons)
+            console.log("donated_coupons", donated_coupons)
+            console.log("product_coupons", coupons)
+    
+            const { data, error } = await supabase
+                .from('completed_orders')
+                .insert([
+                    { 
+                        coupons, 
+                        user_id: initiated_orders.data.user_id,
+                        transaction_number: completed_orders.count + 1
+                    },
+                ])
+            console.log("final", data, error)
+
+        } else {
+            console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
+        }
+            
         
-        
-        return res.send({ message: 'success', initiated_orders, error})
+        return res.send({ message: 'success'})
     }
 }
+
+export default webhookHandler

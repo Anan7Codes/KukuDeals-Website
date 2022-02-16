@@ -1,7 +1,12 @@
 import { buffer } from 'micro'
 import { map } from 'modern-async'
+import Cors from 'micro-cors';
 import { createClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
+
+const cors = Cors({
+    allowMethods: ['POST', 'HEAD'],
+});
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {apiVersion: '2020-08-27'})
 
@@ -102,4 +107,4 @@ const webhookHandler = async (req, res) => {
     }
 }
 
-export default webhookHandler
+export default cors(webhookHandler)

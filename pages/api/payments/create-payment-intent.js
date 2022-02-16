@@ -59,11 +59,11 @@ export default async function handler(req, res) {
                 { 
                     cart: req.body.cart, 
                     amount: total, 
-                    verification_secret: ephemeralKey.secret,
+                    verification_secret: paymentIntent.id,
                     user_id: req.body.user_id
                 },
             ])
-        // console.log(initiated_orders_response)
+        console.log(initiated_orders_response)
 
         res.json({
             paymentIntent: paymentIntent.client_secret,

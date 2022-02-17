@@ -27,13 +27,16 @@ export default async function handler(req, res) {
         return res.send({ success: false, message: 'Wrong request made'})
     }
     if(req.method === 'POST') {
+        const { user } = await supabase.auth.api.getUserByCookie(req)
+        if(!user) return res.status(401).send("Unauthorized")
+
         const { total, success } = await TotalPrice(req.body.cart)
         if(!success) return res.status(404).json({ success: false, message: "Failed to calculate total amount"})
 
         let { data, error } = await supabase
             .from('profiles')
             .select('stripe_customer_id')
-            .eq("id", req.body.user_id)
+            .eq("id", user.id)
         if(error) return res.status(404).json({ success: false, message: "Failed authorization"})
 
         const ephemeralKey = await stripe.ephemeralKeys.create(
@@ -60,7 +63,7 @@ export default async function handler(req, res) {
                     cart: req.body.cart, 
                     amount: total, 
                     verification_secret: paymentIntent.id,
-                    user_id: req.body.user_id
+                    user_id: user.id
                 },
             ])
         console.log(initiated_orders_response)
@@ -69,7 +72,6 @@ export default async function handler(req, res) {
             paymentIntent: paymentIntent.client_secret,
             ephemeralKey: ephemeralKey.secret,
             customer: data[0].stripe_customer_id,
-            initiated_order_id: initiated_orders_response.data[0].id
         });
     }
 }

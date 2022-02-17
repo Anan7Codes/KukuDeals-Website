@@ -91,8 +91,7 @@ const webhookHandler = async (req, res) => {
                         transaction_number: completed_orders.count + 1
                     },
                 ])
-            console.log("final", data, error)
-
+            console.log("final", data, error)            
         } else {
             console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
         }

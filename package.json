@@ -16,6 +16,7 @@
     "@nhost/nhost-js": "^0.3.6",
     "@nhost/react-apollo": "^2.1.0",
     "@supabase/supabase-js": "^1.30.0",
+    "cookie": "^0.4.2",
     "graphql": "^16.3.0",
     "micro": "^9.3.4",
     "micro-cors": "^0.1.1",

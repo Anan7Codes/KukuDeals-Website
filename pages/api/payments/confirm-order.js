@@ -78,9 +78,6 @@ const webhookHandler = async (req, res) => {
                     }
                 }
             })
-            console.log("coupons", ordered_coupons)
-            console.log("donated_coupons", donated_coupons)
-            console.log("product_coupons", coupons)
     
             const { data, error } = await supabase
                 .from('completed_orders')
@@ -91,7 +88,23 @@ const webhookHandler = async (req, res) => {
                         transaction_number: completed_orders.count + 1
                     },
                 ])
-            console.log("final", data, error)            
+            console.log("final", data, error)     
+            
+            let profile = await supabase
+                .from('profiles')
+                .select('promo_codes_used')
+                .eq("id", initiated_orders.data.user_id)
+
+            let promo_codes_used = profile.data[0].promo_codes_used
+            promo_codes_used.push(initiated_orders.data.promo_codes_used)
+            
+            const updated_promo_codes = await supabase
+                .from('profiles')
+                .update({ promo_codes_used: promo_codes_used })
+                .eq('id', initiated_orders.data.user_id)
+            console.log("updated promo code", updated_promo_codes)
+
+
         } else {
             console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
         }

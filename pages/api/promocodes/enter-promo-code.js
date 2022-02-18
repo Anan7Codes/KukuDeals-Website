@@ -13,29 +13,35 @@ const Handler = async (req, res) => {
         console.log(req.body)
         if(req.body.promoCode === '') return res.send({ success: false, message: "Please enter a value"})
         const { user } = await supabase.auth.api.getUserByCookie(req)
+
         if(!user) return res.status(401).send({ success: false, message: "Unauthorized"})
         
-        let { data: promo_codes, error } = await supabase
+        let promo_codes = await supabase
             .from('promo_codes')
             .select('value,type')
             .eq('name', req.body.promoCode)
             .single()
-        if(error) {
-            console.log(error)
+        if(promo_codes.error) {
+            console.log(promo_codes.error)
             return res.send({ success: false, message: "Promo code does not exist"})
         }
-        console.log(promo_codes)
         
-        if(promo_codes.length === 0) {
+        if(promo_codes.data.length === 0) {
             return res.send({ success: false, message: "Promo code does not exist"})
         }  
-
-
-
-        //check if promo code exists
         
-        //check if promo code has been used
-        res.send({ success: true, message: `Apply promo code ${req.body.promoCode}?`, data: promo_codes})
+        let profile = await supabase
+            .from('profiles')
+            .select('promo_codes_used')
+            .eq("id", user.id)
+        if(profile.error) {
+            return res.send({ success: false, message: "Something went wrong! Contact Us!"})
+        }
+        if(profile.data[0].promo_codes_used.includes(req.body.promoCode)) {
+            return res.send({ success: false, message: "Promo code has already been used"})
+        }
+
+        res.send({ success: true, message: `Apply promo code ${req.body.promoCode}?`, data: promo_codes.data})
     }
 }
 

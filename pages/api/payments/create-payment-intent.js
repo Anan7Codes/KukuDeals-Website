@@ -63,7 +63,8 @@ export default async function handler(req, res) {
                     cart: req.body.cart, 
                     amount: total, 
                     verification_secret: paymentIntent.id,
-                    user_id: user.id
+                    user_id: user.id,
+                    promo_code_used: req.body.promoCode
                 },
             ])
         console.log(initiated_orders_response)

@@ -12,9 +12,10 @@ const Handler = async (req, res) => {
     if(req.method === 'POST') {
         console.log(req.body)
         if(req.body.promoCode === '') return res.send({ success: false, message: "Please enter a value"})
-        const { user } = await supabase.auth.api.getUserByCookie(req)
-        console.log("user cookie promo code", user)
-        if(!user) return res.status(401).send({ success: false, message: "Unauthorized"})
+        if(req.body.user_id === '') return res.send({ success: false, message: "Unauthorized"})
+        // const { user } = await supabase.auth.api.getUserByCookie(req)
+        // console.log("user cookie promo code", user)
+        // if(!user) return res.status(401).send({ success: false, message: "Unauthorized"})
         
         let promo_codes = await supabase
             .from('promo_codes')
@@ -33,7 +34,7 @@ const Handler = async (req, res) => {
         let profile = await supabase
             .from('profiles')
             .select('promo_codes_used')
-            .eq("id", user.id)
+            .eq("id", req.body.user_id)
         if(profile.error) {
             return res.send({ success: false, message: "Something went wrong! Contact Us!"})
         }

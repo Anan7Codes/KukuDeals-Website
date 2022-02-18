@@ -39,10 +39,10 @@ export default async function handler(req, res) {
                 .from('promo_codes')
                 .select('type,value')
                 .eq("name", req.body.promoCode)
-            if(promo_code.data.type) {
-                finalTotal = total - promo_code.data.value
+            if(promo_code.data[0].type) {
+                finalTotal = total - promo_code.data[0].value
             } else {
-                finalTotal = total - (total * promo_code.data.value / 100)
+                finalTotal = total - (total * promo_code.data[0].value / 100)
             }
             console.log(finalTotal)
         }
@@ -59,7 +59,7 @@ export default async function handler(req, res) {
         );
 
         const paymentIntent = await stripe.paymentIntents.create({
-            amount: finalTotal * 100,
+            amount: finalTotal.toFixed() * 100,
             currency: 'AED',
             customer: data[0].stripe_customer_id,
             automatic_payment_methods: {

@@ -23,7 +23,7 @@ export default async function handler(req, res) {
 
         const { data, error } = await supabase
             .from('profiles')
-            .update({ stripe_customer_id: customer.id })
+            .update({ stripe_customer_id: customer.id, promo_codes_used: [] })
             .eq('id', req.body.record.id)
         console.log(data, error)
         return res.send({ message: `stripe customer created: ${customer.id}`})

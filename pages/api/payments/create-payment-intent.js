@@ -44,6 +44,7 @@ export default async function handler(req, res) {
             } else {
                 finalTotal = total - (total * promo_code.data.value / 100)
             }
+            console.log(finalTotal)
         }
 
         let { data, error } = await supabase
@@ -58,7 +59,7 @@ export default async function handler(req, res) {
         );
 
         const paymentIntent = await stripe.paymentIntents.create({
-            amount: req.body.promoCode ? finalTotal.toFixed() * 100 : total * 100,
+            amount: finalTotal * 100,
             currency: 'AED',
             customer: data[0].stripe_customer_id,
             automatic_payment_methods: {

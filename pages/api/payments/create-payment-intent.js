@@ -28,6 +28,7 @@ export default async function handler(req, res) {
     }
     if(req.method === 'POST') {
         const { user } = await supabase.auth.api.getUserByCookie(req)
+        console.log("user cookie payment intent", user)
         if(!user) return res.status(401).send("Unauthorized")
 
         const { total, success } = await TotalPrice(req.body.cart)
@@ -66,6 +67,8 @@ export default async function handler(req, res) {
                 enabled: true,
             },
         })
+
+        console.log("paymentIntent", paymentIntent)
        
         const initiated_orders_response = await supabase
             .from('initiated_orders')
@@ -78,7 +81,7 @@ export default async function handler(req, res) {
                     promo_code_used: req.body.promoCode
                 },
             ])
-        console.log(initiated_orders_response)
+        console.log("initiated_orders", initiated_orders_response)
 
         res.json({
             paymentIntent: paymentIntent.client_secret,

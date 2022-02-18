@@ -10,9 +10,10 @@ const Handler = async (req, res) => {
         return res.send({ success: false, message: 'Wrong request made'})
     }
     if(req.method === 'POST') {
+        console.log(req.body)
         if(req.body.promoCode === '') return res.send({ success: false, message: "Please enter a value"})
         const { user } = await supabase.auth.api.getUserByCookie(req)
-
+        console.log("user cookie promo code", user)
         if(!user) return res.status(401).send({ success: false, message: "Unauthorized"})
         
         let promo_codes = await supabase

@@ -5,7 +5,8 @@ const Handler = async (req, res) => {
         return res.send({ success: false, message: 'Wrong request made'})
     }
     if(req.method === 'POST') {
-        await supabase.auth.api.setAuthCookie(req, res)
+        const response = await supabase.auth.api.setAuthCookie(req, res)
+        console.log(response)
     }
 }
 

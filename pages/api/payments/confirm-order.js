@@ -96,7 +96,7 @@ const webhookHandler = async (req, res) => {
                 .eq("id", initiated_orders.data.user_id)
 
             let promo_codes_used = profile.data[0].promo_codes_used
-            promo_codes_used.push(initiated_orders.data.promo_codes_used)
+            promo_codes_used.push(initiated_orders.data.promo_code_used)
             
             const updated_promo_codes = await supabase
                 .from('profiles')

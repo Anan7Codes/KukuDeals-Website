@@ -33,6 +33,19 @@ export default async function handler(req, res) {
         const { total, success } = await TotalPrice(req.body.cart)
         if(!success) return res.status(404).json({ success: false, message: "Failed to calculate total amount"})
 
+        let finalTotal = total
+        if(req.body.promoCode) {
+            let promo_code = await supabase
+                .from('promo_codes')
+                .select('type,value')
+                .eq("name", req.body.promoCode)
+            if(promo_code.data.type) {
+                finalTotal = total - promo_code.data.value
+            } else {
+                finalTotal = total - (total * promo_code.data.value / 100)
+            }
+        }
+
         let { data, error } = await supabase
             .from('profiles')
             .select('stripe_customer_id')
@@ -45,17 +58,14 @@ export default async function handler(req, res) {
         );
 
         const paymentIntent = await stripe.paymentIntents.create({
-            amount: total * 100,
+            amount: req.body.promoCode ? finalTotal.toFixed() * 100 : total * 100,
             currency: 'AED',
             customer: data[0].stripe_customer_id,
             automatic_payment_methods: {
                 enabled: true,
             },
         })
-
-        console.log("paymentIntent", paymentIntent)
-        console.log("ephmeralKey", ephemeralKey)
-        
+       
         const initiated_orders_response = await supabase
             .from('initiated_orders')
             .insert([

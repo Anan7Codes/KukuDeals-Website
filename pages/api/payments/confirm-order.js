@@ -29,7 +29,6 @@ const webhookHandler = async (req, res) => {
 
         try {
             event = stripe.webhooks.constructEvent(buf.toString(), sig, endpointSecret);
-            console.log("event webhook", event)
         } catch (err) {
             console.log("err webhook", err)
             res.status(400).send(`Webhook Error: ${err.message}`);
@@ -59,10 +58,6 @@ const webhookHandler = async (req, res) => {
             let completed_orders = await supabase
                 .from('completed_orders')
                 .select('*', { count: 'exact' }) 
-    
-            
-            console.log("Ini", initiated_orders)
-            console.log("Completed", completed_orders)
             
             let ordered_coupons = []
             let donated_coupons = []

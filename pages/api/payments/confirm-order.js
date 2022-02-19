@@ -48,6 +48,7 @@ const webhookHandler = async (req, res) => {
 
         } else if (event.type === 'charge.succeeded') {
             const charge = event.data.object
+            console.log("charge", charge)
             let initiated_orders = await supabase
                 .from('initiated_orders')
                 .select('*')
@@ -74,30 +75,30 @@ const webhookHandler = async (req, res) => {
                 }
             })
     
-            const { data, error } = await supabase
-                .from('completed_orders')
-                .insert([
-                    { 
-                        coupons, 
-                        user_id: initiated_orders.data.user_id,
-                        transaction_number: completed_orders.count + 1
-                    },
-                ])
-            console.log("final", data, error)     
+            // const { data, error } = await supabase
+            //     .from('completed_orders')
+            //     .insert([
+            //         { 
+            //             coupons, 
+            //             user_id: initiated_orders.data.user_id,
+            //             transaction_number: completed_orders.count + 1
+            //         },
+            //     ])
+            // console.log("final", data, error)     
             
-            let profile = await supabase
-                .from('profiles')
-                .select('promo_codes_used')
-                .eq("id", initiated_orders.data.user_id)
+            // let profile = await supabase
+            //     .from('profiles')
+            //     .select('promo_codes_used')
+            //     .eq("id", initiated_orders.data.user_id)
 
-            let promo_codes_used = profile.data[0].promo_codes_used
-            promo_codes_used.push(initiated_orders.data.promo_code_used)
+            // let promo_codes_used = profile.data[0].promo_codes_used
+            // promo_codes_used.push(initiated_orders.data.promo_code_used)
             
-            const updated_promo_codes = await supabase
-                .from('profiles')
-                .update({ promo_codes_used: promo_codes_used })
-                .eq('id', initiated_orders.data.user_id)
-            console.log("updated promo code", updated_promo_codes)
+            // const updated_promo_codes = await supabase
+            //     .from('profiles')
+            //     .update({ promo_codes_used: promo_codes_used })
+            //     .eq('id', initiated_orders.data.user_id)
+            // console.log("updated promo code", updated_promo_codes)
 
 
         } else {

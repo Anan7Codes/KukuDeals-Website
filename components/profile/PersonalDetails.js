@@ -8,27 +8,26 @@ import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import { supabase } from "@/utils/supabaseClient";
 import { toast } from "react-toastify";
 
-export default function PersonalDetails() {
-
-  
+export default function PersonalDetails() {  
   const [email, setEmail] = useState()
   const [gender, setGender] = useState()
   const [phoneNumber, setPhoneNumber] = useState()
   const [personalDetails, setPersonalDetails] = useState({})
   const [newPersonalDetails, setNewPersonalDetails] = useState({})
-  // const [amountSpent, setAmountSpent] = useState(15)
 
-  useEffect(async() => {
-    const userInfo = supabase.auth.user()
-    console.log(userInfo);
-    const { nationality, countryOfResidence } = userInfo.user_metadata
-    const { name, gender } = userInfo.user_metadata
-    const { email } = userInfo
-    const [firstname, lastname] = name.split(' ');
-    setPersonalDetails({ nationality, countryOfResidence, firstname, lastname ,name })
-    setNewPersonalDetails({ nationality, countryOfResidence, firstname, lastname, name})
-    setGender(gender)
-    setEmail(email)
+  useEffect(() => {
+    const GetUserData = async () => {
+      const userInfo = await supabase.auth.user()
+      const { nationality, countryOfResidence } = userInfo.user_metadata
+      const { name, gender } = userInfo.user_metadata
+      const { email } = userInfo
+      const [firstname, lastname] = name.split(' ');
+      setPersonalDetails({ nationality, countryOfResidence, firstname, lastname ,name })
+      setNewPersonalDetails({ nationality, countryOfResidence, firstname, lastname, name})
+      setGender(gender)
+      setEmail(email)
+    }
+    GetUserData()
   }, [])
 
   async function InsertPersonalDetails(e) {
@@ -52,15 +51,13 @@ export default function PersonalDetails() {
           countryOfResidence: newPersonalDetails.countryOfResidence,
           firstname: newPersonalDetails.firstname,
           lastname: newPersonalDetails.lastname,
-          name: newPersonalDetails.firstname + " " +newPersonalDetails.lastname, 
-
-          
+          name: newPersonalDetails.firstname + " " +newPersonalDetails.lastname,           
         } 
       })
       console.log(user)
 
     if(error) {
-      toast.error(error, {
+      return toast.error(error, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -68,8 +65,7 @@ export default function PersonalDetails() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-    })
-        return 
+      })
     }
     toast.success("Succesfully Updated", {
       position: "top-right",
@@ -79,7 +75,7 @@ export default function PersonalDetails() {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-  })
+    })
     }catch(e){
       console.log(e);
     }
@@ -127,29 +123,6 @@ export default function PersonalDetails() {
               value={newPersonalDetails.countryOfResidence} onChange={e => setNewPersonalDetails({ ...newPersonalDetails, countryOfResidence: e })}
             />
           </div>
-          {/* <RadioGroup
-            className="mt-3 justify-start"
-            row
-            aria-labelledby="demo-row-radio-buttons-group-label"
-            name="row-radio-buttons-group"
-            defaultValue={gender}
-          >
-            <FormControlLabel
-              value={true}
-
-              control={<Radio />}
-              label={
-                <span style={{ fontSize: "14px", color: "gray" }}>Male</span>
-              }
-            />
-            <FormControlLabel
-              value={false}
-              control={<Radio />}
-              label={
-                <span style={{ fontSize: "14px", color: "gray" }}>Female</span>
-              }
-            />
-          </RadioGroup> */}
           <div className=" cursor-pointer pt-6 pb-4 ">
             {gender ? (
               <div className="flex justify-between items-center">
@@ -157,7 +130,7 @@ export default function PersonalDetails() {
                   <p
                     className="bg-white rounded-l-lg h-12  flex justify-center items-center w-[19rem] text-center drop-shadow-sm	 text-blue-600 "
                     value={true}
-                    onClick={(e) => setGender(true)}                             >
+                    onClick={(e) => setGender(true)}>
                     Male
                   </p>
                 </div>
@@ -165,7 +138,7 @@ export default function PersonalDetails() {
                   <p
                     className="bg-gray-300 opacity-20 flex justify-center items-center rounded-r-lg h-12  w-[18rem] text-center drop-shadow-md"
                     value={false}
-                    onClick={(e) => setGender(false)}                          >
+                    onClick={(e) => setGender(false)}>
                     Female
                   </p>
                 </div>

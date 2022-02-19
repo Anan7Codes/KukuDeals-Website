@@ -39,7 +39,7 @@ export default function Campaign({ campaign }) {
   } = CartState()
 
   useEffect(() => {
-    cart.filter(c => c.id === campaign.id ? setQty(c.qty) : null)
+    cart.filter(c => c.id === campaign?.id ? setQty(c.qty) : null)
   }, [cart])
   const AddToCart = () => {
     dispatch({

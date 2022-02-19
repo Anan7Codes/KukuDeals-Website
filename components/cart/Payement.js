@@ -128,7 +128,7 @@ export default function Payement() {
                 onChange={e => setPromoCode(e.target.value)}
               />
               <button onClick={promoLoading ? null : EnterPromoCode} className="ml-3 text-blue-500 border h-9 w-[16%] rounded text-xs font-semibold border-blue-500">
-              { promoLoading ? <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24"></svg> : 'Apply' }
+              { promoLoading ? <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24"></svg> : 'Apply' }
               </button>
             </>
           }
@@ -141,7 +141,7 @@ export default function Payement() {
           </Elements>
           :
           <button className="bg-blue-800 p-3 mt-4 w-full text-white font-bold h-16 rounded-[10px]" onClick={fetchPaymentSheetParams}>
-            { loading ? <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24"></svg> : 'Confirm Order' }
+            { loading ? <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24"></svg> : 'Confirm Order' }
           </button>
         }
       </div>

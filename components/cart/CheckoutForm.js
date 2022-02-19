@@ -29,6 +29,7 @@ export default function CheckoutForm() {
       switch (paymentIntent.status) {
         case "succeeded":
           setMessage("Payment succeeded!");
+          alert('Payment Successful');
           break;
         case "processing":
           setMessage("Your payment is processing.");
@@ -72,7 +73,7 @@ export default function CheckoutForm() {
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
       <PaymentElement />
-      <button disabled={isLoading || !stripe || !elements} >
+      <button disabled={isLoading || !stripe || !elements} className="bg-[#ffd601] mt-4 w-full text-black font-bold p-4 rounded-[10px]">
         <span>
           {isLoading ? <div></div> : "Pay now"}
         </span>

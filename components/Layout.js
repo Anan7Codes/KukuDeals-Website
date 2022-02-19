@@ -6,7 +6,7 @@ function Layout({children}) {
     
 
     return (
-        <div className="bg-gray-100 mx-auto max-w-[1266px] container px-5 pt-4 overflow-x-hidden">   
+        <div className="bg-[#161616] mx-auto max-w-[1266px] container px-5 pt-4 overflow-x-hidden">   
             <Navbar/>
                 {children}               
             <Footer/>

@@ -76,6 +76,7 @@ const webhookHandler = async (req, res) => {
                     }
                 }
             })
+            console.log("coupons", coupons)
     
             const { data, error } = await supabase
                 .from('completed_orders')

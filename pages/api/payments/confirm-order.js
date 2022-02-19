@@ -26,6 +26,7 @@ const webhookHandler = async (req, res) => {
         const buf = await buffer(req)
         const sig = req.headers['stripe-signature'];
         let event;
+        let user_id = ''
 
         try {
             event = stripe.webhooks.constructEvent(buf.toString(), sig, endpointSecret);
@@ -100,14 +101,15 @@ const webhookHandler = async (req, res) => {
                 .update({ promo_codes_used: promo_codes_used })
                 .eq('id', initiated_orders.data.user_id)
             console.log("updated promo code", updated_promo_codes)
-
+            
+            user_id = initiated_orders.data.user_id
 
         } else {
             console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
         }
             
         
-        return res.send({ message: 'success',  user_id: initiated_orders.data.user_id, charge})
+        return res.send({ message: 'success', user_id, charge})
     }
 }
 

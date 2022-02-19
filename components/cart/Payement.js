@@ -4,6 +4,7 @@ import { supabase } from "@/utils/supabaseClient";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
+import axios from "axios";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
@@ -128,7 +129,7 @@ export default function Payement() {
                 onChange={e => setPromoCode(e.target.value)}
               />
               <button onClick={promoLoading ? null : EnterPromoCode} className="ml-3 text-blue-500 border h-9 w-[16%] rounded text-xs font-semibold border-blue-500">
-              { promoLoading ? <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24"></svg> : 'Apply' }
+              { promoLoading ? <svg className="animate-spin h-5 w-5 mr-3 text-blue-500" viewBox="0 0 24 24"></svg> : 'Apply' }
               </button>
             </>
           }

@@ -39,15 +39,15 @@ const webhookHandler = async (req, res) => {
 
         if (event.type === 'payment_intent.succeeded') {
             const paymentIntent = event.data.object            
-            const { error } = await supabase
+            const initiated_orders = await supabase
                 .from('initiated_orders')
                 .update({ status: true })
                 .eq('verification_secret', paymentIntent.id)
-            if(error) {
-                console.log(error)
+            if(initiated_orders.error) {
+                console.log(initiated_orders.error)
                 return res.send({ success: false, message: "Initiated order doesn't exist"})
             }
-
+            return res.send({ success: true, initiated_orders: initiated_orders.data })
         } else if (event.type === 'charge.succeeded') {
             const charge = event.data.object
             console.log("charge", charge)

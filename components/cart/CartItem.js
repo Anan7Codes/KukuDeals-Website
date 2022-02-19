@@ -56,7 +56,7 @@ export default function CartItem({item}) {
               alt="product logo"
           />
         </div>
-        <div className="flex pl-1 pt-2">
+        <div className="flex flex-col lg:flex-row pl-1 pt-2">
             <div className="">
                 <p className="text-white text-sm sm:text-base lg:text-xl font-bold leading-2">
                     {item?.GiftName.en}
@@ -73,14 +73,14 @@ export default function CartItem({item}) {
                 </p>
             </div>
 
-            <div className="flex sm:ml-12 lg:ml-16 leading-extra-loose">
-                <button onClick={item?.qty === 1 ? RemoveFromCart : ReduceQty} className="flex justify-center items-center cursor-pointer text-white bg-[#161616] font-semibold h-12 w-16 rounded-[15px]">
+            <div className="flex sm:ml-12 lg:ml-16 mt-4 leading-extra-loose">
+                <button onClick={item?.qty === 1 ? RemoveFromCart : ReduceQty} className="flex justify-center items-center text-sm lg:text-md  cursor-pointer text-white bg-[#161616] font-semibold h-10 w-10 lg:h-12 lg:w-16 rounded-[15px]">
                     -
                 </button>
-                <div className="flex items-center justify-center h-12 w-16 text-xl rounded-[15px] text-white bg-[#161616] mx-3">
+                <div className="flex font-semibold items-center justify-center h-10 w-10 lg:h-12 lg:w-16 text-sm lg:text-md rounded-[15px] text-white bg-[#161616] mx-3">
                     {item?.qty}
                 </div>
-                <button onClick={AddQty} className="hidden sm:flex lg:flex justify-center items-center cursor-pointer bg-[#ffd601] text-black font-semibold h-12 w-28 rounded-[15px]">
+                <button onClick={AddQty} className="flex justify-center items-center cursor-pointer bg-[#ffd601] text-black font-semibold h-10 w-20 lg:h-12 lg:w-28 text-sm lg:text-md rounded-[15px]">
                     Add More
                 </button>
             </div>

@@ -63,6 +63,7 @@ export default function Payement() {
           if(!res.data.success) {
             alert(`Error: ${res.data.message}`)
             setPromoCode('')
+            setPromoLoading(false)
             return
           }
 
@@ -76,6 +77,7 @@ export default function Payement() {
           } else {
             setPromoCodeApplied(false)
           }
+          setPromoLoading(false)
       } catch (e) {
           console.log(e)
       }

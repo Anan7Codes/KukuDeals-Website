@@ -101,7 +101,7 @@ function Navbar() {
           </div>
         </div>
         {showMenu ? (
-          <div className="absolute top-0 bg-[#2c2c2c] px-4 rounded-[15px] w-full">
+          <div className="absolute top-0 bg-[#2c2c2c] px-4 rounded-[15px] w-full z-30">
             <div className="relative h-full w-full">
               <div className="flex items-center my-2 w-28 h-10 relative cursor-pointer">
                 <Image
@@ -125,13 +125,16 @@ function Navbar() {
               <p className="font-medium text-sm text-white mb-2 hover:cursor-pointer hover:text-yellow-500">
                 العربية
               </p>
-              <p className="font-medium text-sm text-white mb-4 hover:cursor-pointer hover:text-yellow-500">
-                {userInfo ? (
-                  userInfo.user_metadata.name
+              {userInfo ? (
+                  <p onClick={() => router.push('/profile/settings')} className="font-medium text-sm text-white mb-4 hover:cursor-pointer hover:text-yellow-500">
+                    {userInfo.user_metadata.name}
+                  </p>
                 ) : (
-                  <div>Login/Register</div>
+                  <p onClick={() => router.push('/signin')} className="font-medium text-sm text-white mb-4 hover:cursor-pointer hover:text-yellow-500">
+                    Login/Register
+                  </p>
                 )}
-              </p>
+              
 
               <svg
                 onClick={() => setShowMenu(false)}

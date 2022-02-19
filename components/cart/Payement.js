@@ -43,7 +43,7 @@ export default function Payement() {
                   user_id: userInfo.id
               })
           });
-          const { paymentIntent, ephemeralKey, customer } = await response.json();
+          const { paymentIntent } = await response.json();
           setClientSecret(paymentIntent);
       } catch (e) {
           console.log("fetchparamserror", e)

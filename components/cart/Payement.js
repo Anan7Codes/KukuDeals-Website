@@ -58,7 +58,7 @@ export default function Payement() {
               promoCode: promoCode,
               user_id: userInfo.id
           })
-          setPromoLoading(false)
+          console.log(res)
           if(!res.data.success) {
             alert('Error', `${res.data.message}`)
             setPromoCode('')
@@ -75,6 +75,7 @@ export default function Payement() {
           } else {
             setPromoCodeApplied(false)
           }
+          setPromoLoading(false)
       } catch (e) {
           console.log(e)
       }

@@ -19,6 +19,16 @@ const Handler = async (req, res) => {
 
         res.send({ success: false, initiated_orders, test: initiated_orders.data.promo_code_used ? true : false })
     }
+
+
+    let output = await map(completed_orders, async ((order, index) => {
+        let file = {
+            content:
+                `<html>
+                    ${order.cart}
+                </html>`
+        }
+    }))
 }
 
 export default Handler

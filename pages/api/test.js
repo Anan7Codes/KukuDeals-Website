@@ -1,25 +1,23 @@
-import { supabase } from "@/utils/supabaseClient"
-import cookie from 'cookie'
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY
+
+const supabase = createClient(supabaseUrl, supabaseSecretKey)
 
 const Handler = async (req, res) => {
-    if(req.method !== 'POST') {
+    if(req.method !== 'GET') {
         return res.send({ success: false, message: 'Wrong request made'})
     }
-    if(req.method === 'POST') {
-        console.log(req.body)
-        const { user } = await supabase.auth.api.getUserByCookie(req)
-        console.log(user)
+    if(req.method === 'GET') {
+        let initiated_orders = await supabase
+            .from('initiated_orders')
+            .select('*')
+            .eq("verification_secret", "pi_3KUw3YLSsCUq84XE1c4GgqIF")
+            .eq("status", true)
+            .single()
 
-        const token = cookie.parse(req.headers.cookie)['sb:token']
-        supabase.auth.session = () => ({
-            access_token: token
-        })
-
-        let { data: profiles, error } = await supabase
-            .from('profiles')
-            .select('stripe_customer_id')
-
-        res.send({ success: false, user: profiles})
+        res.send({ success: false, initiated_orders, test: initiated_orders.data.promo_code_used ? true : false })
     }
 }
 

@@ -45,7 +45,7 @@ const webhookHandler = async (req, res) => {
                 .eq('verification_secret', paymentIntent.id)
             if(initiated_orders.error) {
                 console.log(initiated_orders.error)
-                return res.send({ success: false, message: "Initiated order doesn't exist"})
+                return res.send({ success: false, message: "Initiated order doesn't exist", error: initiated_orders.error})
             }
             return res.send({ success: true, initiated_orders: initiated_orders.data })
         } else if (event.type === 'charge.succeeded') {
@@ -90,19 +90,21 @@ const webhookHandler = async (req, res) => {
                 ])
             console.log("final", data, error)     
             
-            let profile = await supabase
+            if(initiated_orders.data.promo_code_used) {
+                let profile = await supabase
                 .from('profiles')
                 .select('promo_codes_used')
                 .eq("id", initiated_orders.data.user_id)
 
-            let promo_codes_used = profile.data[0].promo_codes_used
-            promo_codes_used.push(initiated_orders.data.promo_code_used)
-            
-            const updated_promo_codes = await supabase
-                .from('profiles')
-                .update({ promo_codes_used: promo_codes_used })
-                .eq('id', initiated_orders.data.user_id)
-            console.log("updated promo code", updated_promo_codes)
+                let promo_codes_used = profile.data[0].promo_codes_used
+                promo_codes_used.push(initiated_orders.data.promo_code_used)
+                
+                const updated_promo_codes = await supabase
+                    .from('profiles')
+                    .update({ promo_codes_used: promo_codes_used })
+                    .eq('id', initiated_orders.data.user_id)
+                console.log("updated promo code", updated_promo_codes)
+            }            
             
             user_id = initiated_orders.data.user_id
             res_charge = charge

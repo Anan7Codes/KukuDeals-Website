@@ -39,10 +39,10 @@ const items = [
 export default function Draw() {
     const [index, setIndex] = useState(0);
     return (
-        <div className=" bg-gray-300  mb-6 rounded-[15px] px-6 py-5  ">
+        <div className=" bg-[#ffd601] mb-6 rounded-[15px] px-6 py-5  ">
             <div className="p-2 ">
-                <div className="font-[1000] pb-2 text-3xl text-gray-700">Draws</div>
-                <p className="text-sm lg:text-base text-gray-700 font-semibold tracking-tight	leading-5	">
+                <div className="font-[1000] pb-2 text-3xl text-black">Draws</div>
+                <p className="text-sm lg:text-base text-black font-semibold tracking-tight leading-5">
                     See all of our upcoming draws here for all campaigns and <br /> the campaigns you participated in.
                 </p>
             </div>
@@ -81,9 +81,9 @@ export default function Draw() {
                 />
             </div>
             <div className="lg:hidden w-full pt-3 space-y-4 pl-6 flex-col">
-                        <Draw1 />
-                        <Draw1 />
-                    </div>
+                <Draw1 />
+                <Draw1 />
+            </div>
         </div>
 
     )

@@ -1,11 +1,11 @@
 import Layout from '@/components/Layout';
-import Register from '@/components/SignUp';
+import SignUp from '@/components/SignUp';
 
 export default function signup() {
     return (
-        <div className="bg-gray-100">        
+        <div className="bg-[#161616]">        
             <Layout>
-                <Register />
+                <SignUp />
             </Layout>
         </div>
     )

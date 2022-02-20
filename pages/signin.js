@@ -1,11 +1,11 @@
 import Layout from '@/components/Layout';
-import Login from '@/components/SignIn';
+import SignIn from '@/components/SignIn';
 
 export default function signin() {
     return (
-        <div className="bg-gray-100">        
+        <div className="bg-[#161616]">        
             <Layout>
-                <Login />
+                <SignIn />
             </Layout>
         </div>
     )

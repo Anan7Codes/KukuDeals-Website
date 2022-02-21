@@ -10,25 +10,13 @@ const Handler = async (req, res) => {
         return res.send({ success: false, message: 'Wrong request made'})
     }
     if(req.method === 'GET') {
-        let initiated_orders = await supabase
-            .from('initiated_orders')
-            .select('*')
-            .eq("verification_secret", "pi_3KUw3YLSsCUq84XE1c4GgqIF")
-            .eq("status", true)
+        let campaigns_for_qty = await supabase
+            .from('campaigns')
+            .select('SoldOutCoupons')
+            .eq("id", "998895d2-a6aa-404a-9f60-76880b8c2273")
             .single()
-
-        res.send({ success: false, initiated_orders, test: initiated_orders.data.promo_code_used ? true : false })
+        console.log(campaigns_for_qty)
     }
-
-
-    let output = await map(completed_orders, async ((order, index) => {
-        let file = {
-            content:
-                `<html>
-                    ${order.cart}
-                </html>`
-        }
-    }))
 }
 
 export default Handler

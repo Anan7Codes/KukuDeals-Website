@@ -27,8 +27,27 @@ export default async function handler(req, res) {
         return res.send({ success: false, message: 'Wrong request made'})
     }
     if(req.method === 'POST') {
+        if(req.body.user_id === '') return res.send({ success: false, message: "Unauthorized"})
+        // const { user } = await supabase.auth.api.getUserByCookie(req)
+        // console.log("user cookie promo code", user)
+        // if(!user) return res.status(401).send({ success: false, message: "Unauthorized"})
+
         const { total, success } = await TotalPrice(req.body.cart)
         if(!success) return res.status(404).json({ success: false, message: "Failed to calculate total amount"})
+
+        let finalTotal = total
+        if(req.body.promoCode) {
+            let promo_code = await supabase
+                .from('promo_codes')
+                .select('type,value')
+                .eq("name", req.body.promoCode)
+            if(promo_code.data[0].type) {
+                finalTotal = total - promo_code.data[0].value
+            } else {
+                finalTotal = total - (total * promo_code.data[0].value / 100)
+            }
+            console.log(finalTotal)
+        }
 
         let { data, error } = await supabase
             .from('profiles')
@@ -42,7 +61,7 @@ export default async function handler(req, res) {
         );
 
         const paymentIntent = await stripe.paymentIntents.create({
-            amount: total * 100,
+            amount: finalTotal.toFixed() * 100,
             currency: 'AED',
             customer: data[0].stripe_customer_id,
             automatic_payment_methods: {
@@ -51,25 +70,24 @@ export default async function handler(req, res) {
         })
 
         console.log("paymentIntent", paymentIntent)
-        console.log("ephmeralKey", ephemeralKey)
-        
+       
         const initiated_orders_response = await supabase
             .from('initiated_orders')
             .insert([
                 { 
                     cart: req.body.cart, 
                     amount: total, 
-                    verification_secret: ephemeralKey.secret,
-                    user_id: req.body.user_id
+                    verification_secret: paymentIntent.id,
+                    user_id: req.body.user_id,
+                    promo_code_used: req.body.promoCode
                 },
             ])
-        console.log(initiated_orders_response)
+        console.log("initiated_orders", initiated_orders_response)
 
         res.json({
             paymentIntent: paymentIntent.client_secret,
             ephemeralKey: ephemeralKey.secret,
             customer: data[0].stripe_customer_id,
-            initiated_order_id: initiated_orders_response.data[0].id
         });
     }
 }

@@ -41,10 +41,10 @@ export default function Winners() {
     return (
         <div>
             <div className="py-8">
-                <div className="bg-[#7000ff]   rounded-[15px] px-6 pr-2 py-5  text-white">
+                <div className="bg-[#ffd601] rounded-[15px] px-6 pr-2 py-5 text-black">
                     <div className="p-2">
                         <p className="font-[700] tracking-tighter text-3xl">Winners</p>
-                        <p className="text-normal font-bold">
+                        <p className="text-normal">
                             All our winners are announced in this section
                         </p>
                     </div>

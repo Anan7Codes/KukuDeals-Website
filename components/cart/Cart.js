@@ -4,10 +4,10 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Cart({ item }) {
-  console.log("right cart ", item)
+
   const [showCart, setShowCart] = useState(true);
   const router = useRouter()
-  // const [qty, setQty] = useState()
+ 
   const { state: { cart } } = CartState();
   const { dispatch } = CartState();
 
@@ -17,9 +17,7 @@ export default function Cart({ item }) {
   const handleClick = () => {
     router.push('/cart')
   }
-  // useEffect(() => {
-  //   cart.filter(c => c.id === item.id ? setQty(c.qty) : null)
-  // }, [cart])
+
   const AddQty = () => {
     dispatch({
       type: 'ADD_QTY',
@@ -56,12 +54,12 @@ export default function Cart({ item }) {
   }
   return <div>
     {item ?
-      <div className=" text-sm font-semibold text-gray-700 pl-6 pr-6 pt-2">
+      <div className=" text-sm font-semibold text-white pl-6 pr-6 pt-2">
         <div className="flex justify-between">
           <p>Donatable Product(s)</p>
         </div>
         <div className="flex justify-between pt-4">
-          <div className=" bg-white cursor-pointer rounded-[15px] object-fit -left-2 relative w-32 h-24">
+          <div className="cursor-pointer rounded-[15px] object-fit -left-2 relative w-32 h-24">
             <Image
               src={item?.Image}
               layout="fill"
@@ -77,14 +75,14 @@ export default function Cart({ item }) {
               <p className="font-bold text-blue-500">AED{item?.Price}.00</p>
               <div className="text-sm font-semibold text-green-500">
                 {item?.SoldOutCoupons} Coupons
-                <span className="text-black font-normal"> per unit</span>
+                <span className="text-white font-normal"> per unit</span>
               </div>
             </div>
-            <div className=" ml-20 leading-extra-loose ">
+            <div className=" ml-20 leading-extra-loose">
               <svg
                 onClick={AddQty}
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 bg-[#0073ff] text-white rounded-full cursor-pointer"
+                className="h-6 w-6 bg-[#ffd601] text-black rounded-full cursor-pointer"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -96,11 +94,11 @@ export default function Cart({ item }) {
                   d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                 />
               </svg>
-              <div className="text-center"> {item?.qty}</div>
+              <div className="bg-[#2c2c2c] rounded-full"><p className="text-white px-2 text-sm my-2">{item?.qty}</p></div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 onClick={item.qty === 1 ? RemoveFromCart : ReduceQty}
-                className="h-6 w-6 bg-gray-300 rounded-full cursor-pointer"
+                className="h-6 w-6 bg-[#2c2c2c] text-white rounded-full cursor-pointer"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Explore from "@/components/home/Campaign";
+import Campaign from "@/components/home/Campaign";
 import { supabase } from '@/utils/supabaseClient';
 
 export default function Section2() {
@@ -18,11 +18,11 @@ export default function Section2() {
     if (!campaigns) return <p>No Data</p>
     return (
         <div>
-            <p className="text-[26px] text-gray-700 pt-5 font-bold">Explore campaigns</p>
+            <p className="text-[26px] text-[#ffd601] pt-5 font-bold">Explore campaigns</p>
             <div className="z-0 mx-auto rounded-[15px]">
                 {campaigns?.map(campaign => {
                     return (
-                        <Explore campaign={campaign} key={campaign.id} />
+                        <Campaign campaign={campaign} key={campaign.id} />
                     )
                 })}
             </div>

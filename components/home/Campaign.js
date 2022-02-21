@@ -10,7 +10,6 @@ export default function Campaign({ campaign }) {
   console.log(campaign);
   const [isOpen, setIsOpen] = useState(false);
   const [prizeDetails, setPrizeDetails] = useState(true);
-  const [productDetails, setProductDetails] = useState(false);
   const [qty, setQty] = useState(0)
 
   const router = useRouter();
@@ -25,21 +24,14 @@ export default function Campaign({ campaign }) {
   function openModal() {
     setIsOpen(true);
   }
-  const handlePrizeDetails = () => {
-    setPrizeDetails(true);
-    setProductDetails(false);
-  };
-  const handleProductDetails = () => {
-    setProductDetails(true);
-    setPrizeDetails(false);
-  }
+
   const {
     state: { cart },
     dispatch
   } = CartState()
 
   useEffect(() => {
-    cart.filter(c => c.id === campaign.id ? setQty(c.qty) : null)
+    cart.filter(c => c.id === campaign?.id ? setQty(c.qty) : null)
   }, [cart])
   const AddToCart = () => {
     dispatch({
@@ -72,15 +64,8 @@ export default function Campaign({ campaign }) {
   return (
     <>
       <div className="w-full relative my-10">
-        <div className="flex flex-col items-center justify-around lg:flex-row h-[50vh] pb-6 bg-white cursor-pointer rounded-[15px] overflow-visible shadow-lg transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-[101%] duration-700">
+        <div className="flex flex-col items-center justify-around lg:flex-row h-[50vh] pb-6 bg-[#2c2c2c] cursor-pointer rounded-[15px] overflow-visible shadow-lg transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-[101%] duration-700">
           <div className="mt-[60px] lg:mt-0">
-            <div className="cursor-pointer absolute top-0 left-0 mt-6 ml-4 hover:shadow-outline w-24 h-10">
-              <Image
-                src="/icons/explore/shop-logo.png"
-                layout="fill"
-                alt="sponsor logo"
-              />
-            </div>
             <div className="relative lg:top-5 lg:left-6 flex justify-center items-center lg:w-[28rem] h-36 w-60 lg:h-64">
               <Image src={campaign?.Image} layout="fill" alt="Campaign Image" />
             </div>
@@ -89,39 +74,39 @@ export default function Campaign({ campaign }) {
             <div className="justify-center">
               <div className="text-sm text-center sm:pl-4 sm:pt-2 lg:text-justify	 lg:text-3xl">
                 <div className="lg:pt-4">
-                  <p className="text-5xl lg:text-7xl font-bold lg:leading-none italic text-[#f22]">
+                  <p className="text-5xl lg:text-7xl font-bold lg:leading-none italic text-[#ffd601]">
                     Win
                   </p>
                 </div>
-                <p className="text-lg lg:text-2xl text-gray-600 tracking-tighter font-bold leading-6 lg:leading-normal">
+                <p className="text-lg lg:text-2xl text-white tracking-tighter font-bold leading-6 lg:leading-normal">
                   {campaign?.GiftName.en}
                 </p>
-                <p className="text-lg lg:text-2xl text-gray-700 tracking-tighter leading-4 lg:leading-tight font-medium">
+                <p className="text-lg lg:text-2xl text-white tracking-tighter leading-4 lg:leading-tight font-medium">
                   Buy a {campaign?.ProductName.en} and make it yours!
                 </p>
-                <p className="text-lg lg:text-2xl tracking-tighter font-semibold text-blue-500 lg:leading-tight">
+                <p className="text-lg lg:text-2xl tracking-tighter font-semibold text-[#ffd601] lg:leading-tight">
                   AED {campaign?.Price}
                 </p>
                 {cart.some(c => c.id === campaign.id) ?
-                  <div className="flex justify-start space-x-5 items-center pt-4">
-                    <div onClick={cart.some(c => c.id === campaign.id && c.qty === 1) ? RemoveFromCart : ReduceQty} className="flex text-2xl bg-gray-200 pt-15 pb-15  justify-center items-center w-32 h-12 rounded-[15px]">
-                      <p >-</p>
+                  <div className="flex justify-center lg:justify-start space-x-3 items-center pt-4">
+                    <div onClick={cart.some(c => c.id === campaign.id && c.qty === 1) ? RemoveFromCart : ReduceQty} className="flex text-2xl bg-[#161616] pt-15 pb-15 justify-center items-center w-12 h-12 rounded-[15px]">
+                      <p className="text-white">-</p>
                     </div>
-                    <div className="flex bg-gray-200 pt-15 pb-15  justify-center text-lg items-center w-32 h-12 rounded-[15px]">
-                      <p >{qty}</p>
+                    <div className="flex bg-[#161616] py-15 justify-center text-lg items-center w-12 h-12 rounded-[15px]">
+                      <p className="text-white">{qty}</p>
                     </div>
-                    <div onClick={AddQty} className="flex bg-[#006ee6] text-white text-2xl pt-15 pb-15  justify-center items-center w-32 h-12 rounded-[15px]" >
-                      <p >+</p>
+                    <div onClick={AddQty} className="flex bg-[#ffd601] text-black text-2xl pt-15 pb-15 justify-center items-center w-12 h-12 rounded-[15px]" >
+                      <p>+</p>
                     </div>
                   </div> :
-                  <div className="mt-2 space-x-4 text-sm lg:text-base">
+                  <div className="mt-2 space-x-3 text-sm lg:text-base">
                     <button
                       onClick={openModal}
-                      className="w-32 h-12 lg:w-44 lg:h-12  text-gray-700 font-semibold border border-gray-200 hover:bg-gray-200 rounded-[12px] "
+                      className="w-32 h-12 lg:w-44 lg:h-12 text-black font-semibold bg-[#ffd601] hover:text-[#ffd601] hover:bg-[#161616] hover:border hover:border-[#ffd601] rounded-[12px]"
                     >
                       Prize Details
                     </button>
-                    <button onClick={AddToCart} className="bg-blue-500 w-32 h-12 lg:w-44 lg:h-12 text-white font-semibold hover:bg-blue-400 rounded-[12px]">
+                    <button onClick={AddToCart} className="bg-[#161616] w-32 h-12 lg:w-44 lg:h-12 text-[#ffd601] font-semibold hover:bg-[#ffd601] hover:text-black rounded-[12px]">
                       Add to Cart
                     </button>
                   </div>
@@ -129,35 +114,29 @@ export default function Campaign({ campaign }) {
               </div>
             </div>
 
-            <div className="absolute -top-4 -right-4 h-20 w-28  lg:h-28 lg:w-32 p-2 bg-white rounded-full">
+            <div className="absolute -top-4 -right-4 h-28 w-28 lg:h-32 lg:w-32 p-2 bg-[#161616] rounded-full">
               <CircularProgressbar
                 value={campaign?.SoldOutCoupons}
                 maxValue={campaign?.TotalCoupons}
-                strokeWidth={10}
+                strokeWidth={6}
                 styles={buildStyles({
-                  pathColor: `${campaign?.SoldOutCoupons <= (campaign?.TotalCoupons * 1) / 3
-                      ? "#0abf28"
-                      : campaign?.SoldOutCoupons >
-                        (campaign?.TotalCoupons * 1) / 3 &&
-                        campaign?.SoldOutCoupons <=
-                        (campaign?.TotalCoupons * 2) / 3
-                        ? "#ffff00"
-                        : "#ff471a"
-                    }`,
-                  trailColor: "#e6e6e6",
+                  pathColor: "#ffd601",
+                  trailColor: "#161616",
+                  backgroundColor: "#2c2c2c"
                 })}
+                background={true}
               />
               <div className="flex flex-col text-center absolute top-0 h-20 w-20 mt-7 ml-2 lg:ml-4">
-                <p className="text-lg lg:text-2xl font-semibold text-gray-600 leading-4 lg:leading-none">
+                <p className="text-lg lg:text-2xl font-semibold text-white leading-4 lg:leading-none">
                   {campaign?.SoldOutCoupons}
                 </p>
-                <p className="text-[9px] font-semibold text-gray-600 leading-3 lg:leading-1">
+                <p className="text-[9px] font-semibold text-white leading-3 lg:leading-1">
                   SOLD
                 </p>
-                <p className="text-[9px] text-gray-400 leading-3 lg:leading-1">
-                  OUT OF
+                <p className="text-[9px] text-white leading-3 lg:leading-1">
+                  TOTAL
                 </p>
-                <p className="text-md lg:text-xl font-normal text-gray-300 leading-4 lg:leading-none">
+                <p className="text-md lg:text-xl font-normal text-white leading-4 lg:leading-none">
                   {campaign?.TotalCoupons}
                 </p>
               </div>
@@ -166,7 +145,7 @@ export default function Campaign({ campaign }) {
         </div>
       </div>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="fixed  inset-0 z-10 " onClose={closeModal}>
+        <Dialog as="div" className="fixed  inset-0 z-10" onClose={closeModal}>
           <div className="min-h-screen px-4 text-center ">
             <Transition.Child
               as={Fragment}
@@ -177,7 +156,7 @@ export default function Campaign({ campaign }) {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Overlay className="fixed inset-0 " />
+              <Dialog.Overlay className="fixed inset-0" />
             </Transition.Child>
 
             <span
@@ -194,13 +173,13 @@ export default function Campaign({ campaign }) {
               leave="ease-in duration-200"
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
-              style={{ backgroundColor: "#f7fafc" }}
+              style={{ backgroundColor: "#161616" }}
             >
-              <div className="inline-block w-full max-w-md p-6 my-8  text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <div className="inline-block w-full max-w-md p-6 my-8 text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <div className="flex justify-end">
                   <button
                     type="button"
-                    className=" px-4 py-2 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                    className=" px-4 py-2 bg-[#161616] text-white border border-transparent rounded-md hover:text-[#ffd601] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#ffd601]"
                     onClick={closeModal}
                   >
                     <svg
@@ -219,7 +198,7 @@ export default function Campaign({ campaign }) {
                     </svg>
                   </button>
                 </div>
-                <div className="mt-2">
+                <div className="my-2">
                   <div className="relative flex justify-center items-center h-52">
                     <Image
                       src={campaign?.Image}
@@ -227,140 +206,95 @@ export default function Campaign({ campaign }) {
                       alt="Campaign Image"
                     />
                   </div>
-
-                  {prizeDetails ? (
+                  <div className="absolute -top-8 -left-8 bg-[#161616] lg:h-28 w-32  p-2  rounded-full">
+                    <CircularProgressbar
+                      value={campaign?.SoldOutCoupons}
+                      maxValue={campaign?.TotalCoupons}
+                      strokeWidth={6}
+                      styles={buildStyles({
+                        pathColor: "#ffd601",
+                        trailColor: "#161616",
+                        backgroundColor: "#2c2c2c"
+                      })}
+                      background={true}
+                    />
+                    <div className="flex flex-col text-center absolute top-2 left-4 h-20 w-20 mt-7 ml-2 lg:ml-4">
+                      <p className="text-lg lg:text-2xl font-semibold text-white leading-4 lg:leading-none">
+                        {campaign?.SoldOutCoupons}
+                      </p>
+                      <p className="text-[9px] font-semibold text-white leading-3 lg:leading-1">
+                        SOLD
+                      </p>
+                      <p className="text-[9px] text-white leading-3 lg:leading-1">
+                        TOTAL
+                      </p>
+                      <p className="text-md lg:text-xl font-normal text-white leading-4 lg:leading-none">
+                        {campaign?.TotalCoupons}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex justify-center my-4 h-10 pb-2">
+                    <button
+                      onClick={() => setPrizeDetails(true)}
+                      className={`px-2 ${prizeDetails ? 'text-black bg-[#ffd601]' : 'bg-[#2c2c2c] text-white'} rounded-l-xl text-sm font-semibold`}
+                    >
+                      Prize Details
+                    </button>
+                    <button
+                      onClick={() => setPrizeDetails(false)}
+                      className={`px-2 ${prizeDetails ? 'bg-[#2c2c2c] text-white': 'text-black bg-[#ffd601]'} rounded-r-xl text-sm font-semibold`}
+                    >
+                      Product Details
+                    </button>
+                  </div>
+                  { prizeDetails ?
                     <>
-                      <div className="absolute -top-8 -left-4   bg-white    lg:h-28 w-32  p-2  rounded-full">
-                        <CircularProgressbar
-                          value={campaign?.SoldOutCoupons}
-                          maxValue={campaign?.TotalCoupons}
-                          strokeWidth={10}
-                          styles={buildStyles({
-                            pathColor: `${campaign?.SoldOutCoupons <=
-                                (campaign?.TotalCoupons * 1) / 3
-                                ? "#0abf28"
-                                : campaign?.SoldOutCoupons >
-                                  (campaign?.TotalCoupons * 1) / 3 &&
-                                  campaign?.SoldOutCoupons <=
-                                  (campaign?.TotalCoupons * 2) / 3
-                                  ? "#ffff00"
-                                  : "#ff471a"
-                              }`,
-                            trailColor: "#e6e6e6",
-                          })}
-                        />
-                        <div className="flex flex-col text-center absolute top-0 h-20 w-20 mt-7 ml-2 lg:ml-4">
-                          <p className="text-lg lg:text-2xl font-semibold text-gray-600 leading-4 lg:leading-none">
-                            {campaign?.SoldOutCoupons}
-                          </p>
-                          <p className="text-[9px] font-semibold text-gray-600 leading-3 lg:leading-1">
-                            SOLD
-                          </p>
-                          <p className="text-[9px] text-gray-400 leading-3 lg:leading-1">
-                            OUT OF
-                          </p>
-                          <p className="text-md lg:text-xl font-normal text-gray-300 leading-4 lg:leading-none">
-                            {campaign?.TotalCoupons}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex justify-center  h-10 pb-2">
-                        <button
-                          onClick={handlePrizeDetails}
-                          className="bg-white  pr-3 pl-3  text-blue-500 rounded-l-xl text-sm"
-                        >
-                          Prize Details
-                        </button>
-                        <button
-                          onClick={handleProductDetails}
-                          className="opacity-50  pr-2 pl-3  bg-gray-300 rounded-r-xl text-sm"
-                        >
-                          Product Details
-                        </button>
-                      </div>
-                      <p>Get a chance to win:</p>
-                      <p>{campaign?.GiftName.en}</p>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-white text-lg mb-2">Get a chance to win:</p>
+                      <p className="text-white text-sm">{campaign?.GiftName.en}</p>
+                      <p className="text-white text-sm">
                         {campaign?.GiftDescription.en}
                       </p>
                     </>
-                  ) : null}
-                  {productDetails ? (
+                    :
                     <>
-                      <div className="absolute -top-8 -left-4   bg-white    lg:h-28 w-32  p-2  rounded-full">
-                        <CircularProgressbar
-                          value={campaign?.SoldOutCoupons}
-                          maxValue={campaign?.TotalCoupons}
-                          strokeWidth={10}
-                          styles={buildStyles({
-                            pathColor: `${campaign?.SoldOutCoupons <=
-                                (campaign?.TotalCoupons * 1) / 3
-                                ? "#0abf28"
-                                : campaign?.SoldOutCoupons >
-                                  (campaign?.TotalCoupons * 1) / 3 &&
-                                  campaign?.SoldOutCoupons <=
-                                  (campaign?.TotalCoupons * 2) / 3
-                                  ? "#ffff00"
-                                  : "#ff471a"
-                              }`,
-                            trailColor: "#e6e6e6",
-                          })}
-                        />
-                        <div className="flex flex-col text-center absolute top-0 h-20 w-20 mt-7 ml-2 lg:ml-4">
-                          <p className="text-lg lg:text-2xl font-semibold text-gray-600 leading-4 lg:leading-none">
-                            {campaign?.SoldOutCoupons}
-                          </p>
-                          <p className="text-[9px] font-semibold text-gray-600 leading-3 lg:leading-1">
-                            SOLD
-                          </p>
-                          <p className="text-[9px] text-gray-400 leading-3 lg:leading-1">
-                            OUT OF
-                          </p>
-                          <p className="text-md lg:text-xl font-normal text-gray-300 leading-4 lg:leading-none">
-                            {campaign?.TotalCoupons}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex justify-center  h-10 pb-2">
-                        <button
-                          onClick={handlePrizeDetails}
-                          className="opacity-50  pr-2 pl-3  bg-gray-300 rounded-l-xl text-sm"
-                        >
-                          Prize Details
-                        </button>
-                        <button
-                          onClick={handleProductDetails}
-                          className="bg-white  pr-3 pl-3  text-blue-500 rounded-r-xl text-sm"
-                        >
-                          Product Details
-                        </button>
-                      </div>
-                      <div className="flex justify-between mr-10">
-                        <p>{campaign?.ProductName.en}</p>
-                        <p className="text-blue-500 font-bold pt-2 pb-2">
+                      <div className="flex justify-between mb-2">
+                        <p className="text-white">{campaign?.ProductName.en}</p>
+                        <p className="text-white font-bold">
                           AED {campaign?.Price}
                         </p>
                       </div>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-white">
                         {campaign?.ProductDescription.en}
                       </p>
                     </>
-                  ) : null}
+                  }                             
                 </div>
-                <div className="flex justify-between  pt-4 pb-4">
-                  <div className="flex-col ">
-                    <p className="text-xl">Buy {campaign?.ProductName.en}</p>
-                    <p className="text-base text-blue-500 font-bold">
+                <div className="flex justify-between items-center pt-4 pb-4">
+                  <div className="flex-col">
+                    <p className="text-lg text-white">Buy {campaign?.ProductName.en}</p>
+                    <p className="text-base text-[#ffd601] font-bold">
                       AED {campaign?.Price}
                     </p>
-                    <p className="text-xs">Inclusive of VAT</p>
+                    <p className="text-xs text-white">Inclusive of VAT</p>
                   </div>
-                  <button
-                    onClick={handleClick}
-                    className="bg-blue-500  rounded-[15px] text-white font-bold h-16 w-[60%]"
-                  >
-                    Add to Cart
-                  </button>
+                  {cart.some(c => c.id === campaign.id) ?
+                    <div className="flex justify-center lg:justify-start space-x-3 items-center pt-4">
+                      <div onClick={cart.some(c => c.id === campaign.id && c.qty === 1) ? RemoveFromCart : ReduceQty} className="flex text-2xl bg-[#2c2c2c] pt-15 pb-15 justify-center items-center w-12 h-12 rounded-[15px]">
+                        <p className="text-white">-</p>
+                      </div>
+                      <div className="flex bg-[#2c2c2c] py-15 justify-center text-lg items-center w-12 h-12 rounded-[15px]">
+                        <p className="text-white">{qty}</p>
+                      </div>
+                      <div onClick={AddQty} className="flex bg-[#ffd601] text-black text-2xl pt-15 pb-15 justify-center items-center w-12 h-12 rounded-[15px]" >
+                        <p>+</p>
+                      </div>
+                    </div> :
+                    <div className="mt-2 space-x-4 text-sm lg:text-base">
+                      <button onClick={AddToCart} className="bg-[#ffd601] w-32 h-12 lg:w-44 lg:h-12 text-black font-semibold hover:bg-[#ffd601] rounded-[15px]">
+                        Add to Cart
+                      </button>
+                    </div>
+                  }
                 </div>
               </div>
             </Transition.Child>

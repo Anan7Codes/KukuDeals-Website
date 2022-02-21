@@ -12,13 +12,13 @@ function Navbar() {
   const userInfo = supabase.auth.user();
   return (
     <nav className="pb-3 relative">
-      <div className="bg-white mx-auto rounded-[15px]">
+      <div className="bg-[#2c2c2c] mx-auto rounded-[15px]">
         <div className="flex justify-between text-sm">
           <div className="flex space-x-6 pl-2">
             <div className="flex text-center p-2">
-              <div className="flex items-center w-28 h-10 relative cursor-pointer">
+              <div className="flex items-center w-28 h-10 relative cursor-pointer" onClick={() => router.push('/')}>
                 <Image
-                  src="/icons/kukudealslogo-black.png"
+                  src="/icons/kukudeals-white.png"
                   layout="fill"
                   alt="kuku logo"
                 />
@@ -27,13 +27,13 @@ function Navbar() {
             <div className="hidden lg:flex items-center space-x-3">
               <a
                 href=""
-                className="py-4  text-[#4a4a4a] font-bold hover:text-red-400 "
+                className="py-4 text-white font-bold hover:text-[#ffd601] "
               >
                 PRODUCTS
               </a>
               <a
                 href=""
-                className="py-4 px-3 text-[#4a4a4a] font-bold hover:text-red-400"
+                className="py-4 px-3 text-white font-bold hover:text-[#ffd601]"
               >
                 WINNERS
               </a>
@@ -42,23 +42,23 @@ function Navbar() {
           <div className="hidden lg:flex items-center space-x-6 pr-4 ">
             <a
               href=""
-              className="py-4 px-3 text-[#4a4a4a] font-medium hover:text-red-400"
+              className="py-4 px-3 text-white font-medium hover:text-[#ffd601]"
             >
               Need Help? Contact us
             </a>
-            <a href="" className="py-4 px-3 font-medium text-[#0073ff]">
+            <a href="" className="py-4 px-3 font-medium text-[#ffd601]">
               <b>Call 0800-KUKU</b>
             </a>
 
             <div
               onClick={() => setEnglish(!english)}
-              className="py-4 px-3 hover:cursor-pointer  text-[#4a4a4a] font-medium hover:text-red-400"
+              className="py-4 px-3 hover:cursor-pointer text-white font-medium hover:text-[#ffd601]"
             >
               {english ? "العربية" : "English"}
             </div>
             <a
               href=""
-              className="py-2 px-3 text-[#4a4a4a] font-medium hover:text-red-400 "
+              className="py-2 px-3 text-white font-medium hover:text-[#ffd601]"
             >
               {userInfo ? (
                 <span
@@ -82,11 +82,11 @@ function Navbar() {
             </a>
           </div>
           <div className="lg:hidden flex items-center pr-4">
-            <p className="pr-4 text-[#4a4a4a] font-medium">Use App</p>
+            <p className="pr-4 text-white font-medium">Use App</p>
             <svg
               onClick={() => setShowMenu(true)}
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-gray-700 hover:cursor-pointer hover:text-yellow-500"
+              className="h-6 w-6 text-white hover:cursor-pointer hover:text-[#ffd601]"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -101,42 +101,45 @@ function Navbar() {
           </div>
         </div>
         {showMenu ? (
-          <div className="absolute top-0 bg-white px-4 rounded-[15px] w-full">
+          <div className="absolute top-0 bg-[#2c2c2c] px-4 rounded-[15px] w-full z-30">
             <div className="relative h-full w-full">
               <div className="flex items-center my-2 w-28 h-10 relative cursor-pointer">
                 <Image
-                  src="/icons/kukudealslogo-black.png"
+                  src="/icons/kukudeals-white.png"
                   layout="fill"
                   alt="kuku logo"
                 />
               </div>
-              <p className="font-medium text-sm text-[#4a4a4a] my-2 hover:cursor-pointer hover:text-yellow-500">
+              <p className="font-medium text-sm text-white mt-6 mb-2 hover:cursor-pointer hover:text-yellow-500">
                 Products
               </p>
-              <p className="font-medium text-sm text-[#4a4a4a] mb-2 hover:cursor-pointer hover:text-yellow-500">
+              <p className="font-medium text-sm text-white mb-2 hover:cursor-pointer hover:text-yellow-500">
                 Winners
               </p>
-              <p className="font-medium text-sm text-[#4a4a4a] mt-6 mb-2 hover:cursor-pointer hover:text-yellow-500">
+              <p className="font-medium text-sm text-white mt-6 mb-2 hover:cursor-pointer hover:text-yellow-500">
                 Need Help? Contact Us
               </p>
-              <p className="font-medium text-sm text-[#0073ff] mb-2 hover:cursor-pointer hover:text-yellow-500">
+              <p className="font-medium text-sm text-[#ffd601] mb-2 hover:cursor-pointer hover:text-yellow-500">
                 Call 0800-KUKU
               </p>
-              <p className="font-medium text-sm text-[#4a4a4a] mb-2 hover:cursor-pointer hover:text-yellow-500">
+              <p className="font-medium text-sm text-white mb-2 hover:cursor-pointer hover:text-yellow-500">
                 العربية
               </p>
-              <p className="font-medium text-sm text-[#4a4a4a] mb-4 hover:cursor-pointer hover:text-yellow-500">
-                {userInfo ? (
-                  userInfo.user_metadata.name
+              {userInfo ? (
+                  <p onClick={() => router.push('/profile/settings')} className="font-medium text-sm text-white mb-4 hover:cursor-pointer hover:text-yellow-500">
+                    {userInfo.user_metadata.name}
+                  </p>
                 ) : (
-                  <div>Login/Register</div>
+                  <p onClick={() => router.push('/signin')} className="font-medium text-sm text-white mb-4 hover:cursor-pointer hover:text-yellow-500">
+                    Login/Register
+                  </p>
                 )}
-              </p>
+              
 
               <svg
                 onClick={() => setShowMenu(false)}
                 xmlns="http://www.w3.org/2000/svg"
-                className="absolute top-0 right-0 h-6 w-6 text-gray-700 hover:cursor-pointer hover:text-yellow-500"
+                className="absolute top-0 right-0 h-6 w-6 text-white hover:cursor-pointer hover:text-yellow-500"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >

@@ -39,14 +39,12 @@ const items = [
 export default function Soldout() {
   const [index, setIndex] = useState(0);
   return (
-    <div>
-      <div className="">
-        <div className="bg-[#f53435]  rounded-[45px] px-6 py-5 text-white">
+    <div className="bg-[#ffd601] rounded-[45px] px-6 py-5 text-black">
           <div className="pt-2 ml-3 relative">
             <div className="flex justify-between">
-              <p className="font-[700]  tracking-tighter text-3xl">Sold Out</p>
+              <p className="font-[700] tracking-tighter text-3xl">Sold Out</p>
             </div>
-            <div className="text-xs lg:text-base leading-5 font-semibold">
+            <div className="text-xs lg:text-base leading-5">
               All our sold out campaigns along with their <br /> corresponding
               draw dates are listed below
             </div>
@@ -90,7 +88,5 @@ export default function Soldout() {
             </div>
           </div>
         </div>
-      </div>
-    </div>
   );
 }

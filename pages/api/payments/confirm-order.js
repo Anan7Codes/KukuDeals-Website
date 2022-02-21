@@ -112,12 +112,14 @@ const webhookHandler = async (req, res) => {
                     .select('SoldOutCoupons')
                     .eq("id", item.id)
                     .single()
+                console.log("campaign for qty", campaign_for_qty)
                 if(campaign_for_qty.error) return res.send({ success: false, message: "Campaign Doesn't Exist", error: campaign_for_qty.error})
                 const campaign_update_qty = await supabase
                     .from('campaigns')
                     .update({ SoldOutCoupons: campaign_for_qty.data.SoldOutCoupons + item.product_qty })
                     .eq("id", item.id)
-                    if(campaign_update_qty.error) return res.send({ success: false, message: "Campaign Qty Doesn't Exist", error: campaign_update_qty.error})
+                    console.log("campaign update qty", campaign_update_qty)
+                if(campaign_update_qty.error) return res.send({ success: false, message: "Campaign Qty Doesn't Exist", error: campaign_update_qty.error})
             })      
 
             

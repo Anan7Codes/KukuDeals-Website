@@ -60,6 +60,12 @@ const Handler = async (req, res) => {
         const { total, success } = await TotalPrice(req.body.cart)
         if(!success) return res.status(404).json({ success: false, message: "Failed to calculate total amount"})
         if(total >= promo_codes.data.min_amount) return res.send({ success: false, message: `Minimum amount for this promo code is ${promo_codes.data.min_amount}`})
+        console.log("amount", total, promo_codes.data.min_amount)
+        if(total >= promo_codes.data.min_amount) {
+            console.log(true)
+        } else {
+            console.log(false)
+        }
 
         res.send({ success: true, message: `Apply promo code ${req.body.promoCode}?`, data: promo_codes.data})
     }

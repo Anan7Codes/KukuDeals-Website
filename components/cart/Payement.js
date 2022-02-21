@@ -56,7 +56,8 @@ export default function Payement() {
       try {
           const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/promocodes/enter-promo-code`, {
               promoCode: promoCode,
-              user_id: userInfo.id
+              user_id: userInfo.id,
+              cart: cart
           })
           console.log(res)
           setPromoLoading(false)

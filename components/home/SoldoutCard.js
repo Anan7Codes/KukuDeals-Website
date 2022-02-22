@@ -22,11 +22,11 @@ export default function SoldoutBox() {
           </div>
           <div className=" pt-56">
           <div className="text-center text-[1.12rem] tracking-wide">
-            <p className="text-white font-semibold mt-4">AED40,000 Cash</p>
+            <p className="text-white italic font-title font-bold mt-4">Iphone 13 Pro</p>
             <p className="text-white text-sm leading-4">CG-01266</p>
-            <p className="text-white pl-1 text-sm">
+            <p className="text-white pl-1 font-medium text-sm">
               Draw Date:
-              <span className="font-semibold text-[#ffd601]">
+              <span className="font-extrabold text-[#ffd601]">
                 13 January 2022
               </span>
             </p>

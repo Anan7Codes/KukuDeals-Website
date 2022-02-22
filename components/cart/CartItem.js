@@ -58,16 +58,16 @@ export default function CartItem({item}) {
         </div>
         <div className="flex flex-col lg:flex-row pl-1 pt-2">
             <div className="">
-                <p className="text-white text-sm sm:text-base lg:text-xl font-bold leading-2">
+                <p className=" text-sm sm:text-base font-title text-[#ffd601] lg:text-xl font-bold leading-2">
                     {item?.GiftName.en}
                 </p>
                 <p className="text-white text-sm sm:text-base lg:text-xl pt-1 leading-2 lg:leading-3">
                     {item?.ProductName.en}
                 </p>
-                <p className="font-bold text-sm sm:text-base lg:text-xl lg:pt-3 text-[#ffd601]">
+                <p className="font-bold text-sm sm:text-base lg:text-xl lg:pt-3 text-white">
                     AED{item?.Price}.00
                 </p>
-                <p className="text-xs font-semibold lg:pt-3 text-green-500">
+                <p className="text-xs font-semibold lg:pt-3 text-[#ffd601] ">
                     {item?.SoldOutCoupons} Coupons
                     <span className="text-white font-normal"> per unit</span>
                 </p>

@@ -73,18 +73,18 @@ export default function Campaign({ campaign }) {
           <div className="flex-col w-full pb-6 lg:pb-0">
             <div className="justify-center">
               <div className="text-sm text-center sm:pl-4 sm:pt-2 lg:text-justify	 lg:text-3xl">
-                <div className="lg:pt-4">
-                  <p className="text-5xl lg:text-7xl font-bold lg:leading-none italic text-[#ffd601]">
+                <div className="lg:pt-4 ">
+                  <p className="text-5xl lg:text-7xl font-bold font-title lg:leading-none italic text-[#ffd601]">
                     Win
                   </p>
                 </div>
-                <p className="text-lg lg:text-2xl text-white tracking-tighter font-bold leading-6 lg:leading-normal">
+                <p className="text-lg font-extrabold lg:text-2xl text-white tracking-tighter  leading-6 lg:leading-normal">
                   {campaign?.GiftName.en}
                 </p>
                 <p className="text-lg lg:text-2xl text-white tracking-tighter leading-4 lg:leading-tight font-medium">
                   Buy a {campaign?.ProductName.en} and make it yours!
                 </p>
-                <p className="text-lg lg:text-2xl tracking-tighter font-semibold text-[#ffd601] lg:leading-tight">
+                <p className="text-lg lg:text-2xl tracking-tighter font-bold text-[#ffd601] lg:leading-tight">
                   AED {campaign?.Price}
                 </p>
                 {cart.some(c => c.id === campaign.id) ?
@@ -102,11 +102,11 @@ export default function Campaign({ campaign }) {
                   <div className="mt-2 space-x-3 text-sm lg:text-base">
                     <button
                       onClick={openModal}
-                      className="w-32 h-12 lg:w-44 lg:h-12 text-black font-semibold bg-[#ffd601] hover:text-[#ffd601] hover:bg-[#161616] hover:border hover:border-[#ffd601] rounded-[12px]"
+                      className="w-32 h-12 lg:w-44 lg:h-12 text-black font-medium bg-[#ffd601] hover:text-[#ffd601] hover:bg-[#161616] hover:border hover:border-[#ffd601] rounded-[12px]"
                     >
                       Prize Details
                     </button>
-                    <button onClick={AddToCart} className="bg-[#161616] w-32 h-12 lg:w-44 lg:h-12 text-[#ffd601] font-semibold hover:bg-[#ffd601] hover:text-black rounded-[12px]">
+                    <button onClick={AddToCart} className="bg-[#161616] w-32 h-12 lg:w-44 lg:h-12 text-[#ffd601] font-medium hover:bg-[#ffd601] hover:text-black rounded-[12px]">
                       Add to Cart
                     </button>
                   </div>
@@ -218,7 +218,7 @@ export default function Campaign({ campaign }) {
                       })}
                       background={true}
                     />
-                    <div className="flex flex-col text-center absolute top-2 left-4 h-20 w-20 mt-7 ml-2 lg:ml-4">
+                    <div className="flex flex-col text-center absolute top-2 left-4 h-20 w-20 mt-5 ml-2 ">
                       <p className="text-lg lg:text-2xl font-semibold text-white leading-4 lg:leading-none">
                         {campaign?.SoldOutCoupons}
                       </p>
@@ -249,8 +249,8 @@ export default function Campaign({ campaign }) {
                   </div>
                   { prizeDetails ?
                     <>
-                      <p className="text-white text-lg mb-2">Get a chance to win:</p>
-                      <p className="text-white text-sm">{campaign?.GiftName.en}</p>
+                      <p className="text-white text-sm mb-2">Get a chance to win:</p>
+                      <p className="text-[#ffd601] font-title font-bold text-2xl ">{campaign?.GiftName.en}</p>
                       <p className="text-white text-sm">
                         {campaign?.GiftDescription.en}
                       </p>
@@ -258,7 +258,7 @@ export default function Campaign({ campaign }) {
                     :
                     <>
                       <div className="flex justify-between mb-2">
-                        <p className="text-white">{campaign?.ProductName.en}</p>
+                        <p className="text-[#ffd601] text-2xl font-bold font-title">{campaign?.ProductName.en}</p>
                         <p className="text-white font-bold">
                           AED {campaign?.Price}
                         </p>
@@ -279,13 +279,13 @@ export default function Campaign({ campaign }) {
                   </div>
                   {cart.some(c => c.id === campaign.id) ?
                     <div className="flex justify-center lg:justify-start space-x-3 items-center pt-4">
-                      <div onClick={cart.some(c => c.id === campaign.id && c.qty === 1) ? RemoveFromCart : ReduceQty} className="flex text-2xl bg-[#2c2c2c] pt-15 pb-15 justify-center items-center w-12 h-12 rounded-[15px]">
-                        <p className="text-white">-</p>
+                      <div onClick={cart.some(c => c.id === campaign.id && c.qty === 1) ? RemoveFromCart : ReduceQty} className="flex text-2xl cursor-pointer bg-[#2c2c2c] pt-15 pb-15 justify-center items-center w-12 h-12 rounded-[15px]">
+                        <p className="text-white  hover:text-[#ffd601]">-</p>
                       </div>
                       <div className="flex bg-[#2c2c2c] py-15 justify-center text-lg items-center w-12 h-12 rounded-[15px]">
                         <p className="text-white">{qty}</p>
                       </div>
-                      <div onClick={AddQty} className="flex bg-[#ffd601] text-black text-2xl pt-15 pb-15 justify-center items-center w-12 h-12 rounded-[15px]" >
+                      <div onClick={AddQty} className="flex bg-[#ffd601] cursor-pointer text-black text-2xl pt-15 pb-15 justify-center items-center w-12 h-12 rounded-[15px]" >
                         <p>+</p>
                       </div>
                     </div> :

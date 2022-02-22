@@ -17,7 +17,7 @@ const ToggleSwitch = styled((props) => (
             transform: 'translateX(16px)',
             color: '#fff',
             '& + .MuiSwitch-track': {
-                backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#65C466',
+                backgroundColor: theme.palette.mode === 'dark' ? '#ffd601' : '#000000',
                 opacity: 1,
                 border: 0,
             },
@@ -27,7 +27,7 @@ const ToggleSwitch = styled((props) => (
         },
         '&.Mui-focusVisible .MuiSwitch-thumb': {
             color: '#33cf4d',
-            border: '6px solid #fff',
+            border: '6px solid #ffd601',
         },
         '&.Mui-disabled .MuiSwitch-thumb': {
             color:
@@ -46,7 +46,7 @@ const ToggleSwitch = styled((props) => (
     },
     '& .MuiSwitch-track': {
         borderRadius: 26 / 2,
-        backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
+        backgroundColor: theme.palette.mode === 'light' ? '#ffd601' : '#000000',
         opacity: 1,
         transition: theme.transitions.create(['background-color'], {
             duration: 500,

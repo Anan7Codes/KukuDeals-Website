@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "react-phone-input-2/lib/style.css";
-import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
+import { CountryDropdown } from "react-country-region-selector";
 import { supabase } from "@/utils/supabaseClient";
 import { toast } from "react-toastify";
 
@@ -79,20 +79,20 @@ export default function PersonalDetails() {
   return (
     <div>
       <div className="">
-        <p className="pt-5 text-3xl font-bold text-[#ffd601] ">
+        <p className="pt-5 text-3xl font-bold font-title text-[#ffd601] ">
           Personal Details
         </p>
         <form className="">
           <div className="lg:flex text-lg">
             <input
               placeholder="First Name"
-              className="border placeholder:text-xs text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none  rounded-[5px]  h-14  border-gray-300 "
+              className="text-white placeholder:text-xs bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none  rounded-[5px]  h-14   "
               value={newPersonalDetails.firstname} onChange={e => setNewPersonalDetails({ ...newPersonalDetails, firstname: e.target.value })}
 
             />
             <input
               placeholder="Last Name"
-              className="border placeholder:text-xs text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none  rounded-[5px]  h-14  border-gray-300 "
+              className="text-white placeholder:text-xs bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none  rounded-[5px]  h-14   "
               value={newPersonalDetails.lastname} onChange={e => setNewPersonalDetails({ ...newPersonalDetails, lastname: e.target.value })}
 
             />
@@ -100,7 +100,7 @@ export default function PersonalDetails() {
           <div className="flex flex-col">
             <input
               placeholder="Email"
-              className="border placeholder:text-xs text-xs pl-3 mr-3 w-full lg:w-[96.5%] mt-4 outline-none opacity-30 rounded-[5px]  h-14  border-gray-300 "
+              className=" placeholder:text-xs bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-[96.5%] mt-4 outline-none  rounded-[5px]  h-14 text-white "
               value={email}
 
             />
@@ -109,13 +109,13 @@ export default function PersonalDetails() {
           <div className="lg:flex ">
             <CountryDropdown
               defaultOptionLabel="Nationality"
-              className="border border-gray-300  text-xs text-gray-400 pl-3 mr-3 w-full lg:w-72 mt-4 outline-none   rounded-[5px]  h-14 "
+              className=" text-white bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none   rounded-[5px]  h-14 "
               value={newPersonalDetails.nationality} onChange={e => setNewPersonalDetails({ ...newPersonalDetails, nationality: e })}
 
             />
             <CountryDropdown
               defaultOptionLabel="Country of Residence"
-              className="border text-gray-400 pl-3 mr-3 lg:w-72 mt-4 outline-none w-full text-xs rounded-[5px]  h-14  border-gray-300 "
+              className=" text-white bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none   rounded-[5px]  h-14 "
               value={newPersonalDetails.countryOfResidence} onChange={e => setNewPersonalDetails({ ...newPersonalDetails, countryOfResidence: e })}
             />
           </div>
@@ -124,7 +124,7 @@ export default function PersonalDetails() {
               <div className="flex justify-between items-center">
                 <div>
                   <p
-                    className="bg-white rounded-l-lg h-12  flex justify-center items-center w-[19rem] text-center drop-shadow-sm	 text-blue-600 "
+                    className="text-black bg-[#ffd601] rounded-l-lg h-12  flex justify-center items-center w-[19rem] text-center drop-shadow-sm	  "
                     value={true}
                     onClick={(e) => setGender(true)}>
                     Male
@@ -132,7 +132,7 @@ export default function PersonalDetails() {
                 </div>
                 <div className="mr-4">
                   <p
-                    className="bg-gray-300 opacity-20 flex justify-center items-center rounded-r-lg h-12  w-[18rem] text-center drop-shadow-md"
+                    className="bg-black text-[#ffd601]  flex justify-center items-center rounded-r-lg h-12  w-[18rem] text-center drop-shadow-md"
                     value={false}
                     onClick={(e) => setGender(false)}>
                     Female
@@ -143,7 +143,7 @@ export default function PersonalDetails() {
               <div className="flex justify-between">
                 <div>
                   <p
-                    className="bg-gray-300 opacity-20 flex justify-center items-center rounded-l-lg h-12  w-[19rem] text-center drop-shadow-md	 "
+                    className="bg-black text-[#ffd601]  flex justify-center items-center rounded-l-lg h-12  w-[18rem] text-center drop-shadow-md"
                     value={true}
                     onClick={(e) => setGender(true)}
                   >
@@ -152,7 +152,7 @@ export default function PersonalDetails() {
                 </div>
                 <div className="mr-4">
                   <p
-                    className="bg-white rounded-r-lg h-12 flex justify-center items-center w-[18rem] text-center drop-shadow-sm	 text-blue-600 "
+                    className="text-black bg-[#ffd601] rounded-r-lg h-12  flex justify-center items-center w-[19rem] text-center drop-shadow-sm	  "
                     value={false}
                     onClick={(e) => setGender(false)}
                   >
@@ -162,7 +162,7 @@ export default function PersonalDetails() {
               </div>
             )}
           </div>
-          <button onClick={InsertPersonalDetails} className="bg-blue-500 lg:justify-start w-full lg:w-40 h-16 mt-3 text-white  hover:bg-blue-600 font-semibold rounded-[15px]">
+          <button onClick={InsertPersonalDetails} className="bg-[#ffd601] lg:justify-start w-full lg:w-40 h-14 mt-3 text-black  hover:bg-[#dabd2c] font-semibold rounded-[15px]">
             Update
           </button>
         </form>

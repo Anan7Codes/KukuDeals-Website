@@ -42,9 +42,9 @@ export default function Soldout() {
     <div className="bg-[#ffd601] rounded-[45px] px-6 py-5 text-black">
           <div className="pt-2 ml-3 relative">
             <div className="flex justify-between">
-              <p className="font-[700] tracking-tighter text-3xl">Sold Out</p>
+              <p className="tracking-tighter font-title font-bold text-3xl">Sold Out</p>
             </div>
-            <div className="text-xs lg:text-base leading-5">
+            <div className="text-xs lg:text-base leading-5 font-medium">
               All our sold out campaigns along with their <br /> corresponding
               draw dates are listed below
             </div>

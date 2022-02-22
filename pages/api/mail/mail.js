@@ -326,8 +326,8 @@ export default async function handler (req, res) {
         template_id: 'd-3039277b3eca416aa5b730a5e75a6ba1',
         personalizations: [
             {
-                to: 'mohammedhafizba@gmail.com',
-                // to: 'anandhu@rough-paper.com',
+                // to: 'mohammedhafizba@gmail.com',
+                to: 'anandhu@rough-paper.com',
                 dynamic_template_data: {
                     orderDetails: "invoice",
                     greeting: message

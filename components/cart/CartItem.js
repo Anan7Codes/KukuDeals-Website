@@ -89,7 +89,7 @@ export default function CartItem({item}) {
       <div className="bg-[#2c2c2c] text-right h-12 rounded-b-3xl">
         <p className="text-white text-xs lg:text-sm mr-3 pt-1">
           Donate these product(s) to double the ticket(s)
-          <ToggleSwitch sx={{ m: 1 }} defaultChecked />
+          {/* <ToggleSwitch sx={{ m: 1 }} defaultChecked /> */}
         </p>
       </div>
     </div>        

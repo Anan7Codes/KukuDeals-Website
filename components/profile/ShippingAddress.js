@@ -63,25 +63,25 @@ export default function ShippingAddress() {
   
   return (
     <div>
-      <p className="text-3xl text-gray-700 font-bold mt-4 ">Shipping Address</p>
+      <p className="text-3xl  font-bold mt-4 font-title text-[#ffd601]">Shipping Address</p>
       <div className="flex flex-col">
         <input
           placeholder="Apartment or Villa name"
-          className="border placeholder:text-xs   pl-3 mr-3 w-full lg:w-[36rem] mt-4 outline-none  text-xs rounded-[5px]  h-14  border-gray-300 "
+          className=" placeholder:text-xs placeholder:text-white   pl-3 mr-3 w-full lg:w-[36rem] mt-4 outline-none  text-xs rounded-[5px]  h-14  bg-[#2c2c2c] text-white "
           value={newShippingAddress.apartmentNo} onChange={e => setNewShippingAddress({ ...newShippingAddress, apartmentNo: e.target.value })}
         />
         <input
           placeholder="Street name or No."
-          className="border placeholder:text-xs   pl-3 mr-3 w-full lg:w-[36rem] mt-4 outline-none  text-xs rounded-[5px]  h-14  border-gray-300 "
+          className=" placeholder:text-xs placeholder:text-white   pl-3 mr-3 w-full lg:w-[36rem] mt-4 outline-none  text-xs rounded-[5px]  h-14  bg-[#2c2c2c] text-white "
           value={newShippingAddress.buildingName} onChange={e => setNewShippingAddress({ ...newShippingAddress, buildingName: e.target.value })}
         />
         <input
           placeholder="Area"
-          className="border placeholder:text-xs   pl-3 mr-3 w-full lg:w-[36rem] mt-4 outline-none  text-xs rounded-[5px]  h-14  border-gray-300 "
+          className=" placeholder:text-xs placeholder:text-white   pl-3 mr-3 w-full lg:w-[36rem] mt-4 outline-none  text-xs rounded-[5px]  h-14  bg-[#2c2c2c] text-white "
           value={newShippingAddress.location} onChange={e => setNewShippingAddress({ ...newShippingAddress, location: e.target.value })}
         />
       </div>
-      <button onClick={UpdateShippingAddress} className="bg-blue-500 mt-4 font-semibold hover:bg-blue-600 text-white w-full lg:w-52 h-14 text-center  rounded-[10px]">
+      <button onClick={UpdateShippingAddress} className="bg-[#ffd601] text-black mt-4 font-semibold hover:bg-[#cfb327] w-full lg:w-52 h-14 text-center  rounded-[10px]">
         Save Address
       </button>
     </div>

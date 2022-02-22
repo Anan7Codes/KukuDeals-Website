@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FaAddressCard } from "react-icons/fa";
 import { RiCoupon2Fill, RiLogoutBoxRLine } from "react-icons/ri";
 import User from "./User";

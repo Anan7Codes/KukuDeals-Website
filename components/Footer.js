@@ -8,10 +8,10 @@ export default function Footer() {
           <div className=" p-4 sm:flex lg:flex justify-between">
             <div className="flex tracking-tight	">
               <div className="pr-10 w-full">
-                <div className="font-medium text-sm lg:text-lg  text-white cursor-pointer hover:text-[#ffd601]">
+                <div className="font-medium text-sm lg:text-lg text-white cursor-pointer hover:text-[#ffd601]">
                   Quick Links
                 </div>
-                <ul className=" text-xs lg:text-base pt-3 leading-loose lg:leading-extra-loose	">
+                <ul className=" text-xs lg:text-base pt-3 leading-loose">
                   <li>
                     <a className="text-white cursor-pointer hover:text-[#ffd601] ">
                       About Kuku

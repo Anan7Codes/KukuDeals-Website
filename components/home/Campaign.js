@@ -14,9 +14,6 @@ export default function Campaign({ campaign }) {
 
   const router = useRouter();
 
-  const handleClick = () => {
-    router.push("/cart");
-  };
   function closeModal() {
     setIsOpen(false);
   }
@@ -31,8 +28,9 @@ export default function Campaign({ campaign }) {
   } = CartState()
 
   useEffect(() => {
-    cart.filter(c => c.id === campaign?.id ? setQty(c.qty) : null)
+    cart.filter(c => c.id === campaign.id ? setQty(c.qty) : null)
   }, [cart])
+
   const AddToCart = () => {
     dispatch({
       type: 'ADD_TO_CART',

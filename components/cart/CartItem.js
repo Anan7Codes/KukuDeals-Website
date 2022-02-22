@@ -9,9 +9,7 @@ export default function CartItem({item}) {
     // const [qty, setQty] = useState()
     const { state: { cart } } = CartState();
     const { dispatch } = CartState();
-    // useEffect(() => {
-    //   cart.filter(c => c.id === item.id ? setQty(c.qty) : null)
-    // }, [cart])
+
     const AddQty = () => {
       dispatch({
         type: 'ADD_QTY',

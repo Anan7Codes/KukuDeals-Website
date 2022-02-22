@@ -41,21 +41,15 @@ export default function CartRight() {
             <div className="bg-[#161616] rounded-2xl">
               { cart.length ?
                 <>
-                <div className="mx-3 divide-y leading-extra-loose text-[13px]">
+                {/* <div className="mx-3 divide-y leading-extra-loose text-[13px]">
                   <div className="flex justify-between text-white">
                     <p>Total Product</p>
                     <div className="flex pr-4">
                       <p>{cart.length}</p>
                     </div>
                   </div>
-                  <div className="flex justify-between text-white">
-                    <p>Total Coupons</p>
-                    <div className="flex pr-4">
-                      <p>{couponCount}</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex justify-center">
+                </div> */}
+                <div className="flex justify-center pt-4">
                   <button
                     onClick={handleClick}
                     className="bg-[#ffd601] rounded-[15px] text-base font-medium text-black p-4 py-2 mt-2 mb-4"

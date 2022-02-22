@@ -87,7 +87,7 @@ function SignUp() {
       <div className="flex justify-center pt-20 pb-20">
         <div className="w-1/2  rounded-[25px] bg-[#2c2c2c] mb-6 mt-10">
           <div className="ml-28 pt-4">
-            <p className="text-3xl text-[#ffd601] font-bold">Sign Up</p>
+            <p className="text-3xl text-[#ffd601] font-bold font-title">Sign Up</p>
           </div>
           <form
             onSubmit={handleSubmit}
@@ -96,7 +96,7 @@ function SignUp() {
             <div className="flex flex-col text-white ">
               <input
                 type="text"
-                className="border placeholder:text-xs font-Manrope placeholder:text-white text-xs pl-3 mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className="border placeholder:text-xs  placeholder:text-white text-xs pl-3 mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
                 placeholder="FirstName"
                 value={firstname}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -226,7 +226,7 @@ function SignUp() {
                 >
                   Existing User Login
                 </p>
-                <button className="bg-[#ffd601] mr-3 mt-4 w-full outline-none rounded-[5px] h-14 text-black font-semibold text-base">
+                <button className="bg-[#ffd601] font-title mr-3 mt-4 w-full outline-none rounded-[5px] h-14 text-black font-semibold text-base">
                   Sign Up
                 </button>
               </div>

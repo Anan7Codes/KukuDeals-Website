@@ -1,7 +1,7 @@
 import { CartState } from "@/contexts/cart/CartContext";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Cart({ item }) {
 
@@ -72,9 +72,9 @@ export default function Cart({ item }) {
                 {item?.GiftName.en}
               </p>
               <p>{item?.ProductName.en}</p>
-              <p className="font-bold text-blue-500">AED{item?.Price}.00</p>
+              <p className="font-bold text-[#ffd601]">AED{item?.Price}.00</p>
               <div className="text-sm font-semibold text-green-500">
-                {item?.SoldOutCoupons} Coupons
+                2 Coupons
                 <span className="text-white font-normal"> per unit</span>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import Layout from '@/components/Layout';
@@ -16,11 +16,17 @@ export default function ResetPassword() {
   const router = useRouter();
   const [ password, setPassword ] = useState('');
   const [ confirmPassword, setConfirmPassword ] = useState('');
+  const [ accessToken, setAccessToken ] = useState('')
+  useEffect(() => {
+    console.log("query", window.location.hash)
+    console.log('token', window.location.hash.match(new RegExp("#access_token=" + "(.*)" + "&expires"))[1])
+    setAccessToken(window.location.hash.match(new RegExp("#access_token=" + "(.*)" + "&expires"))[1])
+   },[])
 
-  console.log(new URLSearchParams(window.location.search))
-  const access_token = new URLSearchParams(window.location.search).get(
-    "access_token"
-  );
+//   console.log(new URLSearchParams(window.location.search))
+//   const access_token = new URLSearchParams(window.location.search).get(
+//     "access_token"
+//   );
 
   const ResetPassword = async () => {
     try {
@@ -36,7 +42,7 @@ export default function ResetPassword() {
             });
         }
         const { error, data } = await supabase.auth.api
-            .updateUser(access_token, { password : password })
+            .updateUser(accessToken, { password : password })
         console.log('resetted', error, data)
         if (error) {
             toast.error(error, {

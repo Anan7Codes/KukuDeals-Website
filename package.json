@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.4.3",
+    "@sendgrid/mail": "^7.6.1",
     "@stripe/react-stripe-js": "^1.7.0",
     "@stripe/stripe-js": "^1.23.0",
     "@supabase/supabase-js": "^1.30.0",

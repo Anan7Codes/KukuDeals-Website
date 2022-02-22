@@ -66,7 +66,7 @@ const webhookHandler = async (req, res) => {
             let donated_coupons = []
             let coupons = []
             await map(initiated_orders.data.cart, async (order, index) => {
-                coupons.push({ product_id: JSON.parse(order).id, product_coupons: [], product_qty: JSON.parse(order).qty, product_price: JSON.parse(order).Price, name: JSON.parse(order).ProductName.en + "/" + JSON.parse(order).GiftName.en })
+                coupons.push({ product_id: JSON.parse(order).id, product_coupons: [], product_qty: JSON.parse(order).qty, product_price: JSON.parse(order).Price, name: JSON.parse(order).ProductName.en + "/" + JSON.parse(order).GiftName.en, image: JSON.parse(order).Image })
                 for (let i = 1; i <= JSON.parse(order).qty; i++) {
                     ordered_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length + 1}O`)
                     coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}O`)
@@ -104,7 +104,24 @@ const webhookHandler = async (req, res) => {
                     .update({ promo_codes_used: promo_codes_used })
                     .eq('id', initiated_orders.data.user_id)
                 console.log("updated promo code", updated_promo_codes)
-            }            
+            }   
+            
+            await map(coupons, async (item, i) => {
+                const campaign_for_qty = await supabase
+                    .from('campaigns')
+                    .select('SoldOutCoupons')
+                    .eq("id", item.product_id)
+                    .single()
+                console.log("campaign for qty", campaign_for_qty)
+                if(campaign_for_qty.error) return res.send({ success: false, message: "Campaign Doesn't Exist", error: campaign_for_qty.error})
+                const campaign_update_qty = await supabase
+                    .from('campaigns')
+                    .update({ SoldOutCoupons: campaign_for_qty.data.SoldOutCoupons + item.product_qty })
+                    .eq("id", item.product_id)
+                    console.log("campaign update qty", campaign_update_qty)
+                if(campaign_update_qty.error) return res.send({ success: false, message: "Campaign Qty Doesn't Exist", error: campaign_update_qty.error})
+            })      
+
             
             user_id = initiated_orders.data.user_id
             res_charge = charge

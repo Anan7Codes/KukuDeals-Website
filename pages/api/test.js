@@ -256,7 +256,17 @@ const Handler = async (req, res) => {
             res.status(200).json({ status: 'OK' });
         })
         return res.send({ success: true, message: 'request has been made' })
+
     }
+    // if(req.method === 'GET') {
+    //     let campaigns_for_qty = await supabase
+    //         .from('campaigns')
+    //         .select('SoldOutCoupons')
+    //         .eq("id", "998895d2-a6aa-404a-9f60-76880b8c2273")
+    //         .single()
+    //     console.log(campaigns_for_qty)
+
+    // }
 }
 
-export default Handler 
+export default Handler

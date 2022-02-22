@@ -1,9 +1,24 @@
 import { createClient } from '@supabase/supabase-js'
+import { map } from 'modern-async'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY
 
 const supabase = createClient(supabaseUrl, supabaseSecretKey)
+
+const TotalPrice = async (cart) => {
+    let total = 0
+    let success = true
+    await map(cart, async (item) => {
+        let { data, error } = await supabase
+        .from('campaigns')
+        .select('Price')
+        .eq("id", item.id)
+        if(error) return success = false
+        total += data[0].Price * item.qty
+    })
+    return { total, success }
+}
 
 const Handler = async (req, res) => {
     if(req.method !== 'POST') {
@@ -19,7 +34,7 @@ const Handler = async (req, res) => {
         
         let promo_codes = await supabase
             .from('promo_codes')
-            .select('value,type')
+            .select('value,type,min_amount')
             .eq('name', req.body.promoCode)
             .single()
         if(promo_codes.error) {
@@ -41,6 +56,10 @@ const Handler = async (req, res) => {
         if(profile.data[0].promo_codes_used.includes(req.body.promoCode)) {
             return res.send({ success: false, message: "Promo code has already been used"})
         }
+
+        const { total, success } = await TotalPrice(req.body.cart)
+        if(!success) return res.status(404).json({ success: false, message: "Failed to calculate total amount"})
+        if(total < promo_codes.data.min_amount) return res.send({ success: false, message: `Minimum amount for this promo code is AED${promo_codes.data.min_amount}`})
 
         res.send({ success: true, message: `Apply promo code ${req.body.promoCode}?`, data: promo_codes.data})
     }

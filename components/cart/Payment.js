@@ -103,7 +103,7 @@ export default function Payment() {
                 { promoCodeApplied ?
                 <div className="flex items-center justify-center px-2 py-2">
                     <p className="text-sm text-white">Promo code {promoCode} applied! Saving AED {(total - clientTotal).toFixed(2)}</p>
-                    <button onClick={RemovePromoCode} className="ml-3 text-[#000] border h-11 w-[20%] rounded text-xs font-semibold bg-[#000]">
+                    <button onClick={RemovePromoCode} className="ml-3 text-[#000] border border-[#ffd601] h-11 w-[20%] rounded text-xs font-semibold bg-[#ffd601]">
                     Remove
                     </button>
                 </div>

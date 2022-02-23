@@ -8,12 +8,8 @@ export default async function handler(req, res) {
                     {
                       price_data: {
                         currency: 'AED',
-                        product_data: {
-                          name: 'T-shirt',
-                        },
                         unit_amount: 2000,
                       },
-                      quantity: 1,
                     },
                   ],
 				payment_method_types: ['card'],
@@ -21,6 +17,7 @@ export default async function handler(req, res) {
 				success_url: `${req.headers.origin}/?success=true&session_id={CHECKOUT_SESSION_ID}`,
 				cancel_url: `${req.headers.origin}/?canceled=true`,
 			});
+            console.log("session", session)
 			res.redirect(303, session.url);
 		} catch (err) {
 			res.status(err.statusCode || 500).json(err.message);

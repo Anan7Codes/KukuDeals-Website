@@ -76,17 +76,12 @@ export default function Payment() {
     const CheckOutSession = async () => {
         setLoading(true)
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/payments/checkout-sessions`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ 
-                    cart: cart,
-                    promoCode: promoCodeApplied ? promoCode : null,
-                    user_id: userInfo.id
-                })
-            });
+            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/payments/checkout-sessions`, {
+                promoCode: promoCodeApplied ? promoCode : null,
+                user_id: userInfo.id,
+                cart: cart
+            })
+
             console.log("response", response)
             setLoading(false)
         } catch (e) {

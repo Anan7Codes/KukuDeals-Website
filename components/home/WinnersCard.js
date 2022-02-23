@@ -14,10 +14,12 @@ export default function WinnersCard() {
                     </div>
                 </div>
                 <div className="col-span-2 py-4">
-                    <div className="text-center tracking-tighter pt-48">
-                        <p className="text-[#ffd601] font-[700] leading-8 italic text-[24px]">Congratulations</p>
-                        <p className="text-white text-md py-1 font-medium">Riswan Khan</p>
-                        <p className="text-white text-sm">on winning <span className='text-[#ffd601] font-semibold'>AED20,000 Cash</span></p>
+                    <div className="text-center tracking-normal pt-48">
+                        <p className="text-[#ffd601] font-bold font-title leading-8 italic text-[24px]">Congratulations</p>
+                        <p className="text-white text-xl py-1 font-medium">Riswan Khan</p>
+                        <p className="text-[#ffd601] text-sm">on winning &nbsp;<span className='text-[#ffd601] font-extrabold'>AED20,000 Cash</span></p>
+                        <p className="text-[#ffd601] text-sm">Coupon no.&nbsp; <span className='text-[#ffd601] font-extrabold'>KO-00012D</span></p>
+                        <p className="text-[#ffd601] text-sm">Announced :&nbsp; <span className='text-[#ffd601] font-extrabold'>Jan 30 2022</span></p>
                     </div>
                 </div>
             </div>

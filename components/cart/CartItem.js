@@ -1,96 +1,107 @@
-import React from 'react'
 import { CartState } from "@/contexts/cart/CartContext";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import ToggleSwitch from "@/components/ToggleSwitch";
+import { useState } from "react";
 
-export default function CartItem({item}) {
-  console.log("item",item)
-    // const [qty, setQty] = useState()
-    const { state: { cart } } = CartState();
-    const { dispatch } = CartState();
+export default function CartItem({ item }) {
+  const [check, setCheck] = useState(true);
+  const sendDataToParent = (childprops) => { 
+    console.log("childprops",childprops)
+    setCheck(childprops);
+    console.log("inside parent check",check)
+  };
 
-    const AddQty = () => {
-      dispatch({
-        type: 'ADD_QTY',
-        payload: item
-      })
-    }
-  
-    const ReduceQty = () => {
-      dispatch({
-        type: 'REDUCE_QTY',
-        payload: item
-      })
-    }
-  
-    const RemoveFromCart = () => {
-      dispatch({
-        type: 'REMOVE_FROM_CART',
-        payload: item
-      })
-    }
-  
-    const Donate = () => {
-      dispatch({
-        type: 'DONATE',
-        payload: item
-      })
-    }
-  
-    const DontDonate = () => {
-      dispatch({
-        type: 'DONT_DONATE',
-        payload: item
-      })
-    }
-    return (
+  const {
+    state: { cart },
+  } = CartState();
+  const { dispatch } = CartState();
+
+  const AddQty = () => {
+    dispatch({
+      type: "ADD_QTY",
+      payload: item,
+    });
+  };
+
+  const ReduceQty = () => {
+    dispatch({
+      type: "REDUCE_QTY",
+      payload: item,
+    });
+  };
+
+  const RemoveFromCart = () => {
+    dispatch({
+      type: "REMOVE_FROM_CART",
+      payload: item,
+    });
+  };
+
+  const Donate = () => {
+    dispatch({
+      type: "DONATE",
+      payload: item,
+    });
+  };
+
+  const DontDonate = () => {
+    dispatch({
+      type: "DONT_DONATE",
+      payload: item,
+    });
+  };
+  return (
     <div>
       <div className="bg-[#2c2c2c] flex items-center lg:justify-start h-44 rounded-t-3xl mt-6">
         <div className="cursor-pointer rounded-[15px] object-fit -left-2 relative ml-10 mt-2 w-32 h-28">
-          <Image
-              src={item?.Image}
-              layout="fill"
-              alt="product logo"
-          />
+          <Image src={item?.Image} layout="fill" alt="product logo" />
         </div>
         <div className="flex flex-col lg:flex-row pl-1 pt-2">
-            <div className="">
-                <p className="text-white text-sm sm:text-base lg:text-xl font-bold leading-2">
-                    {item?.GiftName.en}
-                </p>
-                <p className="text-white text-sm sm:text-base lg:text-xl pt-1 leading-2 lg:leading-3">
-                    {item?.ProductName.en}
-                </p>
-                <p className="font-bold text-sm sm:text-base lg:text-xl lg:pt-3 text-[#ffd601]">
-                    AED{item?.Price}.00
-                </p>
-                <p className="text-xs font-semibold lg:pt-3 text-green-500">
-                    {item?.SoldOutCoupons} Coupons
-                    <span className="text-white font-normal"> per unit</span>
-                </p>
-            </div>
+          <div className="">
+            <p className=" text-sm sm:text-base font-title text-[#ffd601] lg:text-xl font-bold leading-2">
+              {item?.GiftName.en}
+            </p>
+            <p className="text-white text-sm sm:text-base lg:text-xl pt-1 leading-2 lg:leading-3">
+              {item?.ProductName.en}
+            </p>
+            <p className="font-bold text-sm sm:text-base lg:text-xl lg:pt-3 text-white">
+              AED{item?.Price}.00
+            </p>
+            <p className="text-xs font-semibold lg:pt-3 text-[#ffd601] ">
+            {item.donate === "true" ? '2 Coupons' : '1 Coupon'} Coupons
+              <span className="text-white font-normal"> per unit</span>
+            </p>
+          </div>
 
-            <div className="flex sm:ml-12 lg:ml-16 mt-4 leading-extra-loose">
-                <button onClick={item?.qty === 1 ? RemoveFromCart : ReduceQty} className="flex justify-center items-center text-sm lg:text-md  cursor-pointer text-white bg-[#161616] font-semibold h-10 w-10 lg:h-12 lg:w-16 rounded-[15px]">
-                    -
-                </button>
-                <div className="flex font-semibold items-center justify-center h-10 w-10 lg:h-12 lg:w-16 text-sm lg:text-md rounded-[15px] text-white bg-[#161616] mx-3">
-                    {item?.qty}
-                </div>
-                <button onClick={AddQty} className="flex justify-center items-center cursor-pointer bg-[#ffd601] text-black font-semibold h-10 w-20 lg:h-12 lg:w-28 text-sm lg:text-md rounded-[15px]">
-                    Add More
-                </button>
+          <div className="flex sm:ml-12 lg:ml-16 mt-4 leading-extra-loose">
+            <button
+              onClick={item?.qty === 1 ? RemoveFromCart : ReduceQty}
+              className="flex justify-center items-center text-sm lg:text-md  cursor-pointer text-white bg-[#161616] font-semibold h-10 w-10 lg:h-12 lg:w-16 rounded-[15px]"
+            >
+              -
+            </button>
+            <div className="flex font-semibold items-center justify-center h-10 w-10 lg:h-12 lg:w-16 text-sm lg:text-md rounded-[15px] text-white bg-[#161616] mx-3">
+              {item?.qty}
             </div>
+            <button
+              onClick={AddQty}
+              className="flex justify-center items-center cursor-pointer bg-[#ffd601] text-black font-semibold h-10 w-20 lg:h-12 lg:w-28 text-sm lg:text-md rounded-[15px]"
+            >
+              Add More
+            </button>
+          </div>
         </div>
       </div>
-      <div className="bg-[#2c2c2c] text-right h-12 rounded-b-3xl">
-        <p className="text-white text-xs lg:text-sm mr-3 pt-1">
-          Donate these product(s) to double the ticket(s)
-          <ToggleSwitch sx={{ m: 1 }} defaultChecked />
-        </p>
+      <div className="bg-[#2c2c2c] text-right h-12 flex justify-end rounded-b-3xl">
+        <div className=" mr-2">
+          <ToggleSwitch  item={item} sendDataToParent={sendDataToParent}/>
+        </div>
+        <div>
+          <p className="text-white text-xs lg:text-sm mr-3 pt-1">
+            Donate these product(s) to double the ticket(s)
+          </p>
+        </div>
       </div>
-    </div>        
-  )
+    </div>
+  );
 }
-

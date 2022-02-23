@@ -86,51 +86,49 @@ function SignUp() {
     <>
       <div className="flex justify-center pt-20 pb-20">
         <div className="w-1/2  rounded-[25px] bg-[#2c2c2c] mb-6 mt-10">
-          <div className="ml-28 pt-4">
-            <p className="text-3xl text-[#ffd601] font-bold">Sign Up</p>
+        <div className="pt-4 text-center">
+            <p className="text-3xl text-[#ffd601] font-bold font-title">Sign Up</p>
           </div>
           <form
             onSubmit={handleSubmit}
             className="flex justify-center pb-6 pt-2"
           >
-            <div className="flex flex-col">
+            <div className="flex flex-col text-white ">
               <input
                 type="text"
-                className="border placeholder:text-xs text-xs pl-3 mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className="border placeholder:text-xs  placeholder:text-white text-xs pl-3 mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
                 placeholder="FirstName"
                 value={firstname}
                 onChange={(e) => setFirstName(e.target.value)}
               />
               <input
                 type="text"
-                className="border placeholder:text-xs text-xs pl-3 mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className="border placeholder:text-xs text-xs placeholder:text-white pl-3 mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
                 placeholder="LastName"
                 value={lastname}
                 onChange={(e) => setLastName(e.target.value)}
               />
               <input
                 type="text"
-                className="border placeholder:text-xs text-xs pl-3 mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className="border placeholder:text-xs text-xs pl-3 placeholder:text-white mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <input
                 type="password"
-                className="border placeholder:text-xs text-xs pl-3 mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className="border placeholder:text-xs text-xs pl-3 placeholder:text-white mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <input
                 type="password"
-                className="border placeholder:text-xs text-xs pl-3 mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className="border placeholder:text-xs text-xs pl-3 mr-3 placeholder:text-white w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-              
-
               <div className="pt-4">
                 <p className="text-3xl text-[#ffd601] font-bold">
                   Personal Details
@@ -201,20 +199,20 @@ function SignUp() {
               </div>
                 <input
                 type="text"
-                className="border placeholder:text-xs text-xs pl-3 mr-3 w-full lg:w-[98%] mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className="border placeholder:text-xs placeholder:text-white text-xs pl-3 mr-3 w-full lg:w-[98%] mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
                 placeholder="Location"
                 value={additionalProfileDetails?.location} onChange={ e => setAdditionalProfileDetails({ ...additionalProfileDetails, location: e.target.value})}
               />
                  <input
                 type="text"
-                className="border placeholder:text-xs text-xs pl-3 mr-3 w-full lg:w-[98%] mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className="border placeholder:text-xs placeholder:text-white text-xs pl-3 mr-3 w-full lg:w-[98%] mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
                 placeholder="Building Name"
                 // value={newShippingAddress.apartmentNo} onChange={e => setNewShippingAddress({ ...newShippingAddress, apartmentNo: e.target.value })}
                 value={additionalProfileDetails?.buildingName} onChange={ e => setAdditionalProfileDetails({ ...additionalProfileDetails, buildingName: e.target.value})}
               />
                  <input
                 type="text"
-                className="border placeholder:text-xs text-xs pl-3 mr-3 w-full lg:w-[98%] mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className="border placeholder:text-xs placeholder:text-white  text-xs pl-3 mr-3 w-full lg:w-[98%] mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
                 placeholder="Apartment No"
                 value={additionalProfileDetails?.apartmentNo} onChange={ e => setAdditionalProfileDetails({ ...additionalProfileDetails, apartmentNo: e.target.value})}
               />
@@ -226,7 +224,7 @@ function SignUp() {
                 >
                   Existing User Login
                 </p>
-                <button className="bg-[#ffd601] mr-3 mt-4 w-full outline-none rounded-[5px] h-14 text-black font-semibold text-base">
+                <button className="bg-[#ffd601] font-title mr-3 mt-4 w-full outline-none rounded-[5px] h-14 text-black font-semibold text-base">
                   Sign Up
                 </button>
               </div>

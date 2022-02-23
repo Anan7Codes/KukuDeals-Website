@@ -2,3 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    html {
+      font-family:  Manrope,sans-serif;
+    }
+  }
+ 
+input:checked ~ .dot {
+  transform: translateX(100%);
+  background-color: #ffd601;
+}

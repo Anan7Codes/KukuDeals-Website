@@ -8,18 +8,15 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Manrope', ...defaultTheme.fontFamily.sans],
-        title: ["'Josefin Sans',sans-serif"],
+        'title': ['"Josefin Sans",sans-serif'],
       }
     },
-    extend: {
-      lineHeight: {
-        'extra-loose': '2.5',
-        '12': '3rem',
-      }
-    }
+    // extend: {
+    //   lineHeight: {
+    //     'extra-loose': '2.5',
+    //     '12': '3rem',
+    //   }
+    // }
   },
-  // plugins: [
-  //   require('tailwindcss-rtl'),
-  // ],
+ 
 }

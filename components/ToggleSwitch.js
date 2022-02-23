@@ -1,56 +1,27 @@
-import React from 'react'
-import { styled } from '@mui/material/styles';
-import Switch from '@mui/material/Switch';
+import { useState } from "react";
 
-
-const ToggleSwitch = styled((props) => (
-    <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
-))(({ theme }) => ({
-    width: 42,
-    height: 26,
-    padding: 0,
-    '& .MuiSwitch-switchBase': {
-        padding: 0,
-        margin: 2,
-        transitionDuration: '300ms',
-        '&.Mui-checked': {
-            transform: 'translateX(16px)',
-            color: '#fff',
-            '& + .MuiSwitch-track': {
-                backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#65C466',
-                opacity: 1,
-                border: 0,
-            },
-            '&.Mui-disabled + .MuiSwitch-track': {
-                opacity: 0.5,
-            },
-        },
-        '&.Mui-focusVisible .MuiSwitch-thumb': {
-            color: '#33cf4d',
-            border: '6px solid #fff',
-        },
-        '&.Mui-disabled .MuiSwitch-thumb': {
-            color:
-                theme.palette.mode === 'light'
-                    ? theme.palette.grey[100]
-                    : theme.palette.grey[600],
-        },
-        '&.Mui-disabled + .MuiSwitch-track': {
-            opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
-        },
-    },
-    '& .MuiSwitch-thumb': {
-        boxSizing: 'border-box',
-        width: 22,
-        height: 22,
-    },
-    '& .MuiSwitch-track': {
-        borderRadius: 26 / 2,
-        backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
-        opacity: 1,
-        transition: theme.transitions.create(['background-color'], {
-            duration: 500,
-        }),
-    },
-}));
-export default ToggleSwitch
+export default function ToggleSwitch({item,sendDataToParent}) {
+    const [check, setCheck] = useState();
+    const handleCheck = ()=>{  
+        item.donate = !item.donate ; 
+        setCheck(item.donate);
+        console.log("child check",check);
+        sendDataToParent(check);
+        // if(check=== true){
+        //     input:checked
+        // }else{
+        //     input:unchecked
+        // }
+    }
+    return (
+            <div className="flex items-center justify-center w-full mb-12">
+                <label htmlFor="toggleB" className="flex items-center cursor-pointer">
+                    <div className="relative">
+                        <input type="checkbox" id="toggleB" onClick={handleCheck} className="sr-only" />
+                        <div className="block bg-black w-14 h-8 rounded-full"></div>
+                        <div className="dot absolute left-1 top-1 bg-[#ffd601] w-6 h-6 rounded-full transition"></div>
+                    </div>
+                </label>
+            </div>
+    )
+}

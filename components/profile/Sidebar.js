@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FaAddressCard } from "react-icons/fa";
 import { RiCoupon2Fill, RiLogoutBoxRLine } from "react-icons/ri";
 import User from "./User";
@@ -13,7 +12,7 @@ export default function Sidebar({ children }) {
     <div>
       <div className="lg:grid grid-rows-2 grid-flow-col justify-start">
         <User />
-        <div className=" row-span-2 col-span-2 bg-white lg:w-[21rem] divide-y mb-5 rounded-[25px] text-sm text-gray-700 cursor-pointer">
+        <div className=" row-span-2 col-span-2 bg-[#2c2c2c] text-white lg:w-[21rem] divide-y divide-[#161616] mb-5 rounded-[25px] text-sm  cursor-pointer">
           <div className="hidden lg:flex p-4" onClick={() => router.push('/profile/personal-details')}>
             <svg
               xmlns="http://www.w3.org/2000/svg"

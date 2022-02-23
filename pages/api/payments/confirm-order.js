@@ -65,6 +65,7 @@ const webhookHandler = async (req, res) => {
             let ordered_coupons = []
             let donated_coupons = []
             let coupons = []
+            console.log("confirm order initiated order cart", initiated_orders.data.cart)
             await map(initiated_orders.data.cart, async (order, index) => {
                 coupons.push({ product_id: JSON.parse(order).id, product_coupons: [], product_qty: JSON.parse(order).qty, product_price: JSON.parse(order).Price, name: JSON.parse(order).ProductName.en + "/" + JSON.parse(order).GiftName.en, image: JSON.parse(order).Image })
                 for (let i = 1; i <= JSON.parse(order).qty; i++) {

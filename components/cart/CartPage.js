@@ -1,4 +1,4 @@
-import Payement from "@/components/cart/Payement";
+import Payment from "@/components/cart/Payment";
 import { CartState } from "@/contexts/cart/CartContext";
 import CartItem from "./CartItem";
 
@@ -16,7 +16,7 @@ export default function CartPage() {
         })}
       </div>
       <div className="col-span-3">
-        <Payement />
+        <Payment />
       </div>
     </div>
   );

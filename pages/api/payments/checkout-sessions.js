@@ -9,6 +9,9 @@ export default async function handler(req, res) {
                       price_data: {
                         currency: 'AED',
                         unit_amount: 2000,
+                        product_data: {
+                            name: 'Kuku Products',
+                        },
                       },
                       quantity: 1,
                     },

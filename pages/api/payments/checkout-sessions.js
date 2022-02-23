@@ -4,7 +4,7 @@ export default async function handler(req, res) {
 	if (req.method === 'POST') {
 		try {
 			const session = await stripe.checkout.sessions.create({
-				amount_total: 10000,
+				amount: 10000,
 				payment_method_types: ['card'],
 				mode: 'payment',
 				success_url: `${req.headers.origin}/?success=true&session_id={CHECKOUT_SESSION_ID}`,

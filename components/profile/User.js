@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 export default function User() {
     const [userName,setUserName] = useState()
     const [email,setEmail] = useState()
-    const [amountSpent, setAmountSpent] = useState(0)
+
     useEffect(()=>{
         const userInfo = supabase.auth.user();
         const {name} = userInfo.user_metadata

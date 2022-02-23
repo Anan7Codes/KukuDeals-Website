@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CartState } from "@/contexts/cart/CartContext";
 import { supabase } from "@/utils/supabaseClient";
+import { useRouter } from "next/router";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 
@@ -8,6 +9,7 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 export default function Payment() {
     const userInfo = supabase.auth.user();
+    const router = useRouter();
 
     const [ promoCode, setPromoCode ] = useState('')
     const [ promoCodeApplied, setPromoCodeApplied ] = useState(false)
@@ -82,7 +84,7 @@ export default function Payment() {
                 cart: cart
             })
 
-            console.log("response", response)
+            router.push(response.data.url)
             setLoading(false)
         } catch (e) {
             console.log("checkout", e)

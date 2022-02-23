@@ -29,7 +29,7 @@ export default function Campaign({ campaign }) {
 
   useEffect(() => {
     cart.filter(c => c.id === campaign.id ? setQty(c.qty) : null)
-  }, [cart])
+  }, [cart,campaign])
 
   const AddToCart = () => {
     dispatch({
@@ -65,7 +65,7 @@ export default function Campaign({ campaign }) {
         <div className="flex flex-col items-center justify-around lg:flex-row h-[50vh] pb-6 bg-[#2c2c2c] cursor-pointer rounded-[15px] overflow-visible shadow-lg transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-[101%] duration-700">
           <div className="mt-[60px] lg:mt-0">
             <div className="relative lg:top-5 lg:left-6 flex justify-center items-center lg:w-[28rem] h-36 w-60 lg:h-64">
-              {/* <Image src={campaign?.Image} layout="fill" alt="Campaign Image" /> */}
+              <Image src={campaign?.Image} layout="fill" alt="Campaign Image" />
             </div>
           </div>
           <div className="flex-col w-full pb-6 lg:pb-0">
@@ -199,7 +199,7 @@ export default function Campaign({ campaign }) {
                 <div className="my-2">
                   <div className="relative flex justify-center items-center h-52">
                     <Image
-                      // src={campaign?.Image}
+                      src={campaign?.Image}
                       layout="fill"
                       alt="Campaign Image"
                     />

@@ -10,7 +10,6 @@ export default function Section2() {
             const { data, error } = await supabase
                 .from('campaigns')
                 .select('*')
-            console.log(data, error);
             setCampaigns(data)
         }
         FetchCampaigns()

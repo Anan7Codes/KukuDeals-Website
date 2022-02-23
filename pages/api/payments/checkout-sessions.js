@@ -65,9 +65,9 @@ export default async function handler(req, res) {
                     {
                       price_data: {
                         currency: 'AED',
-                        unit_amount: 2000,
+                        unit_amount: finalTotal.toFixed() * 100,
                         product_data: {
-                            name: 'Kuku Products',
+                            name: 'Kuku Deals Draw',
                         },
                       },
                       quantity: 1,

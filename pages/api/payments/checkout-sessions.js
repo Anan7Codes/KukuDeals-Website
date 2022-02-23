@@ -10,7 +10,9 @@ export default async function handler(req, res) {
                         currency: 'AED',
                         unit_amount: 2000,
                       },
+                      quantity: 1,
                     },
+                    
                 ],
                 customer: 'cus_LC2S4YrghBk60u',
 				payment_method_types: ['card'],

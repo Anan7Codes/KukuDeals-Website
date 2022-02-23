@@ -18,9 +18,6 @@ export default function User() {
                 <div>
                     <p className="text-3xl font-bold text-title ">{userName}</p>
                     <p className="text-xs">{email}</p>
-                    <p className="flex justify-center text-sm">
-                        Amount spent : AED&nbsp;<span className="text-white text-sm font-bold">{amountSpent}</span>
-                    </p>
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@ import PersonalDetails from '@/components/profile/PersonalDetails'
 
 export default function personaldetails() {
     return (
-        <div className="bg-gray-100">
+        <div className="bg-[#161616]">
             <Head>
                 <title>Kuku Deals</title>
             </Head>

@@ -6,7 +6,7 @@ import ActiveCoupons from "@/components/profile/ActiveCoupons";
 
 export default function activecoupons() {
     return (
-        <div className="bg-gray-100">
+        <div className="bg-[#161616]">
             <Head>
                 <title>Kuku Deals</title>
             </Head>

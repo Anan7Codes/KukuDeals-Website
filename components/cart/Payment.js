@@ -84,7 +84,7 @@ export default function Payment() {
                 cart: cart
             })
             console.log("response", response)
-            if(!response.success) return alert(response.message)
+            if(!response.data.success) return alert(response.data.message)
             router.push(response.data.url)
             setLoading(false)
         } catch (e) {

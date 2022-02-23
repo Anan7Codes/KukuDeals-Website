@@ -2,5 +2,6 @@
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.editor.scrollToSwitchTabs": true,
     "workbench.editor.wrapTabs": true,
-    "workbench.editor.enablePreview": false
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": true
 }

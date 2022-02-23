@@ -74,7 +74,7 @@ export default function Cart({ item }) {
               <p>{item?.ProductName.en}</p>
               <p className="font-bold text-[#ffd601]">AED{item?.Price}.00</p>
               <div className="text-sm font-semibold text-green-500">
-                2 Coupons
+              {item.donate === "true" ? '2 Coupons' : '1 Coupon'}
                 <span className="text-white font-normal"> per unit</span>
               </div>
             </div>

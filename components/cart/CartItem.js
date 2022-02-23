@@ -1,10 +1,16 @@
-import React from "react";
 import { CartState } from "@/contexts/cart/CartContext";
 import Image from "next/image";
 import ToggleSwitch from "@/components/ToggleSwitch";
+import { useState } from "react";
 
 export default function CartItem({ item }) {
-  console.log("item", item);
+  const [check, setCheck] = useState(true);
+  const sendDataToParent = (childprops) => { 
+    console.log("childprops",childprops)
+    setCheck(childprops);
+    console.log("inside parent check",check)
+  };
+
   const {
     state: { cart },
   } = CartState();
@@ -62,7 +68,7 @@ export default function CartItem({ item }) {
               AED{item?.Price}.00
             </p>
             <p className="text-xs font-semibold lg:pt-3 text-[#ffd601] ">
-              {item?.SoldOutCoupons} Coupons
+            {item.donate === "true" ? '2 Coupons' : '1 Coupon'} Coupons
               <span className="text-white font-normal"> per unit</span>
             </p>
           </div>
@@ -88,7 +94,7 @@ export default function CartItem({ item }) {
       </div>
       <div className="bg-[#2c2c2c] text-right h-12 flex justify-end rounded-b-3xl">
         <div className=" mr-2">
-          <ToggleSwitch />
+          <ToggleSwitch  item={item} sendDataToParent={sendDataToParent}/>
         </div>
         <div>
           <p className="text-white text-xs lg:text-sm mr-3 pt-1">

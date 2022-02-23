@@ -89,12 +89,15 @@ const webhookHandler = async (req, res) => {
                     },
                 ])
             console.log("final", data, error)     
+            if(error) return res.send({ success: false, message: "Completed orders insertion error", error: data.error})
+            
+            
             
             if(initiated_orders.data.promo_code_used) {
                 let profile = await supabase
-                .from('profiles')
-                .select('promo_codes_used')
-                .eq("id", initiated_orders.data.user_id)
+                    .from('profiles')
+                    .select('promo_codes_used')
+                    .eq("id", initiated_orders.data.user_id)
 
                 let promo_codes_used = profile.data[0].promo_codes_used
                 promo_codes_used.push(initiated_orders.data.promo_code_used)
@@ -104,6 +107,8 @@ const webhookHandler = async (req, res) => {
                     .update({ promo_codes_used: promo_codes_used })
                     .eq('id', initiated_orders.data.user_id)
                 console.log("updated promo code", updated_promo_codes)
+
+                if(updated_promo_codes.error) return res.send({ success: false, message: "Promo Code Update Error", error: updated_promo_codes.error})
             }   
             
             await map(coupons, async (item, i) => {
@@ -114,6 +119,7 @@ const webhookHandler = async (req, res) => {
                     .single()
                 console.log("campaign for qty", campaign_for_qty)
                 if(campaign_for_qty.error) return res.send({ success: false, message: "Campaign Doesn't Exist", error: campaign_for_qty.error})
+
                 const campaign_update_qty = await supabase
                     .from('campaigns')
                     .update({ SoldOutCoupons: campaign_for_qty.data.SoldOutCoupons + item.product_qty })
@@ -130,7 +136,7 @@ const webhookHandler = async (req, res) => {
             console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
         }            
         
-        return res.send({ message: 'success', user_id, res_charge})
+        return res.send({ success: true, user_id, res_charge})
     }
 }
 

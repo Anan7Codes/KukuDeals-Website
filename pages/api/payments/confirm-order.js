@@ -77,7 +77,6 @@ const webhookHandler = async (req, res) => {
                     }
                 }
             })
-            console.log("coupons", coupons)
     
             const { data, error } = await supabase
                 .from('completed_orders')
@@ -88,8 +87,7 @@ const webhookHandler = async (req, res) => {
                         final_amount: initiated_orders.data.final_amount,
                         transaction_number: completed_orders.count + 1
                     },
-                ])
-            console.log("final", data, error)     
+                ])   
             if(error) return res.send({ success: false, message: "Completed orders insertion error", error: data.error})
             
             
@@ -107,8 +105,6 @@ const webhookHandler = async (req, res) => {
                     .from('profiles')
                     .update({ promo_codes_used: promo_codes_used })
                     .eq('id', initiated_orders.data.user_id)
-                console.log("updated promo code", updated_promo_codes)
-
                 if(updated_promo_codes.error) return res.send({ success: false, message: "Promo Code Update Error", error: updated_promo_codes.error})
             }   
             

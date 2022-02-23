@@ -76,7 +76,7 @@ export default function Payment() {
     const CheckOutSession = async () => {
         setLoading(true)
         try {
-            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/payments/checkout-sessions`, {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/payments/checkout-sessions`, {
                 promoCode: promoCodeApplied ? promoCode : null,
                 user_id: userInfo.id,
                 cart: cart

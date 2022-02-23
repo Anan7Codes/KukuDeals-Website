@@ -83,7 +83,7 @@ export default function Payment() {
                 user_id: userInfo.id,
                 cart: cart
             })
-
+            if(!response.success) return alert(response.message)
             router.push(response.data.url)
             setLoading(false)
         } catch (e) {

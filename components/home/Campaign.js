@@ -3,7 +3,6 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import { CartState } from '@/contexts/cart/CartContext';
 
 export default function Campaign({ campaign }) {
@@ -11,8 +10,6 @@ export default function Campaign({ campaign }) {
   const [isOpen, setIsOpen] = useState(false);
   const [prizeDetails, setPrizeDetails] = useState(true);
   const [qty, setQty] = useState(0)
-
-  const router = useRouter();
 
   function closeModal() {
     setIsOpen(false);

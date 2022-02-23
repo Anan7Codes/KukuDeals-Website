@@ -9,6 +9,7 @@ const responsive = {
   0: { items: 1 },
   1024: { items: 4 },
 };
+
 const items = [
   <div className="item" data-value="0" key="0">
     <Soldout1 />

@@ -264,7 +264,6 @@ const webhookHandler = async (req, res) => {
                 <td class=" border-collapse border border-slate-500  py-4  text-gray-500">
                     Grand Total
                 </td>
-
                 <td class=" border-collapse border border-slate-500  py-4 text-sm text-gray-500">
                 </td>
                 <td class=" border-collapse border border-slate-500  py-4">

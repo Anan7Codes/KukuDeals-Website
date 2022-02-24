@@ -1,14 +1,17 @@
 import { createClient } from '@supabase/supabase-js'
 import { map } from 'modern-async'
+const fs = require('fs')
+var html_to_pdf = require('html-pdf-node');
+const mail = require('@sendgrid/mail')
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY
 const supabase = createClient(supabaseUrl, supabaseSecretKey)
+
 let customerName, amount, display
-const mail = require('@sendgrid/mail')
+
 mail.setApiKey(process.env.SENDGRID_API_KEY)
-const fs = require('fs')
-var html_to_pdf = require('html-pdf-node');
+
 
 let options = { format: 'A3', path: './invoice.pdf' };
 const Handler = async (req, res) => {

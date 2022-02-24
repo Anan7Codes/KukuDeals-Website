@@ -20,6 +20,7 @@ const Handler = async (req, res) => {
         return res.send({ success: false, message: 'Wrong request made' })
     }
     if (req.method === 'POST') {
+        console.log("Function called")
         let initiated_orders = await supabase
             .from('initiated_orders')
             .select('*')
@@ -233,28 +234,28 @@ const Handler = async (req, res) => {
         let file = { content: header + body1 + footer + body2 }
         const pdfBuffer = await html_to_pdf.generatePdf(file, options)
         console.log("pdfBuffer",pdfBuffer)
-            const data1 = {
-                from: 'travo.socialmedia@gmail.com',
-                personalizations: [
-                    {
-                        to: ['mohammedhafizba@gmail.com', 'anandhu@rough-paper.com'],  
-                        subject: 'Order Confirmation'
-                    },
-                ],
-                content: [{ type: "text/html", value: image + header + body1 + footer + body2 },],
-                attachments: [
-                    {
-                        content: pdfBuffer.toString('base64'),
-                        filename: 'invoice.pdf',
-                        type: 'application/pdf',
-                        disposition: 'attachment',
-                        content_id: 'mytext',
-                    },
-                ],
-            }
-            const resp = await mail.send(data1)
-            console.log(resp)
-            res.status(200).json({ status: 'OK' });  
+        const data1 = {
+            from: 'travo.socialmedia@gmail.com',
+            personalizations: [
+                {
+                    to: ['mohammedhafizba@gmail.com', 'anandhu@rough-paper.com'],  
+                    subject: 'Order Confirmation'
+                },
+            ],
+            content: [{ type: "text/html", value: image + header + body1 + footer + body2 },],
+            attachments: [
+                {
+                    content: pdfBuffer.toString('base64'),
+                    filename: 'invoice.pdf',
+                    type: 'application/pdf',
+                    disposition: 'attachment',
+                    content_id: 'mytext',
+                },
+            ],
+        }
+        const resp = await mail.send(data1)
+        console.log(resp)
+        res.status(200).json({ status: 'OK' });  
     }
 }
 

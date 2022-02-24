@@ -46,6 +46,18 @@ export default async function handler(req, res) {
             } else {
                 finalTotal = total - (total * promo_code.data[0].value / 100)
             }
+
+            let profile = await supabase
+                .from('profiles')
+                .select('promo_codes_used')
+                .eq("id", req.body.user_id)
+            if(profile.error) {
+                return res.send({ success: false, message: "Something went wrong! Contact Us!"})
+            }
+            if(profile.data[0].promo_codes_used.includes(req.body.promoCode)) {
+                return res.send({ success: false, message: "Promo code has already been used"})
+            }
+
             console.log(finalTotal)
         }
 
@@ -83,7 +95,7 @@ export default async function handler(req, res) {
                     promo_code_used: req.body.promoCode
                 },
             ])
-        console.log("initiated_orders", initiated_orders_response)
+        console.log("initiated_orders pi", initiated_orders_response)
 
         res.json({
             paymentIntent: paymentIntent.client_secret,

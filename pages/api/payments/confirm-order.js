@@ -57,14 +57,14 @@ const webhookHandler = async (req, res) => {
             return res.send({ success: true, initiated_orders: initiated_orders.data })
         } else if (event.type === 'charge.succeeded') {
             const charge = event.data.object
-            console.log("charge", charge)
+            console.log("charge", charge.paymentIntent)
             let initiated_orders = await supabase
                 .from('initiated_orders')
                 .select('*')
                 .eq("verification_secret", charge.payment_intent)
                 .eq("status", true)
                 .single()
-
+            console.log("cart", initiated_orders.data.cart)
             let completed_orders = await supabase
                 .from('completed_orders')
                 .select('*', { count: 'exact' }) 
@@ -72,6 +72,7 @@ const webhookHandler = async (req, res) => {
             let ordered_coupons = []
             let donated_coupons = []
             let coupons = []
+
             await map(initiated_orders.data.cart, async (order, index) => {
                 coupons.push({ product_id: JSON.parse(order).id, product_coupons: [], product_qty: JSON.parse(order).qty, product_price: JSON.parse(order).Price, name: JSON.parse(order).ProductName.en + "/" + JSON.parse(order).GiftName.en, image: JSON.parse(order).Image })
                 for (let i = 1; i <= JSON.parse(order).qty; i++) {
@@ -83,7 +84,6 @@ const webhookHandler = async (req, res) => {
                     }
                 }
             })
-            console.log("coupons", coupons)
     
             const { data, error } = await supabase
                 .from('completed_orders')
@@ -94,14 +94,16 @@ const webhookHandler = async (req, res) => {
                         final_amount: initiated_orders.data.final_amount,
                         transaction_number: completed_orders.count + 1
                     },
-                ])
-            console.log("final", data, error)     
+                ])   
+            if(error) return res.send({ success: false, message: "Completed orders insertion error", error: data.error})
+            
+            
             
             if(initiated_orders.data.promo_code_used) {
                 let profile = await supabase
-                .from('profiles')
-                .select('promo_codes_used')
-                .eq("id", initiated_orders.data.user_id)
+                    .from('profiles')
+                    .select('promo_codes_used')
+                    .eq("id", initiated_orders.data.user_id)
 
                 let promo_codes_used = profile.data[0].promo_codes_used
                 promo_codes_used.push(initiated_orders.data.promo_code_used)
@@ -110,7 +112,7 @@ const webhookHandler = async (req, res) => {
                     .from('profiles')
                     .update({ promo_codes_used: promo_codes_used })
                     .eq('id', initiated_orders.data.user_id)
-                console.log("updated promo code", updated_promo_codes)
+                if(updated_promo_codes.error) return res.send({ success: false, message: "Promo Code Update Error", error: updated_promo_codes.error})
             }   
             
             await map(coupons, async (item, i) => {
@@ -119,13 +121,14 @@ const webhookHandler = async (req, res) => {
                     .select('SoldOutCoupons')
                     .eq("id", item.product_id)
                     .single()
-                console.log("campaign for qty", campaign_for_qty)
+
                 if(campaign_for_qty.error) return res.send({ success: false, message: "Campaign Doesn't Exist", error: campaign_for_qty.error})
+
                 const campaign_update_qty = await supabase
                     .from('campaigns')
                     .update({ SoldOutCoupons: campaign_for_qty.data.SoldOutCoupons + item.product_qty })
                     .eq("id", item.product_id)
-                    console.log("campaign update qty", campaign_update_qty)
+
                 if(campaign_update_qty.error) return res.send({ success: false, message: "Campaign Qty Doesn't Exist", error: campaign_update_qty.error})
             })      
 
@@ -137,7 +140,7 @@ const webhookHandler = async (req, res) => {
             console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
         }            
         
-        return res.send({ message: 'success', user_id, res_charge})
+        return res.send({ success: true, user_id, res_charge})
     }
 }
 

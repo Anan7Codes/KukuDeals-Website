@@ -50,13 +50,14 @@ const webhookHandler = async (req, res) => {
             return res.send({ success: true, initiated_orders: initiated_orders.data })
         } else if (event.type === 'charge.succeeded') {
             const charge = event.data.object
-            console.log("charge", charge.paymentIntent)
+            console.log("charge", charge.payment_intent)
             let initiated_orders = await supabase
                 .from('initiated_orders')
                 .select('*')
                 .eq("verification_secret", charge.payment_intent)
                 .eq("status", true)
                 .single()
+            console.log("Line 60 IO", initiated_orders)
             console.log("cart", initiated_orders.data.cart)
             let completed_orders = await supabase
                 .from('completed_orders')

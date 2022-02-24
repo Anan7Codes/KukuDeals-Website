@@ -136,11 +136,13 @@ const webhookHandler = async (req, res) => {
             user_id = initiated_orders.data.user_id
             res_charge = charge
 
+            return res.send({ success: true, user_id, res_charge})
+
         } else {
             console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
         }            
         
-        return res.send({ success: true, user_id, res_charge})
+        
     }
 }
 

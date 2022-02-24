@@ -1,16 +1,8 @@
 import { CartState } from "@/contexts/cart/CartContext";
 import Image from "next/image";
-import ToggleSwitch from "@/components/ToggleSwitch";
-import { useState } from "react";
+import Switch from "react-switch";
 
 export default function CartItem({ item }) {
-  const [check, setCheck] = useState(true);
-  const sendDataToParent = (childprops) => { 
-    console.log("childprops",childprops)
-    setCheck(childprops);
-    console.log("inside parent check",check)
-  };
-
   const {
     state: { cart },
   } = CartState();
@@ -68,7 +60,7 @@ export default function CartItem({ item }) {
               AED{item?.Price}.00
             </p>
             <p className="text-xs font-semibold lg:pt-3 text-[#ffd601] ">
-            {item.donate === "true" ? '2 Coupons' : '1 Coupon'} Coupons
+              {item.donate === "true" ? '2 Coupons' : '1 Coupon'}
               <span className="text-white font-normal"> per unit</span>
             </p>
           </div>
@@ -94,7 +86,16 @@ export default function CartItem({ item }) {
       </div>
       <div className="bg-[#2c2c2c] text-right h-12 flex justify-end rounded-b-3xl">
         <div className=" mr-2">
-          <ToggleSwitch  item={item} sendDataToParent={sendDataToParent}/>
+          <Switch onChange={item.donate === "true" ? DontDonate : Donate} checked={item.donate === "true" ? true : false}
+            onColor="#161616"
+            offColor="#767577"
+            uncheckedIcon={false}
+            checkedIcon={false}
+            offHandleColor="#ffd601"
+            onHandleColor="#ffd601"
+            boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+            activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+          />
         </div>
         <div>
           <p className="text-white text-xs lg:text-sm mr-3 pt-1">

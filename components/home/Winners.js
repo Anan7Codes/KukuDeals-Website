@@ -1,93 +1,31 @@
-import Winners1 from "@/components/home/WinnersCard";
-import AliceCarousel from "react-alice-carousel";
-import "react-alice-carousel/lib/alice-carousel.css";
-import ArrowL from "@/components/home/ArrowL";
-import ArrowR from "@/components/home/ArrowR";
-import { useState } from "react";
+import Image from 'next/image'
 
-const responsive = {
-    0: { items: 1 },
-    1024: { items: 4 },
-};
-const items = [
-    <div className="item" data-value="0" key="0">
-        <Winners1 />
-    </div>,
-    <div className="item" data-value="1" key="1">
-        <Winners1 />
-    </div>,
-    <div className="item" data-value="2" key="2">
-        <Winners1 />
-    </div>,
-    <div className="item" data-value="3" key="3">
-        <Winners1 />
-    </div>,
-    <div className="item" data-value="4" key="4">
-        <Winners1 />
-    </div>,
-    <div className="item" data-value="5" key="5">
-        <Winners1 />
-    </div>,
-    <div className="item" data-value="6" key="6">
-        <Winners1 />
-    </div>,
-    <div className="item" data-value="7" key="7">
-        <Winners1 />
-    </div>,
-];
-
-export default function Winners() {
-    const [index, setIndex] = useState(0);
-    return (
-        <div>
-            <div className="py-8">
-                <div className="bg-[#000000] rounded-[15px] px-6 pr-2 py-5 text-black">
-                    <div className="p-2  text-[#ffd601]">
-                        <p className="font-[700] tracking-tighter text-3xl font-title">Winners</p>
-                        <p className="text-normal">
-                            All our winners are announced in this section
-                        </p>
-                    </div>
-                    <div className="mt-6 hidden lg:flex">
-                        <AliceCarousel
-                            mouseTracking
-                            items={items}
-                            responsive={responsive}
-                            onSlideChanged={(e) => {
-                                setIndex(e.item);
-                            }}
-                            renderPrevButton={() => {
-                                return index == 0 ? (
-                                    <div className="absolute -top-24 right-24 opacity-50">
-                                        <ArrowL />
-                                    </div>
-                                ) : (
-                                    <div className="absolute -top-24 opacity:100 right-24">
-                                        <ArrowL />
-                                    </div>
-                                );
-                            }}
-                            renderNextButton={() => {
-                                return index >= items.length - 4 ? (
-                                    <div className="absolute -top-24 opacity-50 right-20">
-                                        <ArrowR />
-                                    </div>
-                                ) : (
-                                    <div className="absolute -top-24 right-20">
-                                        <ArrowR />
-                                    </div>
-                                );
-                            }}
-                            disableDotsControls="true"
-                            controlsStrategy="alternate"
+export default function Winners({winner}) {
+  console.log("winners",winner)
+  return (
+    <div>
+         <div className="grid  gap-2">
+            <div className="w-[16rem] bg-[#2c2c2c] rounded-[25px] overflow-hidden shadow-lg ">
+                <div className="relative justify-self-center">
+                    <div className="cursor-pointer absolute top-0 left-0 mt-4 ml-2 hover:shadow-outline w-60 h-44">
+                        <Image
+                            src={winner?.image}
+                            layout="fill"
+                            alt="product logo"
                         />
                     </div>
-                    <div className="lg:hidden w-full pt-3 space-y-4 pl-6 flex-col">
-                        <Winners1 />
-                        <Winners1 />
+                </div>
+                <div className="col-span-2 py-4">
+                    <div className="text-center tracking-normal pt-48">
+                        <p className="text-[#ffd601] font-bold font-title leading-8 italic text-[24px]">Congratulations</p>
+                        <p className="text-white text-xl py-1 font-medium">{winner?.winner_name}</p>
+                        <p className="text-[#ffd601] text-sm">on winning &nbsp;<span className='text-[#ffd601] font-extrabold'>{winner?.gift_name}</span></p>
+                        <p className="text-[#ffd601] text-sm">Coupon no.&nbsp; <span className='text-[#ffd601] font-extrabold'>{winner?.coupon}</span></p>
+                        <p className="text-[#ffd601] text-sm">Announced :&nbsp; <span className='text-[#ffd601] font-extrabold'>{winner?.announced}</span></p>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+      </div>
+    </div>
+  );
 }

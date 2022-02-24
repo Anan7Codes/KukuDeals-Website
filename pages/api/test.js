@@ -13,7 +13,8 @@ let customerName, amount, display
 mail.setApiKey(process.env.SENDGRID_API_KEY)
 
 
-let options = { format: 'A3', path: './invoice.pdf' };
+let options = { format: 'A3' };
+// let options = { format: 'A3', path: './invoice.pdf' };
 const Handler = async (req, res) => {
     if (req.method !== 'POST') {
         return res.send({ success: false, message: 'Wrong request made' })
@@ -229,13 +230,11 @@ const Handler = async (req, res) => {
                   )
              })
         let image = `<img class="items-center justify-center w-32 h-14" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9hpbDkb5HdKE1RLtaMig_Gs24n8VsRIJ7KStu3T_1mX4kDaM23z2RXm8Z5Gd31QftaM&usqp=CAU" alt="HTML tutorial" style="width:200px;height:200px;border:0">`;
-
         let file = { content: header + body1 + footer + body2 }
         const pdfBuffer = await html_to_pdf.generatePdf(file, options)
-        fs.readFile(('invoice.pdf'), async (err, datas) => {
-            const data = {
+        console.log("pdfBuffer",pdfBuffer)
+            const data1 = {
                 from: 'travo.socialmedia@gmail.com',
-                // template_id: 'd-3039277b3eca416aa5b730a5e75a6ba1',
                 personalizations: [
                     {
                         to: 'mohammedhafizba@gmail.com',
@@ -246,7 +245,7 @@ const Handler = async (req, res) => {
                 content: [{ type: "text/html", value: image + header + body1 + footer + body2 },],
                 attachments: [
                     {
-                        content: datas.toString('base64'),
+                        content: pdfBuffer.toString('base64'),
                         filename: 'invoice.pdf',
                         type: 'application/pdf',
                         disposition: 'attachment',
@@ -254,22 +253,10 @@ const Handler = async (req, res) => {
                     },
                 ],
             }
-            const resp = await mail.send(data)
+            const resp = await mail.send(data1)
             console.log(resp)
-            res.status(200).json({ status: 'OK' });
-        })
-        return res.send({ success: true, message: 'request has been made' })
-
+            res.status(200).json({ status: 'OK' });  
     }
-    // if(req.method === 'GET') {
-    //     let campaigns_for_qty = await supabase
-    //         .from('campaigns')
-    //         .select('SoldOutCoupons')
-    //         .eq("id", "998895d2-a6aa-404a-9f60-76880b8c2273")
-    //         .single()
-    //     console.log(campaigns_for_qty)
-
-    // }
 }
 
 export default Handler

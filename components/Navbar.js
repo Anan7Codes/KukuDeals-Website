@@ -1,12 +1,14 @@
-import { useState, useContext, useEffect } from "react";
+import { Fragment, useState, useContext, useEffect } from "react";
 import { LanguageContext } from "@/contexts/language";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
+import { Dialog, Transition } from "@headlessui/react";
 
 function Navbar() {
   const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const { english, setEnglish } = useContext(LanguageContext);
 
   const userInfo = supabase.auth.user();
@@ -82,7 +84,7 @@ function Navbar() {
             </a>
           </div>
           <div className="lg:hidden flex items-center pr-4">
-            <p className="pr-4 text-white font-medium">Use App</p>
+            <p className="pr-4 text-white font-medium cursor-pointer" onClick={() => { setIsOpen(true) }}>Use App</p>
             <svg
               onClick={() => setShowMenu(true)}
               xmlns="http://www.w3.org/2000/svg"
@@ -99,6 +101,81 @@ function Navbar() {
               />
             </svg>
           </div>
+          <Transition appear show={isOpen} as={Fragment}>
+            <Dialog as="div" className="fixed lg:hidden inset-0 z-10" onClose={() => { setIsOpen(false) }}>
+              <div className="min-h-screen px-4 text-center ">
+                <Transition.Child
+                  as={Fragment}
+                  enter="ease-out duration-300"
+                  enterFrom="opacity-0"
+                  enterTo="opacity-100"
+                  leave="ease-in duration-200"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <Dialog.Overlay className="fixed inset-0" />
+                </Transition.Child>
+
+                <span
+                  className="inline-block h-screen align-middle"
+                  aria-hidden="true"
+                >
+                  &#8203;
+                </span>
+                <Transition.Child
+                  as={Fragment}
+                  enter="ease-out duration-300"
+                  enterFrom="opacity-0 scale-95"
+                  enterTo="opacity-100 scale-100"
+                  leave="ease-in duration-200"
+                  leaveFrom="opacity-100 scale-100"
+                  leaveTo="opacity-0 scale-95"
+                  style={{ backgroundColor: "#161616" }}
+                >
+                  <div className="inline-block w-full max-w-md p-6 my-8 text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                    <div className="flex justify-end">
+                      <button
+                        type="button"
+                        className=" px-4 py-2 bg-[#161616] text-white border border-transparent rounded-md hover:text-[#ffd601] focus:outline-none  focus-visible:ring-[#ffd601]"
+                        onClick={() => { setIsOpen(false) }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    <div className="my-4">
+                      <div className="relative flex justify-center items-center mb-4 h-24">
+                        <Image
+                          src="/icons/footerIcons/playstore.svg"
+                          layout="fill"
+                          alt="googleplay logo"
+                        />
+                      </div>
+                      <div className="relative flex justify-center items-center h-24">
+                        <Image
+                          src="/icons/footerIcons/appstore.svg"
+                          layout="fill"
+                          alt="googleplay logo"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </Transition.Child>
+              </div>
+            </Dialog>
+          </Transition>
         </div>
         {showMenu ? (
           <div className="absolute top-0 bg-[#2c2c2c] px-4 rounded-[15px] w-full z-30">
@@ -126,15 +203,15 @@ function Navbar() {
                 العربية
               </p>
               {userInfo ? (
-                  <p onClick={() => router.push('/profile/settings')} className="font-medium text-sm text-white mb-4 hover:cursor-pointer hover:text-yellow-500">
-                    {userInfo.user_metadata.name}
-                  </p>
-                ) : (
-                  <p onClick={() => router.push('/signin')} className="font-medium text-sm text-white mb-4 hover:cursor-pointer hover:text-yellow-500">
-                    Login/Register
-                  </p>
-                )}
-              
+                <p onClick={() => router.push('/profile/settings')} className="font-medium text-sm text-white mb-4 hover:cursor-pointer hover:text-yellow-500">
+                  {userInfo.user_metadata.name}
+                </p>
+              ) : (
+                <p onClick={() => router.push('/signin')} className="font-medium text-sm text-white mb-4 hover:cursor-pointer hover:text-yellow-500">
+                  Login/Register
+                </p>
+              )}
+
 
               <svg
                 onClick={() => setShowMenu(false)}

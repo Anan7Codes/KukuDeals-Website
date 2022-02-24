@@ -62,7 +62,7 @@ const webhookHandler = async (req, res) => {
                 .from('initiated_orders')
                 .select('*')
                 .eq("verification_secret", charge.payment_intent)
-                .eq("status", true)
+                // .eq("status", true)
                 .single()
             console.log("Line 60 IO", initiated_orders)
             console.log("cart", initiated_orders.data.cart)
@@ -329,15 +329,16 @@ const webhookHandler = async (req, res) => {
             try {
                 const resp = await mail.send(data1)
                 mailres = resp
-                console.log(resp)
+                console.log("Mail ran", resp)
             } catch (e) {
+                console.log("Mail didn't", run)
                 return res.send({ success: false, message: 'Email failed', mailres})
             }            
             
             return res.send({ success: true, user_id, res_charge, mailres})
 
         } else {
-            console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
+            return res.send({ success: false, user_id, mailres, res_charge })
         }            
         
         

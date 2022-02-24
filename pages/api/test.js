@@ -237,8 +237,7 @@ const Handler = async (req, res) => {
                 from: 'travo.socialmedia@gmail.com',
                 personalizations: [
                     {
-                        to: 'mohammedhafizba@gmail.com',
-                        // to: 'anandhu@rough-paper.com',    
+                        to: ['mohammedhafizba@gmail.com', 'anandhu@rough-paper.com'],  
                         subject: 'Order Confirmation'
                     },
                 ],

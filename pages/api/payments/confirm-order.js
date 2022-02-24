@@ -2,6 +2,7 @@ import { buffer } from 'micro'
 import { map } from 'modern-async'
 import { createClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
+import { map } from 'modern-async'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {apiVersion: '2020-08-27'})
 
@@ -11,6 +12,12 @@ const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY
 const supabase = createClient(supabaseUrl, supabaseSecretKey)
 
 const endpointSecret = process.env.WEBHOOK_SECRET
+
+let customerName, amount, display
+const mail = require('@sendgrid/mail')
+mail.setApiKey(process.env.SENDGRID_API_KEY)
+const html_to_pdf = require('html-pdf-node');
+let options = { format: 'A3' };
 
 export const config = {
     api: {

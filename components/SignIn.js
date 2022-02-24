@@ -44,8 +44,8 @@ export default function SignIn() {
 
   return (
     <div>
-      <div className="flex justify-center pt-20 pb-20">
-        <div className="w-1/2  rounded-[25px] bg-[#2c2c2c] mb-6 mt-10">
+     <div className="  bg-[#2c2c2c]  mb-20 mt-10 flex justify-center items-center rounded-[15px] w-full h-[30rem] ">
+            <div className=" h-full w-full mt-20 lg:mt-32">
           <div className="pt-4 text-center">
             <p className="text-3xl text-[#ffd601] font-bold font-title ">Sign In</p>
           </div>

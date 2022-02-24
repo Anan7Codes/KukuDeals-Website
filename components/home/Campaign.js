@@ -1,71 +1,70 @@
+import { Fragment, useState, useEffect } from 'react'
 import Image from "next/image";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useState } from "react";
 import { CartState } from '@/contexts/cart/CartContext';
 
-export default function Campaign({ campaign }) {
-  console.log(campaign);
-  const [isOpen, setIsOpen] = useState(false);
-  const [prizeDetails, setPrizeDetails] = useState(true);
-  const [qty, setQty] = useState(0)
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  const {
-    state: { cart },
-    dispatch
-  } = CartState()
-
-  useEffect(() => {
-    cart.filter(c => c.id === campaign.id ? setQty(c.qty) : null)
-  }, [cart,campaign])
-
-  const AddToCart = () => {
-    dispatch({
-      type: 'ADD_TO_CART',
-      payload: campaign
-    })
-  }
-
-  const AddQty = () => {
-    dispatch({
-      type: 'ADD_QTY',
-      payload: campaign
-    })
-  }
-
-  const ReduceQty = () => {
-    dispatch({
-      type: 'REDUCE_QTY',
-      payload: campaign
-    })
-  }
-
-  const RemoveFromCart = () => {
-    dispatch({
-      type: 'REMOVE_FROM_CART',
-      payload: campaign
-    })
-  }
-
-  return (
-    <>
-      <div className="w-full relative my-10">
-        <div className="flex flex-col items-center justify-around lg:flex-row h-[50vh] pb-6 bg-[#2c2c2c] cursor-pointer rounded-[15px] overflow-visible shadow-lg transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-[101%] duration-700">
+export default function Campaign({ campaign}) {
+    const [isOpen, setIsOpen] = useState(false);
+    const [prizeDetails, setPrizeDetails] = useState(true);
+    const [qty, setQty] = useState(0)
+  
+    function closeModal() {
+      setIsOpen(false);
+    }
+  
+    function openModal() {
+      setIsOpen(true);
+    }
+  
+    const {
+      state: { cart },
+      dispatch
+    } = CartState()
+  
+    useEffect(() => {
+      cart.filter(c => c.id === campaign.id ? setQty(c.qty) : null)
+    }, [cart,campaign])
+  
+    const AddToCart = () => {
+      dispatch({
+        type: 'ADD_TO_CART',
+        payload: campaign
+      })
+    }
+  
+    const AddQty = () => {
+      dispatch({
+        type: 'ADD_QTY',
+        payload: campaign
+      })
+    }
+  
+    const ReduceQty = () => {
+      dispatch({
+        type: 'REDUCE_QTY',
+        payload: campaign
+      })
+    }
+  
+    const RemoveFromCart = () => {
+      dispatch({
+        type: 'REMOVE_FROM_CART',
+        payload: campaign
+      })
+    }
+    if(!campaign?.SoldOut) {
+    return (
+        <div>
+            <div className="z-0 mx-auto rounded-[15px]">
+            <div className="w-full relative my-10">
+        <div className="flex flex-col items-center justify-around lg:flex-row h-full pb-6 bg-[#2c2c2c] cursor-pointer rounded-[15px] overflow-visible shadow-lg transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-[101%] duration-700">
           <div className="mt-[60px] lg:mt-0">
-            <div className="relative lg:top-5 lg:left-6 flex justify-center items-center lg:w-[28rem] h-36 w-60 lg:h-64">
+            <div className="relative lg:top-5 lg:left-20 flex justify-center items-center w-64  h-64">
               <Image src={campaign?.Image} layout="fill" alt="Campaign Image" />
             </div>
           </div>
-          <div className="flex-col w-full pb-6 lg:pb-0">
+          <div className="flex-col w-full pb-6 flex justify-center items-center lg:pb-0">
             <div className="justify-center">
               <div className="text-sm text-center sm:pl-4 sm:pt-2 lg:text-justify	 lg:text-3xl">
                 <div className="lg:pt-4 ">
@@ -193,8 +192,8 @@ export default function Campaign({ campaign }) {
                     </svg>
                   </button>
                 </div>
-                <div className="my-2">
-                  <div className="relative flex justify-center items-center h-52">
+                <div className="my-4">
+                  <div className="relative flex  justify-center items-center w-52 h-52">
                     <Image
                       src={campaign?.Image}
                       layout="fill"
@@ -296,6 +295,8 @@ export default function Campaign({ campaign }) {
           </div>
         </Dialog>
       </Transition>
-    </>
-  );
+            </div>
+        </div>
+    )
+} else return null
 }

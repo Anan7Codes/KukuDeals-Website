@@ -1,93 +1,42 @@
-import Soldout1 from "./SoldoutCard";
-import AliceCarousel from "react-alice-carousel";
-import "react-alice-carousel/lib/alice-carousel.css";
-import ArrowL from "@/components/home/ArrowL";
-import ArrowR from "@/components/home//ArrowR";
-import { useState } from "react";
+import Image from "next/image";
 
-const responsive = {
-  0: { items: 1 },
-  1024: { items: 4 },
-};
-
-const items = [
-  <div className="item" data-value="0" key="0">
-    <Soldout1 />
-  </div>,
-  <div className="item" data-value="1" key="1">
-    <Soldout1 />
-  </div>,
-  <div className="item" data-value="2" key="2">
-    <Soldout1 />
-  </div>,
-  <div className="item" data-value="3" key="3">
-    <Soldout1 />
-  </div>,
-  <div className="item" data-value="4" key="4">
-    <Soldout1 />
-  </div>,
-  <div className="item" data-value="5" key="5">
-    <Soldout1 />
-  </div>,
-  <div className="item" data-value="6" key="6">
-    <Soldout1 />
-  </div>,
-  <div className="item" data-value="7" key="7">
-    <Soldout1 />
-  </div>,
-];
-
-export default function Soldout() {
-  const [index, setIndex] = useState(0);
+export default function Soldout({ campaign }) {
+  if(campaign?.SoldOut) {
   return (
-    <div className="bg-[#ffd601] rounded-[45px] px-6 py-5 text-black">
-          <div className="pt-2 ml-3 relative">
-            <div className="flex justify-between">
-              <p className="tracking-tighter font-title font-bold text-3xl">Sold Out</p>
-            </div>
-            <div className="text-xs lg:text-base leading-5 font-medium">
-              All our sold out campaigns along with their <br /> corresponding
-              draw dates are listed below
-            </div>
-            <div className="hidden lg:flex mt-6 relative ">
-              <AliceCarousel
-                mouseTracking
-                items={items}
-                responsive={responsive}
-                onSlideChanged={(e) => {
-                  setIndex(e.item);
-                }}
-                renderPrevButton={() => {
-                  return index == 0 ? (
-                    <div className="absolute -top-24 right-24 opacity-50">
-                      <ArrowL />
-                    </div>
-                  ) : (
-                    <div className="absolute -top-24 opacity:100 right-24">
-                      <ArrowL />
-                    </div>
-                  );
-                }}
-                renderNextButton={() => {
-                  return index >= items.length - 4 ? (
-                    <div className="absolute -top-24 opacity-50 right-20">
-                      <ArrowR />
-                    </div>
-                  ) : (
-                    <div className="absolute -top-24 right-20">
-                      <ArrowR />
-                    </div>
-                  );
-                }}
-                disableDotsControls="true"
-                controlsStrategy="alternate"
+    <div >
+      <div className="grid grid-cols-4 gap-2">
+        <div className="w-[16rem] h-[22rem] bg-[#2c2c2c] rounded-[25px] overflow-hidden shadow-lg ">
+          <div className="relative justify-self-center">
+            <div className=" cursor-pointer absolute top-0 left-0 mt-12 opacity-60 ml-2 hover:shadow-outline w-52 h-44">
+              <Image
+                src={campaign?.Image}
+                layout="fill"
+                alt="product logo"
               />
             </div>
-            <div className="lg:hidden w-full pt-3 space-y-4 pl-3 flex-col">
-          <Soldout1 />
-          <Soldout1/>
+            <div className="absolute top-3 left-6 mt-24 ml-4  w-36 h-24 object-cover">
+              <Image
+                src="/icons/soldout/soldout.png"
+                layout="fill"
+                alt="product logo"
+              />
+            </div>
+          </div>
+          <div className=" pt-56">
+            <div className="text-center text-[1.12rem] tracking-wide">
+              <p className="text-white italic font-title font-bold mt-4">{campaign?.ProductName.en}</p>
+              <p className="text-white text-sm leading-4">{campaign?.ProductName.en}</p>
+              <p className="text-white pl-1 font-medium text-sm">
+                Draw Date:
+                <span className="font-extrabold text-[#ffd601]">
+                  {campaign?.ProductName.en}
+                </span>
+              </p>
             </div>
           </div>
         </div>
-  );
+      </div>
+    </div>
+  )
+  } else return null
 }

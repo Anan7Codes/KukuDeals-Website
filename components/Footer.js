@@ -11,7 +11,7 @@ export default function Footer() {
                 <div className="font-medium text-sm lg:text-lg text-white cursor-pointer hover:text-[#ffd601]">
                   Quick Links
                 </div>
-                <ul className=" text-xs lg:text-base pt-3 leading-loose">
+                <ul className=" text-xs lg:text-base pt-3 leading-loose lg:leading-extra-loose">
                   <li>
                     <a className="text-white cursor-pointer hover:text-[#ffd601] ">
                       About Kuku
@@ -123,14 +123,14 @@ export default function Footer() {
                 <ul className="space-x-10 flex justify-center  pt-2">
                   <li className=" h-12 w-36 relative ">
                     <Image
-                      src="/icons/footerIcons/appstore.png"
+                      src="/icons/footerIcons/appstore.svg"
                       layout="fill"
                       alt="googleplay logo"
                     />
                   </li>
                   <li className=" h-12 w-36 relative">
                     <Image
-                      src="/icons/footerIcons/google play.png"
+                      src="/icons/footerIcons/playstore.svg"
                       layout="fill"
                       alt="googleplay logo"
                     />

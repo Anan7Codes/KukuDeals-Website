@@ -9,7 +9,11 @@ module.exports = {
     extend: {
       fontFamily: {
         'title': ['"Josefin Sans",sans-serif'],
-      }
+      },
+      lineHeight: {
+            'extra-loose': '2.5',
+            '12': '3rem',
+          }
     },
     // extend: {
     //   lineHeight: {

@@ -1,15 +1,73 @@
 import Head from "next/head";
-
 import Layout from "@/components/Layout";
 import Banner from "@/components/home/Banner";
 import Section1 from "@/components/home/Section1";
-import Section2 from "@/components/home/Section2";
-import Section3 from "@/components/home/Section3";
-import Section4 from "@/components/home/Section4";
+import Campaign from "@/components/home/Campaign";
+import Soldout from "@/components/home/Soldout";
+import Winners from "@/components/home/Winners";
 import Section5 from "@/components/home/Section5";
 import CartButton from "@/components/cart/CartButton";
+import { useEffect, useState } from "react";
+import { supabase } from '@/utils/supabaseClient';
+import AliceCarousel from "react-alice-carousel";
+import "react-alice-carousel/lib/alice-carousel.css";
+import ArrowL from "@/components/home/ArrowL";
+import ArrowR from "@/components/home//ArrowR";
 
 export default function Home() {
+  const [campaigns, setCampaigns] = useState([])
+  const [ winners, setWinners ] = useState([])
+  const [index, setIndex] = useState(0);
+  const responsive = {
+    0: { items: 1 },
+    1024: { items: 4 },
+  };
+  useEffect(() => {
+    const FetchCampaigns = async () => {
+      try {
+        let { data, error } = await supabase.from('campaigns').select('*')
+        if (error) {
+          toast.error(error.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined
+          });
+          return
+        }
+        setCampaigns(data)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    FetchCampaigns()
+    const FetchWinners = async () => {
+      try {
+        let { data, error } = await supabase.from('winners').select('*')
+        if (error) {
+          toast.error(error.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined
+          });
+          return
+        }
+        setWinners(data)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    FetchWinners()
+  }, [])
+
+  if (!campaigns) return <p>No Data</p>
   return (
     <div className="bg-[#161616]">
       <Head>
@@ -18,9 +76,123 @@ export default function Home() {
       <Layout>
         <Banner />
         {/* <Section1 /> */}
-        <Section2 />
-        <Section3 />
-        <Section4 />
+        <div>
+          <p className="text-[26px] text-[#ffd601] pt-5 font-title font-bold">Explore campaigns</p>
+          {campaigns?.map(campaign => {
+            return (
+              <Campaign campaign={campaign} key={campaign.id} />
+            )
+          })}
+        </div>
+        <div>
+          <div className=" mx-auto">
+            <div className="bg-[#ffd601] rounded-[45px] px-6 py-5 text-black">
+              <div className="pt-2 ml-3 relative">
+                <div className="flex justify-between">
+                  <p className="tracking-tighter font-title font-bold text-3xl">Sold Out</p>
+                </div>
+                <div className="text-xs lg:text-base leading-5 font-medium">
+                  All our sold out campaigns along with their <br /> corresponding
+                  draw dates are listed below
+                </div>
+                <div className="flex mt-6 relative ">
+                  <AliceCarousel
+                    mouseTracking
+                    responsive={responsive}
+                    onSlideChanged={(e) => {
+                      setIndex(10);
+                    }}
+                    renderPrevButton={() => {
+                      return index == 0 ? (
+                        <div className="absolute -top-24 right-24 opacity-50">
+                          <ArrowL />
+                        </div>
+                      ) : (
+                        <div className="absolute -top-24 opacity:100 right-24">
+                          <ArrowL />
+                        </div>
+                      )
+                    }}
+                    renderNextButton={() => {
+                      return index >= 10 - 4 ? (
+                        <div className="absolute -top-24 opacity-50 right-20">
+                          <ArrowR />
+                        </div>
+                      ) : (
+                        <div className="absolute -top-24 right-20">
+                          <ArrowR />
+                        </div>
+                      );
+                    }}
+                    disableDotsControls="true"
+                    controlsStrategy="alternate"
+                  >
+                    <div className="flex space-x-[17rem]">
+                      {campaigns?.map(campaign => {
+                        return (
+                          <Soldout campaign={campaign} key={campaign.id} />
+                        )
+                      })}
+                    </div>
+                  </AliceCarousel>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className="py-8">
+            <div className="bg-[#000000] rounded-[15px] px-6 pr-2 py-5 text-black">
+              <div className="p-2  text-[#ffd601]">
+                <p className="font-[700] tracking-tighter text-3xl font-title">Winners</p>
+                <p className="text-normal">
+                  All our winners are announced in this section
+                </p>
+              </div>
+              <div className="mt-6 flex">
+                <AliceCarousel
+                  mouseTracking
+                  responsive={responsive}
+                  onSlideChanged={(e) => {
+                    setIndex(10);
+                  }}
+                  renderPrevButton={() => {
+                    return index == 0 ? (
+                      <div className="absolute -top-24 right-24 opacity-50">
+                        <ArrowL />
+                      </div>
+                    ) : (
+                      <div className="absolute -top-24 opacity:100 right-24">
+                        <ArrowL />
+                      </div>
+                    );
+                  }}
+                  renderNextButton={() => {
+                    return index >= 10 - 4 ? (
+                      <div className="absolute -top-24 opacity-50 right-20">
+                        <ArrowR />
+                      </div>
+                    ) : (
+                      <div className="absolute -top-24 right-20">
+                        <ArrowR />
+                      </div>
+                    );
+                  }}
+                  disableDotsControls="true"
+                  controlsStrategy="alternate"
+                >
+              <div className="flex space-x-10">
+                  {winners?.map(winner => {
+                    return (
+                      <Winners winner={winner} key={winner.id} />
+                    )
+                  })}
+                  </div>
+                </AliceCarousel>
+              </div>
+            </div>
+          </div>
+        </div>
         <Section5 />
         <CartButton />
       </Layout>

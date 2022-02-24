@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { CountryDropdown } from "react-country-region-selector";
 import { supabase } from '@/utils/supabaseClient';
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import * as yup from 'yup'
+import { Formik } from 'formik'
 
 function SignUp() {
   const router = useRouter();
@@ -84,10 +86,10 @@ function SignUp() {
   }
   return (
     <>
-      <div className="flex justify-center pt-20 pb-20">
-        <div className="w-1/2  rounded-[25px] bg-[#2c2c2c] mb-6 mt-10">
+          <div className="  bg-[#2c2c2c]  mb-20 mt-10 flex justify-center items-center rounded-[15px] w-full h-full ">
+            <div className=" h-full w-full mt-20 lg:mt-32">
         <div className="pt-4 text-center">
-            <p className="text-3xl text-[#ffd601] font-bold font-title">Sign Up</p>
+            <p className="text-3xl text-[#ffd601] pr-12 font-bold font-title">Sign Up</p>
           </div>
           <form
             onSubmit={handleSubmit}

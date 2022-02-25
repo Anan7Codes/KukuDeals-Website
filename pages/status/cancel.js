@@ -18,6 +18,7 @@ function Cancel() {
     <div className='bg-[#161616]'>
       <Head>
           <title>Payment Cancelled | Kuku Deals</title>
+          <link rel="icon" href="../icons/icon.png" />
       </Head>
       <Layout>
         <div className='bg-[#2c2c2c] min-h-42 my-8 py-12 rounded-[15px] flex flex-col items-center justify-center'>

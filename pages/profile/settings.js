@@ -9,6 +9,7 @@ export default function settings() {
         <div className="bg-[#161616]">
             <Head>
                 <title>Change Password | Kuku Deals</title>
+                <link rel="icon" href="../icons/icon.png" />
             </Head>
             <Layout>
                 <Sidebar>

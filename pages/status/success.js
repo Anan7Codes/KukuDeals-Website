@@ -69,7 +69,7 @@ function Success() {
     <div className={`bg-[#161616] overflow-x-hidden`}>
       <Head>
           <title>Order Successful | Kuku Deals</title>
-          <link rel="icon" href="icons/icon.png" />
+          <link rel="icon" href="../icons/icon.png" />
       </Head>
       <Confetti
         width={width - 20}

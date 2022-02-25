@@ -9,6 +9,7 @@ export default function personaldetails() {
         <div className="bg-[#161616]">
             <Head>
                 <title>Personal Details | Kuku Deals</title>
+                <link rel="icon" href="../icons/icon.png" />
             </Head>
             <Layout>
                 <Sidebar>

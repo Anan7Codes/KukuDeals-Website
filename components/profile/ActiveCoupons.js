@@ -22,13 +22,15 @@ export default function ActiveCoupons() {
     }, [])
     return (
         <div>
-            <div className="flex flex-col  justify-center items-center ">
               <div>
+                <p className="font-title text-[#ffd601] font-semibold pb-4 text-4xl ">Your Tickets</p>
+                <div className="overflow-y-auto scrollbar-thin scrollbar-thumb-custom-scroll scrollbar-track-custom-scroll   max-h-screen">
               {activeOrders?.map(order => {              
               return (
                 <Coupon order={order} key={order.id}/>              
               )
             })} 
+            </div>
               </div>
               {/* <div className=" relative  top-0 left-0 opacity-50  hover:shadow-outline w-40 h-40 cursor-pointer">
             <Image
@@ -42,6 +44,5 @@ export default function ActiveCoupons() {
                   Start Shopping
               </button> */}
                 </div>
-        </div>
     )
 }

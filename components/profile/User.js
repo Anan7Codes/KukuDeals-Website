@@ -14,7 +14,7 @@ export default function User() {
     return (
         <div>
             {/* <div className="col-span-2  mb-4  flex mt-5 shadow-lg text-[#ffd601] bg-gradient-to-b from-[#175198] lg:w-[21rem] h-[20rem] rounded-[25px] items-center justify-center text-center "> */}
-            <div className="col-span-2  mb-4  flex mt-5 shadow-lg text-[#ffd601] bg-[#2c2c2c] lg:w-[21rem] h-[20rem] rounded-[25px] items-center justify-center text-center ">
+            <div className=" mb-4  flex mt-5 shadow-lg text-[#ffd601] bg-[#2c2c2c] lg:w-[21rem] h-[20rem] rounded-[25px] items-center justify-center text-center ">
                 <div>
                     <p className="text-3xl font-bold text-title ">{userName}</p>
                     <p className="text-xs">{email}</p>

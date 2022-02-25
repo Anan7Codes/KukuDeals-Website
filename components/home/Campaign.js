@@ -139,7 +139,7 @@ export default function Campaign({ campaign}) {
         </div>
       </div>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="fixed  inset-0 z-10" onClose={closeModal}>
+        <Dialog as="div" className="fixed ml-2 mr-2 inset-0 z-10" onClose={closeModal}>
           <div className="min-h-screen px-4 text-center ">
             <Transition.Child
               as={Fragment}
@@ -193,14 +193,14 @@ export default function Campaign({ campaign}) {
                   </button>
                 </div>
                 <div className="my-4">
-                  <div className="relative flex  justify-center items-center w-52 h-52">
+                  <div className="relative flex  justify-center items-center lg:ml-24 ml-16 w-52 h-52">
                     <Image
                       src={campaign?.Image}
                       layout="fill"
                       alt="Campaign Image"
                     />
                   </div>
-                  <div className="absolute -top-8 -left-8 bg-[#161616] lg:h-28 w-32  p-2  rounded-full">
+                  <div className="absolute -top-8 -left-5 bg-[#161616] lg:h-28 w-32  p-2  rounded-full">
                     <CircularProgressbar
                       value={campaign?.SoldOutCoupons}
                       maxValue={campaign?.TotalCoupons}
@@ -227,7 +227,7 @@ export default function Campaign({ campaign}) {
                       </p>
                     </div>
                   </div>
-                  <div className="flex justify-center my-4 h-10 pb-2">
+                  <div className="flex justify-center  h-10 pb-2">
                     <button
                       onClick={() => setPrizeDetails(true)}
                       className={`px-2 ${prizeDetails ? 'text-black bg-[#ffd601]' : 'bg-[#2c2c2c] text-white'} rounded-l-xl text-sm font-semibold`}

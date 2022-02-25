@@ -8,7 +8,7 @@ export default function activecoupons() {
     return (
         <div className="bg-[#161616]">
             <Head>
-                <title>Kuku Deals</title>
+                <title>Active Coupons | Kuku Deals</title>
             </Head>
             <Layout>
                 <Sidebar>

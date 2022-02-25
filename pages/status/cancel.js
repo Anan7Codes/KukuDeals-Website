@@ -1,3 +1,4 @@
+import Head from "next/head";
 import React, { useEffect } from 'react'
 import Layout from '@/components/Layout'
 import { useUser } from '@/contexts/user/UserContext';
@@ -15,6 +16,9 @@ function Cancel() {
 
   return (
     <div className='bg-[#161616]'>
+      <Head>
+          <title>Payment Cancelled | Kuku Deals</title>
+      </Head>
       <Layout>
         <div className='bg-[#2c2c2c] min-h-42 my-8 py-12 rounded-[15px] flex flex-col items-center justify-center'>
           <Lottie

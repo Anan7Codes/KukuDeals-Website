@@ -1,3 +1,4 @@
+import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
@@ -73,6 +74,9 @@ export default function ResetPassword() {
 
   return (
     <div className="bg-[#161616]">
+        <Head>
+            <title>Reset Password | Kuku Deals</title>
+        </Head>
         <Layout>
             <div className="flex justify-center pt-20 pb-20 bg-[#161616] h-screen">
                 <div className="rounded-[25px] bg-[#2c2c2c] mb-6 px-16 h-96">

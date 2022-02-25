@@ -1,3 +1,5 @@
+
+import Head from "next/head";
 import React, { useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
 import { CartState } from "@/contexts/cart/CartContext";
@@ -37,6 +39,9 @@ function Success() {
   if(!success) {
     return (
     <div className='bg-[#161616]'>
+      <Head>
+          <title>Order Successful | Kuku Deals</title>
+      </Head>
       <Confetti
         width={window.innerWidth}
         height={window.innerHeight}

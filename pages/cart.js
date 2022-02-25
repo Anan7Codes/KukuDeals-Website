@@ -7,7 +7,7 @@ export default function cart() {
     return (
         <div className="bg-[#161616] lg:min-h-screen">
             <Head>
-                <title>Kuku Deals</title>
+                <title>Cart | Kuku Deals</title>
             </Head>
             <Layout>
                 <CartPage />

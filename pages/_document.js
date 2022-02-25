@@ -10,7 +10,7 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <link rel="icon" href="icons/black-logo-small.png" />
+                    <link rel="icon" href="icons/icon.png" />
                     <link rel="preconnect" href="https://fonts.googleapis.com" />
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
                     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,400;0,500;0,700;1,100;1,500&family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />

@@ -8,7 +8,7 @@ export default function personaldetails() {
     return (
         <div className="bg-[#161616]">
             <Head>
-                <title>Kuku Deals</title>
+                <title>Personal Details | Kuku Deals</title>
             </Head>
             <Layout>
                 <Sidebar>

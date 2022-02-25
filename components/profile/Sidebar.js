@@ -12,8 +12,10 @@ export default function Sidebar({ children }) {
   const { user, setUser } = useUser();
 
   useEffect(() => {
-    if(!user) router.push('/signin')
-  }, [])
+    if(!user) {
+      router.push('/signin')
+    }
+  }, [user])
 
   const SignOutUser = async () => {
     const { error } = await supabase.auth.signOut()

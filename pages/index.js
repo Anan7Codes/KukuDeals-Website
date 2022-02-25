@@ -65,8 +65,6 @@ export default function Home() {
       }
     }
     FetchWinners()
-    const soldout = campaigns?.filter((campaign) => campaign.SoldOut === true) 
-    console.log("sold", soldout)
   }, [])
  
   if (!campaigns) return <p>No Data</p>

@@ -7,10 +7,10 @@ export default function User() {
     const [userName,setUserName] = useState()
     const [email,setEmail] = useState()
 
-    useEffect(()=>{
+    useEffect(() => {
         setUserName(user.user_metadata.name)
         setEmail(user.email)
-    },[])
+    },[user])
     return (
         <div className="mb-4 flex mt-5 shadow-lg text-[#fff] bg-[#2c2c2c] lg:w-[21rem] h-[20rem] rounded-[25px] items-center justify-center text-center ">
             <div>

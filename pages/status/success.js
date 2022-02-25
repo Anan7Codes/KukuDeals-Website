@@ -13,9 +13,11 @@ function Success() {
   const { dispatch } = CartState();
 
   useEffect(() => {
-    if(!user) router.push('/signin')
-  }, [])
-  
+    if(!user) {
+      router.push('/signin')
+    }
+  }, [user])
+
   const EmptyCart = () => {
     dispatch({
         type: 'EMPTY_CART',

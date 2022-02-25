@@ -1,12 +1,15 @@
 import Head from "next/head";
 import React, { useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
+import SkeletonLayout from "@/components/SkeletonLayout";
 import { CartState } from "@/contexts/cart/CartContext";
 import { useUser } from '@/contexts/user/UserContext';
 import { useRouter } from 'next/router';
 import Confetti from 'react-confetti';
 import Lottie from "lottie-react";
 import SuccessAnimation from '@/public/success-animation.json'
+import Skeleton from 'react-loading-skeleton'
+
 
 function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
@@ -66,6 +69,7 @@ function Success() {
     <div className={`bg-[#161616] overflow-x-hidden`}>
       <Head>
           <title>Order Successful | Kuku Deals</title>
+          <link rel="icon" href="icons/icon.png" />
       </Head>
       <Confetti
         width={width - 20}
@@ -90,11 +94,9 @@ function Success() {
     </div> 
   )} else return (
     <div className='bg-[#161616]'>
-      <Layout>
-        <div className='bg-[#2c2c2c] min-h-42 my-8 py-12 rounded-[15px] flex flex-col items-center justify-center'>
-          <p className='font-title text-[#ffd601] text-5xl font-semibold'>Restricted Page</p>
-        </div>
-      </Layout>
+      <SkeletonLayout>
+        <Skeleton className="h-96 py-12" style={{borderRadius: 15}} />
+      </SkeletonLayout>
     </div>
   )
 }

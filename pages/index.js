@@ -14,6 +14,7 @@ import ArrowL from "@/components/home/ArrowL";
 import ArrowR from "@/components/home//ArrowR";
 
 export default function Home() {
+  
   const [campaigns, setCampaigns] = useState([])
   const [winners, setWinners] = useState([])
   const [index, setIndex] = useState(0);
@@ -53,7 +54,7 @@ export default function Home() {
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
-            draggable: true,
+            draggable: true, 
             progress: undefined
           });
           return
@@ -64,8 +65,10 @@ export default function Home() {
       }
     }
     FetchWinners()
+    const soldout = campaigns?.filter((campaign) => campaign.SoldOut === true) 
+    console.log("sold", soldout)
   }, [])
-
+ 
   if (!campaigns) return <p>No Data</p>
   return (
     <div className="bg-[#161616]">
@@ -76,12 +79,13 @@ export default function Home() {
         <Banner />
         {/* <Section1 /> */}
         <div>
-          <p className="text-[26px] text-[#ffd601] pt-5 font-title font-bold">Explore campaigns</p>
+          {/* <p className="text-[26px] text-[#ffd601] pt-5 font-title font-bold">Explore campaigns</p> */}
           {campaigns?.map(campaign => {
-            return (
-              <Campaign campaign={campaign} key={campaign.id} />
-            )
-          })}
+              return (
+                <Campaign campaign={campaign} key={campaign.id} />
+              )
+            })
+          }
         </div>
         <div>
           <div className=" mx-auto">
@@ -90,35 +94,32 @@ export default function Home() {
                 <div className="flex justify-between">
                   <p className="tracking-tighter font-title font-bold text-3xl">Sold Out</p>
                 </div>
-                <div className="text-xs lg:text-base leading-5 font-medium">
-                  All our sold out campaigns along with their <br /> corresponding
+                <div className="text-normal pt-4 lg:pt-0 font-medium lg:w-[450px]">
+                  All our sold out campaigns along with their corresponding
                   draw dates are listed below
                 </div>
-                <div className="mt-6 relative ">
+                <div className="mt-6 relative">
                   <AliceCarousel
                     mouseTracking
                     responsive={responsive}
-                    onSlideChanged={(e) => {
-                      setIndex(10);
-                    }}
                     renderPrevButton={() => {
-                      return index == 0 ? (
-                        <div className="absolute hidden lg:flex -top-24 right-24 opacity-50">
+                      return index === 0 ? (
+                        <div className="absolute flex lg:-top-24 -top-40 right-24 opacity-50">
                           <ArrowL />
                         </div>
                       ) : (
-                        <div className="absolute hidden lg:flex -top-24 opacity:100 right-24">
+                        <div className="absolute flex lg:-top-24 -top-40 right-24">
                           <ArrowL />
                         </div>
                       )
                     }}
                     renderNextButton={() => {
                       return index >= 10 - 4 ? (
-                        <div className="absolute hidden lg:flex -top-24 opacity-50 right-20">
+                        <div className="absolute flex lg:-top-24 -top-40 opacity-50 right-20">
                           <ArrowR />
                         </div>
                       ) : (
-                        <div className="absolute hidden lg:flex -top-24 right-20">
+                        <div className="absolute flex lg:-top-24 -top-40 right-20">
                           <ArrowR />
                         </div>
                       );
@@ -126,22 +127,11 @@ export default function Home() {
                     disableDotsControls="true"
                     controlsStrategy="alternate"
                   >
-                    <div className="flex justify-center items-center">
-                      <div className="flex-col space-y-8 lg:hidden">
-                        {campaigns?.map(campaign => {
-                          return (
-                            <Soldout campaign={campaign} key={campaign.id} />
-                          )
-                        })}
-                      </div>
-                      <div className="hidden lg:flex space-x-[17rem]">
-                        {campaigns?.map(campaign => {
-                          return (
-                            <Soldout campaign={campaign} key={campaign.id} />
-                          )
-                        })}
-                      </div>
-                      </div>
+                    {campaigns?.filter((campaign) => campaign.SoldOut === true).map((campaign, i) => {
+                      return (
+                        <Soldout campaign={campaign} key={campaign.id} data-value={i}/>
+                      )
+                    })}
                   </AliceCarousel>
                 </div>
               </div>
@@ -150,10 +140,10 @@ export default function Home() {
         </div>
         <div>
           <div className="py-8">
-            <div className="bg-[#000000] rounded-[15px] px-6 pr-2 py-5 text-black">
-              <div className="p-2  text-[#ffd601]">
+            <div className="bg-[#000000] rounded-[15px] px-6 py-5 text-black">
+              <div className="p-2 text-[#ffd601]">
                 <p className="font-[700] tracking-tighter text-3xl font-title">Winners</p>
-                <p className="text-normal">
+                <p className="text-normal pt-4 lg:pt-0">
                   All our winners are announced in this section
                 </p>
               </div>
@@ -161,27 +151,24 @@ export default function Home() {
                 <AliceCarousel
                   mouseTracking
                   responsive={responsive}
-                  onSlideChanged={(e) => {
-                    setIndex(10);
-                  }}
                   renderPrevButton={() => {
-                    return index == 0 ? (
-                      <div className="absolute  -top-24 right-24 opacity-50">
+                    return index === 0 ? (
+                      <div className="absolute lg:-top-24 -top-36 right-24 opacity-50">
                         <ArrowL item={true}/>
                       </div>
                     ) : (
-                      <div className="absolute -top-24 opacity:100 right-24">
+                      <div className="absolute lg:-top-24 -top-36 right-24">
                         <ArrowL item={true}/>
                       </div>
                     );
                   }}
                   renderNextButton={() => {
                     return index >= 10 - 4 ? (
-                      <div className="absolute -top-24 opacity-50 right-20">
+                      <div className="absolute lg:-top-24 -top-36 opacity-50 right-20">
                         <ArrowR item={true}/>
                       </div>
                     ) : (
-                      <div className="absolute -top-24 right-20">
+                      <div className="absolute lg:-top-24 -top-36 right-20">
                         <ArrowR item={true}/>
                       </div>
                     );
@@ -189,22 +176,11 @@ export default function Home() {
                   disableDotsControls="true"
                   controlsStrategy="alternate"
                 >
-                  <div className="flex justify-center items-center">
-                    <div className="flex-col space-y-8 lg:hidden">
-                      {winners?.map(winner => {
-                        return (
-                          <Winners winner={winner} key={winner.id} />
-                        )
-                      })}
-                    </div>
-                    <div className="hidden justify-start lg:flex space-x-10">
-                      {winners?.map(winner => {
-                        return (
-                          <Winners winner={winner} key={winner.id} />
-                        )
-                      })}
-                    </div>
-                  </div>
+                  {winners?.map((winner, i) => {
+                    return (
+                      <Winners winner={winner} key={winner.id} data-value={i}/>
+                    )
+                  })}
                 </AliceCarousel>
               </div>
             </div>

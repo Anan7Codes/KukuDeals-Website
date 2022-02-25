@@ -20,7 +20,7 @@ module.exports = {
             light: '#ffd601',
             scroll:'#161616'
         }
-    }
+      },
     },
   },
   plugins: [

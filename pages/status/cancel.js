@@ -1,7 +1,14 @@
 import React from 'react'
 import Layout from '@/components/Layout'
+import { useUser } from '@/contexts/user/UserContext';
 
 function Cancel() {
+  const { user } = useUser()
+
+  useEffect(() => {
+    if(!user) router.push('/signin')
+  }, [])
+
   return (
     <div className='bg-[#161616]'>
       <Layout>

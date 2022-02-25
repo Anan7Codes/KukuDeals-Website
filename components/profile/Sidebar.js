@@ -1,12 +1,46 @@
+import { useEffect } from 'react'
 import { FaAddressCard } from "react-icons/fa";
 import { RiCoupon2Fill, RiLogoutBoxRLine } from "react-icons/ri";
 import User from "./User";
 import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
+import { useUser } from '@/contexts/user/UserContext';
+import { toast } from "react-toastify";
 
 export default function Sidebar({ children }) {
   const router = useRouter();
+  const { user, setUser } = useUser();
 
+  useEffect(() => {
+    if(!user) router.push('/signin')
+  }, [])
+
+  const SignOutUser = async () => {
+    const { error } = await supabase.auth.signOut()
+    if (error) {
+      toast.error(error.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      });
+      return
+    }
+    setUser(null)
+    toast.success("Signed out successfully", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+    return router.push('/')
+}
 
   return (
     <div>
@@ -225,7 +259,7 @@ export default function Sidebar({ children }) {
           <div className="flex p-4">
             <RiLogoutBoxRLine className="h-6 w-6" />
             <p className="pl-3"
-              onClick={async () => { const { error } = await supabase.auth.signOut(); router.push('/') }}>
+              onClick={SignOutUser}>
               Logout
             </p>
 

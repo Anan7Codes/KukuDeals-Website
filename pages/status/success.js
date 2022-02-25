@@ -1,17 +1,33 @@
 import React, { useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
+import { CartState } from "@/contexts/cart/CartContext";
+import { useUser } from '@/contexts/user/UserContext';
 import { useRouter } from 'next/router';
 import Confetti from 'react-confetti'
 
 function Success() {
   const router = useRouter();
+  const { user } = useUser()
+
   const [ success, setSuccess ] = useState(false)
+  const { dispatch } = CartState();
+
+  useEffect(() => {
+    if(!user) router.push('/signin')
+  }, [])
+  
+  const EmptyCart = () => {
+    dispatch({
+        type: 'EMPTY_CART',
+    })       
+  }
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
     if (query.get('success')) {
       setSuccess(true)
     }
+    EmptyCart()
   }, []);
 
   if(success) {

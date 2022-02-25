@@ -27,6 +27,11 @@ export const CartReducer = ( state, action ) => {
                 ...state,
                 cart: state.cart.filter( c => c.id === action.payload.id ? c.donate = "false" : c.donate )
             };
+        case 'EMPTY_CART':
+            return {
+                ...state,
+                cart: []
+            };
         default:
             return state;
     }

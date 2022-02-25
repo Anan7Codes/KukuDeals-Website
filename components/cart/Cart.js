@@ -1,22 +1,9 @@
 import { CartState } from "@/contexts/cart/CartContext";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { useState } from "react";
 
 export default function Cart({ item }) {
 
-  const [showCart, setShowCart] = useState(true);
-  const router = useRouter()
- 
-  const { state: { cart } } = CartState();
   const { dispatch } = CartState();
-
-  const handleCart = (e) => {
-    setShowCart(false);
-  };
-  const handleClick = () => {
-    router.push('/cart')
-  }
 
   const AddQty = () => {
     dispatch({
@@ -39,19 +26,6 @@ export default function Cart({ item }) {
     })
   }
 
-  const Donate = () => {
-    dispatch({
-      type: 'DONATE',
-      payload: item
-    })
-  }
-
-  const DontDonate = () => {
-    dispatch({
-      type: 'DONT_DONATE',
-      payload: item
-    })
-  }
   return <div>
     {item ?
       <div className=" text-sm font-semibold text-white pl-6 pr-6 pt-2">
@@ -78,7 +52,7 @@ export default function Cart({ item }) {
                 <span className="text-white font-normal"> per unit</span>
               </div>
             </div>
-            <div className=" ml-20 leading-extra-loose">
+            <div className="ml-20 leading-extra-loose">
               <svg
                 onClick={AddQty}
                 xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +68,7 @@ export default function Cart({ item }) {
                   d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                 />
               </svg>
-              <div className="bg-[#2c2c2c] rounded-full"><p className="text-white px-2 text-sm my-2">{item?.qty}</p></div>
+              <p className="text-white px-2 text-sm my-2">{item?.qty}</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 onClick={item.qty === 1 ? RemoveFromCart : ReduceQty}

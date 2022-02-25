@@ -17,7 +17,7 @@ export default function CartButton() {
         {showButton ? (
           <div onMouseOver={handleMouseIn}>
             <div className="flex">
-              <div className="bg-[#161616] py-4 px-4 flex items-center justify-center relative text-white rounded-[15px]">
+              <div className="bg-[#161616] py-4 px-4 backdrop-blur-sm bg-[#161616]/90 flex items-center justify-center relative text-white rounded-[15px]">
                 <button className="font-normal">
                   <p className="hidden lg:flex">Shopping Cart</p>
                 </button>

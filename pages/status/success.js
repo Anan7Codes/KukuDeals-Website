@@ -1,4 +1,3 @@
-
 import Head from "next/head";
 import React, { useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
@@ -9,7 +8,33 @@ import Confetti from 'react-confetti';
 import Lottie from "lottie-react";
 import SuccessAnimation from '@/public/success-animation.json'
 
+function useWindowSize() {
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      function handleResize() {
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      }
+
+      window.addEventListener("resize", handleResize);
+      handleResize();
+
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []); 
+  return windowSize;
+}
+
 function Success() {
+  const { width, height } = useWindowSize()
+
   const router = useRouter();
   const { user } = useUser()
 
@@ -36,15 +61,15 @@ function Success() {
     EmptyCart()
   }, []);
 
-  if(!success) {
+  if(success) {
     return (
-    <div className='bg-[#161616]'>
+    <div className={`bg-[#161616] overflow-x-hidden`}>
       <Head>
           <title>Order Successful | Kuku Deals</title>
       </Head>
       <Confetti
-        width={window.innerWidth}
-        height={window.innerHeight}
+        width={width - 20}
+        height={height}
         recycle={false}
       />
       <Layout>

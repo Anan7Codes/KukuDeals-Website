@@ -77,7 +77,7 @@ export default async function handler(req, res) {
         );
 
         const paymentIntent = await stripe.paymentIntents.create({
-            amount: donated ? (finalTotal+35).toFixed() * 100 : finalTotal.toFixed() * 100,
+            amount: donated ? finalTotal.toFixed() * 100 : (finalTotal+35).toFixed() * 100,
             currency: 'AED',
             customer: data[0].stripe_customer_id,
             automatic_payment_methods: {

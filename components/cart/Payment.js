@@ -25,7 +25,7 @@ export default function Payment() {
         try {
             const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/promocodes/enter-promo-code`, {
                 promoCode: promoCode,
-                user_id: userInfo.id,
+                user_id: user.id,
                 cart: cart
             })
             console.log(res)
@@ -68,7 +68,7 @@ export default function Payment() {
         try {
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/payments/checkout-sessions`, {
                 promoCode: promoCodeApplied ? promoCode : null,
-                user_id: userInfo.id,
+                user_id: user.id,
                 cart: cart
             })
 

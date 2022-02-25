@@ -9,6 +9,7 @@ const supabase = createClient(supabaseUrl, supabaseSecretKey)
 const TotalPrice = async (cart) => {
     let total = 0
     let success = true
+    let donated = true
     await map(cart, async (item) => {
         let { data, error } = await supabase
         .from('campaigns')
@@ -16,8 +17,11 @@ const TotalPrice = async (cart) => {
         .eq("id", item.id)
         if(error) return success = false
         total += data[0].Price * item.qty
+        if(item.donate === 'false') {
+            donated = false
+        }
     })
-    return { total, success }
+    return { total, success, donated }
 }
 
 export default async function handler(req, res) {
@@ -25,7 +29,7 @@ export default async function handler(req, res) {
 		try {
             if(req.body.user_id === '') return res.send({ success: false, message: "Unauthorized"})
 
-            const { total, success } = await TotalPrice(req.body.cart)
+            const { total, success, donated } = await TotalPrice(req.body.cart)
             if(!success) return res.status(404).json({ success: false, message: "Failed to calculate total amount"})
 
             let finalTotal = total
@@ -65,7 +69,7 @@ export default async function handler(req, res) {
                     {
                       price_data: {
                         currency: 'AED',
-                        unit_amount: finalTotal.toFixed() * 100,
+                        unit_amount: donated ? (finalTotal+35).toFixed() * 100 : finalTotal.toFixed() * 100,
                         product_data: {
                             name: 'Kuku Deals Draw',
                         },

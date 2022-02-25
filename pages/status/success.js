@@ -3,7 +3,9 @@ import Layout from '@/components/Layout'
 import { CartState } from "@/contexts/cart/CartContext";
 import { useUser } from '@/contexts/user/UserContext';
 import { useRouter } from 'next/router';
-import Confetti from 'react-confetti'
+import Confetti from 'react-confetti';
+import Lottie from "lottie-react";
+import SuccessAnimation from '@/public/success-animation.json'
 
 function Success() {
   const router = useRouter();
@@ -32,7 +34,7 @@ function Success() {
     EmptyCart()
   }, []);
 
-  if(success) {
+  if(!success) {
     return (
     <div className='bg-[#161616]'>
       <Confetti
@@ -42,6 +44,15 @@ function Success() {
       />
       <Layout>
         <div className='bg-[#2c2c2c] min-h-42 my-8 py-12 rounded-[15px] flex flex-col items-center justify-center'>
+          <Lottie
+            animationData={SuccessAnimation}
+            speed={1}
+            loop
+            style={{
+              height: 200,
+              width: 200
+            }}
+          />
           <p className='font-title text-[#ffd601] text-5xl font-semibold'>Congratulations</p>
           <p className='text-[#fff] text-2xl'>You have successfully placed your order!</p>
         </div>

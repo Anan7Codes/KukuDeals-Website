@@ -34,9 +34,9 @@ export default function Footer() {
                 <div className=" text-sm lg:text-lg text-white font-medium cursor-pointer hover:text-[#ffd601]">
                   Customer Service
                 </div>
-                <ul className="text-xs lg:text-base  pt-3 leading-loose  lg:leading-extra-loose	">
+                <ul className="text-xs lg:text-base pt-3 leading-loose lg:leading-loose">
                   <li>
-                    <a className="text-white  cursor-pointer hover:text-[#ffd601]">
+                    <a className="text-white cursor-pointer hover:text-[#ffd601]">
                       Contact Us
                     </a>
                   </li>
@@ -57,7 +57,7 @@ export default function Footer() {
                   </li>
                   <li>
                     <a className="text-white  cursor-pointer hover:text-[#ffd601]">
-                      Campaign Draw Terms &amp; Conditions
+                      Draw Terms &amp; Conditions
                     </a>
                   </li>
                 </ul>

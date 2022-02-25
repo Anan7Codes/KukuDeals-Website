@@ -122,7 +122,7 @@ export default function ShippingAddress() {
               <input
                 placeholder="Apartment No"
                 type="text"
-                className=" placeholder:text-xs placeholder:text-white   pl-3 mr-3 w-full lg:w-[36rem] mt-4 outline-none  text-xs rounded-[5px]  h-14  bg-[#2c2c2c] text-white "
+                className=" placeholder:text-xs placeholder:text-[#bebebe]   pl-3 mr-3 w-full lg:w-[36rem] mt-4 outline-none  text-xs rounded-[5px]  h-14  bg-[#2c2c2c] text-white "
                 value={values.apartmentNo}
                 onChange={handleChange("apartmentNo")}
                 onBlur={() => setFieldTouched("apartmentNo")}
@@ -133,7 +133,7 @@ export default function ShippingAddress() {
               <input
                 placeholder="Building Name"
                 type="text"
-                className=" placeholder:text-xs placeholder:text-white   pl-3 mr-3 w-full lg:w-[36rem] mt-4 outline-none  text-xs rounded-[5px]  h-14  bg-[#2c2c2c] text-white "
+                className=" placeholder:text-xs placeholder:text-[#bebebe]   pl-3 mr-3 w-full lg:w-[36rem] mt-4 outline-none  text-xs rounded-[5px]  h-14  bg-[#2c2c2c] text-white "
                 value={values.buildingName}
                 onChange={handleChange("buildingName")}
                 onBlur={() => setFieldTouched("buildingName")}
@@ -144,7 +144,7 @@ export default function ShippingAddress() {
               <input
                 placeholder="Location "
                 type="text"
-                className=" placeholder:text-xs placeholder:text-white   pl-3 mr-3 w-full lg:w-[36rem] mt-4 outline-none  text-xs rounded-[5px]  h-14  bg-[#2c2c2c] text-white "
+                className=" placeholder:text-xs placeholder:text-[#bebebe]   pl-3 mr-3 w-full lg:w-[36rem] mt-4 outline-none  text-xs rounded-[5px]  h-14  bg-[#2c2c2c] text-white "
                 value={values.location}
                 onChange={handleChange("location")}
                 onBlur={() => setFieldTouched("location")}

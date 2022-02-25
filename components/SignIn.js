@@ -74,7 +74,7 @@ export default function SignIn() {
               <div className="flex flex-col text-[#ffff] ">
                 <input
                   type="text"
-                  className="border placeholder:text-xs placeholder:text-white  text-xs font-semibold pl-3 mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c]"
+                  className="border placeholder:text-xs placeholder:text-[#bebebe]  text-xs font-semibold pl-3 mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c]"
                   placeholder="Email Address"
                   value={values.email} 
                   onChange={handleChange('email')}
@@ -85,7 +85,7 @@ export default function SignIn() {
                 }
                 <input
                   type="password"
-                  className="border placeholder:text-xs text-xs pl-3 mr-3 placeholder:text-white font-semibold w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] "
+                  className="border placeholder:text-xs text-xs pl-3 mr-3 placeholder:text-[#bebebe] font-semibold w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] "
                   placeholder="Password"
                   value={values.password} 
                   onChange={handleChange('password')}

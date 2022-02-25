@@ -36,7 +36,7 @@ function SignUp() {
         });
         return;
       }
-      console.log(firstname, lastname, email, password, confirmPassword, gender, countryOfResidence, nationality,phoneNumber,additionalProfileDetails)
+      console.log(firstname, lastname, email, password, confirmPassword, gender, countryOfResidence, nationality, phoneNumber, additionalProfileDetails)
       const { user, session, error } = await supabase.auth.signUp(
         {
           email,
@@ -44,11 +44,11 @@ function SignUp() {
         },
 
         {
-          data: { 
-            name: firstname + " " + lastname, 
+          data: {
+            name: firstname + " " + lastname,
             gender: gender,
-            nationality:nationality,
-            countryOfResidence:countryOfResidence,
+            nationality: nationality,
+            countryOfResidence: countryOfResidence,
             // phoneNumber: countryCode + " " + additionalProfileDetails.phoneNumber,
             location: additionalProfileDetails.location,
             buildingName: additionalProfileDetails.buildingName,
@@ -57,7 +57,7 @@ function SignUp() {
         }
       )
       console.log(user, error, session)
-      if(error){
+      if (error) {
         toast.error(error, {
           position: "top-right",
           autoClose: 5000,
@@ -80,15 +80,15 @@ function SignUp() {
       router.push('/signin')
       return
     }
-    catch(e) {
+    catch (e) {
       console.log(e);
     }
   }
   return (
     <>
-          <div className="  bg-[#2c2c2c]  mb-20 mt-10 flex justify-center items-center rounded-[15px] w-full h-full ">
-            <div className=" h-full w-full mt-20 lg:mt-32">
-        <div className="pt-4 text-center">
+      <div className="  bg-[#2c2c2c]  mb-20 mt-10 flex justify-center items-center rounded-[15px] w-full h-full ">
+        <div className=" h-full w-full mt-20 lg:mt-32">
+          <div className="pt-4 text-center">
             <p className="text-3xl text-[#ffd601] pr-12 font-bold font-title">Sign Up</p>
           </div>
           <form
@@ -98,35 +98,35 @@ function SignUp() {
             <div className="flex flex-col text-white ">
               <input
                 type="text"
-                className="border placeholder:text-xs  placeholder:text-white text-xs pl-3 mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className="border placeholder:text-xs  placeholder:text-[#bebebe] text-xs pl-3 mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
                 placeholder="FirstName"
                 value={firstname}
                 onChange={(e) => setFirstName(e.target.value)}
               />
               <input
                 type="text"
-                className="border placeholder:text-xs text-xs placeholder:text-white pl-3 mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className="border placeholder:text-xs text-xs placeholder:text-[#bebebe] pl-3 mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
                 placeholder="LastName"
                 value={lastname}
                 onChange={(e) => setLastName(e.target.value)}
               />
               <input
                 type="text"
-                className="border placeholder:text-xs text-xs pl-3 placeholder:text-white mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className="border placeholder:text-xs text-xs pl-3 placeholder:text-[#bebebe] mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <input
                 type="password"
-                className="border placeholder:text-xs text-xs pl-3 placeholder:text-white mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className="border placeholder:text-xs text-xs pl-3 placeholder:text-[#bebebe] mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <input
                 type="password"
-                className="border placeholder:text-xs text-xs pl-3 mr-3 placeholder:text-white w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className="border placeholder:text-xs text-xs pl-3 mr-3 placeholder:text-[#bebebe] w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
@@ -160,7 +160,7 @@ function SignUp() {
                 <div className="lg:flex ">
                   <CountryDropdown
                     defaultOptionLabel="Nationality"
-                    className="border border-[#d3d3d3] bg-[#2c2c2c] text-white text-xs pl-3 mr-3 w-full mt-4 outline-none rounded-[5px] h-14"
+                    className="border border-[#d3d3d3] bg-[#2c2c2c] text-[#bebebe] text-xs pl-3 mr-3 w-full mt-4 outline-none rounded-[5px] h-14"
                     value={nationality}
                     onChange={(val) => setNationality(val)}
                   />
@@ -168,57 +168,56 @@ function SignUp() {
                 <div className="lg:flex ">
                   <CountryDropdown
                     defaultOptionLabel="Country of Residence"
-                    className="border border-[#d3d3d3] bg-[#2c2c2c] text-white text-xs pl-3 mr-3 w-full mt-4 outline-none rounded-[5px] h-14"
+                    className="border border-[#d3d3d3] bg-[#2c2c2c] text-[#bebebe] text-xs pl-3 mr-3 w-full mt-4 outline-none rounded-[5px] h-14"
                     value={countryOfResidence}
                     onChange={(val) => setCountryOfResidence(val)}
                   />
                 </div>
                 <div className="lg:flex">
-                <PhoneInput
-                  placeholder="Enter Mobile Number"
-                  containerClass="my-container-class"
-                  value={phoneNumber}
-                  // onChange={(e)=> setPhoneNumber(e.target.value)}
-                  inputClass="my-input-class"
-                  containerStyle={{
-                    border: "",
-                    marginTop: "13px",
-                    backgroundColor: "#2c2c2c"
-                  }}
-                  inputStyle={{
-                    background: "#2c2c2c",
-                    color: 'white',
-                    fontSize: "11px",
-                    height: "3.1rem",
-                    width: "98%",
-                    fontSize: "11px",
-                  }}
-                  enableSearch="true"
-                  country="ae"
-                  regions={["north-america", "carribean", "middle-east", "asia"]}
-                />
+                  <PhoneInput
+                    placeholder="Enter Mobile Number"
+                    containerClass="my-container-class"
+                    value={phoneNumber}
+                    // onChange={(e)=> setPhoneNumber(e.target.value)}
+                    inputClass="my-input-class"
+                    containerStyle={{
+                      border: "",
+                      marginTop: "13px",
+                      backgroundColor: "#2c2c2c"
+                    }}
+                    inputStyle={{
+                      background: "#2c2c2c",
+                      color: '#bebebe',
+                      height: "3.1rem",
+                      width: "98%",
+                      fontSize: "12px",
+                    }}
+                    enableSearch="true"
+                    country="ae"
+                    regions={["north-america", "carribean", "middle-east", "asia"]}
+                  />
                 </div>
               </div>
-                <input
+              <input
                 type="text"
-                className="border placeholder:text-xs placeholder:text-white text-xs pl-3 mr-3 w-full lg:w-[98%] mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className="border placeholder:text-xs placeholder:text-[#bebebe] text-xs pl-3 mr-3 w-full lg:w-[98%] mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
                 placeholder="Location"
-                value={additionalProfileDetails?.location} onChange={ e => setAdditionalProfileDetails({ ...additionalProfileDetails, location: e.target.value})}
+                value={additionalProfileDetails?.location} onChange={e => setAdditionalProfileDetails({ ...additionalProfileDetails, location: e.target.value })}
               />
-                 <input
+              <input
                 type="text"
-                className="border placeholder:text-xs placeholder:text-white text-xs pl-3 mr-3 w-full lg:w-[98%] mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className="border placeholder:text-xs placeholder:text-[#bebebe] text-xs pl-3 mr-3 w-full lg:w-[98%] mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
                 placeholder="Building Name"
                 // value={newShippingAddress.apartmentNo} onChange={e => setNewShippingAddress({ ...newShippingAddress, apartmentNo: e.target.value })}
-                value={additionalProfileDetails?.buildingName} onChange={ e => setAdditionalProfileDetails({ ...additionalProfileDetails, buildingName: e.target.value})}
+                value={additionalProfileDetails?.buildingName} onChange={e => setAdditionalProfileDetails({ ...additionalProfileDetails, buildingName: e.target.value })}
               />
-                 <input
+              <input
                 type="text"
-                className="border placeholder:text-xs placeholder:text-white  text-xs pl-3 mr-3 w-full lg:w-[98%] mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className="border placeholder:text-xs placeholder:text-[#bebebe]  text-xs pl-3 mr-3 w-full lg:w-[98%] mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
                 placeholder="Apartment No"
-                value={additionalProfileDetails?.apartmentNo} onChange={ e => setAdditionalProfileDetails({ ...additionalProfileDetails, apartmentNo: e.target.value})}
+                value={additionalProfileDetails?.apartmentNo} onChange={e => setAdditionalProfileDetails({ ...additionalProfileDetails, apartmentNo: e.target.value })}
               />
-
+           
               <div className="pb-6 flex justify-between">
                 <p
                   className="text-[#ffd601]  mr-3  pt-4 mt-4 w-full h-14 font-semibold text-base cursor-pointer"
@@ -226,7 +225,7 @@ function SignUp() {
                 >
                   Existing User Login
                 </p>
-                <button className="bg-[#ffd601] font-title mr-3 mt-4 w-full outline-none rounded-[5px] h-14 text-black font-semibold text-base">
+                <button className="bg-[#ffd601]  mr-3 mt-4 w-full outline-none rounded-[5px] h-14 text-black font-semibold text-base">
                   Sign Up
                 </button>
               </div>

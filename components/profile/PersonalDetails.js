@@ -86,13 +86,13 @@ export default function PersonalDetails() {
           <div className="lg:flex text-lg">
             <input
               placeholder="First Name"
-              className="text-white placeholder:text-xs bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none  rounded-[5px]  h-14   "
+              className="text-white placeholder:text-xs placeholder:text-[#bebebe]  bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none  rounded-[5px]  h-14   "
               value={newPersonalDetails.firstname} onChange={e => setNewPersonalDetails({ ...newPersonalDetails, firstname: e.target.value })}
 
             />
             <input
               placeholder="Last Name"
-              className="text-white placeholder:text-xs bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none  rounded-[5px]  h-14   "
+              className="text-white placeholder:text-xs placeholder:text-[#bebebe] bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none  rounded-[5px]  h-14   "
               value={newPersonalDetails.lastname} onChange={e => setNewPersonalDetails({ ...newPersonalDetails, lastname: e.target.value })}
 
             />
@@ -100,8 +100,9 @@ export default function PersonalDetails() {
           <div className="flex flex-col">
             <input
               placeholder="Email"
-              className=" placeholder:text-xs bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-[96.5%] mt-4 outline-none  rounded-[5px]  h-14 text-white "
+              className=" placeholder:text-xs placeholder:text-[#bebebe] bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-[96.5%] mt-4 outline-none  rounded-[5px] opacity-60 h-14 text-white "
               value={email}
+              disabled
 
             />
           </div>
@@ -152,7 +153,7 @@ export default function PersonalDetails() {
                 </div>
                 <div className="mr-4">
                   <p
-                    className="text-black bg-[#ffd601] rounded-r-lg h-12  flex justify-center items-center w-[19rem] text-center drop-shadow-sm	  "
+                    className="text-black bg-[#ffd601] rounded-r-lg h-12  flex justify-center items-center w-[19rem] text-center drop-shadow-sm"
                     value={false}
                     onClick={(e) => setGender(false)}
                   >

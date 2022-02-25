@@ -40,7 +40,7 @@ export default function Settings() {
                 <input
                   placeholder="Current Password"
                   type="password"
-                  className="text-white placeholder:text-xs placeholder:text-white text-lg bg-[#2c2c2c] pl-3 mr-3 w-full lg:w-[26rem] mt-4 outline-none  rounded-[5px]  h-14 "
+                  className="text-white placeholder:text-xs placeholder:text-[#bebebe] text-lg bg-[#2c2c2c] pl-3 mr-3 w-full lg:w-[26rem] mt-4 outline-none  rounded-[5px]  h-14 "
                   value={values.oldPassword}
                   onChange={handleChange('oldPassword')}
                   onBlur={() => setFieldTouched('oldPassword')}
@@ -51,7 +51,7 @@ export default function Settings() {
                 <input
                   placeholder="New Password"
                   type="password"
-                  className="text-white placeholder:text-xs placeholder:text-white text-lg bg-[#2c2c2c] pl-3 mr-3 w-full lg:w-[26rem] mt-4 outline-none  rounded-[5px]  h-14 "
+                  className="text-white placeholder:text-xs placeholder:text-[#bebebe] text-lg bg-[#2c2c2c] pl-3 mr-3 w-full lg:w-[26rem] mt-4 outline-none  rounded-[5px]  h-14 "
                   value={values.newPassword}
                   onChange={handleChange('newPassword')}
                   onBlur={() => setFieldTouched('newPassword')}
@@ -65,7 +65,7 @@ export default function Settings() {
                   value={values.confirmPassword}
                   onChange={handleChange('confirmPassword')}
                   onBlur={() => setFieldTouched('confirmPassword')}
-                  className="text-white placeholder:text-xs placeholder:text-white text-lg bg-[#2c2c2c] pl-3 mr-3 w-full lg:w-[26rem] mt-4 outline-none  rounded-[5px]  h-14 "
+                  className="text-white placeholder:text-xs placeholder:text-[#bebebe] text-lg bg-[#2c2c2c] pl-3 mr-3 w-full lg:w-[26rem] mt-4 outline-none  rounded-[5px]  h-14 "
                 />
                 {touched.confirmPassword && errors.confirmPassword &&
                   <p className="text-xs text-red-600">{errors.confirmPassword}</p>

@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Layout from "@/components/Layout";
+import SkeletonLayout from "@/components/SkeletonLayout";
 import Banner from "@/components/home/Banner";
 import Section1 from "@/components/home/Section1";
 import Campaign from "@/components/home/Campaign";
@@ -9,6 +10,7 @@ import CartButton from "@/components/cart/CartButton";
 import { useEffect, useState } from "react";
 import { supabase } from '@/utils/supabaseClient';
 import AliceCarousel from "react-alice-carousel";
+import Skeleton from 'react-loading-skeleton'
 import "react-alice-carousel/lib/alice-carousel.css";
 import ArrowL from "@/components/home/ArrowL";
 import ArrowR from "@/components/home//ArrowR";
@@ -67,6 +69,14 @@ export default function Home() {
     FetchWinners()
   }, [])
  
+  if(campaigns.length === 0 ) return (
+    <SkeletonLayout>
+      <Skeleton className="h-80" style={{borderRadius: 15}} />
+      <Skeleton className="h-60 mt-12" style={{borderRadius: 15}} />
+      <Skeleton className="h-60 mt-12" style={{borderRadius: 15}} />
+      <Skeleton className="h-60 mt-12" style={{borderRadius: 15}} />
+    </SkeletonLayout>
+  )
   if (!campaigns) return <p>No Data</p>
   return (
     <div className="bg-[#161616]">

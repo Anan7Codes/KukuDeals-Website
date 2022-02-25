@@ -18,7 +18,7 @@ module.exports = {
         custom: {
             DEFAULT: '#10B981',
             light: '#ffd601',
-            scroll:'#161616'
+            scroll:'#fff'
         }
       },
     },

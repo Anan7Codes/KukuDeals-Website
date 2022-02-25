@@ -45,10 +45,9 @@ export default function Sidebar({ children }) {
 }
 
   return (
-    <div>
-      <div className="lg:grid grid-rows-2 grid-flow-col justify-start">
+    <div className="lg:grid grid-rows-2 grid-flow-col justify-start">
         <User />
-        <div className=" row-span-2 col-span-2 bg-[#2c2c2c] text-white lg:w-[21rem] divide-y  divide-[#161616] mb-5 rounded-[25px] text-sm  cursor-pointer">
+        <div className="row-span-2 col-span-2 bg-[#2c2c2c] text-white lg:w-[21rem] divide-y divide-[#161616] mb-5 rounded-[15px] text-sm cursor-pointer">
           <div className="hidden lg:flex p-4" onClick={() => router.push('/profile/personal-details')}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -264,7 +263,6 @@ export default function Sidebar({ children }) {
               onClick={SignOutUser}>
               Logout
             </p>
-
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 hidden lg:flex ml-[12.5rem] text-gray-200"
@@ -281,10 +279,9 @@ export default function Sidebar({ children }) {
             </svg>
           </div>
         </div>
-        <div className="row-span-3 p-7">
+        <div className="row-span-3 lg:p-7">
           {children}
         </div>
-      </div>
     </div>
   );
 }

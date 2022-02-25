@@ -29,12 +29,6 @@ function Navbar() {
             <div className="hidden lg:flex items-center space-x-3">
               <a
                 href=""
-                className="py-4 text-white font-bold hover:text-[#ffd601] "
-              >
-                PRODUCTS
-              </a>
-              <a
-                href=""
                 className="py-4 px-3 text-white font-bold hover:text-[#ffd601]"
               >
                 WINNERS
@@ -187,9 +181,6 @@ function Navbar() {
                   alt="kuku logo"
                 />
               </div>
-              <p className="font-medium text-sm text-white mt-6 mb-2 hover:cursor-pointer hover:text-yellow-500">
-                Products
-              </p>
               <p className="font-medium text-sm text-white mb-2 hover:cursor-pointer hover:text-yellow-500">
                 Winners
               </p>

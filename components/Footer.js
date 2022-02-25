@@ -120,15 +120,15 @@ export default function Footer() {
                 </p>
               </div>
               <div className="w-full">
-                <ul className="space-x-10 flex justify-center  pt-2">
-                  <li className=" h-12 w-36 relative ">
+                <ul className="space-x-3 flex justify-center  pt-2">
+                  <li className=" h-24 w-44 relative ">
                     <Image
                       src="/icons/footerIcons/appstore.svg"
                       layout="fill"
                       alt="googleplay logo"
                     />
                   </li>
-                  <li className=" h-12 w-36 relative">
+                  <li className=" h-24 w-44 relative">
                     <Image
                       src="/icons/footerIcons/playstore.svg"
                       layout="fill"

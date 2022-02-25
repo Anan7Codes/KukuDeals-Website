@@ -59,7 +59,7 @@ export default function CartItem({ item }) {
             <p className="font-bold text-sm sm:text-base lg:text-xl lg:pt-3 text-white">
               AED{item?.Price}.00
             </p>
-            <p className="text-xs font-semibold lg:pt-3 text-[#ffd601] ">
+            <p className="text-xs font-semibold lg:pt-3 text-green-500 ">
               {item.donate === "true" ? '2 Coupons' : '1 Coupon'}
               <span className="text-white font-normal"> per unit</span>
             </p>
@@ -91,7 +91,7 @@ export default function CartItem({ item }) {
             offColor="#767577"
             uncheckedIcon={false}
             checkedIcon={false}
-            offHandleColor="#ffd601"
+            offHandleColor="#fffff"
             onHandleColor="#ffd601"
             boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
             activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"

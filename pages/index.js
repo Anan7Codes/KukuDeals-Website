@@ -5,7 +5,6 @@ import Section1 from "@/components/home/Section1";
 import Campaign from "@/components/home/Campaign";
 import Soldout from "@/components/home/Soldout";
 import Winners from "@/components/home/Winners";
-import Section5 from "@/components/home/Section5";
 import CartButton from "@/components/cart/CartButton";
 import { useEffect, useState } from "react";
 import { supabase } from '@/utils/supabaseClient';
@@ -16,7 +15,7 @@ import ArrowR from "@/components/home//ArrowR";
 
 export default function Home() {
   const [campaigns, setCampaigns] = useState([])
-  const [ winners, setWinners ] = useState([])
+  const [winners, setWinners] = useState([])
   const [index, setIndex] = useState(0);
   const responsive = {
     0: { items: 1 },
@@ -86,7 +85,7 @@ export default function Home() {
         </div>
         <div>
           <div className=" mx-auto">
-            <div className="bg-[#ffd601] rounded-[45px] px-6 py-5 text-black">
+            <div className="bg-[#ffd601] rounded-[15px] px-6 py-5 text-black">
               <div className="pt-2 ml-3 relative">
                 <div className="flex justify-between">
                   <p className="tracking-tighter font-title font-bold text-3xl">Sold Out</p>
@@ -95,7 +94,7 @@ export default function Home() {
                   All our sold out campaigns along with their <br /> corresponding
                   draw dates are listed below
                 </div>
-                <div className="flex mt-6 relative ">
+                <div className="mt-6 relative ">
                   <AliceCarousel
                     mouseTracking
                     responsive={responsive}
@@ -104,22 +103,22 @@ export default function Home() {
                     }}
                     renderPrevButton={() => {
                       return index == 0 ? (
-                        <div className="absolute -top-24 right-24 opacity-50">
+                        <div className="absolute hidden lg:flex -top-24 right-24 opacity-50">
                           <ArrowL />
                         </div>
                       ) : (
-                        <div className="absolute -top-24 opacity:100 right-24">
+                        <div className="absolute hidden lg:flex -top-24 opacity:100 right-24">
                           <ArrowL />
                         </div>
                       )
                     }}
                     renderNextButton={() => {
                       return index >= 10 - 4 ? (
-                        <div className="absolute -top-24 opacity-50 right-20">
+                        <div className="absolute hidden lg:flex -top-24 opacity-50 right-20">
                           <ArrowR />
                         </div>
                       ) : (
-                        <div className="absolute -top-24 right-20">
+                        <div className="absolute hidden lg:flex -top-24 right-20">
                           <ArrowR />
                         </div>
                       );
@@ -127,13 +126,22 @@ export default function Home() {
                     disableDotsControls="true"
                     controlsStrategy="alternate"
                   >
-                    <div className="flex space-x-[17rem]">
-                      {campaigns?.map(campaign => {
-                        return (
-                          <Soldout campaign={campaign} key={campaign.id} />
-                        )
-                      })}
-                    </div>
+                    <div className="flex justify-center items-center">
+                      <div className="flex-col space-y-8 lg:hidden">
+                        {campaigns?.map(campaign => {
+                          return (
+                            <Soldout campaign={campaign} key={campaign.id} />
+                          )
+                        })}
+                      </div>
+                      <div className="hidden lg:flex space-x-[17rem]">
+                        {campaigns?.map(campaign => {
+                          return (
+                            <Soldout campaign={campaign} key={campaign.id} />
+                          )
+                        })}
+                      </div>
+                      </div>
                   </AliceCarousel>
                 </div>
               </div>
@@ -158,42 +166,50 @@ export default function Home() {
                   }}
                   renderPrevButton={() => {
                     return index == 0 ? (
-                      <div className="absolute -top-24 right-24 opacity-50">
-                        <ArrowL />
+                      <div className="absolute  -top-24 right-24 opacity-50">
+                        <ArrowL item={true}/>
                       </div>
                     ) : (
                       <div className="absolute -top-24 opacity:100 right-24">
-                        <ArrowL />
+                        <ArrowL item={true}/>
                       </div>
                     );
                   }}
                   renderNextButton={() => {
                     return index >= 10 - 4 ? (
                       <div className="absolute -top-24 opacity-50 right-20">
-                        <ArrowR />
+                        <ArrowR item={true}/>
                       </div>
                     ) : (
                       <div className="absolute -top-24 right-20">
-                        <ArrowR />
+                        <ArrowR item={true}/>
                       </div>
                     );
                   }}
                   disableDotsControls="true"
                   controlsStrategy="alternate"
                 >
-              <div className="flex space-x-10">
-                  {winners?.map(winner => {
-                    return (
-                      <Winners winner={winner} key={winner.id} />
-                    )
-                  })}
+                  <div className="flex justify-center items-center">
+                    <div className="flex-col space-y-8 lg:hidden">
+                      {winners?.map(winner => {
+                        return (
+                          <Winners winner={winner} key={winner.id} />
+                        )
+                      })}
+                    </div>
+                    <div className="hidden justify-start lg:flex space-x-10">
+                      {winners?.map(winner => {
+                        return (
+                          <Winners winner={winner} key={winner.id} />
+                        )
+                      })}
+                    </div>
                   </div>
                 </AliceCarousel>
               </div>
             </div>
           </div>
         </div>
-        <Section5 />
         <CartButton />
       </Layout>
     </div>

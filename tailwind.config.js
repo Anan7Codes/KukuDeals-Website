@@ -13,14 +13,19 @@ module.exports = {
       lineHeight: {
             'extra-loose': '2.5',
             '12': '3rem',
-          }
+      },
+      colors: {
+        custom: {
+            DEFAULT: '#10B981',
+            light: '#ffd601',
+            scroll:'#161616'
+        }
+    }
     },
-    // extend: {
-    //   lineHeight: {
-    //     'extra-loose': '2.5',
-    //     '12': '3rem',
-    //   }
-    // }
   },
+  plugins: [
+    require('tailwind-scrollbar')
+    ],
+  
  
 }

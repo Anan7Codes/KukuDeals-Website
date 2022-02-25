@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { supabase } from '@/utils/supabaseClient';
@@ -43,9 +43,8 @@ export default function SignIn() {
   }
 
   return (
-    <div>
-     <div className="  bg-[#2c2c2c]  mb-20 mt-10 flex justify-center items-center rounded-[15px] w-full h-[30rem] ">
-            <div className=" h-full w-full mt-20 lg:mt-32">
+    <div className="  bg-[#2c2c2c]  mb-20 mt-10 flex justify-center items-center rounded-[15px] w-full h-[30rem] ">
+      <div className=" h-full w-full mt-20 lg:mt-32">
           <div className="pt-4 text-center">
             <p className="text-3xl text-[#ffd601] font-bold font-title ">Sign In</p>
           </div>
@@ -95,27 +94,29 @@ export default function SignIn() {
                   <p className="text-xs text-red-600">{errors.password}</p>
                 }
                 <div className="pb-6 flex justify-between">
-                  <button onClick={isValid ? handleSubmit : null} type="submit" className="bg-[#ffd601] font-title hover:bg-[#d1b736] mr-3 mt-4 w-full outline-none rounded-[5px] h-14 text-black font-semibold text-base">
+                  <button onClick={isValid ? handleSubmit : null} type="submit" className="bg-[#ffd601] hover:bg-[#d1b736] mr-3 mt-4 w-full outline-none rounded-[5px] h-14 text-black font-semibold text-base">
                     Sign In
                   </button>
                 </div>
-                <div className="flex justify-between text-xs">
+                <div className="flex flex-col justify-between text-xs">
                   <p
-                    className="text-white cursor-pointer hover:text-[#ffd601] "
+                    className="text-white cursor-pointer hover:text-[#ffd601]"
                     onClick={() => router.push("/signup")}
                   >
                     Don&apos;t have an account yet?  Click here to Signup
                   </p>
-                  {/* <p className="text-blue-500 cursor-pointer mr-3 ">
-                    Forgot password
-                  </p> */}
+                  <p
+                    className="text-white mt-4 cursor-pointer hover:text-[#ffd601]"
+                    onClick={() => router.push("/forgot-password")}
+                  >
+                    Forgot Password? Click here to reset password
+                  </p>
                 </div>
               </div>
             )}
             </Formik> 
           </div>
         </div>
-      </div>
     </div>
   );
 }

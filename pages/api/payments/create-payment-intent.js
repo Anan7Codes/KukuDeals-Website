@@ -11,6 +11,7 @@ const supabase = createClient(supabaseUrl, supabaseSecretKey)
 const TotalPrice = async (cart) => {
     let total = 0
     let success = true
+    let donated = true
     await map(cart, async (item) => {
         let { data, error } = await supabase
         .from('campaigns')
@@ -18,8 +19,11 @@ const TotalPrice = async (cart) => {
         .eq("id", item.id)
         if(error) return success = false
         total += data[0].Price * item.qty
+        if(item.donate === 'false') {
+            donated = false
+        }
     })
-    return { total, success }
+    return { total, success, donated }
 }
 
 export default async function handler(req, res) {
@@ -32,7 +36,7 @@ export default async function handler(req, res) {
         // console.log("user cookie promo code", user)
         // if(!user) return res.status(401).send({ success: false, message: "Unauthorized"})
 
-        const { total, success } = await TotalPrice(req.body.cart)
+        const { total, success, donated } = await TotalPrice(req.body.cart)
         if(!success) return res.status(404).json({ success: false, message: "Failed to calculate total amount"})
 
         let finalTotal = total
@@ -57,10 +61,9 @@ export default async function handler(req, res) {
             if(profile.data[0].promo_codes_used.includes(req.body.promoCode)) {
                 return res.send({ success: false, message: "Promo code has already been used"})
             }
-
-            console.log(finalTotal)
         }
 
+        console.log("Amount log" + total, success, donated, donated ? finalTotal.toFixed() * 100 : (finalTotal+35).toFixed() * 100)
         let { data, error } = await supabase
             .from('profiles')
             .select('stripe_customer_id')
@@ -73,7 +76,7 @@ export default async function handler(req, res) {
         );
 
         const paymentIntent = await stripe.paymentIntents.create({
-            amount: finalTotal.toFixed() * 100,
+            amount: donated ? finalTotal.toFixed() * 100 : (finalTotal+35).toFixed() * 100,
             currency: 'AED',
             customer: data[0].stripe_customer_id,
             automatic_payment_methods: {
@@ -88,8 +91,8 @@ export default async function handler(req, res) {
             .insert([
                 { 
                     cart: req.body.cart, 
-                    amount: total, 
-                    final_amount: finalTotal,
+                    amount: donated ? total : total + 35, 
+                    final_amount: donated ? finalTotal : finalTotal + 35,
                     verification_secret: paymentIntent.id,
                     user_id: req.body.user_id,
                     promo_code_used: req.body.promoCode

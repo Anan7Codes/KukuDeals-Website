@@ -96,6 +96,7 @@ const webhookHandler = async (req, res) => {
                         transaction_number: completed_orders.count + 1
                     },
                 ])   
+            console.log("co", data)
             if(error) return res.send({ success: false, message: "Completed orders insertion error", error: data.error})
                        
             let profile = await supabase

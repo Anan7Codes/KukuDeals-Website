@@ -61,10 +61,9 @@ export default async function handler(req, res) {
             if(profile.data[0].promo_codes_used.includes(req.body.promoCode)) {
                 return res.send({ success: false, message: "Promo code has already been used"})
             }
-
-            console.log(finalTotal)
         }
 
+        console.log("Amount log" + total, success, donated, donated ? finalTotal.toFixed() * 100 : (finalTotal+35).toFixed() * 100)
         let { data, error } = await supabase
             .from('profiles')
             .select('stripe_customer_id')

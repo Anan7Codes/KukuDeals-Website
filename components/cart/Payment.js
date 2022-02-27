@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import Image from 'next/image'
 import { CartState } from "@/contexts/cart/CartContext";
 import { useRouter } from "next/router";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { useUser } from '@/contexts/user/UserContext';
+import { RiNavigationFill } from "react-icons/ri";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
@@ -84,26 +86,58 @@ export default function Payment() {
         <>
             <div className="bg-[#2c2c2c] rounded-[15px] mb-4 mt-3 p-5 leading-extra-loose h-50">
                 <div className="flex text-2xl font-bold justify-between pb-6 text-white">
-                <p>Total</p>
-                <p className="pt-2 text-white absolute pl-16 lg:pl-0 lg:mt-6 text-sm font-normal">
-                    (Inclusive of VAT)
-                </p>
-                <p>AED{promoCodeApplied ? clientTotal.toFixed(2) : total.toFixed(2)}</p>
+                    <p>Total</p>
+                    <p className="pt-2 text-white absolute pl-16 lg:pl-0 lg:mt-6 text-sm font-normal">
+                        (Inclusive of VAT)
+                    </p>
+                    <p>AED{promoCodeApplied ? clientTotal.toFixed(2) : total.toFixed(2)}</p>
                 </div>
                 <div className="flex justify-between text-sm py-1 mt-4 text-white">
-                <p>Subtotal</p>
-                <p>AED{promoCodeApplied ? (clientTotal*0.95).toFixed(2) : (total*0.95).toFixed(2)}</p>
-                </div>
-                <div className="flex justify-between text-sm py-1 text-white">
-                <p>VAT</p>
-                <p>AED{promoCodeApplied ? (clientTotal*0.05).toFixed(2) : (total*0.05).toFixed(2)}</p>
+                    <p>Subtotal</p>
+                    <p>AED{promoCodeApplied ? (clientTotal*0.95).toFixed(2) : (total*0.95).toFixed(2)}</p>
+                    </div>
+                    <div className="flex justify-between text-sm py-1 text-white">
+                    <p>VAT</p>
+                    <p>AED{promoCodeApplied ? (clientTotal*0.05).toFixed(2) : (total*0.05).toFixed(2)}</p>
                 </div>
             </div>
+            {cart.some( c => c.donate === "false" ) ?
+                <div className="bg-[#2c2c2c] rounded-[15px] mb-4 mt-3 p-5 min-h-50">
+                    <div className="flex">
+                        <div>
+                            <p className="font-semibold font-title text-[#ffd601] text-lg">Deliver to your address</p>
+                            <p className="text-white text-xs">
+                                Spend <span className="font-bold">AED 35</span> and have your products delivered to you.<br/><span className="font-bold">Your coupons</span> will be used for draws.
+                            </p>
+                        </div>
+                        <div className=" w-16 h-12 relative">
+                            <Image
+                                src="/motorbike.png"
+                                layout="fill"
+                                alt="kuku logo"
+                            />
+                        </div>
+                    </div>
+                    {user ?
+                        <>
+                            <div className="text-sm py-1 mt-4 text-white">
+                                <p className="font-semibold font-title text-[#ffd601]">Current Address</p>
+                                <p className="text-white text-xs font-bold">{user.user_metadata.location ? `${user?.user_metadata.countryOfResidence}, ${user?.user_metadata.location}, ${user?.user_metadata.buildingName}, ${user?.user_metadata.apartmentNo}` : 'No address has been added'}</p>
+                            </div>
+                            <button onClick={() => router.push('/profile/shipping-address')} className="bg-[#ffd601] mt-4 w-full text-sm text-black font-semibold p-4 rounded-[10px]" type="submit" role="link">
+                                Update Address
+                            </button>
+                        </>
+                        : null
+                    }
+                </div>
+                : null
+            }
             { user ?
                 <>
                     <div className="bg-[#2c2c2c] item-centers justify-center rounded-2xl">
                         { promoCodeApplied ?
-                        <div className="flex items-center justify-center px-2 py-2">
+                        <div className="flex items-center justify-center px-2">
                             <p className="text-sm text-white">Promo code {promoCode} applied! Saving AED {(total - clientTotal).toFixed(2)}</p>
                             <button onClick={RemovePromoCode} className="ml-3 text-[#000] border border-[#ffd601] h-11 w-[20%] rounded text-xs font-semibold bg-[#ffd601]">
                             Remove
@@ -134,7 +168,7 @@ export default function Payment() {
                     </button>
                 </>
                 :
-                <button onClick={() =>  router.push('/signin')} className="bg-[#ffd601] mt-4 w-full text-md text-black font-semibold p-4 rounded-[10px]" type="submit" role="link">
+                <button onClick={() =>  router.push('/signin')} className="bg-[#ffd601] w-full text-md text-black font-semibold p-4 rounded-[10px]" type="submit" role="link">
                     You need to sign in.<br/>Click here to sign in.
                 </button>                
             }

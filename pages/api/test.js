@@ -1,14 +1,8 @@
-import { createClient } from '@supabase/supabase-js'
 import { map } from 'modern-async'
 var html_to_pdf = require('html-pdf-node');
 const mail = require('@sendgrid/mail')
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY
-const supabase = createClient(supabaseUrl, supabaseSecretKey)
-
-let customerName, amount, display
-
+let amount, display
 mail.setApiKey(process.env.SENDGRID_API_KEY)
 
 
@@ -20,47 +14,41 @@ const Handler = async (req, res) => {
     }
     if (req.method === 'GET') {
         console.log("Function called")
-        let initiated_orders = await supabase
-            .from('initiated_orders')
-            .select('*')
-            // .eq("verification_secret", charge.payment_intent)
-            .eq("verification_secret", "pi_3KViy4LSsCUq84XE0qx29IKS")
-            .eq("status", true)
-            .single()
-        console.log("initiated_orders", initiated_orders)
-        if (initiated_orders.data.promo_code_used === null) {
-            amount = initiated_orders.data.amount
-        } else {
-            amount = initiated_orders.data.final_amount
+        const customerName = "Test User Name"
+        const completed_orders = {
+            count: 20
         }
-        console.log("initiated_orders amount", initiated_orders.data.amount)
-        let completed_orders = await supabase
-            .from('completed_orders')
-            .select('*', { count: 'exact' })
+        let coupons = [
+            {
+              product_id: 'ec3e130d-766e-4f3f-ace2-50ffee8ae458',
+              product_coupons: [ 'KUKU0000012-1O', 'KUKU0000012-1D' ],
+              product_qty: 1,
+              product_price: 15,
+              name: 'Zorno Pencil/AED 10,000 Cash'
+            },
+            {
+              product_id: '998895d2-a6aa-404a-9f60-76880b8c2273',
+              product_coupons: [
+                'KUKU0000012-2O',
+                'KUKU0000012-2D',
+                'KUKU0000012-3O',
+                'KUKU0000012-3D',
+                'KUKU0000012-4O',
+                'KUKU0000012-4D'
+              ],
+              product_qty: 3,
+              product_price: 50,
+              name: 'Zorno Pencil/AED 10,000 Cash'
+            },
+            {
+              product_id: 'a415a869-6ebe-4d67-901c-b92b7e02dbac',
+              product_coupons: [ 'KUKU0000012-5O', 'KUKU0000012-5D' ],
+              product_qty: 1,
+              product_price: 55,
+              name: 'Zorno Pencil/AED 10,000 Cash'
+            }
+          ]
 
-        let ordered_coupons = []
-        let donated_coupons = []
-        let coupons = []
-        await map(initiated_orders.data.cart, async (order, index) => {
-            coupons.push({ product_id: JSON.parse(order).id, product_coupons: [], product_qty: JSON.parse(order).qty, product_price: JSON.parse(order).Price, name: JSON.parse(order).ProductName.en + "/" + JSON.parse(order).GiftName.en })
-            for (let i = 1; i <= JSON.parse(order).qty; i++) {
-                ordered_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length + 1}O`)
-                coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}O`)
-                if (JSON.parse(order).donate === "true") {
-                    donated_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}D`)
-                    coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}D`)
-                }
-            }
-        })
-        console.log("coupons", coupons)
-        const { data, error } = await supabase
-            .from('profiles')
-            .select('*')
-        data.map((i, index) => {
-            if (i.id === initiated_orders.data.user_id) {
-                customerName = i.name
-            }
-        })
         const header = `
             <!DOCTYPE html>
             <html lang="en">
@@ -204,10 +192,6 @@ const Handler = async (req, res) => {
             <td class=" border-collapse border border-slate-500  py-4">
             </td>
             <td class=" border-collapse border border-slate-500  py-4">
-            </td>
-            <td class=" border-collapse border border-slate-500  py-4">
-            ${initiated_orders.data.promo_code_used ? `AED${amount}<br/>(Promocode used)` : `AED${amount}`}
-            </td>
         </tr>
             </tbody>
                 </table>

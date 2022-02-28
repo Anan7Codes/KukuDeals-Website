@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { supabase } from '@/utils/supabaseClient';
@@ -20,29 +19,22 @@ export default function ActiveCoupons() {
       }
       GetActiveOrders() 
     }, [])
+
+    if(activeOrders.length === 0) return (
+      <div className="bg-[#2c2c2c] rounded-[15px] flex items-center justify-center h-[400px] w-[350px]">
+        <p className="text-white font-semibold">No Active Coupons</p> 
+      </div>
+    )
     return (
-        <div>
-              <div>
-                <p className="font-title text-[#ffd601] font-semibold pb-4 text-4xl ">Your Tickets</p>
-                <div className="overflow-y-auto scrollbar-thin scrollbar-thumb-custom-scroll scrollbar-track-custom-scroll   max-h-screen">
-              {activeOrders?.map(order => {              
-              return (
-                <Coupon order={order} key={order.id}/>              
-              )
-            })} 
-            </div>
-              </div>
-              {/* <div className=" relative  top-0 left-0 opacity-50  hover:shadow-outline w-40 h-40 cursor-pointer">
-            <Image
-              src="/icons/coupon.png"
-              layout="fill"
-              alt="product logo"
-            />
-          </div> 
-              <p className="pt-3 text-white pb-4 text-center">You can view active coupons after you make purchase</p>
-              <button onClick={ ()=>router.push('/')} className="bg-[#ffd601] hover:bg-[#cfb429] font-semibold  text-black w-72 h-14 text-center  rounded-[10px]">
-                  Start Shopping
-              </button> */}
-                </div>
+      <div>
+        <p className="font-title text-[#ffd601] font-semibold pb-4 text-4xl">Your Tickets</p>
+        <div className="overflow-y-auto scrollbar-thin scrollbar-thumb-yellow-400 scrollbar-track-gray-100 max-h-[600px] lg:min-w-[800px] px-4 lg:px-0 hover:cursor-all-scroll">
+          {activeOrders?.map(order => {              
+            return (
+              <Coupon order={order} key={order.id}/>              
+            )
+          })} 
+        </div>
+      </div>
     )
 }

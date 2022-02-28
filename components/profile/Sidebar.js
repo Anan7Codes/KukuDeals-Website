@@ -1,18 +1,53 @@
+import { useEffect } from 'react'
 import { FaAddressCard } from "react-icons/fa";
 import { RiCoupon2Fill, RiLogoutBoxRLine } from "react-icons/ri";
 import User from "./User";
 import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
+import { useUser } from '@/contexts/user/UserContext';
+import { toast } from "react-toastify";
 
 export default function Sidebar({ children }) {
   const router = useRouter();
+  const { user, setUser } = useUser();
 
+  useEffect(() => {
+    if(!user) {
+      router.push('/signin')
+    }
+  }, [user])
+
+  const SignOutUser = async () => {
+    const { error } = await supabase.auth.signOut()
+    if (error) {
+      toast.error(error.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      });
+      return
+    }
+    setUser(null)
+    toast.success("Signed out successfully", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+    return router.push('/')
+}
 
   return (
-    <div>
-      <div className="lg:grid grid-rows-2 grid-flow-col justify-start">
+    <div className="lg:grid grid-rows-2 grid-flow-col justify-start">
         <User />
-        <div className=" row-span-2 col-span-2 bg-[#2c2c2c] text-white lg:w-[21rem] divide-y  divide-[#161616] mb-5 rounded-[25px] text-sm  cursor-pointer">
+        <div className="row-span-2 col-span-2 bg-[#2c2c2c] text-white lg:w-[21rem] divide-y divide-[#161616] mb-5 rounded-[15px] text-sm cursor-pointer">
           <div className="hidden lg:flex p-4" onClick={() => router.push('/profile/personal-details')}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -225,10 +260,9 @@ export default function Sidebar({ children }) {
           <div className="flex p-4">
             <RiLogoutBoxRLine className="h-6 w-6" />
             <p className="pl-3"
-              onClick={async () => { const { error } = await supabase.auth.signOut(); router.push('/') }}>
+              onClick={SignOutUser}>
               Logout
             </p>
-
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 hidden lg:flex ml-[12.5rem] text-gray-200"
@@ -245,10 +279,9 @@ export default function Sidebar({ children }) {
             </svg>
           </div>
         </div>
-        <div className="row-span-3 p-7">
+        <div className="row-span-3 lg:p-7">
           {children}
         </div>
-      </div>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import Layout from '@/components/Layout';
@@ -40,7 +41,10 @@ export default function ForgotPassword() {
         }
     }
     return (
-        <div className="bg-[#161616]">        
+        <div className="bg-[#161616]">    
+            <Head>
+                <title>Forgot Password | Kuku Deals</title>
+            </Head>    
             <Layout>
                 <div className="  bg-[#2c2c2c]  mb-20 mt-10 flex justify-center items-center rounded-[15px] w-full h-[30rem] ">
                     <div className=" h-full w-full mt-20 lg:mt-32">

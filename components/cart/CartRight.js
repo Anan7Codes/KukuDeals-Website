@@ -1,13 +1,11 @@
-import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CartButton from "./CartButton";
 import Cart from "./Cart";
 import { CartState } from "@/contexts/cart/CartContext";
 
 export default function CartRight() {
   const [showCart, setShowCart] = useState(true);
-  const [couponCount, setCouponCount] = useState();
   const router = useRouter();
 
   const handleCart = (e) => {
@@ -20,11 +18,6 @@ export default function CartRight() {
     state: { cart },
   } = CartState();
 
-  useEffect(() => {
-    setCouponCount(
-      cart.reduce((acc, curr) => acc + Number(curr.SoldOutCoupons), 0)
-    );
-  }, [cart]);
   return (
     <div>
       {showCart ? (

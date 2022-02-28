@@ -129,7 +129,7 @@ export default function Payement() {
             <div className="flex items-center justify-center">
               <input
                 placeholder="Promo Code"
-                className="border border-[#161616] bg-[#161616]  text-white pl-3 my-4 outline-none text-xs rounded w-[70%] h-11"
+                className="border border-[#161616] bg-[#161616] placeholder:text[#bebebe] text-white pl-3 my-4 outline-none text-xs rounded w-[70%] h-11"
                 value={promoCode}
                 onChange={e => setPromoCode(e.target.value)}
               />

@@ -1,6 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
 import { map } from 'modern-async'
-const fs = require('fs')
 var html_to_pdf = require('html-pdf-node');
 const mail = require('@sendgrid/mail')
 
@@ -14,12 +13,12 @@ mail.setApiKey(process.env.SENDGRID_API_KEY)
 
 
 let options = { format: 'A3' };
-// let options = { format: 'A3', path: './invoice.pdf' };
+
 const Handler = async (req, res) => {
-    if (req.method !== 'POST') {
+    if (req.method !== 'GET') {
         return res.send({ success: false, message: 'Wrong request made' })
     }
-    if (req.method === 'POST') {
+    if (req.method === 'GET') {
         console.log("Function called")
         let initiated_orders = await supabase
             .from('initiated_orders')

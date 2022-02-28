@@ -1,4 +1,4 @@
-import { Fragment, useState, useContext, useEffect } from "react";
+import { Fragment, useState, useContext } from "react";
 import { LanguageContext } from "@/contexts/language";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -52,30 +52,12 @@ function Navbar() {
             >
               {english ? "العربية" : "English"}
             </div>
-            <a
-              href=""
-              className="py-2 px-3 text-white font-medium hover:text-[#ffd601]"
+            <p
+              className="py-2 px-3 text-white font-medium hover:text-[#ffd601] hover:cursor-pointer"
+              onClick={() => userInfo ? router.push("/profile/personal-details") : router.push('/signin')}
             >
-              {userInfo ? (
-                <span
-                  onClick={(e) => {
-                    e.preventDefault();
-                    router.push("/profile/personal-details");
-                  }}
-                >
-                  {userInfo.user_metadata.name}
-                </span>
-              ) : (
-                <div
-                  onClick={(e) => {
-                    e.preventDefault();
-                    router.push("/signin");
-                  }}
-                >
-                  Login/Register
-                </div>
-              )}
-            </a>
+              {userInfo ? userInfo.user_metadata.name : 'Login/Register'}
+            </p>
           </div>
           <div className="lg:hidden flex items-center pr-4">
             <p className="pr-4 text-white font-medium cursor-pointer" onClick={() => { setIsOpen(true) }}>Use App</p>

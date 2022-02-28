@@ -5,7 +5,11 @@ import CartItem from "./CartItem";
 export default function CartPage() {
   const { state: { cart } } = CartState();
 
-  if (cart.length === 0 ) return (<p className="text-white">No items added to cart</p>)
+  if (cart.length === 0 ) return (
+    <div className='bg-[#2c2c2c] min-h-42 my-8 py-12 rounded-[15px] flex flex-col items-center justify-center'>
+      <p className='text-[#fff] text-2xl'>You cart is empty!</p>
+    </div>
+  )
 
   return (
     <div className="lg:grid grid-cols-12 my-4">

@@ -97,7 +97,7 @@ function Navbar() {
           </div>
           <Transition appear show={isOpen} as={Fragment}>
             <Dialog as="div" className="fixed lg:hidden inset-0 z-10" onClose={() => { setIsOpen(false) }}>
-              <div className="min-h-screen px-4 text-center ">
+              <div className="min-h-screen ml-6 mr-6 text-center ">
                 <Transition.Child
                   as={Fragment}
                   enter="ease-out duration-300"
@@ -126,11 +126,11 @@ function Navbar() {
                   leaveTo="opacity-0 scale-95"
                   style={{ backgroundColor: "#161616" }}
                 >
-                  <div className="inline-block w-full max-w-md p-6 my-8 text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                  <div className="inline-block w-full max-w-md  pt-3 py-4 my-8 text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                     <div className="flex justify-end">
                       <button
                         type="button"
-                        className=" px-4 py-2 bg-[#161616] text-white border border-transparent rounded-md hover:text-[#ffd601] focus:outline-none  focus-visible:ring-[#ffd601]"
+                        className=" px-4  bg-[#161616] text-white border border-transparent rounded-md hover:text-[#ffd601] focus:outline-none  focus-visible:ring-[#ffd601]"
                         onClick={() => { setIsOpen(false) }}
                       >
                         <svg
@@ -150,14 +150,14 @@ function Navbar() {
                       </button>
                     </div>
                     <div className="my-4">
-                      <div className="relative flex justify-center items-center mb-4 h-24">
+                      <div className="relative flex justify-center items-center mb-4 h-16">
                         <Image
                           src="/icons/footerIcons/playstore.svg"
                           layout="fill"
                           alt="googleplay logo"
                         />
                       </div>
-                      <div className="relative flex justify-center items-center h-24">
+                      <div className="relative flex justify-center items-center h-16">
                         <Image
                           src="/icons/footerIcons/appstore.svg"
                           layout="fill"

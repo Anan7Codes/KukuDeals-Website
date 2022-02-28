@@ -72,7 +72,7 @@ export default function CartItem({ item }) {
             >
               -
             </button>
-            <div className="flex font-semibold items-center justify-center h-10 w-10 lg:h-12 lg:w-16 text-sm lg:text-md rounded-[15px] text-white bg-[#161616] mx-3">
+            <div className="flex font-semibold items-center justify-center h-10 w-10 lg:h-12 lg:w-16 text-sm lg:text-md rounded-[15px] text-white  mx-3">
               {item?.qty}
             </div>
             <button

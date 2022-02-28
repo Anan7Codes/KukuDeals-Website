@@ -85,15 +85,13 @@ export default function PersonalDetails() {
           <div className="lg:flex text-lg">
             <input
               placeholder="First Name"
-              className="text-white placeholder:text-xs placeholder:text-[#bebebe]  bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none  rounded-[5px]  h-14   "
+              className="text-white placeholder:text-xs placeholder:text-[#bebebe]  bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none  rounded-[5px]  h-14  opacity-60 " disabled
               value={newPersonalDetails.firstname} onChange={e => setNewPersonalDetails({ ...newPersonalDetails, firstname: e.target.value })}
-
             />
             <input
               placeholder="Last Name"
-              className="text-white placeholder:text-xs placeholder:text-[#bebebe] bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none  rounded-[5px]  h-14   "
+              className="text-white placeholder:text-xs placeholder:text-[#bebebe] bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none  rounded-[5px]  h-14  opacity-60 " disabled
               value={newPersonalDetails.lastname} onChange={e => setNewPersonalDetails({ ...newPersonalDetails, lastname: e.target.value })}
-
             />
           </div>
           <div className="flex flex-col">
@@ -102,16 +100,13 @@ export default function PersonalDetails() {
               className=" placeholder:text-xs placeholder:text-[#bebebe] bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-[96.5%] mt-4 outline-none  rounded-[5px] opacity-60 h-14 text-white "
               value={email}
               disabled
-
             />
           </div>
-
           <div className="lg:flex ">
             <CountryDropdown
               defaultOptionLabel="Nationality"
-              className=" text-white bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none   rounded-[5px]  h-14 "
+              className=" text-white bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none   rounded-[5px]  h-14 opacity-60 " disabled
               value={newPersonalDetails.nationality} onChange={e => setNewPersonalDetails({ ...newPersonalDetails, nationality: e })}
-
             />
             <CountryDropdown
               defaultOptionLabel="Country of Residence"
@@ -119,7 +114,7 @@ export default function PersonalDetails() {
               value={newPersonalDetails.countryOfResidence} onChange={e => setNewPersonalDetails({ ...newPersonalDetails, countryOfResidence: e })}
             />
           </div>
-          <div className=" cursor-pointer pt-6 pb-4 ">
+          <div className=" cursor-pointer pt-6 pb-4 opacity-60" disabled>
             {gender ? (
               <div className="flex justify-between items-center">
                 <div>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "react-phone-input-2/lib/style.css";
 import { CountryDropdown } from "react-country-region-selector";
 import { supabase } from "@/utils/supabaseClient";
 import { toast } from "react-toastify";

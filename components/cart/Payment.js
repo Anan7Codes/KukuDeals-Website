@@ -90,7 +90,7 @@ export default function Payment() {
                     <p className="pt-2 text-white absolute pl-16 lg:pl-0 lg:mt-6 text-sm font-normal">
                         (Inclusive of VAT)
                     </p>
-                    <p>AED {promoCodeApplied ? clientTotal.toFixed(2) : total.toFixed(2)}</p>
+                    <p>AED {promoCodeApplied ? cart.some( c => c.donate === "false" ) ? (clientTotal + 35).toFixed(2) : clientTotal.toFixed(2) : cart.some( c => c.donate === "false" ) ? (total + 35).toFixed(2) : total.toFixed(2)}</p>
                 </div>
                 <div className="flex justify-between text-sm py-1 mt-4 text-white">
                     <p>Subtotal</p>

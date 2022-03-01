@@ -3,20 +3,15 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <>
-      <footer className="pb-2">
-        <div className=" bg-[#2c2c2c] mx-auto py-2 pl-4 rounded-[15px]">
-          <div className=" p-4 sm:flex lg:flex justify-between">
+      <footer className="py-3">
+        <div className="bg-[#2c2c2c] mx-auto py-2 pl-4 rounded-[15px]">
+          <div className="p-4 sm:flex lg:flex justify-between">
             <div className="flex tracking-tight	">
               <div className="pr-10 w-full">
                 <div className="font-medium text-sm lg:text-lg text-white cursor-pointer hover:text-[#ffd601]">
                   Quick Links
                 </div>
                 <ul className=" text-xs lg:text-base pt-3 leading-loose lg:leading-extra-loose">
-                  <li>
-                    <a className="text-white cursor-pointer hover:text-[#ffd601] ">
-                      About Kuku
-                    </a>
-                  </li>
                   <li>
                     <a className="text-white  cursor-pointer hover:text-[#ffd601]">
                       My Account
@@ -31,7 +26,7 @@ export default function Footer() {
               </div>
 
               <div className="w-full pb-4">
-                <div className=" text-sm lg:text-lg text-white font-medium cursor-pointer hover:text-[#ffd601]">
+                <div className="text-sm lg:text-lg text-white font-medium cursor-pointer hover:text-[#ffd601]">
                   Customer Service
                 </div>
                 <ul className="text-xs lg:text-base pt-3 leading-loose lg:leading-loose">
@@ -48,16 +43,6 @@ export default function Footer() {
                   <li>
                     <a className="text-white  cursor-pointer hover:text-[#ffd601]">
                       How it Works
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-white  cursor-pointer hover:text-[#ffd601]">
-                      Charities
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-white  cursor-pointer hover:text-[#ffd601]">
-                      Draw Terms &amp; Conditions
                     </a>
                   </li>
                 </ul>

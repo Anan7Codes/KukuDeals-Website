@@ -13,7 +13,7 @@ function Navbar() {
 
   const userInfo = supabase.auth.user();
   return (
-    <nav className="pb-3 relative">
+    <nav className="pb-2 relative">
       <div className="bg-[#2c2c2c] mx-auto rounded-[15px]">
         <div className="flex justify-between text-sm">
           <div className="flex space-x-6 pl-2">

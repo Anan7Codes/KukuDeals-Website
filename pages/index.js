@@ -2,7 +2,7 @@ import Head from "next/head";
 import Layout from "@/components/Layout";
 import SkeletonLayout from "@/components/SkeletonLayout";
 import Banner from "@/components/home/Banner";
-import Section1 from "@/components/home/Section1";
+// import Section1 from "@/components/home/Section1";
 import Campaign from "@/components/home/Campaign";
 import Soldout from "@/components/home/Soldout";
 import Winners from "@/components/home/Winners";
@@ -96,11 +96,11 @@ export default function Home() {
           }
         </div>
         <div>
-          <div className=" mx-auto">
-            <div className="bg-[#ffd601] rounded-[15px] px-6 py-5 text-black">
-              <div className="pt-2 ml-3 relative">
+          <div className="py-3">
+            <div className="bg-[#ffd601] rounded-[15px] px-6 py-8 text-black">
+              <div className="relative">
                 <div className="flex justify-between">
-                  <p className="tracking-tighter font-title font-bold text-3xl">Sold Out</p>
+                  <p className="font-title font-bold text-3xl">Sold Out</p>
                 </div>
                 <div className="text-normal pt-4 lg:pt-0 font-medium lg:w-[450px]">
                   All our sold out campaigns along with their corresponding
@@ -147,7 +147,7 @@ export default function Home() {
           </div>
         </div>
         <div>
-          <div className="py-8">
+          <div className="py-3">
             <div className="bg-[#000000] rounded-[15px] px-6 py-5 text-black">
               <div className="p-2 text-[#ffd601]">
                 <p className="font-[700] tracking-tighter text-3xl font-title">Winners</p>

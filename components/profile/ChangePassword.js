@@ -1,9 +1,51 @@
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+import { supabase } from '@/utils/supabaseClient';
 import * as yup from 'yup'
 import { Formik } from 'formik'
 
-export default function Settings() {
-  const ChangePassword = async ({ oldPassword,newPassword,confirmPassword }) => {
+export default function ChangePassword() {
+  const router = useRouter();
 
+  const ChangePasswordFunction = async ({ newPassword,confirmPassword }) => {
+    try {
+      if( newPassword !== confirmPassword ) {
+          return toast.error("Passwords do not match", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined
+          });
+      }
+      const { error } = await supabase.auth.update({password: newPassword })
+      if (error) {
+        toast.error(error.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined
+        });
+        return
+      }
+      toast.success("Signed in successfully", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+      return router.push('/')
+    } catch (e) {
+        console.log(e)
+    }
   }
   return (
     <div>
@@ -16,13 +58,8 @@ export default function Settings() {
               newPassword: '',
               confirmPassword: ''
             }}
-            onSubmit={values => ChangePassword(values)}
+            onSubmit={values => ChangePasswordFunction(values)}
             validationSchema={yup.object().shape({
-              oldPassword: yup
-                .string()
-                .min(6, 'Password should be atleast 6 chars.')
-                .max(15, 'Password should not excced 15 chars.')
-                .required('Password is required'),
               newPassword: yup
                 .string()
                 .min(6, 'Password should be atleast 6 chars.')
@@ -37,17 +74,6 @@ export default function Settings() {
           >
             {({ values, handleChange, errors, touched, isValid, setFieldTouched, handleSubmit }) => (
               <div className="flex flex-col">
-                <input
-                  placeholder="Current Password"
-                  type="password"
-                  className="text-white placeholder:text-xs placeholder:text-[#bebebe] text-lg bg-[#2c2c2c] pl-3 mr-3 w-full lg:w-[26rem] mt-4 outline-none  rounded-[5px]  h-14 "
-                  value={values.oldPassword}
-                  onChange={handleChange('oldPassword')}
-                  onBlur={() => setFieldTouched('oldPassword')}
-                />
-                {touched.oldPassword && errors.oldPassword &&
-                  <p className="text-xs text-red-600">{errors.oldPassword}</p>
-                }
                 <input
                   placeholder="New Password"
                   type="password"

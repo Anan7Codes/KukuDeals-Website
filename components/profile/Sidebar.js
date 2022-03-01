@@ -147,7 +147,7 @@ export default function Sidebar({ children }) {
               />
             </svg>
           </div>
-          <div className="hidden lg:flex p-4" onClick={() => router.push('/profile/settings')}>
+          <div className="hidden lg:flex p-4" onClick={() => router.push('/profile/change-password')}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -168,7 +168,7 @@ export default function Sidebar({ children }) {
                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
-            <p className="pl-3">Settings</p>
+            <p className="pl-3">Change Password</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 hidden lg:flex ml-[12.2rem] text-gray-200"
@@ -184,7 +184,7 @@ export default function Sidebar({ children }) {
               />
             </svg>
           </div>
-          <div className="lg:hidden flex p-4" onClick={() => router.push('/profile/settings')}>
+          <div className="lg:hidden flex p-4" onClick={() => router.push('/profile/change-password')}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -205,7 +205,7 @@ export default function Sidebar({ children }) {
                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
-            <p className="pl-3">Settings</p>
+            <p className="pl-3">Change Password</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 hidden lg:flex ml-[12.2rem] text-gray-200"

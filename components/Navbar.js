@@ -36,7 +36,7 @@ function Navbar() {
             </div>
           </div>
           <div className="hidden lg:flex items-center space-x-6 pr-4 ">
-            <a
+            {/* <a
               href=""
               className="py-4 px-3 text-white font-medium hover:text-[#ffd601]"
             >
@@ -44,7 +44,7 @@ function Navbar() {
             </a>
             <a href="" className="py-4 px-3 font-medium text-[#ffd601]">
               <b>Call 0800-KUKU</b>
-            </a>
+            </a> */}
 
             <div
               onClick={() => setEnglish(!english)}

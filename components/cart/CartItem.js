@@ -44,20 +44,20 @@ export default function CartItem({ item }) {
   };
   return (
     <div>
-      <div className="bg-[#2c2c2c] flex items-center lg:justify-start h-44 rounded-t-3xl mt-6">
-        <div className="cursor-pointer rounded-[15px] object-fit -left-2 relative ml-10 mt-2 w-32 h-28">
+      <div className="bg-[#2c2c2c] flex items-center lg:justify-start h-44 rounded-t-[15px] mt-2">
+        <div className="cursor-pointer rounded-[15px] object-fit -left-2 relative ml-10 mt-2 w-32 h-32">
           <Image src={item?.Image} layout="fill" alt="product logo" />
         </div>
         <div className="flex flex-col lg:flex-row pl-1 pt-2">
           <div className="">
-            <p className=" text-sm sm:text-base font-title text-[#ffd601] lg:text-xl font-bold leading-2">
+            <p className=" text-sm sm:text-base text-[#ffd601] lg:text-xl font-semibold leading-2">
               {item?.GiftName.en}
             </p>
             <p className="text-white text-sm sm:text-base lg:text-xl pt-1 leading-2 lg:leading-3">
               {item?.ProductName.en}
             </p>
-            <p className="font-bold text-sm sm:text-base lg:text-xl lg:pt-3 text-white">
-              AED{item?.Price}.00
+            <p className="font-semibold text-sm sm:text-base lg:text-xl lg:pt-3 text-white">
+              AED {item?.Price}.00
             </p>
             <p className="text-xs font-semibold lg:pt-3 text-green-500 ">
               {item.donate === "true" ? '2 Coupons' : '1 Coupon'}
@@ -65,26 +65,26 @@ export default function CartItem({ item }) {
             </p>
           </div>
 
-          <div className="flex sm:ml-12 lg:ml-16 mt-4 leading-extra-loose">
+          <div className="flex sm:ml-12 lg:ml-16 mt-4">
             <button
               onClick={item?.qty === 1 ? RemoveFromCart : ReduceQty}
-              className="flex justify-center items-center text-sm lg:text-md  cursor-pointer text-white bg-[#161616] font-semibold h-10 w-10 lg:h-12 lg:w-16 rounded-[15px]"
+              className="flex justify-center items-center text-sm lg:text-xl cursor-pointer text-white bg-[#161616] font-semibold h-10 w-10 lg:h-12 lg:w-16 rounded-[10px]"
             >
               -
             </button>
-            <div className="flex font-semibold items-center justify-center h-10 w-10 lg:h-12 lg:w-16 text-sm lg:text-md rounded-[15px] text-white  mx-3">
+            <div className="flex font-semibold items-center justify-center h-10 w-10 lg:h-12 lg:w-16 text-sm lg:text-md rounded-[10px] bg-[#161616] text-white mx-2">
               {item?.qty}
             </div>
             <button
               onClick={AddQty}
-              className="flex justify-center items-center cursor-pointer bg-[#ffd601] text-black font-semibold h-10 w-20 lg:h-12 lg:w-28 text-sm lg:text-md rounded-[15px]"
+              className="flex justify-center items-center cursor-pointer bg-[#ffd601] text-black font-semibold h-10 w-20 lg:h-12 lg:w-16 text-sm lg:text-xl rounded-[10px]"
             >
-              Add More
+              +
             </button>
           </div>
         </div>
       </div>
-      <div className="bg-[#2c2c2c] text-right h-12 flex justify-end rounded-b-3xl">
+      <div className="bg-[#2c2c2c] text-right h-12 flex justify-end rounded-b-[10px]">
         <div className=" mr-2">
           <Switch onChange={item.donate === "true" ? DontDonate : Donate} checked={item.donate === "true" ? true : false}
             onColor="#161616"

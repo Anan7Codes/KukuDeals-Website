@@ -71,10 +71,10 @@ export default function Home() {
  
   if(campaigns.length === 0 ) return (
     <SkeletonLayout>
-      <Skeleton className="h-80" style={{borderRadius: 15}} />
-      <Skeleton className="h-60 mt-12" style={{borderRadius: 15}} />
-      <Skeleton className="h-60 mt-12" style={{borderRadius: 15}} />
-      <Skeleton className="h-60 mt-12" style={{borderRadius: 15}} />
+      <Skeleton className="h-96" style={{borderRadius: 15}} />
+      <Skeleton className="h-60 mt-6" style={{borderRadius: 15}} />
+      <Skeleton className="h-60 mt-6" style={{borderRadius: 15}} />
+      <Skeleton className="h-60 mt-6" style={{borderRadius: 15}} />
     </SkeletonLayout>
   )
   if (!campaigns) return <p>No Data</p>
@@ -87,7 +87,6 @@ export default function Home() {
         <Banner />
         {/* <Section1 /> */}
         <div>
-          {/* <p className="text-[26px] text-[#ffd601] pt-5 font-title font-bold">Explore campaigns</p> */}
           {campaigns?.map(campaign => {
               return (
                 <Campaign campaign={campaign} key={campaign.id} />

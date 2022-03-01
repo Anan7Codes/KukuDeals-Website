@@ -6,7 +6,7 @@ export default function Winners({winner}) {
          <div className="grid gap-2">
             <div className="w-[16rem] h-[24rem] bg-[#2c2c2c] rounded-[25px] overflow-hidden shadow-lg ">
                 <div className="relative">
-                    <div className="cursor-pointer absolute top-0 left-0  mt-4 ml-6 hover:shadow-outline w-52 h-52">
+                    <div className="cursor-pointer absolute top-0 left-0 mt-4 ml-6 hover:shadow-outline w-48 h-48">
                         <Image
                             src={winner?.image}
                             layout="fill"

@@ -90,10 +90,10 @@ function SignUp() {
   }
   return (
     <>
-      <div className="  bg-[#2c2c2c]  mb-20 mt-10 flex justify-center items-center rounded-[15px] w-full h-full ">
-        <div className=" h-full w-full mt-20 lg:mt-32">
+      <div className="bg-[#2c2c2c] my-6 flex justify-center items-center rounded-[10px] w-full h-full">
+        <div className=" h-full w-full mt-20 lg:mt-16">
           <div className="pt-4 flex lg:justify-center">
-            <p className="text-3xl text-[#ffd601] pr-12 font-bold font-title pl-3">Sign Up</p>
+            <p className="text-3xl text-[#ffd601] font-semibold font-title text-center">Sign Up</p>
           </div>
           <form
             onSubmit={handleSubmit}

@@ -193,14 +193,14 @@ export default function Campaign({ campaign}) {
                   </button>
                 </div>
                 <div className="my-4">
-                  <div className="relative flex  justify-center items-center lg:ml-24 ml-16 w-52 h-52">
+                  <div className="relative flex justify-center items-center lg:ml-24 ml-16 w-48 h-48">
                     <Image
                       src={campaign?.Image}
                       layout="fill"
                       alt="Campaign Image"
                     />
                   </div>
-                  <div className="absolute -top-8 -left-5 bg-[#161616] lg:h-28 w-32  p-2  rounded-full">
+                  <div className="absolute -top-8 -left-5 bg-[#161616] w-32 p-2 rounded-full">
                     <CircularProgressbar
                       value={campaign?.SoldOutCoupons}
                       maxValue={campaign?.TotalCoupons}
@@ -227,24 +227,24 @@ export default function Campaign({ campaign}) {
                       </p>
                     </div>
                   </div>
-                  <div className="flex justify-center  h-10 pb-2">
+                  <div className="flex justify-center py-4">
                     <button
                       onClick={() => setPrizeDetails(true)}
-                      className={`px-2 ${prizeDetails ? 'text-black bg-[#ffd601]' : 'bg-[#2c2c2c] text-white'} rounded-l-xl text-sm font-semibold`}
+                      className={`px-2 ${prizeDetails ? 'text-black bg-[#ffd601]' : 'bg-[#2c2c2c] text-white'} rounded-l-xl text-sm py-3 px-8 font-semibold`}
                     >
                       Prize Details
                     </button>
                     <button
                       onClick={() => setPrizeDetails(false)}
-                      className={`px-2 ${prizeDetails ? 'bg-[#2c2c2c] text-white': 'text-black bg-[#ffd601]'} rounded-r-xl text-sm font-semibold`}
+                      className={`px-2 ${prizeDetails ? 'bg-[#2c2c2c] text-white': 'text-black bg-[#ffd601]'} rounded-r-xl text-sm py-3 px-8 font-semibold`}
                     >
                       Product Details
                     </button>
                   </div>
                   { prizeDetails ?
                     <>
-                      <p className="text-white text-sm mb-2">Get a chance to win:</p>
-                      <p className="text-[#ffd601] font-title font-bold text-2xl ">{campaign?.GiftName.en}</p>
+                      <p className="text-white text-sm">Get a chance to win:</p>
+                      <p className="text-[#ffd601] font-semibold text-2xl">{campaign?.GiftName.en}</p>
                       <p className="text-white text-sm">
                         {campaign?.GiftDescription.en}
                       </p>
@@ -252,8 +252,8 @@ export default function Campaign({ campaign}) {
                     :
                     <>
                       <div className="flex justify-between mb-2">
-                        <p className="text-[#ffd601] text-2xl font-bold font-title">{campaign?.ProductName.en}</p>
-                        <p className="text-white font-bold">
+                        <p className="text-[#ffd601] text-2xl font-semibold">{campaign?.ProductName.en}</p>
+                        <p className="text-white font-semibold">
                           AED {campaign?.Price}
                         </p>
                       </div>
@@ -266,25 +266,25 @@ export default function Campaign({ campaign}) {
                 <div className="flex justify-between items-center pt-4 pb-4">
                   <div className="flex-col">
                     <p className="text-lg text-white">Buy {campaign?.ProductName.en}</p>
-                    <p className="text-base text-[#ffd601] font-bold">
+                    <p className="text-base text-[#ffd601] font-semibold">
                       AED {campaign?.Price}
                     </p>
                     <p className="text-xs text-white">Inclusive of VAT</p>
                   </div>
                   {cart.some(c => c.id === campaign.id) ?
-                    <div className="flex justify-center lg:justify-start space-x-3 items-center pt-4">
-                      <div onClick={cart.some(c => c.id === campaign.id && c.qty === 1) ? RemoveFromCart : ReduceQty} className="flex text-2xl cursor-pointer bg-[#2c2c2c] pt-15 pb-15 justify-center items-center w-12 h-12 rounded-[15px]">
+                    <div className="flex justify-center lg:justify-start space-x-2 items-center pt-4">
+                      <div onClick={cart.some(c => c.id === campaign.id && c.qty === 1) ? RemoveFromCart : ReduceQty} className="flex text-2xl cursor-pointer bg-[#2c2c2c] pt-15 pb-15 justify-center items-center w-12 h-12 rounded-[10px]">
                         <p className="text-white  hover:text-[#ffd601]">-</p>
                       </div>
-                      <div className="flex bg-[#2c2c2c] py-15 justify-center text-lg items-center w-12 h-12 rounded-[15px]">
+                      <div className="flex bg-[#2c2c2c] py-15 justify-center text-lg items-center w-12 h-12 rounded-[10px]">
                         <p className="text-white">{qty}</p>
                       </div>
-                      <div onClick={AddQty} className="flex bg-[#ffd601] cursor-pointer text-black text-2xl pt-15 pb-15 justify-center items-center w-12 h-12 rounded-[15px]" >
+                      <div onClick={AddQty} className="flex bg-[#ffd601] cursor-pointer text-black text-2xl pt-15 pb-15 justify-center items-center w-12 h-12 rounded-[10px]" >
                         <p>+</p>
                       </div>
                     </div> :
                     <div className="mt-2 space-x-4 text-sm lg:text-base">
-                      <button onClick={AddToCart} className="bg-[#ffd601] w-32 h-12 lg:w-44 lg:h-12 text-black font-semibold hover:bg-[#ffd601] rounded-[15px]">
+                      <button onClick={AddToCart} className="bg-[#ffd601] w-32 h-12 lg:w-32 lg:h-12 text-black text-sm font-semibold hover:bg-[#ffd601] rounded-[10px]">
                         Add to Cart
                       </button>
                     </div>

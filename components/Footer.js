@@ -4,21 +4,21 @@ export default function Footer() {
   return (
     <>
       <footer className="py-3">
-        <div className="bg-[#2c2c2c] mx-auto py-2 pl-4 rounded-[15px]">
+        <div className="bg-[#2c2c2c] mx-auto py-2 pl-4 rounded-[10px]">
           <div className="p-4 sm:flex lg:flex justify-between">
-            <div className="flex tracking-tight	">
+            <div className="flex tracking-tight">
               <div className="pr-10 w-full">
-                <div className="font-medium text-sm lg:text-lg text-white cursor-pointer hover:text-[#ffd601]">
+                <div className="font-semibold text-sm text-white cursor-pointer hover:text-[#ffd601]">
                   Quick Links
                 </div>
-                <ul className=" text-xs lg:text-base pt-3 leading-loose lg:leading-extra-loose">
+                <ul className=" text-xs lg:text-base pt-4">
                   <li>
-                    <a className="text-white  cursor-pointer hover:text-[#ffd601]">
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
                       My Account
                     </a>
                   </li>
                   <li>
-                    <a className="text-white  cursor-pointer hover:text-[#ffd601]">
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
                       Active Tickets
                     </a>
                   </li>
@@ -26,22 +26,22 @@ export default function Footer() {
               </div>
 
               <div className="w-full pb-4">
-                <div className="text-sm lg:text-lg text-white font-medium cursor-pointer hover:text-[#ffd601]">
+                <div className="text-sm lg:text-sm w-[150px] text-white font-semibold cursor-pointer hover:text-[#ffd601]">
                   Customer Service
                 </div>
-                <ul className="text-xs lg:text-base pt-3 leading-loose lg:leading-loose">
+                <ul className="text-xs lg:text-base pt-3">
                   <li>
-                    <a className="text-white cursor-pointer hover:text-[#ffd601]">
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
                       Contact Us
                     </a>
                   </li>
                   <li>
-                    <a className="text-white  cursor-pointer hover:text-[#ffd601]">
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
                       FAQs
                     </a>
                   </li>
                   <li>
-                    <a className="text-white  cursor-pointer hover:text-[#ffd601]">
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
                       How it Works
                     </a>
                   </li>
@@ -100,20 +100,20 @@ export default function Footer() {
                 </ul>
               </div>
               <div>
-                <p className="flex justify-center text-center p-3 mt-2 text-sm text-white">
+                <p className="flex justify-center text-center mt-2 text-xs text-white">
                   Download the Kuku app for the ultimate shopping experience!
                 </p>
               </div>
               <div className="w-full">
-                <ul className="space-x-3 flex justify-center  pt-2">
-                  <li className=" h-24 w-44 relative ">
+                <ul className="space-x-2 flex justify-center">
+                  <li className="h-24 w-36 relative hover:cursor-pointer">
                     <Image
                       src="/icons/footerIcons/appstore.svg"
                       layout="fill"
                       alt="googleplay logo"
                     />
                   </li>
-                  <li className=" h-24 w-44 relative">
+                  <li className="h-24 w-36 relative hover:cursor-pointer">
                     <Image
                       src="/icons/footerIcons/playstore.svg"
                       layout="fill"

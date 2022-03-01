@@ -28,12 +28,9 @@ export default function Cart({ item }) {
 
   return <div>
     {item ?
-      <div className=" text-sm font-semibold text-white pl-6 pr-6 pt-2">
-        <div className="flex justify-between">
-          <p>Donatable Product(s)</p>
-        </div>
+      <div className="text-sm font-semibold text-white pl-6 pr-6 pt-2">
         <div className="flex justify-between pt-4">
-          <div className="cursor-pointer rounded-[15px] object-fit -left-2 relative w-32 h-24">
+          <div className="cursor-pointer rounded-[15px] object-fit -left-2 relative w-24 h-24">
             <Image
               src={item?.Image}
               layout="fill"

@@ -26,14 +26,14 @@ function Navbar() {
                 />
               </div>
             </div>
-            <div className="hidden lg:flex items-center space-x-3">
+            {/* <div className="hidden lg:flex items-center space-x-3">
               <a
                 href=""
                 className="py-4 px-3 text-white font-bold hover:text-[#ffd601]"
               >
                 WINNERS
               </a>
-            </div>
+            </div> */}
           </div>
           <div className="hidden lg:flex items-center space-x-6 pr-4 ">
             {/* <a

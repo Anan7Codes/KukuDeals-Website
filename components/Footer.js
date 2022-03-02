@@ -128,7 +128,7 @@ export default function Footer() {
       </footer>
 
       <footer className="py-2">
-        <div className="pl-4 pr-5 bg-[#2c2c2c] mx-auto rounded-[15px] pb-2">
+        <div className="pl-4 pr-5 bg-[#2c2c2c] mx-auto rounded-[10px] pb-2">
           <div className="sm:flex lg:flex justify-between items-center pt-4">
             <div className="flex space-x-1 items-center mb-2">
               <div className=" items-center w-24 h-7 relative cursor-pointer">

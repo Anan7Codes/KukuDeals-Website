@@ -3,6 +3,7 @@ import Layout from "@/components/Layout";
 import SkeletonLayout from "@/components/SkeletonLayout";
 import Banner from "@/components/home/Banner";
 // import Section1 from "@/components/home/Section1";
+import DownloadApp from "@/components/home/DownloadApp";
 import Campaign from "@/components/home/Campaign";
 import Soldout from "@/components/home/Soldout";
 import Winners from "@/components/home/Winners";
@@ -85,6 +86,7 @@ export default function Home() {
       </Head>
       <Layout>
         <Banner />
+        <DownloadApp/>
         {/* <Section1 /> */}
         <div>
           {campaigns?.map(campaign => {

@@ -70,7 +70,7 @@ export default function Campaign({ campaign}) {
                 Buy a {campaign?.ProductName.en} for: <span className='font-bold'>AED {campaign?.Price}</span>
               </p>                
               <p className='text-white lg:text-3xl font-bold'>
-                <span className="lg:text-3xl font-title lg:pt-6 text-[#ffd601]">WIN: </span> 
+                <span className="lg:text-3xl font-title lg:pt-6 text-[#ffd601]">Win: </span> 
                 {campaign?.GiftName.en}
               </p>
               {cart.some(c => c.id === campaign.id) ?

@@ -45,11 +45,11 @@ export default function CartItem({ item }) {
   return (
     <div>
       <div className="bg-[#2c2c2c] flex items-center lg:justify-start h-44 rounded-t-[15px] mt-2">
-        <div className="cursor-pointer rounded-[15px] object-fit -left-2 relative ml-10 mt-2 w-32 h-32">
+        <div className="cursor-pointer rounded-[10px] object-fit -left-2 relative ml-4 lg:ml-10 mt-2 w-32 h-32">
           <Image src={item?.Image} layout="fill" alt="product logo" />
         </div>
         <div className="flex flex-col lg:flex-row pl-1 pt-2">
-          <div className="">
+          <div>
             <p className=" text-sm sm:text-base text-[#ffd601] lg:text-xl font-semibold leading-2">
               {item?.GiftName.en}
             </p>
@@ -59,7 +59,7 @@ export default function CartItem({ item }) {
             <p className="font-semibold text-sm sm:text-base lg:text-xl lg:pt-3 text-white">
               AED {item?.Price}.00
             </p>
-            <p className="text-xs font-semibold lg:pt-3 text-green-500 ">
+            <p className="text-xs font-semibold lg:pt-3 text-green-500">
               {item.donate === "true" ? '2 Coupons' : '1 Coupon'}
               <span className="text-white font-normal"> per unit</span>
             </p>
@@ -68,7 +68,7 @@ export default function CartItem({ item }) {
           <div className="flex sm:ml-12 lg:ml-16 mt-4">
             <button
               onClick={item?.qty === 1 ? RemoveFromCart : ReduceQty}
-              className="flex justify-center items-center text-sm lg:text-xl cursor-pointer text-white bg-[#161616] font-semibold h-10 w-10 lg:h-12 lg:w-16 rounded-[10px]"
+              className="flex justify-center items-center text-lg lg:text-xl cursor-pointer text-white bg-[#161616] font-semibold h-10 w-10 lg:h-12 lg:w-16 rounded-[10px]"
             >
               -
             </button>
@@ -77,7 +77,7 @@ export default function CartItem({ item }) {
             </div>
             <button
               onClick={AddQty}
-              className="flex justify-center items-center cursor-pointer bg-[#ffd601] text-black font-semibold h-10 w-20 lg:h-12 lg:w-16 text-sm lg:text-xl rounded-[10px]"
+              className="flex justify-center items-center cursor-pointer bg-[#ffd601] text-black font-semibold h-10 w-10 lg:h-12 lg:w-16 text-lg lg:text-xl rounded-[10px]"
             >
               +
             </button>

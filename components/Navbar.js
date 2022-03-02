@@ -163,9 +163,9 @@ function Navbar() {
                   alt="kuku logo"
                 />
               </div>
-              <p className="font-medium text-sm text-white mb-2 hover:cursor-pointer hover:text-yellow-500">
+              {/* <p className="font-medium text-sm text-white mb-2 hover:cursor-pointer hover:text-yellow-500">
                 Winners
-              </p>
+              </p> */}
               <p className="font-medium text-sm text-white mt-6 mb-2 hover:cursor-pointer hover:text-yellow-500">
                 Need Help? Contact Us
               </p>

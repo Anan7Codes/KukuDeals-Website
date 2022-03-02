@@ -14,17 +14,22 @@ import AliceCarousel from "react-alice-carousel";
 import Skeleton from 'react-loading-skeleton'
 import "react-alice-carousel/lib/alice-carousel.css";
 import ArrowL from "@/components/home/ArrowL";
-import ArrowR from "@/components/home//ArrowR";
+import ArrowR from "@/components/home/ArrowR";
 
 export default function Home() {
   
   const [campaigns, setCampaigns] = useState([])
   const [winners, setWinners] = useState([])
-  const [index, setIndex] = useState(0);
+  const [isSoldOutNextDisabled, setIsSoldOutNextDisabled] = useState(false)
+  const [isSoldOutPrevDisabled, setIsSoldOutPrevDisabled] = useState(true)
+  const [isWinnerNextDisabled, setIsWinnerNextDisabled] = useState(false)
+  const [isWinnerPrevDisabled, setIsWinnerPrevDisabled] = useState(true)
+
   const responsive = {
     0: { items: 1 },
     1024: { items: 4 },
   };
+  
   useEffect(() => {
     const FetchCampaigns = async () => {
       try {
@@ -111,28 +116,22 @@ export default function Home() {
                   <AliceCarousel
                     mouseTracking
                     responsive={responsive}
-                    renderPrevButton={() => {
-                      return index === 0 ? (
-                        <div className="absolute flex lg:-top-24 -top-40 right-24 opacity-50">
-                          <ArrowL />
-                        </div>
-                      ) : (
-                        <div className="absolute flex lg:-top-24 -top-40 right-24">
-                          <ArrowL />
-                        </div>
-                      )
+                    onSlideChanged={(e) => {
+                      setIsSoldOutNextDisabled(e.isNextSlideDisabled)
+                      setIsSoldOutPrevDisabled(e.isPrevSlideDisabled)                      
                     }}
+                    renderPrevButton={() => {                      
+                      return (
+                        <div className={`absolute flex lg:-top-24 -top-40 right-20 ${isSoldOutPrevDisabled ? 'opacity-50' : null}`}>
+                          <ArrowL />
+                        </div>
+                    )}}
                     renderNextButton={() => {
-                      return index >= 10 - 4 ? (
-                        <div className="absolute flex lg:-top-24 -top-40 opacity-50 right-20">
+                      return (
+                        <div className={`absolute flex lg:-top-24 -top-40 right-16 ${isSoldOutNextDisabled ? 'opacity-50' : null}`}>
                           <ArrowR />
                         </div>
-                      ) : (
-                        <div className="absolute flex lg:-top-24 -top-40 right-20">
-                          <ArrowR />
-                        </div>
-                      );
-                    }}
+                      )}}
                     disableDotsControls="true"
                     controlsStrategy="alternate"
                   >
@@ -160,28 +159,22 @@ export default function Home() {
                 <AliceCarousel
                   mouseTracking
                   responsive={responsive}
+                  onSlideChanged={(e) => {
+                    setIsWinnerNextDisabled(e.isNextSlideDisabled)
+                    setIsWinnerPrevDisabled(e.isPrevSlideDisabled)                      
+                  }}
                   renderPrevButton={() => {
-                    return index === 0 ? (
-                      <div className="absolute lg:-top-24 -top-36 right-24 opacity-50">
-                        <ArrowL item={true}/>
+                    return (
+                      <div className={`absolute flex lg:-top-24 -top-36 right-20`}>
+                        <ArrowL item={true} isWinnerPrevDisabled={isWinnerPrevDisabled}/>
                       </div>
-                    ) : (
-                      <div className="absolute lg:-top-24 -top-36 right-24">
-                        <ArrowL item={true}/>
-                      </div>
-                    );
-                  }}
+                  )}}
                   renderNextButton={() => {
-                    return index >= 10 - 4 ? (
-                      <div className="absolute lg:-top-24 -top-36 opacity-50 right-20">
-                        <ArrowR item={true}/>
+                    return (
+                      <div className={`absolute flex lg:-top-24 -top-36 right-16`}>
+                        <ArrowR item={true} isWinnerNextDisabled={isWinnerNextDisabled}/>
                       </div>
-                    ) : (
-                      <div className="absolute lg:-top-24 -top-36 right-20">
-                        <ArrowR item={true}/>
-                      </div>
-                    );
-                  }}
+                  )}}
                   disableDotsControls="true"
                   controlsStrategy="alternate"
                 >

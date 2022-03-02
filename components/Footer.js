@@ -22,6 +22,11 @@ export default function Footer() {
                       Active Tickets
                     </a>
                   </li>
+                  <li>
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                      Contact Us
+                    </a>
+                  </li>
                 </ul>
               </div>
 
@@ -32,11 +37,6 @@ export default function Footer() {
                 <ul className="text-xs lg:text-base pt-3">
                   <li>
                     <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      Contact Us
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
                       FAQs
                     </a>
                   </li>
@@ -45,12 +45,22 @@ export default function Footer() {
                       How it Works
                     </a>
                   </li>
+                  <li>
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                      User Agreement
+                    </a>
+                  </li>
+                  <li>
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                      Privacy Policy
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
 
             <div>
-              <div className=" w-full pr-2">
+              <div className="w-full pr-2">
                 <ul className="flex space-x-2 lg:space-x-4 justify-center">
                   <li>
                     <a className="">
@@ -101,7 +111,7 @@ export default function Footer() {
               </div>
               <div>
                 <p className="flex justify-center text-center mt-2 text-xs text-white">
-                  Download the Kuku app for the ultimate shopping experience!
+                  Download the Kuku app for a more complete shopping experience
                 </p>
               </div>
               <div className="w-full">
@@ -131,26 +141,18 @@ export default function Footer() {
         <div className="pl-4 pr-5 bg-[#2c2c2c] mx-auto rounded-[10px] pb-2">
           <div className="sm:flex lg:flex justify-between items-center pt-4">
             <div className="flex space-x-1 items-center mb-2">
-              <div className=" items-center w-24 h-7 relative cursor-pointer">
+              <div className="w-24 h-7 relative cursor-pointer">
                 <Image
                   src="/icons/kukudeals-white.png"
                   layout="fill"
                   alt="kuku logo"
                 />
               </div>
-              <div className="w-full flex space-x-1 lg:space-x-6 text-[9px] lg:text-xs">
+              <div className="w-full mt-1 lg:mt-0 flex space-x-1 lg:space-x-6 text-[9px] lg:text-xs">
                 <p className="pr-[6px] pl-[6px] text-white">© 2022. All rights reserved</p>
-                <ul className="flex  lg:space-x-6 ">
-                  <li className="pr-[6px] cursor-pointer text-white hover:text-[#ffd601]">
-                    <a>User Agreement</a>
-                  </li>
-                  <li className="cursor-pointer text-white hover:text-[#ffd601]">
-                    <a>Privacy Policy</a>
-                  </li>
-                </ul>
               </div>
             </div>
-            <div className="flex text-[9px] lg:text-xs">
+            <div className="md:flex text-[9px] lg:text-xs hidden">
               <ul className="flex space-x-2 items-center">
                 <li className="text-white">We accept</li>
                 <li className="h-6 w-9 relative">

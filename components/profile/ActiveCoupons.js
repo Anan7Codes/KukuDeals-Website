@@ -1,10 +1,8 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { supabase } from '@/utils/supabaseClient';
 import Coupon from "./Coupon";
 
 export default function ActiveCoupons() {
-    const router = useRouter();
     const [ activeOrders, setActiveOrders ] = useState([])
     useEffect(() => {
       const GetActiveOrders = async () => {
@@ -18,6 +16,7 @@ export default function ActiveCoupons() {
         }
       }
       GetActiveOrders() 
+      console.log("co", activeOrders) 
     }, [])
 
     if(activeOrders.length === 0) return (

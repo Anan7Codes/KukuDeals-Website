@@ -176,7 +176,7 @@ function Navbar() {
                 العربية
               </p>
               {userInfo ? (
-                <p onClick={() => router.push('/profile/settings')} className="font-medium text-sm text-white mb-4 hover:cursor-pointer hover:text-yellow-500">
+                <p onClick={() => router.push('/profile/personal-details')} className="font-medium text-sm text-white mb-4 hover:cursor-pointer hover:text-yellow-500">
                   {userInfo.user_metadata.name}
                 </p>
               ) : (

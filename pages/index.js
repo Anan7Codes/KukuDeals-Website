@@ -27,6 +27,7 @@ export default function Home() {
 
   const responsive = {
     0: { items: 1 },
+    576: { items: 3 },
     1024: { items: 4 },
   };
   

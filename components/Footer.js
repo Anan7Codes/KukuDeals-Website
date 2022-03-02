@@ -8,30 +8,7 @@ export default function Footer() {
           <div className="p-4 sm:flex lg:flex justify-between">
             <div className="flex tracking-tight">
               <div className="pr-10 w-full">
-                <div className="font-semibold text-sm text-white cursor-pointer hover:text-[#ffd601]">
-                  Quick Links
-                </div>
-                <ul className=" text-xs lg:text-base pt-4">
-                  <li>
-                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      My Account
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      Active Tickets
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      Contact Us
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="w-full pb-4">
-                <div className="text-sm lg:text-sm w-[150px] text-white font-semibold cursor-pointer hover:text-[#ffd601]">
+              <div className="text-sm lg:text-sm w-[150px] text-white font-semibold cursor-pointer hover:text-[#ffd601]">
                   Customer Service
                 </div>
                 <ul className="text-xs lg:text-base pt-3">
@@ -53,6 +30,29 @@ export default function Footer() {
                   <li>
                     <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
                       Privacy Policy
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="w-full pb-4">
+                <div className="font-semibold text-sm text-white cursor-pointer hover:text-[#ffd601]">
+                  Quick Links
+                </div>
+                <ul className=" text-xs lg:text-base pt-4">
+                  <li>
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                      My Account
+                    </a>
+                  </li>
+                  <li>
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                      Active Tickets
+                    </a>
+                  </li>
+                  <li>
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                      Contact Us
                     </a>
                   </li>
                 </ul>

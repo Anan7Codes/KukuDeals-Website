@@ -4,7 +4,7 @@ export default function Soldout({ campaign }) {
   if(campaign?.SoldOut) {
   return (
     <div className="grid">
-      <div className="w-[18rem] h-[24rem] bg-[#2c2c2c] rounded-[25px] overflow-hidden shadow-lg relative">
+      <div className="w-72 h-96 bg-[#2c2c2c] rounded-[25px] overflow-hidden shadow-lg relative">
         <div>
           <div className="cursor-pointer absolute top-0 left-10 mt-12 hover:shadow-outline">
             <div className="relative w-52 h-52">

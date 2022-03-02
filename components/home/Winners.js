@@ -3,8 +3,8 @@ import Image from 'next/image'
 export default function Winners({winner}) {
   return (
     <div>
-         <div className="grid">
-            <div className="w-[18rem] h-[24rem] bg-[#2c2c2c] rounded-[10px] overflow-hidden shadow-lg">
+        <div className="grid">
+            <div className="w-72 h-96 bg-[#2c2c2c] rounded-[10px] overflow-hidden shadow-lg">
                 <div className="relative">
                     <div className="cursor-pointer absolute top-0 left-14 hover:shadow-outline">
                         <div className="w-48 h-48 relative">
@@ -26,7 +26,7 @@ export default function Winners({winner}) {
                     </div>
                 </div>
             </div>
-      </div>
+        </div>
     </div>
   );
 }

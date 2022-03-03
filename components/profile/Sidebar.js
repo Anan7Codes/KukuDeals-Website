@@ -171,7 +171,7 @@ export default function Sidebar({ children }) {
             <p className="pl-3">Change Password</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 hidden lg:flex ml-[12.2rem] text-gray-200"
+              className="h-10 w-10 hidden lg:flex ml-[12.2rem] text-gray-200"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -187,7 +187,7 @@ export default function Sidebar({ children }) {
           <div className="lg:hidden flex p-4" onClick={() => router.push('/profile/change-password')}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="h-8 w-8"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

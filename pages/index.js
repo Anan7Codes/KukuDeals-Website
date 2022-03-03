@@ -123,13 +123,13 @@ export default function Home() {
                     }}
                     renderPrevButton={() => {                      
                       return (
-                        <div className={`absolute flex lg:-top-24 -top-40 right-20 ${isSoldOutPrevDisabled ? 'opacity-50' : null}`}>
+                        <div className={`absolute flex lg:-top-28 -top-40 right-20 ${isSoldOutPrevDisabled ? 'opacity-50' : null}`}>
                           <ArrowL />
                         </div>
                     )}}
                     renderNextButton={() => {
                       return (
-                        <div className={`absolute flex lg:-top-24 -top-40 right-16 ${isSoldOutNextDisabled ? 'opacity-50' : null}`}>
+                        <div className={`absolute flex lg:-top-28 -top-40 right-16 ${isSoldOutNextDisabled ? 'opacity-50' : null}`}>
                           <ArrowR />
                         </div>
                       )}}

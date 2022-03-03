@@ -16,7 +16,6 @@ export default function ActiveCoupons() {
         }
       }
       GetActiveOrders() 
-      console.log("co", activeOrders) 
     }, [])
 
     if(activeOrders.length === 0) return (

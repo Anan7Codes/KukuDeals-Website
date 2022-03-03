@@ -60,7 +60,7 @@ function Navbar() {
             </p>
           </div>
           <div className="lg:hidden flex items-center pr-4">
-            <p className="pr-4 text-white font-medium cursor-pointer" onClick={() => { setIsOpen(true) }}>Use App</p>
+            <p className="pr-4 text-white font-medium cursor-pointer" onClick={() => { setIsOpen(true) }}>Download our App</p>
             <svg
               onClick={() => setShowMenu(true)}
               xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +112,7 @@ function Navbar() {
                     <div className="flex justify-end">
                       <button
                         type="button"
-                        className=" px-4  bg-[#161616] text-white border border-transparent rounded-md hover:text-[#ffd601] focus:outline-none  focus-visible:ring-[#ffd601]"
+                        className="px-4 bg-[#161616] text-white border border-transparent rounded-md hover:text-[#ffd601] focus:outline-none  focus-visible:ring-[#ffd601]"
                         onClick={() => { setIsOpen(false) }}
                       >
                         <svg
@@ -131,15 +131,15 @@ function Navbar() {
                         </svg>
                       </button>
                     </div>
-                    <div className="my-4">
-                      <div className="relative flex justify-center items-center mb-4 h-16">
+                    <div className="my-2">
+                      <div className="relative flex justify-center items-center mb-4 h-12">
                         <Image
                           src="/icons/footerIcons/playstore.svg"
                           layout="fill"
                           alt="googleplay logo"
                         />
                       </div>
-                      <div className="relative flex justify-center items-center h-16">
+                      <div className="relative flex justify-center items-center h-12">
                         <Image
                           src="/icons/footerIcons/appstore.svg"
                           layout="fill"

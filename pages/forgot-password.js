@@ -46,7 +46,7 @@ export default function ForgotPassword() {
                 <title>Forgot Password | Kuku Deals</title>
             </Head>    
             <Layout>
-                <div className="bg-[#2c2c2c] my-6 flex justify-center items-center rounded-[10px] w-full">
+                <div className="bg-[#2c2c2c] my-3 flex justify-center items-center rounded-[10px] w-full">
                     <div className="h-full w-full mt-20 lg:mt-16">
                         <div className="pt-4 text-center">
                             <p className="text-3xl text-[#ffd601] font-bold font-title">Forgot Password</p>

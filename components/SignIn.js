@@ -43,7 +43,7 @@ export default function SignIn() {
   }
 
   return (
-    <div className="bg-[#2c2c2c] my-6 flex justify-center items-center rounded-[10px] w-full h-[30rem]">
+    <div className="bg-[#2c2c2c] my-3 flex justify-center items-center rounded-[10px] w-full h-[30rem]">
       <div className="h-full w-full mt-20 lg:mt-16">
           <div className="pt-4 text-center">
             <p className="text-3xl text-[#ffd601] font-semibold font-title">Sign In</p>
@@ -73,7 +73,7 @@ export default function SignIn() {
               <div className="flex flex-col text-[#ffff] ">
                 <input
                   type="text"
-                  className="border placeholder:text-xs placeholder:text-[#bebebe]  text-xs font-semibold pl-3 mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c]"
+                  className="border placeholder:text-xs placeholder:text-[#bebebe] text-xs font-semibold pl-3 mr-3 w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c]"
                   placeholder="Email Address"
                   value={values.email} 
                   onChange={handleChange('email')}

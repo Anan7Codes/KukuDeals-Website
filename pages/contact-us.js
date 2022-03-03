@@ -7,7 +7,7 @@ function ContactUs() {
     <Layout>
         <div className="my-3 flex flex-col lg:flex-row items-center justify-center rounded-[10px] bg-[#2c2c2c] p-4">
             <div className="flex-1 hidden lg:flex items-center justify-center w-32">
-                <div className="relative w-40 h-40 mx-8">
+                <div className="relative w-44 h-40 mx-8">
                     <Image
                         src="/icons/contactus.png"
                         layout="fill"

@@ -10,6 +10,7 @@ export default function ActiveCoupons() {
           let { data: completed_orders, error } = await supabase
             .from('completed_orders')
             .select('*')
+            .order('created_at', { ascending: false})
           setActiveOrders(completed_orders)
         } catch (e) {
           console.log(e)

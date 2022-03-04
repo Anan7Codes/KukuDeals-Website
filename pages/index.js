@@ -1,4 +1,6 @@
 import Head from "next/head";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from "next-i18next";
 import Layout from "@/components/Layout";
 import SkeletonLayout from "@/components/SkeletonLayout";
 import Banner from "@/components/home/Banner";
@@ -17,7 +19,8 @@ import ArrowL from "@/components/home/ArrowL";
 import ArrowR from "@/components/home/ArrowR";
 
 export default function Home() {
-  
+  const  { t, i18n } = useTranslation()
+
   const [campaigns, setCampaigns] = useState([])
   const [winners, setWinners] = useState([])
   const [isSoldOutNextDisabled, setIsSoldOutNextDisabled] = useState(false)
@@ -106,12 +109,11 @@ export default function Home() {
           <div className="py-3">
             <div className="bg-[#ffd601] rounded-[15px] px-6 py-8 text-black">
               <div className="relative">
-                <div className="flex justify-between">
-                  <p className="font-title font-bold text-3xl">Sold Out</p>
+                <div className={`flex justify-between ${i18n.language === 'ar' ? 'flex-row-reverse' : null}`}>
+                  <p className="font-title font-bold text-3xl">{t('common:soldout')}</p>
                 </div>
-                <div className="text-normal pt-4 lg:pt-0 font-medium lg:w-[450px]">
-                  All our sold out campaigns along with their corresponding
-                  draw dates are listed below
+                <div className={`flex justify-between ${i18n.language === 'ar' ? 'flex-row-reverse' : null}`}>
+                  <p className={`text-normal pt-4 lg:pt-0 font-medium lg:w-[450px] ${i18n.language === 'ar' ? 'text-right' : null}`}>{t('common:soldoutdesc')}</p>
                 </div>
                 <div className="mt-6 relative">
                   <AliceCarousel
@@ -123,13 +125,13 @@ export default function Home() {
                     }}
                     renderPrevButton={() => {                      
                       return (
-                        <div className={`absolute flex lg:-top-28 -top-40 right-20 ${isSoldOutPrevDisabled ? 'opacity-50' : null}`}>
+                        <div className={`absolute flex ${i18n.language === 'ar' ? 'left-16 lg:-top-20 -top-32' : 'right-20 -top-32 lg:-top-28'} ${isSoldOutPrevDisabled ? 'opacity-50' : null}`}>
                           <ArrowL />
                         </div>
                     )}}
                     renderNextButton={() => {
                       return (
-                        <div className={`absolute flex lg:-top-28 -top-40 right-16 ${isSoldOutNextDisabled ? 'opacity-50' : null}`}>
+                        <div className={`absolute flex ${i18n.language === 'ar' ? 'left-20 lg:-top-20 -top-32' : 'right-16 -top-32 lg:-top-28'} ${isSoldOutNextDisabled ? 'opacity-50' : null}`}>
                           <ArrowR />
                         </div>
                       )}}
@@ -149,12 +151,14 @@ export default function Home() {
         </div>
         <div>
           <div className="py-3">
-            <div className="bg-[#000000] rounded-[15px] px-6 py-5 text-black">
+            <div className="bg-[#000000] rounded-[15px] px-6 py-5">
               <div className="p-2 text-[#ffd601]">
-                <p className="font-[700] tracking-tighter text-3xl font-title">Winners</p>
-                <p className="text-normal pt-4 lg:pt-0">
-                  All our winners are announced in this section
-                </p>
+                <div className={`flex justify-between ${i18n.language === 'ar' ? 'flex-row-reverse' : null}`}>
+                  <p className="font-title font-bold text-3xl">{t('common:winners')}</p>
+                </div>
+                <div className={`flex justify-between ${i18n.language === 'ar' ? 'flex-row-reverse' : null}`}>
+                  <p className={`text-normal pt-4 lg:pt-0 font-medium lg:w-[450px] ${i18n.language === 'ar' ? 'text-right' : null}`}>{t('common:winners-desc')}</p>
+                </div>
               </div>
               <div className="mt-6 flex">
                 <AliceCarousel
@@ -166,13 +170,13 @@ export default function Home() {
                   }}
                   renderPrevButton={() => {
                     return (
-                      <div className={`absolute flex lg:-top-24 -top-36 right-20`}>
+                      <div className={`absolute flex ${i18n.language === 'ar' ? 'left-16 lg:-top-20 -top-32' : 'right-20 -top-32 lg:-top-28'}`}>
                         <ArrowL item={true} isWinnerPrevDisabled={isWinnerPrevDisabled}/>
                       </div>
                   )}}
                   renderNextButton={() => {
                     return (
-                      <div className={`absolute flex lg:-top-24 -top-36 right-16`}>
+                      <div className={`absolute flex ${i18n.language === 'ar' ? 'left-20 lg:-top-20 -top-32' : 'right-16 -top-32 lg:-top-28'}`}>
                         <ArrowR item={true} isWinnerNextDisabled={isWinnerNextDisabled}/>
                       </div>
                   )}}
@@ -193,4 +197,12 @@ export default function Home() {
       </Layout>
     </div>
   );
+}
+
+export async function getServerSideProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common']))
+    }
+  }
 }

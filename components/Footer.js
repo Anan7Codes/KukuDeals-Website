@@ -1,6 +1,9 @@
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
 export default function Footer() {
+  const  { t, i18n } = useTranslation()
+
   return (
     <>
       <footer className="py-3">
@@ -8,28 +11,28 @@ export default function Footer() {
           <div className="p-4 sm:flex lg:flex justify-between">
             <div className="flex tracking-tight">
               <div className="pr-10 w-full">
-              <div className="text-sm lg:text-sm w-[150px] text-white font-semibold cursor-pointer hover:text-[#ffd601]">
-                  Customer Service
+                <div className="text-sm lg:text-sm w-[150px] text-white font-semibold cursor-pointer hover:text-[#ffd601]">
+                  {t('customer-service')}
                 </div>
                 <ul className="text-xs lg:text-base pt-3">
                   <li>
                     <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      FAQs
+                      {t('faq')}
                     </a>
                   </li>
                   <li>
                     <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      How it Works
+                      {t('how-it-works')}
                     </a>
                   </li>
                   <li>
                     <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      User Agreement
+                      {t('user-agreement')}
                     </a>
                   </li>
                   <li>
                     <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      Privacy Policy
+                      {t('privacy-policy')}
                     </a>
                   </li>
                 </ul>
@@ -37,22 +40,22 @@ export default function Footer() {
 
               <div className="w-full pb-4">
                 <div className="font-semibold text-sm text-white cursor-pointer hover:text-[#ffd601]">
-                  Quick Links
+                  {t('quick-links')}
                 </div>
                 <ul className=" text-xs lg:text-base pt-4">
                   <li>
                     <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      My Account
+                      {t('my-account')}
                     </a>
                   </li>
                   <li>
                     <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      Active Tickets
+                      {t('active-tickets')}
                     </a>
                   </li>
                   <li>
                     <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      Contact Us
+                      {t('user-agreement')}
                     </a>
                   </li>
                 </ul>

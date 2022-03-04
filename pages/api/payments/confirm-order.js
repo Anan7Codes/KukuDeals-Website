@@ -2,10 +2,11 @@ import { buffer } from 'micro'
 import { createClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
 import { map } from 'modern-async'
+import RobotoBlack from '@/font/roboto/Roboto/Roboto-Black.ttf'
 const Pdfmake = require('pdfmake');
 const fonts = {
     Roboto: {
-        normal: '@/font/roboto/Roboto/Roboto-Black.ttf',
+        normal: RobotoBlack,
         bold: '@/font/roboto/Roboto/Roboto-Medium.ttf',
         italics: '@/font/roboto/Roboto/Roboto-Italic.ttf',
         bolditalics: '@/font/roboto/Roboto/Roboto-MediumItalic.ttf'

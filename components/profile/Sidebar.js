@@ -47,7 +47,7 @@ export default function Sidebar({ children }) {
   return (
     <div className="lg:grid grid-rows-2 grid-flow-col justify-start">
         <User />
-        <div className="row-span-2 col-span-2 bg-[#2c2c2c] text-white lg:w-[21rem] divide-y divide-[#161616] mb-5 rounded-[15px] text-sm cursor-pointer">
+        <div className="row-span-2 col-span-2 bg-[#2c2c2c] text-white lg:w-[21rem] divide-y divide-[#161616] mb-3 h-72 rounded-[10px] text-sm cursor-pointer">
           <div className="hidden lg:flex p-4" onClick={() => router.push('/profile/personal-details')}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -64,20 +64,6 @@ export default function Sidebar({ children }) {
               />
             </svg>
             <p className="pl-3">Personal Details</p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 hidden lg:flex lg:ml-[9.3rem] text-gray-200"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
           </div>
           <div className="lg:hidden flex p-4" onClick={() => router.push('/profile/personal-details')}>
             <svg
@@ -95,57 +81,15 @@ export default function Sidebar({ children }) {
               />
             </svg>
             <p className="pl-3">Personal Details</p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 hidden lg:flex lg:ml-[9.3rem] text-gray-200"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
           </div>
 
           <div className="hidden lg:flex p-4" onClick={() => router.push('/profile/active-coupons')}>
             <RiCoupon2Fill className="h-6 w-6" />
             <p className="pl-3">Active coupons</p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 hidden lg:flex ml-[9.5rem] text-gray-200"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
           </div>
           <div className="lg:hidden flex p-4" onClick={() => router.push('/profile/active-coupons')}>
             <RiCoupon2Fill className="h-6 w-6" />
             <p className="pl-3">Active coupons</p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 hidden lg:flex ml-[9.5rem] text-gray-200"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
           </div>
           <div className="hidden lg:flex p-4" onClick={() => router.push('/profile/change-password')}>
             <svg
@@ -169,25 +113,11 @@ export default function Sidebar({ children }) {
               />
             </svg>
             <p className="pl-3">Change Password</p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-10 w-10 hidden lg:flex ml-[12.2rem] text-gray-200"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
           </div>
           <div className="lg:hidden flex p-4" onClick={() => router.push('/profile/change-password')}>
-            <svg
+          <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-8 w-8"
+              className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -206,77 +136,21 @@ export default function Sidebar({ children }) {
               />
             </svg>
             <p className="pl-3">Change Password</p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 hidden lg:flex ml-[12.2rem] text-gray-200"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
           </div>
           <div className="hidden lg:flex p-4" onClick={() => router.push('/profile/shipping-address')}>
             <FaAddressCard className="h-6 w-6" />
             <p className="pl-3">Shipping Address</p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 hidden lg:flex ml-[8.5rem] text-gray-200"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
           </div>
           <div className="lg:hidden flex p-4" onClick={() => router.push('/profile/shipping-address')}>
             <FaAddressCard className="h-6 w-6" />
             <p className="pl-3">Shipping Address</p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 hidden lg:flex ml-[8.5rem] text-gray-200"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
           </div>
           <div className="flex p-4">
-            <RiLogoutBoxRLine className="h-6 w-6" />
+            <RiLogoutBoxRLine className="h-6 w-6"/>
             <p className="pl-3"
               onClick={SignOutUser}>
               Logout
             </p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 hidden lg:flex ml-[12.5rem] text-gray-200"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
           </div>
         </div>
         <div className="row-span-3 lg:p-7">

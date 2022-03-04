@@ -2,6 +2,16 @@ import { buffer } from 'micro'
 import { createClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
 import { map } from 'modern-async'
+const Pdfmake = require('pdfmake');
+const fonts = {
+    Roboto: {
+        normal: 'font/roboto/Roboto/Roboto-Black.ttf',
+        bold: 'font/roboto/Roboto/Roboto-Medium.ttf',
+        italics: 'font/roboto/Roboto/Roboto-Italic.ttf',
+        bolditalics: 'font/roboto/Roboto/Roboto-MediumItalic.ttf'
+    }
+};
+const pdfmake = new Pdfmake(fonts);
 const mail = require('@sendgrid/mail')
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2020-08-27' })
@@ -99,9 +109,8 @@ const webhookHandler = async (req, res) => {
 
             let profile = await supabase
                 .from('profiles')
-                .select('promo_codes_used', 'name')
+                .select('promo_codes_used, name, email')
                 .eq("id", initiated_orders.data.user_id)
-                console.log("profile",profile)
 
             if (initiated_orders.data.promo_code_used) {
 
@@ -180,7 +189,7 @@ const webhookHandler = async (req, res) => {
             <div class="flex text-xs m-6 justify-between p-4">
                 <div>
                     <div>
-                        <h6 class="font-bold">Customer Name: <span class=" font-medium">${customerName}</span></h6>
+                        <h6 class="font-bold">Customer Name: <span class=" font-medium">${profile.data[0].name}</span></h6>
                     </div>
                     <h6 class="font-bold">Address : <span class=" font-medium"> United Arab Emirates</span></h6>
                 </div>
@@ -294,38 +303,36 @@ const webhookHandler = async (req, res) => {
                     col_6: { text: 'Tax Rate %', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
                     col_7: { text: 'Amount Including Tax', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
                 },
-                fila_1: {
-                }
             }
-            var rows = coupons
-            var body = [];
-            for (var key in headers) {
-                if (headers.hasOwnProperty(key)) {
-                    var header = headers[key];
-                    var row = new Array();
-                    row.push(header.col_1);
-                    row.push(header.col_2);
-                    row.push(header.col_3);
-                    row.push(header.col_4);
-                    row.push(header.col_5);
-                    row.push(header.col_6);
-                    row.push(header.col_7);
-                    body.push(row);
-                }
-            }
-            for (var i = 0; i < rows.length; i++) {
+        
+            let body = [];
+            let header = headers.fila_0;
+            var row = new Array();
+            row.push(header.col_1);
+            row.push(header.col_2);
+            row.push(header.col_3);
+            row.push(header.col_4);
+            row.push(header.col_5);
+            row.push(header.col_6);
+            row.push(header.col_7);
+            body.push(row);
+        
+            await map(coupons, async (coupon,i) => {
                 var row = new Array();
-                console.log(i)
-                row.push(i + 1)
-                console.log("cjeck", rows[i].product_price.toString())
-                row.push(rows[i].name.toString());
-                row.push(rows[i].product_qty.toString());
-                row.push(`AED${rows[i].product_price.toString()}`);
-                row.push(`AED${rows[i].product_price.toString() * rows[i].product_qty.toString() * 0.95}`);
+                console.log("cjeck", coupon.product_price)
+                row.push(coupon.name);
+                console.log("coupon", coupon.name)
+                row.push(coupon.product_qty);
+                console.log("coupon", coupon.product_qty)
+                row.push(`AED${coupon.product_price}`);
+                console.log("coupon", coupon.product_price)
+                row.push(`AED${(coupon.product_price * coupon?.product_qty * 0.95)}`);
+                console.log("coupon", `AED${(coupon.product_price * coupon?.product_qty * 0.95)}`)
                 row.push("5%");
-                row.push(`AED${rows[i].product_price.toString() * rows[i].product_qty.toString()}`);
+                row.push(`AED${(coupon.product_price * coupon?.product_qty)}`);
+                console.log("coupon", `AED${(coupon.product_price * coupon?.product_qty)}`)
                 body.push(row);
-            }
+            }) 
 
 
             const document = {
@@ -347,7 +354,8 @@ const webhookHandler = async (req, res) => {
                     ]
                 },
                 footer: function (currentPage, pageCount) {
-                    return { text: 'Page' + currentPage.toString() + ' of ' + pageCount, alignment: 'center', margin: [0, 30, 0, 0] };
+                    return { text: 'Page' + ' of ' + pageCount, alignment: 'center', margin: [0, 30, 0, 0] };
+                    // return { text: 'Page' + currentPage.toString() + ' of ' + pageCount, alignment: 'center', margin: [0, 30, 0, 0] };
                 },
                 content: [
                     '\n\n\n\n',
@@ -360,7 +368,7 @@ const webhookHandler = async (req, res) => {
 
                             },
                             {
-                                text: customerName,
+                                text: profile.data[0].name,
                                 style: 'invoiceSubValue',
                                 alignment: 'left',
                                 margin: [-100, 0, 0, 0]
@@ -458,7 +466,7 @@ const webhookHandler = async (req, res) => {
                                         style: 'itemsFooterTotalTitle'
                                     },
                                     {
-                                        text: `AED${amount.toString()}`,
+                                        text: `AED${amount}`,
                                         style: 'itemsFooterTotalTitle'
                                     }
                                 ],
@@ -547,7 +555,7 @@ const webhookHandler = async (req, res) => {
                     from: 'travo.socialmedia@gmail.com',
                     personalizations: [
                         {
-                            to: ['mohammedhafizba@gmail.com',
+                            to: [`${profile.data[0].email}`,
                                 // 'anandhu@rough-paper.com'
                             ],
                             subject: 'Order Confirmation'

@@ -36,9 +36,8 @@ function useWindowSize() {
 }
 
 function Success() {
-  const { width, height } = useWindowSize()
-
   const router = useRouter();
+  const { width, height } = useWindowSize()
   const { user } = useUser()
 
   const [ success, setSuccess ] = useState(false)
@@ -50,16 +49,15 @@ function Success() {
     }
   }, [user])
 
-  const EmptyCart = () => {
-    dispatch({
-        type: 'EMPTY_CART',
-    })       
-  }
-
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
     if (query.get('success')) {
       setSuccess(true)
+    }
+    const EmptyCart = () => {
+      dispatch({
+          type: 'EMPTY_CART',
+      })       
     }
     EmptyCart()
   }, []);

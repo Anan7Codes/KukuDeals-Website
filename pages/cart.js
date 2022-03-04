@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import Layout from "@/components/Layout";
 import CartPage from "@/components/cart/CartPage";
 
-export default function cart() {
+export default function Cart() {
     const { locale } = useRouter()
     return (
         <div className="bg-[#161616] lg:min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>

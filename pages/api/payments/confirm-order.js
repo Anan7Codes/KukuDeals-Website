@@ -319,18 +319,18 @@ const webhookHandler = async (req, res) => {
         
             await map(coupons, async (coupon,i) => {
                 var row = new Array();
-                console.log("cjeck", coupon.product_price.toString())
-                row.push(coupon.name.toString());
-                console.log("coupon", coupon.name.toString())
-                row.push(coupon.product_qty.toString());
-                console.log("coupon", coupon.product_qty.toString())
-                row.push(`AED${coupon.product_price.toString()}`);
-                console.log("coupon", coupon.product_price.toString())
-                row.push(`AED${(coupon.product_price * coupon?.product_qty * 0.95).toString()}`);
-                console.log("coupon", `AED${(coupon.product_price * coupon?.product_qty * 0.95).toString()}`)
+                console.log("cjeck", coupon.product_price)
+                row.push(coupon.name);
+                console.log("coupon", coupon.name)
+                row.push(coupon.product_qty);
+                console.log("coupon", coupon.product_qty)
+                row.push(`AED${coupon.product_price}`);
+                console.log("coupon", coupon.product_price)
+                row.push(`AED${(coupon.product_price * coupon?.product_qty * 0.95)}`);
+                console.log("coupon", `AED${(coupon.product_price * coupon?.product_qty * 0.95)}`)
                 row.push("5%");
-                row.push(`AED${(coupon.product_price * coupon?.product_qty).toString()}`);
-                console.log("coupon", `AED${(coupon.product_price * coupon?.product_qty).toString()}`)
+                row.push(`AED${(coupon.product_price * coupon?.product_qty)}`);
+                console.log("coupon", `AED${(coupon.product_price * coupon?.product_qty)}`)
                 body.push(row);
             }) 
 
@@ -466,7 +466,7 @@ const webhookHandler = async (req, res) => {
                                         style: 'itemsFooterTotalTitle'
                                     },
                                     {
-                                        text: `AED${amount.toString()}`,
+                                        text: `AED${amount}`,
                                         style: 'itemsFooterTotalTitle'
                                     }
                                 ],
@@ -565,7 +565,7 @@ const webhookHandler = async (req, res) => {
                     // content: [{"type": "text/html", "value": document.toString() }],
                     attachments: [
                         {
-                            // content: result.toString('base64'),
+                            content: result.toString('base64'),
                             filename: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}.pdf`,
                             type: 'application/pdf',
                             disposition: 'attachment',

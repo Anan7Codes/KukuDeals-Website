@@ -565,7 +565,7 @@ const webhookHandler = async (req, res) => {
                     // content: [{"type": "text/html", "value": document.toString() }],
                     attachments: [
                         {
-                            content: result.toString('base64'),
+                            // content: result.toString('base64'),
                             filename: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}.pdf`,
                             type: 'application/pdf',
                             disposition: 'attachment',

@@ -2,13 +2,13 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 import { map } from 'modern-async'
 import { createClient } from '@supabase/supabase-js'
 const fs = require('fs')
-fs.readFile('font/roboto/Roboto/Roboto-Black.ttf', (err, data) => {
-  if (err) {
-    console.error(err)
-    return
-  }
-  console.log(data)
-})
+// fs.readFile('font/roboto/Roboto/Roboto-Black.ttf', (err, data) => {
+//   if (err) {
+//     console.error(err)
+//     return
+//   }
+//   console.log(data)
+// })
 const RobotoBlack = fs.readFile('font/roboto/Roboto/Roboto-Black.ttf')
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL

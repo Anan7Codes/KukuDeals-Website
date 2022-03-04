@@ -36,6 +36,7 @@ function useWindowSize() {
 }
 
 function Success() {
+  const router = useRouter();
   const { width, height } = useWindowSize()
   const { user } = useUser()
 
@@ -43,7 +44,6 @@ function Success() {
   const { dispatch } = CartState();
 
   useEffect(() => {
-    const router = useRouter();
     if(!user) {
       router.push('/signin')
     }

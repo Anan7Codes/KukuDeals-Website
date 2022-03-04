@@ -303,8 +303,6 @@ const webhookHandler = async (req, res) => {
                     col_6: { text: 'Tax Rate %', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
                     col_7: { text: 'Amount Including Tax', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
                 },
-                fila_1: {
-                }
             }
             var rows = coupons
 

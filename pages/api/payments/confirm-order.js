@@ -4,42 +4,17 @@ import Stripe from 'stripe'
 import { map } from 'modern-async'
 const Pdfmake = require('pdfmake');
 const fs = require('fs')
-let RobotoMedium, RobotoBlack, RobotoItalics, RobotoMediumItalics
-fs.readFile('font/roboto/Roboto/Roboto-Medium.ttf', 'utf8' , (err, data) => {
-    if (err) {
-      console.error("font load error medium", err)
-      return
-    }
-    RobotoMedium = data
-})
-fs.readFile('font/roboto/Roboto/Roboto-Black.ttf', 'utf8' , (err, data) => {
-    if (err) {
-      console.error("font load error medium", err)
-      return
-    }
-    RobotoBlack = data
-})
-fs.readFile('font/roboto/Roboto/Roboto-Italic.ttf', 'utf8' , (err, data) => {
-    if (err) {
-      console.error("font load error medium", err)
-      return
-    }
-    RobotoItalics = data
-})
-fs.readFile('font/roboto/Roboto/Roboto-MediumItalic.ttf', 'utf8' , (err, data) => {
-    if (err) {
-      console.error("font load error medium", err)
-      return
-    }
-    RobotoMediumItalics = data
-})
+const RobotoMedium = fs.readFileSync('font/roboto/Roboto/Roboto-Medium.ttf')
+const RobotoBlack = fs.readFileSync('font/roboto/Roboto/Roboto-Black.ttf')
+const RobotoMediumItalics = fs.readFileSync('font/roboto/Roboto/Roboto-MediumItalic.ttf')
+const RobotoItalics = fs.readFileSync('font/roboto/Roboto/Roboto-Italic.ttf')
 
 const fonts = {
     Roboto: {
         normal: RobotoMedium,
         bold: RobotoBlack,
-        italics: RobotoItalics,
-        bolditalics: RobotoMediumItalics
+        italics: RobotoMediumItalics,
+        bolditalics: RobotoItalics,
     }
 };
 const pdfmake = new Pdfmake(fonts);

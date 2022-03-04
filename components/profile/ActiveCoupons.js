@@ -1,10 +1,8 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { supabase } from '@/utils/supabaseClient';
 import Coupon from "./Coupon";
 
 export default function ActiveCoupons() {
-    const router = useRouter();
     const [ activeOrders, setActiveOrders ] = useState([])
     useEffect(() => {
       const GetActiveOrders = async () => {
@@ -12,6 +10,7 @@ export default function ActiveCoupons() {
           let { data: completed_orders, error } = await supabase
             .from('completed_orders')
             .select('*')
+            .order('created_at', { ascending: false})
           setActiveOrders(completed_orders)
         } catch (e) {
           console.log(e)

@@ -55,56 +55,56 @@ export default function Campaign({ campaign}) {
     }
     if(!campaign?.SoldOut) {
     return (
-        <div>
-            <div className="z-0 mx-auto rounded-[15px]">
-            <div className="w-full relative my-10">
+      <div>
+        <div className="z-0 mx-auto rounded-[15px]">
+          <div className="w-full relative my-6">
         <div className="flex flex-col items-center justify-around lg:flex-row h-full pb-6 bg-[#2c2c2c] cursor-pointer rounded-[15px] overflow-visible shadow-lg transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-[101%] duration-700">
-          <div className="mt-[60px] lg:mt-0">
-            <div className="relative lg:top-5 lg:left-20 flex justify-center items-center w-64  h-64">
+          <div className="mt-[60px] lg:mt-0 lg:ml-24 flex justify-center items-center">
+            <div className="relative lg:top-5 lg:w-64 lg:h-64 w-48 h-48">
               <Image src={campaign?.Image} layout="fill" alt="Campaign Image" />
             </div>
           </div>
-          <div className="flex-col w-full pb-6 flex justify-center items-center lg:pb-0">
-            <div className="justify-center">
-              <div className="text-sm text-center sm:pl-4 sm:pt-2 lg:text-justify	 lg:text-3xl">
-                <div className="lg:pt-4 ">
-                  <p className="text-5xl lg:text-7xl font-bold font-title lg:leading-none italic text-[#ffd601]">
-                    Win
-                  </p>
-                </div>
-                <p className="text-lg font-extrabold lg:text-2xl text-white tracking-tighter  leading-6 lg:leading-normal">
-                  {campaign?.GiftName.en}
-                </p>
-                <p className="text-lg lg:text-2xl text-white tracking-tighter leading-4 lg:leading-tight font-medium">
-                  Buy a {campaign?.ProductName.en} and make it yours!
-                </p>
-                <p className="text-lg lg:text-2xl tracking-tighter font-bold text-[#ffd601] lg:leading-tight">
-                  AED {campaign?.Price}
-                </p>
-                {cart.some(c => c.id === campaign.id) ?
-                  <div className="flex justify-center lg:justify-start space-x-3 items-center pt-4">
-                    <div onClick={cart.some(c => c.id === campaign.id && c.qty === 1) ? RemoveFromCart : ReduceQty} className="flex text-2xl bg-[#161616] pt-15 pb-15 justify-center items-center w-12 h-12 rounded-[15px]">
-                      <p className="text-white">-</p>
-                    </div>
-                    <div className="flex bg-[#161616] py-15 justify-center text-lg items-center w-12 h-12 rounded-[15px]">
-                      <p className="text-white">{qty}</p>
-                    </div>
-                    <div onClick={AddQty} className="flex bg-[#ffd601] text-black text-2xl pt-15 pb-15 justify-center items-center w-12 h-12 rounded-[15px]" >
-                      <p>+</p>
-                    </div>
-                  </div> :
-                  <div className="mt-2 space-x-3 text-sm lg:text-base">
-                    <button
-                      onClick={openModal}
-                      className="w-32 h-12 lg:w-44 lg:h-12 text-black font-medium bg-[#ffd601] hover:text-[#ffd601] hover:bg-[#161616] hover:border hover:border-[#ffd601] rounded-[12px]"
-                    >
-                      Prize Details
-                    </button>
-                    <button onClick={AddToCart} className="bg-[#161616] w-32 h-12 lg:w-44 lg:h-12 text-[#ffd601] font-medium hover:bg-[#ffd601] hover:text-black rounded-[12px]">
-                      Add to Cart
-                    </button>
+          <div className="flex flex-col justify-center w-full mt-6 lg:mt-10 pb-2 lg:ml-12 lg:pb-0">
+            <div className="text-center sm:pl-4 sm:pt-2 lg:text-justify	lg:text-3xl">
+              <p className="text-md lg:text-2xl text-white">
+                Buy a {campaign?.ProductName.en} for: <span className='font-bold'>AED {campaign?.Price}</span>
+              </p>                
+              <p className='text-white lg:text-3xl font-bold'>
+                <span className="lg:text-3xl font-title lg:pt-6 text-[#ffd601]">Win: </span> 
+                {campaign?.GiftName.en}
+              </p>
+              {cart.some(c => c.id === campaign.id) ?
+                <div className="flex justify-center lg:justify-start space-x-2 items-center pt-4">
+                  <div onClick={cart.some(c => c.id === campaign.id && c.qty === 1) ? RemoveFromCart : ReduceQty} className="flex text-2xl bg-[#161616] font-semibold py-15 justify-center items-center w-16 h-12 rounded-[10px]">
+                    <p className="text-white">-</p>
                   </div>
-                }
+                  <div className="flex bg-[#161616] font-semibold py-15 justify-center text-lg items-center w-16 h-12 rounded-[10px]">
+                    <p className="text-white">{qty}</p>
+                  </div>
+                  <div onClick={AddQty} className="flex bg-[#ffd601] text-black font-semibold text-2xl py-15 justify-center items-center w-16 h-12 rounded-[10px]" >
+                    <p>+</p>
+                  </div>
+                </div> :
+                <div className="mt-2 space-x-2 text-sm lg:text-base">
+                  <button
+                    onClick={openModal}
+                    className="w-36 h-12 lg:w-40 lg:h-12 text-black font-semibold bg-[#ffd601] hover:text-[#ffd601] hover:bg-[#000] hover:border hover:border-[#ffd601] rounded-[10px]"
+                  >
+                    Prize Details
+                  </button>
+                  <button onClick={AddToCart} className="bg-[#000] w-36 h-12 lg:w-40 lg:h-12 text-[#ffd601] font-semibold hover:bg-[#ffd601] hover:text-black rounded-[10px]">
+                    Add to Cart
+                  </button>
+                </div>
+              }
+              <div className='flex items-center justify-center lg:justify-start my-4 text-left'>
+                <div className="relative w-6 h-6 mr-2">
+                  <Image src="/icons/calendar.png" layout="fill" alt="Calendar Image" />
+                </div>
+                <div className='flex flex-col'>
+                  <p className='text-white font-bold text-xs leading-3'>Max draw date: {campaign?.DrawDate}</p>
+                  <p className='text-white text-xs'>or when the campaign is sold out. Whichever is earlier.</p>
+                </div>
               </div>
             </div>
 
@@ -193,14 +193,14 @@ export default function Campaign({ campaign}) {
                   </button>
                 </div>
                 <div className="my-4">
-                  <div className="relative flex  justify-center items-center lg:ml-24 ml-16 w-52 h-52">
+                  <div className="relative flex justify-center items-center lg:ml-24 ml-16 w-48 h-48">
                     <Image
                       src={campaign?.Image}
                       layout="fill"
                       alt="Campaign Image"
                     />
                   </div>
-                  <div className="absolute -top-8 -left-5 bg-[#161616] lg:h-28 w-32  p-2  rounded-full">
+                  <div className="absolute -top-8 -left-5 bg-[#161616] w-32 p-2 rounded-full">
                     <CircularProgressbar
                       value={campaign?.SoldOutCoupons}
                       maxValue={campaign?.TotalCoupons}
@@ -227,24 +227,24 @@ export default function Campaign({ campaign}) {
                       </p>
                     </div>
                   </div>
-                  <div className="flex justify-center  h-10 pb-2">
+                  <div className="flex justify-center py-4">
                     <button
                       onClick={() => setPrizeDetails(true)}
-                      className={`px-2 ${prizeDetails ? 'text-black bg-[#ffd601]' : 'bg-[#2c2c2c] text-white'} rounded-l-xl text-sm font-semibold`}
+                      className={`px-2 ${prizeDetails ? 'text-black bg-[#ffd601]' : 'bg-[#2c2c2c] text-white'} rounded-l-xl text-sm py-3 px-8 font-semibold`}
                     >
                       Prize Details
                     </button>
                     <button
                       onClick={() => setPrizeDetails(false)}
-                      className={`px-2 ${prizeDetails ? 'bg-[#2c2c2c] text-white': 'text-black bg-[#ffd601]'} rounded-r-xl text-sm font-semibold`}
+                      className={`px-2 ${prizeDetails ? 'bg-[#2c2c2c] text-white': 'text-black bg-[#ffd601]'} rounded-r-xl text-sm py-3 px-8 font-semibold`}
                     >
                       Product Details
                     </button>
                   </div>
                   { prizeDetails ?
                     <>
-                      <p className="text-white text-sm mb-2">Get a chance to win:</p>
-                      <p className="text-[#ffd601] font-title font-bold text-2xl ">{campaign?.GiftName.en}</p>
+                      <p className="text-white text-sm">Get a chance to win:</p>
+                      <p className="text-[#ffd601] font-semibold text-2xl">{campaign?.GiftName.en}</p>
                       <p className="text-white text-sm">
                         {campaign?.GiftDescription.en}
                       </p>
@@ -252,8 +252,8 @@ export default function Campaign({ campaign}) {
                     :
                     <>
                       <div className="flex justify-between mb-2">
-                        <p className="text-[#ffd601] text-2xl font-bold font-title">{campaign?.ProductName.en}</p>
-                        <p className="text-white font-bold">
+                        <p className="text-[#ffd601] text-2xl font-semibold">{campaign?.ProductName.en}</p>
+                        <p className="text-white font-semibold">
                           AED {campaign?.Price}
                         </p>
                       </div>
@@ -266,25 +266,25 @@ export default function Campaign({ campaign}) {
                 <div className="flex justify-between items-center pt-4 pb-4">
                   <div className="flex-col">
                     <p className="text-lg text-white">Buy {campaign?.ProductName.en}</p>
-                    <p className="text-base text-[#ffd601] font-bold">
+                    <p className="text-base text-[#ffd601] font-semibold">
                       AED {campaign?.Price}
                     </p>
                     <p className="text-xs text-white">Inclusive of VAT</p>
                   </div>
                   {cart.some(c => c.id === campaign.id) ?
-                    <div className="flex justify-center lg:justify-start space-x-3 items-center pt-4">
-                      <div onClick={cart.some(c => c.id === campaign.id && c.qty === 1) ? RemoveFromCart : ReduceQty} className="flex text-2xl cursor-pointer bg-[#2c2c2c] pt-15 pb-15 justify-center items-center w-12 h-12 rounded-[15px]">
+                    <div className="flex justify-center lg:justify-start space-x-2 items-center pt-4">
+                      <div onClick={cart.some(c => c.id === campaign.id && c.qty === 1) ? RemoveFromCart : ReduceQty} className="flex text-2xl cursor-pointer bg-[#2c2c2c] pt-15 pb-15 justify-center items-center w-12 h-12 rounded-[10px]">
                         <p className="text-white  hover:text-[#ffd601]">-</p>
                       </div>
-                      <div className="flex bg-[#2c2c2c] py-15 justify-center text-lg items-center w-12 h-12 rounded-[15px]">
+                      <div className="flex bg-[#2c2c2c] py-15 justify-center text-lg items-center w-12 h-12 rounded-[10px]">
                         <p className="text-white">{qty}</p>
                       </div>
-                      <div onClick={AddQty} className="flex bg-[#ffd601] cursor-pointer text-black text-2xl pt-15 pb-15 justify-center items-center w-12 h-12 rounded-[15px]" >
+                      <div onClick={AddQty} className="flex bg-[#ffd601] cursor-pointer text-black text-2xl pt-15 pb-15 justify-center items-center w-12 h-12 rounded-[10px]" >
                         <p>+</p>
                       </div>
                     </div> :
                     <div className="mt-2 space-x-4 text-sm lg:text-base">
-                      <button onClick={AddToCart} className="bg-[#ffd601] w-32 h-12 lg:w-44 lg:h-12 text-black font-semibold hover:bg-[#ffd601] rounded-[15px]">
+                      <button onClick={AddToCart} className="bg-[#ffd601] w-32 h-12 lg:w-32 lg:h-12 text-black text-sm font-semibold hover:bg-[#ffd601] rounded-[10px]">
                         Add to Cart
                       </button>
                     </div>

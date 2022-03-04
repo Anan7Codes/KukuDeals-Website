@@ -2,7 +2,8 @@ import Head from "next/head";
 import Layout from "@/components/Layout";
 import SkeletonLayout from "@/components/SkeletonLayout";
 import Banner from "@/components/home/Banner";
-import Section1 from "@/components/home/Section1";
+// import Section1 from "@/components/home/Section1";
+import DownloadApp from "@/components/home/DownloadApp";
 import Campaign from "@/components/home/Campaign";
 import Soldout from "@/components/home/Soldout";
 import Winners from "@/components/home/Winners";
@@ -13,17 +14,23 @@ import AliceCarousel from "react-alice-carousel";
 import Skeleton from 'react-loading-skeleton'
 import "react-alice-carousel/lib/alice-carousel.css";
 import ArrowL from "@/components/home/ArrowL";
-import ArrowR from "@/components/home//ArrowR";
+import ArrowR from "@/components/home/ArrowR";
 
 export default function Home() {
   
   const [campaigns, setCampaigns] = useState([])
   const [winners, setWinners] = useState([])
-  const [index, setIndex] = useState(0);
+  const [isSoldOutNextDisabled, setIsSoldOutNextDisabled] = useState(false)
+  const [isSoldOutPrevDisabled, setIsSoldOutPrevDisabled] = useState(true)
+  const [isWinnerNextDisabled, setIsWinnerNextDisabled] = useState(false)
+  const [isWinnerPrevDisabled, setIsWinnerPrevDisabled] = useState(true)
+
   const responsive = {
     0: { items: 1 },
+    576: { items: 3 },
     1024: { items: 4 },
   };
+  
   useEffect(() => {
     const FetchCampaigns = async () => {
       try {
@@ -71,10 +78,10 @@ export default function Home() {
  
   if(campaigns.length === 0 ) return (
     <SkeletonLayout>
-      <Skeleton className="h-80" style={{borderRadius: 15}} />
-      <Skeleton className="h-60 mt-12" style={{borderRadius: 15}} />
-      <Skeleton className="h-60 mt-12" style={{borderRadius: 15}} />
-      <Skeleton className="h-60 mt-12" style={{borderRadius: 15}} />
+      <Skeleton className="h-96" style={{borderRadius: 15}} />
+      <Skeleton className="h-60 mt-6" style={{borderRadius: 15}} />
+      <Skeleton className="h-60 mt-6" style={{borderRadius: 15}} />
+      <Skeleton className="h-60 mt-6" style={{borderRadius: 15}} />
     </SkeletonLayout>
   )
   if (!campaigns) return <p>No Data</p>
@@ -85,9 +92,9 @@ export default function Home() {
       </Head>
       <Layout>
         <Banner />
+        <DownloadApp/>
         {/* <Section1 /> */}
         <div>
-          {/* <p className="text-[26px] text-[#ffd601] pt-5 font-title font-bold">Explore campaigns</p> */}
           {campaigns?.map(campaign => {
               return (
                 <Campaign campaign={campaign} key={campaign.id} />
@@ -96,11 +103,11 @@ export default function Home() {
           }
         </div>
         <div>
-          <div className=" mx-auto">
-            <div className="bg-[#ffd601] rounded-[15px] px-6 py-5 text-black">
-              <div className="pt-2 ml-3 relative">
+          <div className="py-3">
+            <div className="bg-[#ffd601] rounded-[15px] px-6 py-8 text-black">
+              <div className="relative">
                 <div className="flex justify-between">
-                  <p className="tracking-tighter font-title font-bold text-3xl">Sold Out</p>
+                  <p className="font-title font-bold text-3xl">Sold Out</p>
                 </div>
                 <div className="text-normal pt-4 lg:pt-0 font-medium lg:w-[450px]">
                   All our sold out campaigns along with their corresponding
@@ -110,28 +117,22 @@ export default function Home() {
                   <AliceCarousel
                     mouseTracking
                     responsive={responsive}
-                    renderPrevButton={() => {
-                      return index === 0 ? (
-                        <div className="absolute flex lg:-top-24 -top-40 right-24 opacity-50">
-                          <ArrowL />
-                        </div>
-                      ) : (
-                        <div className="absolute flex lg:-top-24 -top-40 right-24">
-                          <ArrowL />
-                        </div>
-                      )
+                    onSlideChanged={(e) => {
+                      setIsSoldOutNextDisabled(e.isNextSlideDisabled)
+                      setIsSoldOutPrevDisabled(e.isPrevSlideDisabled)                      
                     }}
+                    renderPrevButton={() => {                      
+                      return (
+                        <div className={`absolute flex lg:-top-28 -top-40 right-20 ${isSoldOutPrevDisabled ? 'opacity-50' : null}`}>
+                          <ArrowL />
+                        </div>
+                    )}}
                     renderNextButton={() => {
-                      return index >= 10 - 4 ? (
-                        <div className="absolute flex lg:-top-24 -top-40 opacity-50 right-20">
+                      return (
+                        <div className={`absolute flex lg:-top-28 -top-40 right-16 ${isSoldOutNextDisabled ? 'opacity-50' : null}`}>
                           <ArrowR />
                         </div>
-                      ) : (
-                        <div className="absolute flex lg:-top-24 -top-40 right-20">
-                          <ArrowR />
-                        </div>
-                      );
-                    }}
+                      )}}
                     disableDotsControls="true"
                     controlsStrategy="alternate"
                   >
@@ -147,7 +148,7 @@ export default function Home() {
           </div>
         </div>
         <div>
-          <div className="py-8">
+          <div className="py-3">
             <div className="bg-[#000000] rounded-[15px] px-6 py-5 text-black">
               <div className="p-2 text-[#ffd601]">
                 <p className="font-[700] tracking-tighter text-3xl font-title">Winners</p>
@@ -159,28 +160,22 @@ export default function Home() {
                 <AliceCarousel
                   mouseTracking
                   responsive={responsive}
+                  onSlideChanged={(e) => {
+                    setIsWinnerNextDisabled(e.isNextSlideDisabled)
+                    setIsWinnerPrevDisabled(e.isPrevSlideDisabled)                      
+                  }}
                   renderPrevButton={() => {
-                    return index === 0 ? (
-                      <div className="absolute lg:-top-24 -top-36 right-24 opacity-50">
-                        <ArrowL item={true}/>
+                    return (
+                      <div className={`absolute flex lg:-top-24 -top-36 right-20`}>
+                        <ArrowL item={true} isWinnerPrevDisabled={isWinnerPrevDisabled}/>
                       </div>
-                    ) : (
-                      <div className="absolute lg:-top-24 -top-36 right-24">
-                        <ArrowL item={true}/>
-                      </div>
-                    );
-                  }}
+                  )}}
                   renderNextButton={() => {
-                    return index >= 10 - 4 ? (
-                      <div className="absolute lg:-top-24 -top-36 opacity-50 right-20">
-                        <ArrowR item={true}/>
+                    return (
+                      <div className={`absolute flex lg:-top-24 -top-36 right-16`}>
+                        <ArrowR item={true} isWinnerNextDisabled={isWinnerNextDisabled}/>
                       </div>
-                    ) : (
-                      <div className="absolute lg:-top-24 -top-36 right-20">
-                        <ArrowR item={true}/>
-                      </div>
-                    );
-                  }}
+                  )}}
                   disableDotsControls="true"
                   controlsStrategy="alternate"
                 >

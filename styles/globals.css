@@ -13,6 +13,7 @@
     -webkit-appearance: none; 
     margin: 0; 
   }
+<<<<<<< HEAD
   /* Change the white to any color */
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
@@ -27,3 +28,9 @@ input:-webkit-autofill{
 input:-webkit-autofill{
   -webkit-text-fill-color: whiote !important;
 }
+=======
+
+  body {
+    background-color: #161616;
+  }
+>>>>>>> dfa5ea5fdcb5c523c84e2376f0523b31eedf057a

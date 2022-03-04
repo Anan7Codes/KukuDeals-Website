@@ -3,61 +3,56 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <>
-      <footer className="pb-2">
-        <div className=" bg-[#2c2c2c] mx-auto py-2 pl-4 rounded-[15px]">
-          <div className=" p-4 sm:flex lg:flex justify-between">
-            <div className="flex tracking-tight	">
+      <footer className="py-3">
+        <div className="bg-[#2c2c2c] mx-auto py-2 pl-4 rounded-[10px]">
+          <div className="p-4 sm:flex lg:flex justify-between">
+            <div className="flex tracking-tight">
               <div className="pr-10 w-full">
-                <div className="font-medium text-sm lg:text-lg text-white cursor-pointer hover:text-[#ffd601]">
-                  Quick Links
+              <div className="text-sm lg:text-sm w-[150px] text-white font-semibold cursor-pointer hover:text-[#ffd601]">
+                  Customer Service
                 </div>
-                <ul className=" text-xs lg:text-base pt-3 leading-loose lg:leading-extra-loose">
+                <ul className="text-xs lg:text-base pt-3">
                   <li>
-                    <a className="text-white cursor-pointer hover:text-[#ffd601] ">
-                      About Kuku
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                      FAQs
                     </a>
                   </li>
                   <li>
-                    <a className="text-white  cursor-pointer hover:text-[#ffd601]">
-                      My Account
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                      How it Works
                     </a>
                   </li>
                   <li>
-                    <a className="text-white  cursor-pointer hover:text-[#ffd601]">
-                      Active Tickets
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                      User Agreement
+                    </a>
+                  </li>
+                  <li>
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                      Privacy Policy
                     </a>
                   </li>
                 </ul>
               </div>
 
               <div className="w-full pb-4">
-                <div className=" text-sm lg:text-lg text-white font-medium cursor-pointer hover:text-[#ffd601]">
-                  Customer Service
+                <div className="font-semibold text-sm text-white cursor-pointer hover:text-[#ffd601]">
+                  Quick Links
                 </div>
-                <ul className="text-xs lg:text-base pt-3 leading-loose lg:leading-loose">
+                <ul className=" text-xs lg:text-base pt-4">
                   <li>
-                    <a className="text-white cursor-pointer hover:text-[#ffd601]">
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                      My Account
+                    </a>
+                  </li>
+                  <li>
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                      Active Tickets
+                    </a>
+                  </li>
+                  <li>
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
                       Contact Us
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-white  cursor-pointer hover:text-[#ffd601]">
-                      FAQs
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-white  cursor-pointer hover:text-[#ffd601]">
-                      How it Works
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-white  cursor-pointer hover:text-[#ffd601]">
-                      Charities
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-white  cursor-pointer hover:text-[#ffd601]">
-                      Draw Terms &amp; Conditions
                     </a>
                   </li>
                 </ul>
@@ -65,7 +60,7 @@ export default function Footer() {
             </div>
 
             <div>
-              <div className=" w-full pr-2">
+              <div className="w-full pr-2">
                 <ul className="flex space-x-2 lg:space-x-4 justify-center">
                   <li>
                     <a className="">
@@ -115,20 +110,20 @@ export default function Footer() {
                 </ul>
               </div>
               <div>
-                <p className="flex justify-center text-center p-3 mt-2 text-sm text-white">
-                  Download the Kuku app for the ultimate shopping experience!
+                <p className="flex justify-center text-center mt-2 text-xs text-white">
+                  Download the Kuku app for a more complete shopping experience
                 </p>
               </div>
               <div className="w-full">
-                <ul className="space-x-3 flex justify-center  pt-2">
-                  <li className=" h-24 w-44 relative ">
+                <ul className="space-x-2 flex justify-center">
+                  <li className="h-24 w-36 relative hover:cursor-pointer">
                     <Image
                       src="/icons/footerIcons/appstore.svg"
                       layout="fill"
                       alt="googleplay logo"
                     />
                   </li>
-                  <li className=" h-24 w-44 relative">
+                  <li className="h-24 w-36 relative hover:cursor-pointer">
                     <Image
                       src="/icons/footerIcons/playstore.svg"
                       layout="fill"
@@ -143,29 +138,21 @@ export default function Footer() {
       </footer>
 
       <footer className="py-2">
-        <div className="pl-4 pr-5 bg-[#2c2c2c] mx-auto rounded-[15px] pb-2">
+        <div className="pl-4 pr-5 bg-[#2c2c2c] mx-auto rounded-[10px] pb-2">
           <div className="sm:flex lg:flex justify-between items-center pt-4">
             <div className="flex space-x-1 items-center mb-2">
-              <div className=" items-center w-24 h-7 relative cursor-pointer">
+              <div className="w-24 h-7 relative cursor-pointer">
                 <Image
                   src="/icons/kukudeals-white.png"
                   layout="fill"
                   alt="kuku logo"
                 />
               </div>
-              <div className="w-full flex space-x-1 lg:space-x-6 text-[9px] lg:text-xs">
+              <div className="w-full mt-1 lg:mt-0 flex space-x-1 lg:space-x-6 text-[9px] lg:text-xs">
                 <p className="pr-[6px] pl-[6px] text-white">© 2022. All rights reserved</p>
-                <ul className="flex  lg:space-x-6 ">
-                  <li className="pr-[6px] cursor-pointer text-white hover:text-[#ffd601]">
-                    <a>User Agreement</a>
-                  </li>
-                  <li className="cursor-pointer text-white hover:text-[#ffd601]">
-                    <a>Privacy Policy</a>
-                  </li>
-                </ul>
               </div>
             </div>
-            <div className="flex text-[9px] lg:text-xs">
+            <div className="md:flex text-[9px] lg:text-xs hidden">
               <ul className="flex space-x-2 items-center">
                 <li className="text-white">We accept</li>
                 <li className="h-6 w-9 relative">

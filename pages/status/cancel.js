@@ -21,7 +21,7 @@ function Cancel() {
           <link rel="icon" href="../icons/icon.png" />
       </Head>
       <Layout>
-        <div className='bg-[#2c2c2c] min-h-42 my-8 py-12 rounded-[15px] flex flex-col items-center justify-center'>
+        <div className='bg-[#2c2c2c] min-h-42 my-3 py-12 rounded-[15px] flex flex-col items-center justify-center'>
           <Lottie
             animationData={FailedAnimation}
             speed={1}

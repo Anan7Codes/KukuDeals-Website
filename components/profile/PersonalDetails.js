@@ -51,8 +51,18 @@ export default function PersonalDetails() {
       })
       console.log(user)
 
-    if(error) {
-      return toast.error(error, {
+      if(error) {
+        return toast.error(error, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      }
+      toast.success("Succesfully Updated", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -61,24 +71,13 @@ export default function PersonalDetails() {
         draggable: true,
         progress: undefined,
       })
-    }
-    toast.success("Succesfully Updated", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    })
     }catch(e){
       console.log(e);
     }
   }
   return (
-    <div>
-      <div className="">
-        <p className="pt-5 text-3xl font-bold font-title text-[#ffd601] ">
+    <div className="">
+        <p className="text-3xl font-bold font-title text-[#ffd601] ">
           Personal Details
         </p>
         <form className="">
@@ -161,7 +160,6 @@ export default function PersonalDetails() {
             Update
           </button>
         </form>
-      </div>
     </div>
   );
 }

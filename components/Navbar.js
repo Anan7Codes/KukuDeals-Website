@@ -1,4 +1,4 @@
-import { Fragment, useState, useContext, useEffect } from "react";
+import { Fragment, useState, useContext } from "react";
 import { LanguageContext } from "@/contexts/language";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -13,8 +13,8 @@ function Navbar() {
 
   const userInfo = supabase.auth.user();
   return (
-    <nav className="pb-3 relative">
-      <div className="bg-[#2c2c2c] mx-auto rounded-[15px]">
+    <nav className="pb-2 relative">
+      <div className="bg-[#2c2c2c] mx-auto rounded-[10px]">
         <div className="flex justify-between text-sm">
           <div className="flex space-x-6 pl-2">
             <div className="flex text-center p-2">
@@ -26,17 +26,17 @@ function Navbar() {
                 />
               </div>
             </div>
-            <div className="hidden lg:flex items-center space-x-3">
+            {/* <div className="hidden lg:flex items-center space-x-3">
               <a
                 href=""
                 className="py-4 px-3 text-white font-bold hover:text-[#ffd601]"
               >
                 WINNERS
               </a>
-            </div>
+            </div> */}
           </div>
           <div className="hidden lg:flex items-center space-x-6 pr-4 ">
-            <a
+            {/* <a
               href=""
               className="py-4 px-3 text-white font-medium hover:text-[#ffd601]"
             >
@@ -44,7 +44,7 @@ function Navbar() {
             </a>
             <a href="" className="py-4 px-3 font-medium text-[#ffd601]">
               <b>Call 0800-KUKU</b>
-            </a>
+            </a> */}
 
             <div
               onClick={() => setEnglish(!english)}
@@ -52,33 +52,15 @@ function Navbar() {
             >
               {english ? "العربية" : "English"}
             </div>
-            <a
-              href=""
-              className="py-2 px-3 text-white font-medium hover:text-[#ffd601]"
+            <p
+              className="py-2 px-3 text-white font-medium hover:text-[#ffd601] hover:cursor-pointer"
+              onClick={() => userInfo ? router.push("/profile/personal-details") : router.push('/signin')}
             >
-              {userInfo ? (
-                <span
-                  onClick={(e) => {
-                    e.preventDefault();
-                    router.push("/profile/personal-details");
-                  }}
-                >
-                  {userInfo.user_metadata.name}
-                </span>
-              ) : (
-                <div
-                  onClick={(e) => {
-                    e.preventDefault();
-                    router.push("/signin");
-                  }}
-                >
-                  Login/Register
-                </div>
-              )}
-            </a>
+              {userInfo ? userInfo.user_metadata.name : 'Login/Register'}
+            </p>
           </div>
           <div className="lg:hidden flex items-center pr-4">
-            <p className="pr-4 text-white font-medium cursor-pointer" onClick={() => { setIsOpen(true) }}>Use App</p>
+            <p className="pr-4 text-white font-medium cursor-pointer" onClick={() => { setIsOpen(true) }}>Download our App</p>
             <svg
               onClick={() => setShowMenu(true)}
               xmlns="http://www.w3.org/2000/svg"
@@ -130,7 +112,7 @@ function Navbar() {
                     <div className="flex justify-end">
                       <button
                         type="button"
-                        className=" px-4  bg-[#161616] text-white border border-transparent rounded-md hover:text-[#ffd601] focus:outline-none  focus-visible:ring-[#ffd601]"
+                        className="px-4 bg-[#161616] text-white border border-transparent rounded-md hover:text-[#ffd601] focus:outline-none  focus-visible:ring-[#ffd601]"
                         onClick={() => { setIsOpen(false) }}
                       >
                         <svg
@@ -149,15 +131,15 @@ function Navbar() {
                         </svg>
                       </button>
                     </div>
-                    <div className="my-4">
-                      <div className="relative flex justify-center items-center mb-4 h-16">
+                    <div className="my-2">
+                      <div className="relative flex justify-center items-center mb-4 h-12">
                         <Image
                           src="/icons/footerIcons/playstore.svg"
                           layout="fill"
                           alt="googleplay logo"
                         />
                       </div>
-                      <div className="relative flex justify-center items-center h-16">
+                      <div className="relative flex justify-center items-center h-12">
                         <Image
                           src="/icons/footerIcons/appstore.svg"
                           layout="fill"
@@ -181,9 +163,9 @@ function Navbar() {
                   alt="kuku logo"
                 />
               </div>
-              <p className="font-medium text-sm text-white mb-2 hover:cursor-pointer hover:text-yellow-500">
+              {/* <p className="font-medium text-sm text-white mb-2 hover:cursor-pointer hover:text-yellow-500">
                 Winners
-              </p>
+              </p> */}
               <p className="font-medium text-sm text-white mt-6 mb-2 hover:cursor-pointer hover:text-yellow-500">
                 Need Help? Contact Us
               </p>
@@ -194,7 +176,7 @@ function Navbar() {
                 العربية
               </p>
               {userInfo ? (
-                <p onClick={() => router.push('/profile/settings')} className="font-medium text-sm text-white mb-4 hover:cursor-pointer hover:text-yellow-500">
+                <p onClick={() => router.push('/profile/personal-details')} className="font-medium text-sm text-white mb-4 hover:cursor-pointer hover:text-yellow-500">
                   {userInfo.user_metadata.name}
                 </p>
               ) : (

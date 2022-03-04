@@ -7,10 +7,10 @@ const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY
 const supabase = createClient(supabaseUrl, supabaseSecretKey)
 const fonts = {
   Roboto: {
-    normal: 'font/roboto/Roboto/Roboto-Black.ttf',
-    bold: 'font/roboto/Roboto/Roboto-Medium.ttf',
-    italics: 'font/roboto/Roboto/Roboto-Italic.ttf',
-    bolditalics: 'font/roboto/Roboto/Roboto-MediumItalic.ttf'
+    normal: '/font/roboto/Roboto/Roboto-Black.ttf',
+    bold: '/font/roboto/Roboto/Roboto-Medium.ttf',
+    italics: '/font/roboto/Roboto/Roboto-Italic.ttf',
+    bolditalics: '/font/roboto/Roboto/Roboto-MediumItalic.ttf'
 }
 };
 

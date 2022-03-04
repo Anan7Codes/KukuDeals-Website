@@ -61,13 +61,13 @@ export default function Campaign({ campaign }) {
       <div>
         <div className="z-0 mx-auto rounded-[15px]">
           <div className="w-full relative my-6">
-        <div className={`flex flex-col items-center justify-around ${i18n.language === 'ar' ? 'lg:flex-row-reverse' : 'lg:flex-row'} h-full pb-6 bg-[#2c2c2c] cursor-pointer rounded-[15px] overflow-visible shadow-lg transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-[101%] duration-700`}>
+        <div className={`flex flex-col items-center justify-around lg:flex-row h-full pb-6 bg-[#2c2c2c] cursor-pointer rounded-[15px] overflow-visible shadow-lg transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-[101%] duration-700`}>
           <div className={`mt-[60px] lg:mt-0 ${i18n.language === 'ar' ? 'lg:mr-24' : 'lg:ml-24'} flex justify-center items-center`}>
             <div className="relative lg:top-5 lg:w-64 lg:h-64 w-48 h-48">
               <Image src={campaign?.Image} layout="fill" alt="Campaign Image" />
             </div>
           </div>
-          <div className={`flex flex-col justify-center w-full mt-6 lg:mt-10 pb-2 ${i18n.language === 'ar' ? 'lg:mr-12 items-end' : 'lg:ml-12'} lg:pb-0`}>
+          <div className={`flex flex-col justify-center w-full mt-6 lg:mt-10 pb-2 lg:ml-12 lg:pb-0`}>
             <div className="text-center sm:pl-4 sm:pt-2 lg:text-justify	lg:text-3xl">
               <p className={`text-md lg:text-2xl text-white ${i18n.language === 'ar' ? 'text-right' : null}`}>
               {t('buy-a')} {i18n.language === 'ar' ? campaign?.ProductName.ar :  campaign?.ProductName.en} {t('for')}: <span className='font-bold'>{t('aed')} {campaign?.Price}</span>
@@ -77,21 +77,21 @@ export default function Campaign({ campaign }) {
                 {i18n.language === 'ar' ? campaign?.GiftName.ar : campaign?.GiftName.en}
               </p>
               {cart.some(c => c.id === campaign.id) ?
-                <div className={`flex justify-center ${i18n.language === 'ar' ? 'lg:justify-end' : 'lg:justify-start'} space-x-2 items-center pt-4`}>
-                  <div onClick={cart.some(c => c.id === campaign.id && c.qty === 1) ? RemoveFromCart : ReduceQty} className="flex text-2xl bg-[#161616] font-semibold py-15 justify-center items-center w-16 h-12 rounded-[10px]">
+                <div className={`flex justify-center lg:justify-start space-x-2 items-center pt-4`}>
+                  <div onClick={cart.some(c => c.id === campaign.id && c.qty === 1) ? RemoveFromCart : ReduceQty} className={`${i18n.language === 'ar' ? 'ml-2' : null} flex text-2xl bg-[#161616] font-semibold py-15 justify-center items-center w-16 h-12 rounded-[10px]`}>
                     <p className="text-white">-</p>
                   </div>
-                  <div className="flex bg-[#161616] font-semibold py-15 justify-center text-lg items-center w-16 h-12 rounded-[10px]">
+                  <div className={`flex bg-[#161616] font-semibold py-15 justify-center text-lg items-center w-16 h-12 rounded-[10px]`}>
                     <p className="text-white">{qty}</p>
                   </div>
-                  <div onClick={AddQty} className="flex bg-[#ffd601] text-black font-semibold text-2xl py-15 justify-center items-center w-16 h-12 rounded-[10px]" >
+                  <div onClick={AddQty} className="flex bg-[#ffd601] text-black font-semibold text-2xl py-15 justify-center items-center w-16 h-12 rounded-[10px]">
                     <p>+</p>
                   </div>
                 </div> :
-                <div className={`mt-2 space-x-2 text-sm lg:text-base flex items-center justify-center ${i18n.language === 'ar' ? 'lg:justify-end' : 'lg:justify-start'}`}>
+                <div className={`mt-2 space-x-2 text-sm lg:text-base flex items-center justify-center lg:justify-start`}>
                   <button
                     onClick={openModal}
-                    className="w-36 h-12 lg:w-40 lg:h-12 text-black font-semibold bg-[#ffd601] hover:text-[#ffd601] hover:bg-[#000] hover:border hover:border-[#ffd601] rounded-[10px]"
+                    className={`${i18n.language === 'ar' ? 'ml-3' : null} w-36 h-12 lg:w-40 lg:h-12 text-black font-semibold bg-[#ffd601] hover:text-[#ffd601] hover:bg-[#000] hover:border hover:border-[#ffd601] rounded-[10px]`}
                   >
                     {t('prize-details')}
                   </button>
@@ -100,8 +100,8 @@ export default function Campaign({ campaign }) {
                   </button>
                 </div>
               }
-              <div className={`flex items-center justify-center ${i18n.language === 'ar' ? 'lg:justify-end' : 'lg:justify-start'} my-4 text-left`}>
-                <div className="relative w-6 h-6 mr-2">
+              <div className={`flex items-center justify-center lg:justify-start my-4 text-left`}>
+                <div className="relative w-6 h-6 mx-2">
                   <Image src="/icons/calendar.png" layout="fill" alt="Calendar Image" />
                 </div>
                 <div className='flex flex-col'>
@@ -123,7 +123,7 @@ export default function Campaign({ campaign }) {
                 })}
                 background={true}
               />
-              <div className="flex flex-col text-center absolute top-0 h-20 w-20 mt-7 ml-2 lg:ml-4">
+              <div className={`flex flex-col text-center absolute top-0 h-20 w-20 mt-7 ml-2 lg:ml-4 ${i18n.language === 'ar' ? 'mr-2 lg:mr-4' : null}`}>
                 <p className="text-lg lg:text-2xl font-semibold text-white leading-4 lg:leading-none">
                   {campaign?.SoldOutCoupons}
                 </p>

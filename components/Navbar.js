@@ -15,8 +15,8 @@ function Navbar() {
   return (
     <nav className="pb-2 relative">
       <div className="bg-[#2c2c2c] mx-auto rounded-[10px]">
-        <div className={`flex ${i18n.language === 'ar' ? 'flex-row-reverse' : null} justify-between text-sm`}>
-          <div className={`flex space-x-6 ${i18n.language === 'ar' ? 'pr-4' : 'pl-2'}`}>
+        <div className={`flex justify-between text-sm`}>
+          <div className={`flex space-x-6 pl-2`}>
             <div className="flex text-center p-2">
               <div className="flex items-center w-28 h-10 relative cursor-pointer" onClick={() => router.push('/')}>
                 <Image
@@ -48,12 +48,12 @@ function Navbar() {
 
             <div
               onClick={() => router.locale === 'ar' ? router.push(`${router.asPath}`, undefined, { locale: 'en' }) : router.push(`${router.asPath}`, undefined, { locale: 'ar' }) }
-              className={`py-4 ${i18n.language === 'ar' ? 'pl-8' : 'px-3'} hover:cursor-pointer text-white font-medium hover:text-[#ffd601]`}
+              className={`py-4 px-3 hover:cursor-pointer text-white font-medium hover:text-[#ffd601]`}
             >
               {i18n.language === 'en' ? "العربية" : "English"}
             </div>
             <p
-              className={`py-2 ${i18n.language === 'ar' ? 'pl-2' : 'px-3'} text-white font-medium hover:text-[#ffd601] hover:cursor-pointer`}
+              className={`py-2 px-3 text-white font-medium hover:text-[#ffd601] hover:cursor-pointer`}
               onClick={() => userInfo ? router.push("/profile/personal-details") : router.push('/signin')}
             >
               {userInfo ? userInfo.user_metadata.name : t('login-register')}

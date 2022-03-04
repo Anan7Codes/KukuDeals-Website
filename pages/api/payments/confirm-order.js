@@ -319,9 +319,6 @@ const webhookHandler = async (req, res) => {
         
             await map(coupons, async (coupon,i) => {
                 var row = new Array();
-                console.log("rows of i", coupon)
-                console.log("to string", coupon.product_price.toString())
-                row.push(i + 1)
                 console.log("cjeck", coupon.product_price.toString())
                 row.push(coupon.name.toString());
                 console.log("coupon", coupon.name.toString())
@@ -357,7 +354,8 @@ const webhookHandler = async (req, res) => {
                     ]
                 },
                 footer: function (currentPage, pageCount) {
-                    return { text: 'Page' + currentPage.toString() + ' of ' + pageCount, alignment: 'center', margin: [0, 30, 0, 0] };
+                    return { text: 'Page' + ' of ' + pageCount, alignment: 'center', margin: [0, 30, 0, 0] };
+                    // return { text: 'Page' + currentPage.toString() + ' of ' + pageCount, alignment: 'center', margin: [0, 30, 0, 0] };
                 },
                 content: [
                     '\n\n\n\n',

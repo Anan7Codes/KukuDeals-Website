@@ -37,29 +37,27 @@ function useWindowSize() {
 
 function Success() {
   const { width, height } = useWindowSize()
-
-  const router = useRouter();
   const { user } = useUser()
 
   const [ success, setSuccess ] = useState(false)
   const { dispatch } = CartState();
 
   useEffect(() => {
+    const router = useRouter();
     if(!user) {
       router.push('/signin')
     }
   }, [user])
 
-  const EmptyCart = () => {
-    dispatch({
-        type: 'EMPTY_CART',
-    })       
-  }
-
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
     if (query.get('success')) {
       setSuccess(true)
+    }
+    const EmptyCart = () => {
+      dispatch({
+          type: 'EMPTY_CART',
+      })       
     }
     EmptyCart()
   }, []);

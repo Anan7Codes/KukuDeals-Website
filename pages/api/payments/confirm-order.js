@@ -111,7 +111,6 @@ const webhookHandler = async (req, res) => {
                 .from('profiles')
                 .select('promo_codes_used, name, email')
                 .eq("id", initiated_orders.data.user_id)
-            console.log("profile",profile)
 
             if (initiated_orders.data.promo_code_used) {
 
@@ -328,13 +327,13 @@ const webhookHandler = async (req, res) => {
                 var row = new Array();
                 console.log(i)
                 row.push(i + 1)
-                console.log("cjeck", rows[i].product_price.toString())
-                row.push(rows[i].name.toString());
-                row.push(rows[i].product_qty.toString());
-                row.push(`AED${rows[i].product_price.toString()}`);
-                row.push(`AED${rows[i].product_price.toString() * rows[i].product_qty.toString() * 0.95}`);
+                console.log("cjeck", rows[i]?.product_price.toString())
+                row.push(rows[i]?.name.toString());
+                row.push(rows[i]?.product_qty.toString());
+                row.push(`AED${rows[i]?.product_price.toString()}`);
+                row.push(`AED${rows[i]?.product_price.toString() * rows[i]?.product_qty.toString() * 0.95}`);
                 row.push("5%");
-                row.push(`AED${rows[i].product_price.toString() * rows[i].product_qty.toString()}`);
+                row.push(`AED${rows[i]?.product_price.toString() * rows[i]?.product_qty.toString()}`);
                 body.push(row);
             }
 

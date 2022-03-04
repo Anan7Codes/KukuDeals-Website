@@ -304,36 +304,38 @@ const webhookHandler = async (req, res) => {
                     col_7: { text: 'Amount Including Tax', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
                 },
             }
-            var rows = coupons
-
-            var body = [];
-            for (var key in headers) {
-                if (headers.hasOwnProperty(key)) {
-                    var header = headers[key];
-                    var row = new Array();
-                    row.push(header.col_1);
-                    row.push(header.col_2);
-                    row.push(header.col_3);
-                    row.push(header.col_4);
-                    row.push(header.col_5);
-                    row.push(header.col_6);
-                    row.push(header.col_7);
-                    body.push(row);
-                }
-            }
-            for (var i = 0; i < rows.length; i++) {
+        
+            let body = [];
+            let header = headers.fila_0;
+            var row = new Array();
+            row.push(header.col_1);
+            row.push(header.col_2);
+            row.push(header.col_3);
+            row.push(header.col_4);
+            row.push(header.col_5);
+            row.push(header.col_6);
+            row.push(header.col_7);
+            body.push(row);
+        
+            await map(coupons, async (coupon,i) => {
                 var row = new Array();
-                console.log(i)
+                console.log("rows of i", coupon)
+                console.log("to string", coupon.product_price.toString())
                 row.push(i + 1)
-                console.log("cjeck", rows[i]?.product_price.toString())
-                row.push(rows[i]?.name.toString());
-                row.push(rows[i]?.product_qty.toString());
-                row.push(`AED${rows[i]?.product_price.toString()}`);
-                row.push(`AED${rows[i]?.product_price.toString() * rows[i]?.product_qty.toString() * 0.95}`);
+                console.log("cjeck", coupon.product_price.toString())
+                row.push(coupon.name.toString());
+                console.log("coupon", coupon.name.toString())
+                row.push(coupon.product_qty.toString());
+                console.log("coupon", coupon.product_qty.toString())
+                row.push(`AED${coupon.product_price.toString()}`);
+                console.log("coupon", coupon.product_price.toString())
+                row.push(`AED${(coupon.product_price * coupon?.product_qty * 0.95).toString()}`);
+                console.log("coupon", `AED${(coupon.product_price * coupon?.product_qty * 0.95).toString()}`)
                 row.push("5%");
-                row.push(`AED${rows[i]?.product_price.toString() * rows[i]?.product_qty.toString()}`);
+                row.push(`AED${(coupon.product_price * coupon?.product_qty).toString()}`);
+                console.log("coupon", `AED${(coupon.product_price * coupon?.product_qty).toString()}`)
                 body.push(row);
-            }
+            }) 
 
 
             const document = {

@@ -536,14 +536,14 @@ const webhookHandler = async (req, res) => {
             console.log('start pdf')
             let pdfDoc = await pdfmake.createPdfKitDocument(document);
             var chunks = [];
-            var result, buffer;
+            var result,bufferData;
             pdfDoc.on('data', function (chunk) {
                 chunks.push(chunk);
             });
             pdfDoc.on('end', async function () {
                 console.log("12")
                 result = Buffer.concat(chunks);
-                buffer = 'data:application/pdf;base64,' + result.toString('base64')
+                bufferData = 'data:application/pdf;base64,' + result.toString('base64')
                 const data1 = {
                     from: 'travo.socialmedia@gmail.com',
                     personalizations: [

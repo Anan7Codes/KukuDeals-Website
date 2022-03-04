@@ -298,7 +298,6 @@ const webhookHandler = async (req, res) => {
                 }
             }
             var rows = coupons
-
             var body = [];
             for (var key in headers) {
                 if (headers.hasOwnProperty(key)) {

@@ -3,12 +3,17 @@ import { createClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
 import { map } from 'modern-async'
 const Pdfmake = require('pdfmake');
+const fs = require('fs')
+const RobotoBlack = fs.readFile('font/roboto/Roboto/Roboto-Medium.ttf')
+const RobotoBold = fs.readFile('font/roboto/Roboto/Roboto-Black.ttf')
+const RobotoItalics = fs.readFile('font/roboto/Roboto/Roboto-MediumItalic.ttf')
+const RobotoBoldItalics = fs.readFile('font/roboto/Roboto/Roboto-Italic.ttf')
 const fonts = {
     Roboto: {
-        normal: '/font/roboto/Roboto/Roboto-Black.ttf',
-        bold: '/font/roboto/Roboto/Roboto-Medium.ttf',
-        italics: '/font/roboto/Roboto/Roboto-Italic.ttf',
-        bolditalics: '/font/roboto/Roboto/Roboto-MediumItalic.ttf'
+        normal: RobotoBlack,
+        bold: RobotoBold,
+        italics: RobotoItalics,
+        bolditalics: RobotoBoldItalics
     }
 };
 const pdfmake = new Pdfmake(fonts);

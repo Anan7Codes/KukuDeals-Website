@@ -6,6 +6,7 @@
             "@/contexts/*": ["contexts/*"],
             "@/utils/*": ["utils/*"],
             "@/public/*": ["public/*"],
+            "@/font/*": ["font*"],
         }
     }
 }

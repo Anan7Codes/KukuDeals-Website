@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Layout from "@/components/Layout";
 import CartPage from "@/components/cart/CartPage";
 
@@ -14,4 +15,12 @@ export default function cart() {
             </Layout>
         </div>
     )
+}
+
+export async function getStaticProps({ locale }) {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ['common']))
+      }
+    }
 }

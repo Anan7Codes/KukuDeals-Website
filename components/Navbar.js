@@ -47,7 +47,7 @@ function Navbar() {
             </a> */}
 
             <div
-              onClick={() => i18n.language === 'ar' ? i18n.changeLanguage('en') : i18n.changeLanguage('ar')}
+              onClick={() => router.locale === 'ar' ? router.push(`${router.asPath}`, undefined, { locale: 'en' }) : router.push(`${router.asPath}`, undefined, { locale: 'ar' }) }
               className={`py-4 ${i18n.language === 'ar' ? 'pl-8' : 'px-3'} hover:cursor-pointer text-white font-medium hover:text-[#ffd601]`}
             >
               {i18n.language === 'en' ? "العربية" : "English"}

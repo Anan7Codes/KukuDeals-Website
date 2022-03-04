@@ -2,6 +2,16 @@ import { buffer } from 'micro'
 import { createClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
 import { map } from 'modern-async'
+const Pdfmake = require('pdfmake');
+const fonts = {
+    Roboto: {
+        normal: 'font/roboto/Roboto/Roboto-Black.ttf',
+        bold: 'font/roboto/Roboto/Roboto-Medium.ttf',
+        italics: 'font/roboto/Roboto/Roboto-Italic.ttf',
+        bolditalics: 'font/roboto/Roboto/Roboto-MediumItalic.ttf'
+    }
+};
+let pdfmake = new Pdfmake(fonts);
 const mail = require('@sendgrid/mail')
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2020-08-27' })
@@ -99,9 +109,9 @@ const webhookHandler = async (req, res) => {
 
             let profile = await supabase
                 .from('profiles')
-                .select('promo_codes_used', 'name')
+                .select('promo_codes_used, name, email')
                 .eq("id", initiated_orders.data.user_id)
-                console.log("profile",profile)
+            console.log("profile",profile)
 
             if (initiated_orders.data.promo_code_used) {
 
@@ -180,7 +190,7 @@ const webhookHandler = async (req, res) => {
             <div class="flex text-xs m-6 justify-between p-4">
                 <div>
                     <div>
-                        <h6 class="font-bold">Customer Name: <span class=" font-medium">${customerName}</span></h6>
+                        <h6 class="font-bold">Customer Name: <span class=" font-medium">${profile.data[0].name}</span></h6>
                     </div>
                     <h6 class="font-bold">Address : <span class=" font-medium"> United Arab Emirates</span></h6>
                 </div>
@@ -361,7 +371,7 @@ const webhookHandler = async (req, res) => {
 
                             },
                             {
-                                text: customerName,
+                                text: profile.data[0].name,
                                 style: 'invoiceSubValue',
                                 alignment: 'left',
                                 margin: [-100, 0, 0, 0]
@@ -548,7 +558,7 @@ const webhookHandler = async (req, res) => {
                     from: 'travo.socialmedia@gmail.com',
                     personalizations: [
                         {
-                            to: ['mohammedhafizba@gmail.com',
+                            to: [`${profile.data[0].email}`,
                                 // 'anandhu@rough-paper.com'
                             ],
                             subject: 'Order Confirmation'

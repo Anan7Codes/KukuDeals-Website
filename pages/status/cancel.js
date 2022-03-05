@@ -1,11 +1,16 @@
 import Head from "next/head";
+import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import Layout from '@/components/Layout'
 import { useUser } from '@/contexts/user/UserContext';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from "next-i18next"
 import Lottie from "lottie-react";
 import FailedAnimation from '@/public/failed-animation.json'
 
 function Cancel() {
+  const { t } = useTranslation()
+  const { locale } = useRouter()
   const { user } = useUser()
 
   useEffect(() => {
@@ -15,7 +20,7 @@ function Cancel() {
   }, [user])
 
   return (
-    <div className='bg-[#161616]'>
+    <div className='bg-[#161616]' dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <Head>
           <title>Payment Cancelled | Kuku Deals</title>
           <link rel="icon" href="../icons/icon.png" />
@@ -31,8 +36,8 @@ function Cancel() {
               width: 200
             }}
           />
-          <p className='font-title text-[#ffd601] text-5xl font-semibold'>Cancelled</p>
-          <p className='text-[#fff] text-2xl'>You have cancelled your order!</p>
+          <p className='font-title text-[#ffd601] text-5xl font-semibold'>{t('cancelled')}</p>
+          <p className='text-[#fff] text-2xl'>{t('order-cancel')}</p>
         </div>
       </Layout>
     </div>
@@ -40,3 +45,11 @@ function Cancel() {
 }
 
 export default Cancel
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common']))
+    }
+  }
+}

@@ -108,5 +108,10 @@
     "available-on": "Available on App Store and Google Play Store",
     "shopping-cart": "Shopping Cart",
     "no-items": "No items in the cart",
-    "continue-to-checkout": "Continue to Checkout"
+    "continue-to-checkout": "Continue to Checkout",
+    "order-success": "You have successfully placed your order!",
+    "order-cancel": "You have cancelled your order!",
+    "restricted-page": "Restricted Page",
+    "how-are-you-here": "How are you here?",
+    "sorry-page": "Sorry, but this page does not exist!"
 }

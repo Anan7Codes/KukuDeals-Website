@@ -108,5 +108,10 @@
     "available-on": "متوفر على App Store و Google Play Store",
     "shopping-cart": "عربة التسوق",
     "no-items": "لا توجد عناصر في عربة التسوق",
-    "continue-to-checkout": "الاستمرار في الخروج"
+    "continue-to-checkout": "الاستمرار في الخروج",
+    "order-success": "لقد قمت بوضع طلبك بنجاح!",
+    "order-cancel": "لقد ألغيت طلبك!",
+    "restricted-page": "صفحة مقيدة",
+    "how-are-you-here": "كيف حالك هنا",
+    "sorry-page": "عذرا ، ولكن هذه الصفحة غير موجودة!"
 }

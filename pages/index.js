@@ -126,13 +126,13 @@ export default function Home() {
                     }}
                     renderPrevButton={() => {                      
                       return (
-                        <div className={`absolute flex right-20 -top-32 lg:-top-24 ${isSoldOutPrevDisabled ? 'opacity-50' : null}`}>
+                        <div className={`absolute flex ${i18n.language === 'ar' ? 'left-16' : 'right-20'} -top-32 lg:-top-24 ${isSoldOutPrevDisabled ? 'opacity-50' : null}`}>
                           <ArrowL />
                         </div>
                     )}}
                     renderNextButton={() => {
                       return (
-                        <div className={`absolute flex right-16 -top-32 lg:-top-24 ${isSoldOutNextDisabled ? 'opacity-50' : null}`}>
+                        <div className={`absolute flex ${i18n.language === 'ar' ? 'left-20' : 'right-16'} -top-32 lg:-top-24 ${isSoldOutNextDisabled ? 'opacity-50' : null}`}>
                           <ArrowR />
                         </div>
                       )}}
@@ -171,13 +171,13 @@ export default function Home() {
                   }}
                   renderPrevButton={() => {
                     return (
-                      <div className={`absolute flex right-20 -top-32 lg:-top-24`}>
+                      <div className={`absolute flex ${i18n.language === 'ar' ? 'left-16' : 'right-20'} -top-32 lg:-top-24`}>
                         <ArrowL item={true} isWinnerPrevDisabled={isWinnerPrevDisabled}/>
                       </div>
                   )}}
                   renderNextButton={() => {
                     return (
-                      <div className={`absolute flex right-16 -top-32 lg:-top-24`}>
+                      <div className={`absolute flex ${i18n.language === 'ar' ? 'left-20' : 'right-16'} -top-32 lg:-top-24`}>
                         <ArrowR item={true} isWinnerNextDisabled={isWinnerNextDisabled}/>
                       </div>
                   )}}

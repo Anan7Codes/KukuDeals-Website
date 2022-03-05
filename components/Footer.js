@@ -114,12 +114,12 @@ export default function Footer() {
               </div>
               <div>
                 <p className="flex justify-center text-center mt-2 text-xs text-white">
-                  Download the Kuku app for a more complete shopping experience
+                  {t('download-the-kuku-app')}
                 </p>
               </div>
               <div className="w-full">
                 <ul className="space-x-2 flex justify-center">
-                  <li className="h-24 w-36 relative hover:cursor-pointer">
+                  <li className={`h-24 w-36 ${i18n.language === 'ar' ? 'ml-2' : null} relative hover:cursor-pointer`}>
                     <Image
                       src="/icons/footerIcons/appstore.svg"
                       layout="fill"
@@ -152,12 +152,12 @@ export default function Footer() {
                 />
               </div>
               <div className="w-full mt-1 lg:mt-0 flex space-x-1 lg:space-x-6 text-[9px] lg:text-xs">
-                <p className="pr-[6px] pl-[6px] text-white">© 2022. All rights reserved</p>
+                <p className="pr-[6px] pl-[6px] text-white">© 2022. {t('all-rights')}</p>
               </div>
             </div>
             <div className="md:flex text-[9px] lg:text-xs hidden">
               <ul className="flex space-x-2 items-center">
-                <li className="text-white">We accept</li>
+                <li className={`text-white ${i18n.language === 'ar' ? 'ml-2' : null}`}>{t('we-accept')}</li>
                 <li className="h-6 w-9 relative">
                   <Image
                     src="/icons/footerIcons/pay.png"

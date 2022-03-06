@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { CountryDropdown } from "react-country-region-selector";
 import { supabase } from "@/utils/supabaseClient";
 import { toast } from "react-toastify";
+import { useTranslation } from "next-i18next"
 
 export default function PersonalDetails() {  
+  const { t, i18n } = useTranslation()
   const [email, setEmail] = useState()
   const [gender, setGender] = useState()
   const [phoneNumber, setPhoneNumber] = useState()
@@ -49,7 +51,6 @@ export default function PersonalDetails() {
           name: newPersonalDetails.firstname + " " +newPersonalDetails.lastname,           
         } 
       })
-      console.log(user)
 
       if(error) {
         return toast.error(error, {
@@ -77,14 +78,14 @@ export default function PersonalDetails() {
   }
   return (
     <div className="">
-        <p className="text-3xl font-bold font-title text-[#ffd601] ">
-          Personal Details
+        <p className="text-3xl font-bold font-title text-[#ffd601]">
+          {t('personal-details')}
         </p>
         <form className="">
           <div className="lg:flex text-lg">
             <input
               placeholder="First Name"
-              className="text-white placeholder:text-xs placeholder:text-[#bebebe]  bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none  rounded-[5px]  h-14  opacity-60 " disabled
+              className="text-white placeholder:text-xs placeholder:text-[#bebebe] bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none  rounded-[5px]  h-14  opacity-60 " disabled
               value={newPersonalDetails.firstname} onChange={e => setNewPersonalDetails({ ...newPersonalDetails, firstname: e.target.value })}
             />
             <input
@@ -118,15 +119,15 @@ export default function PersonalDetails() {
               <div className="flex justify-between items-center">
                 <div>
                   <p
-                    className="text-black bg-[#ffd601] rounded-l-lg h-12  flex justify-center items-center w-[19rem] text-center drop-shadow-sm	  "
+                    className="text-black bg-[#ffd601] rounded-l-lg h-12 flex justify-center items-center w-[19rem] text-center drop-shadow-sm"
                     value={true}
                     onClick={(e) => setGender(true)}>
-                    Male
+                      Male
                   </p>
                 </div>
                 <div className="mr-4">
                   <p
-                    className="bg-black text-[#ffd601]  flex justify-center items-center rounded-r-lg h-12  w-[18rem] text-center drop-shadow-md"
+                    className="bg-black text-[#ffd601]  flex justify-center items-center rounded-r-lg h-12 w-[18rem] text-center drop-shadow-md"
                     value={false}
                     onClick={(e) => setGender(false)}>
                     Female
@@ -137,7 +138,7 @@ export default function PersonalDetails() {
               <div className="flex justify-between">
                 <div>
                   <p
-                    className="bg-black text-[#ffd601]  flex justify-center items-center rounded-l-lg h-12  w-[18rem] text-center drop-shadow-md"
+                    className="bg-black text-[#ffd601] flex justify-center items-center rounded-l-lg h-12 w-[18rem] text-center drop-shadow-md"
                     value={true}
                     onClick={(e) => setGender(true)}
                   >
@@ -146,7 +147,7 @@ export default function PersonalDetails() {
                 </div>
                 <div className="mr-4">
                   <p
-                    className="text-black bg-[#ffd601] rounded-r-lg h-12  flex justify-center items-center w-[19rem] text-center drop-shadow-sm"
+                    className="text-black bg-[#ffd601] rounded-r-lg h-12 flex justify-center items-center w-[19rem] text-center drop-shadow-sm"
                     value={false}
                     onClick={(e) => setGender(false)}
                   >
@@ -156,8 +157,8 @@ export default function PersonalDetails() {
               </div>
             )}
           </div>
-          <button onClick={InsertPersonalDetails} className="bg-[#ffd601] lg:justify-start w-full lg:w-40 h-14 mt-3 text-black  hover:bg-[#dabd2c] font-semibold rounded-[15px]">
-            Update
+          <button onClick={InsertPersonalDetails} className="bg-[#ffd601] lg:justify-start w-full lg:w-40 h-12 mt-3 text-black hover:bg-[#dabd2c] font-semibold rounded-[15px]">
+            {t('update')}
           </button>
         </form>
     </div>

@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next"
 import { supabase } from "@/utils/supabaseClient";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -5,6 +6,7 @@ import * as yup from "yup";
 import { Formik } from "formik";
 
 export default function ShippingAddress() {
+  const { t, i18n } = useTranslation()
   const [shippingAddress, setShippingAddress] = useState({});
   const [reload, setReload] = useState();
 
@@ -64,22 +66,22 @@ export default function ShippingAddress() {
   return (
     <div>
       <p className="text-3xl  font-bold mt-4 font-title text-[#ffd601]">
-        Shipping Address
+        {t('shipping-address')}
       </p>
       <p className="text-2xl font-bold mt-4 font-title text-white">
-        Current Address:
+        {t('current-address')}:
       </p>
       <div className="flex flex-col">
         <div className="text-white text-md flex">
-          Aparment No:{" "}
+          {t('apartment-no')}:
           <p className="font-bold text-white">{shippingAddress.apartmentNo}</p>
         </div>
         <div className="text-white text-md flex">
-          Building Name:{" "}
+          {t('building-name')}:
           <p className="font-bold text-white">{shippingAddress.buildingName}</p>
         </div>
         <div className="text-white text-md flex">
-          Location:{" "}
+          {t('location')}:
           <p className="font-bold text-white">{shippingAddress.location}</p>
         </div>
       </div>
@@ -122,7 +124,7 @@ export default function ShippingAddress() {
               <input
                 placeholder="Apartment No"
                 type="text"
-                className=" placeholder:text-xs placeholder:text-[#bebebe]   pl-3 mr-3 w-full lg:w-[36rem] mt-4 outline-none  text-xs rounded-[5px]  h-14  bg-[#2c2c2c] text-white "
+                className={`placeholder:text-xs placeholder:text-[#bebebe] ${i18n.language === 'ar' ? 'pr-3 ml-3' : 'pl-3 mr-3'} w-full lg:w-[36rem] mt-4 outline-none  text-xs rounded-[5px] h-14 bg-[#2c2c2c] text-white`}
                 value={values.apartmentNo}
                 onChange={handleChange("apartmentNo")}
                 onBlur={() => setFieldTouched("apartmentNo")}
@@ -133,7 +135,7 @@ export default function ShippingAddress() {
               <input
                 placeholder="Building Name"
                 type="text"
-                className=" placeholder:text-xs placeholder:text-[#bebebe]   pl-3 mr-3 w-full lg:w-[36rem] mt-4 outline-none  text-xs rounded-[5px]  h-14  bg-[#2c2c2c] text-white "
+                className={`placeholder:text-xs placeholder:text-[#bebebe] ${i18n.language === 'ar' ? 'pr-3 ml-3' : 'pl-3 mr-3'} w-full lg:w-[36rem] mt-4 outline-none  text-xs rounded-[5px] h-14 bg-[#2c2c2c] text-white`}
                 value={values.buildingName}
                 onChange={handleChange("buildingName")}
                 onBlur={() => setFieldTouched("buildingName")}
@@ -142,9 +144,9 @@ export default function ShippingAddress() {
                 <p className="text-xs text-red-600">{errors.buildingName}</p>
               )}
               <input
-                placeholder="Location "
+                placeholder="Location"
                 type="text"
-                className=" placeholder:text-xs placeholder:text-[#bebebe]   pl-3 mr-3 w-full lg:w-[36rem] mt-4 outline-none  text-xs rounded-[5px]  h-14  bg-[#2c2c2c] text-white "
+                className={`placeholder:text-xs placeholder:text-[#bebebe] ${i18n.language === 'ar' ? 'pr-3 ml-3' : 'pl-3 mr-3'} w-full lg:w-[36rem] mt-4 outline-none  text-xs rounded-[5px]  h-14  bg-[#2c2c2c] text-white`}
                 value={values.location}
                 onChange={handleChange("location")}
                 onBlur={() => setFieldTouched("location")}
@@ -155,9 +157,9 @@ export default function ShippingAddress() {
               <button
                 onClick={isValid ? handleSubmit : null}
                 type="submit"
-                className="bg-[#ffd601] text-black mt-4 font-semibold hover:bg-[#cfb327] w-full lg:w-52 h-14 text-center  rounded-[10px]"
+                className="bg-[#ffd601] text-black mt-4 font-semibold hover:bg-[#cfb327] w-full lg:w-48 h-12 text-center rounded-[10px]"
               >
-                Save Address
+                {t('update-address')}
               </button>
             </div>
           )}

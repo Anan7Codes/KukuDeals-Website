@@ -113,5 +113,7 @@
     "order-cancel": "You have cancelled your order!",
     "restricted-page": "Restricted Page",
     "how-are-you-here": "How are you here?",
-    "sorry-page": "Sorry, but this page does not exist!"
+    "sorry-page": "Sorry, but this page does not exist!",
+    "update": "Update",
+    "amount": "Amount"
 }

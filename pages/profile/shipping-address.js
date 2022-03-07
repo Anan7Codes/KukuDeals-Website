@@ -5,7 +5,7 @@ import Sidebar from "@/components/profile/Sidebar";
 import Layout from "@/components/Layout";
 import ShippingAddress from "@/components/profile/ShippingAddress";
 
-export default function ShippingAddress() {
+export default function ShippingAddressPage() {
     const { locale } = useRouter()
 
     return (

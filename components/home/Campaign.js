@@ -198,7 +198,7 @@ export default function Campaign({ campaign }) {
                 <div className="my-4">
                   <div className="relative flex justify-center items-center lg:ml-24 ml-16 w-48 h-48">
                     <Image
-                      src={campaign?.Image}
+                      src={ prizeDetails ? campaign?.ImageGift : campaign?.ImageProduct}
                       layout="fill"
                       alt="Campaign Image"
                     />

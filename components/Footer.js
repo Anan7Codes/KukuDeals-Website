@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from 'next/link'
 import { useTranslation } from "next-i18next";
 
 export default function Footer() {
@@ -21,14 +22,11 @@ export default function Footer() {
                     </a>
                   </li>
                   <li>
-                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      {t('how-it-works')}
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      {t('user-agreement')}
-                    </a>
+                    <Link href="/how-it-works">
+                      <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                        {t('how-it-works')}
+                      </a>
+                    </Link>
                   </li>
                   <li>
                     <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
@@ -42,21 +40,27 @@ export default function Footer() {
                 <div className="font-semibold text-sm text-white cursor-pointer hover:text-[#ffd601]">
                   {t('quick-links')}
                 </div>
-                <ul className=" text-xs lg:text-base pt-4">
+                <ul className="text-xs lg:text-base pt-4">
                   <li>
-                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      {t('my-account')}
-                    </a>
+                    <Link href="/profile/personal-details">
+                      <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                        {t('my-account')}
+                      </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      {t('active-tickets')}
-                    </a>
+                    <Link href="/profile/active-coupons">
+                      <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                        {t('active-coupons')}
+                      </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      {t('contact-us')}
-                    </a>
+                    <Link href="/contact-us">
+                      <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                        {t('contact-us')}
+                      </a>
+                    </Link>
                   </li>
                 </ul>
               </div>

@@ -55,7 +55,7 @@ export default function Footer() {
                   </li>
                   <li>
                     <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      {t('user-agreement')}
+                      {t('contact-us')}
                     </a>
                   </li>
                 </ul>

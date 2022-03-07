@@ -126,13 +126,13 @@ export default function Home() {
                     }}
                     renderPrevButton={() => {                      
                       return (
-                        <div className={`absolute flex ${i18n.language === 'ar' ? 'left-16' : 'right-20'} -top-32 lg:-top-24 ${isSoldOutPrevDisabled ? 'opacity-50' : null}`}>
+                        <div className={`absolute flex ${i18n.language === 'ar' ? 'left-16' : 'right-20'} -top-32 lg:-top-28 ${isSoldOutPrevDisabled ? 'opacity-50' : null}`}>
                           <ArrowL />
                         </div>
                     )}}
                     renderNextButton={() => {
                       return (
-                        <div className={`absolute flex ${i18n.language === 'ar' ? 'left-20' : 'right-16'} -top-32 lg:-top-24 ${isSoldOutNextDisabled ? 'opacity-50' : null}`}>
+                        <div className={`absolute flex ${i18n.language === 'ar' ? 'left-20' : 'right-16'} -top-32 lg:-top-28 ${isSoldOutNextDisabled ? 'opacity-50' : null}`}>
                           <ArrowR />
                         </div>
                       )}}

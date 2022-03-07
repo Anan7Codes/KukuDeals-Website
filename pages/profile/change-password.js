@@ -5,7 +5,7 @@ import Layout from "@/components/Layout";
 import ChangePassword from "@/components/profile/ChangePassword";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-export default function changepasswordpage() {
+export default function Changepasswordpage() {
     const { locale } = useRouter()
     return (
         <div className="bg-[#161616]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>

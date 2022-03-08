@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next"
 import { CountryDropdown } from "react-country-region-selector";
 import { supabase } from '@/utils/supabaseClient';
 import * as yup from 'yup'
@@ -9,6 +10,8 @@ const countryCodes = require('country-codes-list')
 
 
 function SignUp() {
+  const { locale } = useRouter()
+  const { t, i18n } = useTranslation()
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,8 +44,7 @@ function SignUp() {
         });
         return;
       }
-      // console.log(firstname, lastname, email, password, confirmPassword, gender, countryOfResidence, nationality, phoneNumber, additionalProfileDetails)
-      const { user, session, error } = await supabase.auth.signUp(
+      const { error } = await supabase.auth.signUp(
         {
           email,
           password
@@ -90,7 +92,7 @@ function SignUp() {
   }
   return (
     <>
-      <div className="bg-[#2c2c2c] my-3 flex justify-center items-center rounded-[10px] w-full h-full">
+      <div className="bg-[#2c2c2c] my-3 flex justify-center items-center rounded-[10px] w-full h-full" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
         <div className="h-full w-full mt-20 lg:mt-16">
           <div className="flex lg:justify-center">
             <p className="text-3xl text-[#ffd601] font-semibold font-title text-center">Sign Up</p>
@@ -102,35 +104,35 @@ function SignUp() {
             <div className="flex flex-col text-white ">
               <input
                 type="text"
-                className="border placeholder:text-xs font-semibold placeholder:text-[#bebebe] text-xs pl-3 mr-3 w-full lg:w-[98%] mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className={`border placeholder:text-xs font-semibold placeholder:text-[#bebebe] text-xs ${i18n.language === 'ar' ? 'pr-3 ml-3' : 'pl-3 mr-3'} w-full mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white`}
                 placeholder="First Name"
                 value={firstname}
                 onChange={(e) => setFirstName(e.target.value)}
               />
               <input
                 type="text"
-                className="border placeholder:text-xs text-xs font-semibold placeholder:text-[#bebebe] pl-3 mr-3 w-full lg:w-[98%] mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className={`border placeholder:text-xs text-xs font-semibold placeholder:text-[#bebebe] ${i18n.language === 'ar' ? 'pr-3 ml-3' : 'pl-3 mr-3'} w-full mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white`}
                 placeholder="Last Name"
                 value={lastname}
                 onChange={(e) => setLastName(e.target.value)}
               />
               <input
                 type="text"
-                className="border placeholder:text-xs text-xs pl-3 font-semibold placeholder:text-[#bebebe] mr-3 w-full lg:w-[98%] mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className={`border placeholder:text-xs text-xs font-semibold placeholder:text-[#bebebe] ${i18n.language === 'ar' ? 'pr-3 ml-3' : 'pl-3 mr-3'} w-full mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white`}
                 placeholder="Email Address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <input
                 type="password"
-                className="border placeholder:text-xs text-xs pl-3 font-semibold placeholder:text-[#bebebe] mr-3 w-full lg:w-[98%] mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className={`border placeholder:text-xs text-xs font-semibold placeholder:text-[#bebebe] ${i18n.language === 'ar' ? 'pr-3 ml-3' : 'pl-3 mr-3'} w-full mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white`}
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <input
                 type="password"
-                className="border placeholder:text-xs text-xs pl-3 mr-3 font-semibold placeholder:text-[#bebebe] w-full lg:w-[98%] mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white"
+                className={`border placeholder:text-xs text-xs font-semibold placeholder:text-[#bebebe] ${i18n.language === 'ar' ? 'pr-3 ml-3' : 'pl-3 mr-3'} w-full mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c] text-white`}
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
@@ -141,15 +143,15 @@ function SignUp() {
                 </p>
               </div>
               <div>
-                <div className="flex flex-row text-center lg:mr-2 my-5">
-                    <div onClick={() => setGender(true)} className={`py-3 rounded-l-[10px] flex-1 font-semibold  ${gender ? 'bg-[#ffd601] text-black' : 'bg-black text-[#ffd601]'}`} >
+                <div className={`flex flex-row text-center my-5`}>
+                    <div onClick={() => setGender(true)} className={`py-3 ${i18n.language === 'ar' ? 'rounded-r-[10px]' : 'rounded-l-[10px]'} flex-1 font-semibold  ${gender ? 'bg-[#ffd601] text-black' : 'bg-black text-[#ffd601]'}`} >
                         <p className ="cursor-pointer text-md">Male</p>
                     </div>
-                    <div onClick={() => setGender(false)} className={`py-3 rounded-r-[10px] flex-1 font-semibold ${!gender ? 'bg-[#ffd601] text-black' : 'bg-black text-[#ffd601]'}`}>
+                    <div onClick={() => setGender(false)} className={`py-3 ${i18n.language === 'ar' ? 'rounded-l-[10px]' : 'rounded-r-[10px]'} flex-1 font-semibold ${!gender ? 'bg-[#ffd601] text-black' : 'bg-black text-[#ffd601]'}`}>
                         <p className="cursor-pointer text-md">Female</p>
                     </div>
                 </div>
-                <div onClick={() => setShowNationality(true)} className="flex flex-row font-semibold items-center lg:w-[98%] w-full mt-4 bg-[#2c2c2c] border rounded-lg h-14 border-[#d3d3d3]" >
+                <div onClick={() => setShowNationality(true)} className="flex flex-row font-semibold items-center lg:w-[98%] w-full mt-4 bg-[#2c2c2c] border rounded-lg h-14 border-[#d3d3d3]">
                   <p className=" text-[#bebebe] text-xs ml-3 mr-2">Nationality:</p>
                   <div className="flex-1">
                     <CountryDropdown
@@ -238,3 +240,4 @@ function SignUp() {
 }
 
 export default SignUp;
+

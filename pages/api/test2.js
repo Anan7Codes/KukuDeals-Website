@@ -3,7 +3,7 @@ import { map } from 'modern-async'
 import { createClient } from '@supabase/supabase-js'
 const fs = require('fs')
 
-const RobotoBlack = fs.readFileSync('../../../font/roboto/Roboto/Roboto-Black.ttf')
+const RobotoBlack = fs.readFileSync('../../font/roboto/Roboto/Roboto-Black.ttf')
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY

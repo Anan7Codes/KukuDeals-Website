@@ -7,12 +7,13 @@ import axios from "axios";
 import { useUser } from '@/contexts/user/UserContext';
 import { useTranslation } from "next-i18next";
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 export default function Payment() {
     const { t, i18n } = useTranslation()
     const { user } = useUser();
     const router = useRouter();
+    const { locale } = useRouter()
 
     const [ promoCode, setPromoCode ] = useState('')
     const [ promoCodeApplied, setPromoCodeApplied ] = useState(false)
@@ -39,7 +40,7 @@ export default function Payment() {
                 return
             }
 
-            if(confirm(`${res.data.message}`) ==  true) {
+            if(confirm(`${res.data.message}`) == true) {
                 setPromoCodeApplied(true)
                 if(res.data.data.type) {
                     setClientTotal(clientTotal - res.data.data.value)
@@ -71,7 +72,8 @@ export default function Payment() {
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/payments/checkout-sessions`, {
                 promoCode: promoCodeApplied ? promoCode : null,
                 user_id: user.id,
-                cart: cart
+                cart: cart,
+                locale: locale
             })
 
             if(!response.data.success) return alert(response.data.message)
@@ -80,7 +82,7 @@ export default function Payment() {
         } catch (e) {
             console.log("checkout", e)
         }
-      };
+    };
 
     return (
         <>

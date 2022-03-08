@@ -142,7 +142,7 @@ export default function Payment() {
             { user ?
                 <>
                     <div className="bg-[#2c2c2c] item-centers justify-center rounded-2xl">
-                        { !promoCodeApplied ?
+                        { promoCodeApplied ?
                         <div className="flex items-center justify-center px-2 py-2">
                             <p className="text-sm text-white">{t('promo-code')} {promoCode} {t('saving-aed')} {(total - clientTotal).toFixed(2)}</p>
                             <button onClick={RemovePromoCode} className={`${i18n.language === 'ar' ? 'mr-3' : 'ml-3'} text-[#000] border border-[#ffd601] h-11 w-[20%] rounded text-xs font-semibold bg-[#ffd601]`}>

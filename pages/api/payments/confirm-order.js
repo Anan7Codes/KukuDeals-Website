@@ -82,6 +82,8 @@ const webhookHandler = async (req, res) => {
             let completed_orders = await supabase
                 .from('completed_orders')
                 .select('*', { count: 'exact' })
+                console.log("completed_ordersdddd",completed_orders)
+
 
             let ordered_coupons = []
             let donated_coupons = []

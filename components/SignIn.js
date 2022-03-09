@@ -7,14 +7,13 @@ import { Formik } from 'formik'
 
 export default function SignIn() {
   const router = useRouter();
-
   const SignInUser = async ({ email, password }) => {
     try {
-      const { error } = await supabase.auth.signIn({
+      const { user,error } = await supabase.auth.signIn({
         email,
         password,
       })
-      console.log(error)
+      console.log(user)
       if (error) {
         toast.error(error.message, {
           position: "top-right",
@@ -37,7 +36,7 @@ export default function SignIn() {
         progress: undefined,
       })
       return router.push('/')
-    } catch (e) {
+    } catch(e) {
       console.log(e)
     }
   }

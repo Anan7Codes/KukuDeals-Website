@@ -3,21 +3,6 @@ import { createClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
 import { map } from 'modern-async'
 const Pdfmake = require('pdfmake');
-// const fs = require('fs')
-// const RobotoMedium = fs.readFileSync('font/roboto/Roboto/Roboto-Medium.ttf')
-// const RobotoBlack = fs.readFileSync('font/roboto/Roboto/Roboto-Black.ttf')
-// const RobotoMediumItalics = fs.readFileSync('font/roboto/Roboto/Roboto-MediumItalic.ttf')
-// const RobotoItalics = fs.readFileSync('font/roboto/Roboto/Roboto-Italic.ttf')
-
-// const fonts = {
-//     Roboto: {
-//         normal: RobotoMedium,
-//         bold: RobotoBlack,
-//         italics: RobotoMediumItalics,
-//         bolditalics: RobotoItalics,
-//     }
-// };
-// const pdfmake = new Pdfmake(fonts);
 const mail = require('@sendgrid/mail')
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2020-08-27' })

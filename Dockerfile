@@ -1,9 +1,7 @@
 FROM node:alpine AS deps
-
-RUN apk add --no-cache libc6-compact
 WORKDIR /app
 COPY package.json ./
-RUN npm install --frozen-lockfile
+RUN npm install
 
 FROM node:alpine AS builder 
 WORKDIR /app

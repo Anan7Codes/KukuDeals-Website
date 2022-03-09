@@ -2,10 +2,13 @@ import { map } from 'modern-async'
 import { parse } from 'path'
 const fs = require('fs')
 const mail = require('@sendgrid/mail')
+import { createClient } from '@supabase/supabase-js'
+
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY
 const supabase = createClient(supabaseUrl, supabaseSecretKey)
+
 const Pdfmake = require('pdfmake');
 const fonts = {
     Roboto: {
@@ -36,6 +39,12 @@ const Handler = async (req, res) => {
             .eq("verification_secret", "pi_3KViy4LSsCUq84XE0qx29IKS")
             .eq("status", true)
             .single()
+
+            let completed_orders = await supabase
+            .from('completed_orders')
+            .select('*', { count: 'exact' })
+            console.log("completed_ordersdddd",completed_orders)
+
         // console.log("initiated_orders", initiated_orders)
         if (initiated_orders.data.promo_code_used === null) {
             amount = initiated_orders.data.amount

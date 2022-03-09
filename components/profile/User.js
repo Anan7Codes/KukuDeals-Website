@@ -12,7 +12,7 @@ export default function User() {
         setEmail(user?.email)
     },[user])
     return (
-        <div className="mb-4 flex mt-5 shadow-lg text-[#fff] bg-[#2c2c2c] lg:w-[21rem] h-[20rem] rounded-[15px] items-center justify-center text-center ">
+        <div className="mb-4 flex mt-5 shadow-lg text-[#fff] bg-[#2c2c2c] lg:w-[21rem] h-[20rem] rounded-[15px] items-center justify-center text-center">
             <div>
                 <p className="text-3xl font-bold text-title">{userName}</p>
                 <p className="text-xs">{email}</p>

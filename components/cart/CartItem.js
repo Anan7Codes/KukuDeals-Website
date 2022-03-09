@@ -1,11 +1,10 @@
-import { CartState } from "@/contexts/cart/CartContext";
 import Image from "next/image";
 import Switch from "react-switch";
+import { CartState } from "@/contexts/cart/CartContext";
+import { useTranslation } from "next-i18next";
 
 export default function CartItem({ item }) {
-  const {
-    state: { cart },
-  } = CartState();
+  const { t, i18n } = useTranslation()
   const { dispatch } = CartState();
 
   const AddQty = () => {
@@ -51,21 +50,21 @@ export default function CartItem({ item }) {
         <div className="flex flex-col lg:flex-row pl-1 pt-2">
           <div>
             <p className=" text-sm sm:text-base text-[#ffd601] lg:text-xl font-semibold leading-2">
-              {item?.GiftName.en}
+              {i18n.language === 'ar' ? item?.GiftName.ar : item?.GiftName.en}
             </p>
             <p className="text-white text-sm sm:text-base lg:text-xl pt-1 leading-2 lg:leading-3">
-              {item?.ProductName.en}
+              {i18n.language === 'ar' ? item?.ProductName.ar : item?.ProductName.en}
             </p>
             <p className="font-semibold text-sm sm:text-base lg:text-xl lg:pt-3 text-white">
-              AED {item?.Price}.00
+              {t('aed')} {item?.Price}.00
             </p>
             <p className="text-xs font-semibold lg:pt-3 text-green-500">
-              {item.donate === "true" ? '2 Coupons' : '1 Coupon'}
-              <span className="text-white font-normal"> per unit</span>
+              {item.donate === "true" ? t('2-coupons') : t('1-coupon')}
+              <span className="text-white font-normal"> {t('per-unit')}</span>
             </p>
           </div>
 
-          <div className="flex sm:ml-12 lg:ml-16 mt-4">
+          <div className={`flex sm:ml-12 lg:ml-16 ${i18n.language === 'ar' ? 'mx-3' : null} mt-4`}>
             <button
               onClick={item?.qty === 1 ? RemoveFromCart : ReduceQty}
               className="flex justify-center items-center text-lg lg:text-xl cursor-pointer text-white bg-[#161616] font-semibold h-10 w-10 lg:h-12 lg:w-16 rounded-[10px]"
@@ -98,8 +97,8 @@ export default function CartItem({ item }) {
           />
         </div>
         <div>
-          <p className="text-white text-xs lg:text-sm mr-3 pt-1">
-            Donate these product(s) to double the ticket(s)
+          <p className={`text-white text-xs lg:text-sm ${i18n.language === 'ar' ? 'mx-3' : 'mr-3'} pt-1`}>
+            {t('donate-products')}
           </p>
         </div>
       </div>

@@ -1,6 +1,9 @@
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
 export default function Soldout({ campaign }) {
+  const  { t, i18n } = useTranslation()
+
   if(campaign?.SoldOut) {
   return (
     <div className="grid">
@@ -27,12 +30,12 @@ export default function Soldout({ campaign }) {
         </div>
         <div className="pt-64">
           <div className="text-center">
-            <p className="text-white text-xl font-semibold mt-4">{campaign?.GiftName.en}</p>
-            <p className="text-white text-sm leading-4">{campaign?.ProductName.en}</p>
+            <p className="text-white text-xl font-semibold mt-4">{i18n.language === 'ar' ? campaign?.GiftName.ar : campaign?.GiftName.en}</p>
+            <p className="text-white text-sm leading-4">{i18n.language === 'ar' ? campaign?.ProductName.ar : campaign?.ProductName.en}</p>
             <p className="text-white font-medium text-sm">
-              Draw Date:
+              {t('draw-date')}:
               <span className="font-semibold pl-1 text-[#ffd601]">
-                {campaign?.ProductName.en}
+                {campaign?.DrawDate}
               </span>
             </p>
           </div>

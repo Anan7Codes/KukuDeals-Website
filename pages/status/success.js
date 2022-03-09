@@ -9,7 +9,8 @@ import Confetti from 'react-confetti';
 import Lottie from "lottie-react";
 import SuccessAnimation from '@/public/success-animation.json'
 import Skeleton from 'react-loading-skeleton'
-
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from "next-i18next"
 
 function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
@@ -36,6 +37,8 @@ function useWindowSize() {
 }
 
 function Success() {
+  const { t, i18n } = useTranslation()
+  const { locale } = useRouter()
   const router = useRouter();
   const { width, height } = useWindowSize()
   const { user } = useUser()
@@ -64,10 +67,10 @@ function Success() {
 
   if(success) {
     return (
-    <div className={`bg-[#161616] overflow-x-hidden`}>
+    <div className={`bg-[#161616] overflow-x-hidden`} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <Head>
           <title>Order Successful | Kuku Deals</title>
-          <link rel="icon" href="../icons/icon.png" />
+          <link rel="icon" href={locale === 'ar' ? "../../icons/icon.png" : "../icons/icon.png"}/>
       </Head>
       <Confetti
         width={width - 20}
@@ -85,8 +88,8 @@ function Success() {
               width: 200
             }}
           />
-          <p className='font-title text-[#ffd601] text-5xl font-semibold'>Congratulations</p>
-          <p className='text-[#fff] text-2xl'>You have successfully placed your order!</p>
+          <p className='font-title text-[#ffd601] text-5xl font-semibold'>{t('congratulations')}</p>
+          <p className='text-[#fff] text-2xl'>{t('order-success')}</p>
         </div>
       </Layout>
     </div> 
@@ -100,3 +103,11 @@ function Success() {
 }
 
 export default Success
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common']))
+    }
+  }
+}

@@ -1,6 +1,10 @@
 import Image from "next/image";
+import Link from 'next/link'
+import { useTranslation } from "next-i18next";
 
 export default function Footer() {
+  const  { t, i18n } = useTranslation()
+
   return (
     <>
       <footer className="py-3">
@@ -8,28 +12,25 @@ export default function Footer() {
           <div className="p-4 sm:flex lg:flex justify-between">
             <div className="flex tracking-tight">
               <div className="pr-10 w-full">
-              <div className="text-sm lg:text-sm w-[150px] text-white font-semibold cursor-pointer hover:text-[#ffd601]">
-                  Customer Service
+                <div className="text-sm lg:text-sm w-[150px] text-white font-semibold cursor-pointer hover:text-[#ffd601]">
+                  {t('customer-service')}
                 </div>
                 <ul className="text-xs lg:text-base pt-3">
                   <li>
                     <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      FAQs
+                      {t('faq')}
                     </a>
                   </li>
                   <li>
-                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      How it Works
-                    </a>
+                    <Link href="/how-it-works">
+                      <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                        {t('how-it-works')}
+                      </a>
+                    </Link>
                   </li>
                   <li>
                     <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      User Agreement
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      Privacy Policy
+                      {t('privacy-policy')}
                     </a>
                   </li>
                 </ul>
@@ -37,23 +38,29 @@ export default function Footer() {
 
               <div className="w-full pb-4">
                 <div className="font-semibold text-sm text-white cursor-pointer hover:text-[#ffd601]">
-                  Quick Links
+                  {t('quick-links')}
                 </div>
-                <ul className=" text-xs lg:text-base pt-4">
+                <ul className="text-xs lg:text-base pt-4">
                   <li>
-                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      My Account
-                    </a>
+                    <Link href="/profile/personal-details">
+                      <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                        {t('my-account')}
+                      </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      Active Tickets
-                    </a>
+                    <Link href="/profile/active-coupons">
+                      <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                        {t('active-coupons')}
+                      </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
-                      Contact Us
-                    </a>
+                    <Link href="/contact-us">
+                      <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                        {t('contact-us')}
+                      </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -111,12 +118,12 @@ export default function Footer() {
               </div>
               <div>
                 <p className="flex justify-center text-center mt-2 text-xs text-white">
-                  Download the Kuku app for a more complete shopping experience
+                  {t('download-the-kuku-app')}
                 </p>
               </div>
               <div className="w-full">
                 <ul className="space-x-2 flex justify-center">
-                  <li className="h-24 w-36 relative hover:cursor-pointer">
+                  <li className={`h-24 w-36 ${i18n.language === 'ar' ? 'ml-2' : null} relative hover:cursor-pointer`}>
                     <Image
                       src="/icons/footerIcons/appstore.svg"
                       layout="fill"
@@ -149,12 +156,12 @@ export default function Footer() {
                 />
               </div>
               <div className="w-full mt-1 lg:mt-0 flex space-x-1 lg:space-x-6 text-[9px] lg:text-xs">
-                <p className="pr-[6px] pl-[6px] text-white">© 2022. All rights reserved</p>
+                <p className="pr-[6px] pl-[6px] text-white">© 2022. {t('all-rights')}</p>
               </div>
             </div>
             <div className="md:flex text-[9px] lg:text-xs hidden">
               <ul className="flex space-x-2 items-center">
-                <li className="text-white">We accept</li>
+                <li className={`text-white ${i18n.language === 'ar' ? 'ml-2' : null}`}>{t('we-accept')}</li>
                 <li className="h-6 w-9 relative">
                   <Image
                     src="/icons/footerIcons/pay.png"

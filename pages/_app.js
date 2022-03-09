@@ -1,7 +1,6 @@
 import '../styles/globals.css'
+import { appWithTranslation } from 'next-i18next'
 import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion"
-import { useState } from 'react'
-import { LanguageContext } from '@/contexts/language'
 import { ToastContainer } from 'react-toastify';
 import { animations } from "@/utils/animation"
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,11 +9,10 @@ import CartContext from '@/contexts/cart/CartContext';
 import UserProvider from '@/contexts/user/UserContext';
 
 function MyApp({ Component, pageProps, router }) {
-  const [english, setEnglish] = useState(true)
+
   return (
     <UserProvider>
-      <LanguageContext.Provider value={{ english, setEnglish }}>
-        <CartContext>
+      <CartContext>
         <LazyMotion features={domAnimation}>
           <AnimatePresence exitBeforeEnter={true}>
             <m.div
@@ -31,10 +29,9 @@ function MyApp({ Component, pageProps, router }) {
             </m.div>
           </AnimatePresence>
         </LazyMotion>
-        </CartContext>
-      </LanguageContext.Provider>
+      </CartContext>
     </UserProvider>
   )
 }
 
-export default MyApp
+export default appWithTranslation(MyApp)

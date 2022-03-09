@@ -1,22 +1,22 @@
-import { Fragment, useState, useContext } from "react";
-import { LanguageContext } from "@/contexts/language";
+import { Fragment, useState } from "react";
+import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
 import { Dialog, Transition } from "@headlessui/react";
 
 function Navbar() {
+  const  { t, i18n } = useTranslation()
   const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { english, setEnglish } = useContext(LanguageContext);
-
   const userInfo = supabase.auth.user();
+
   return (
     <nav className="pb-2 relative">
       <div className="bg-[#2c2c2c] mx-auto rounded-[10px]">
-        <div className="flex justify-between text-sm">
-          <div className="flex space-x-6 pl-2">
+        <div className={`flex justify-between text-sm`}>
+          <div className={`flex space-x-6 pl-2`}>
             <div className="flex text-center p-2">
               <div className="flex items-center w-28 h-10 relative cursor-pointer" onClick={() => router.push('/')}>
                 <Image
@@ -35,7 +35,7 @@ function Navbar() {
               </a>
             </div> */}
           </div>
-          <div className="hidden lg:flex items-center space-x-6 pr-4 ">
+          <div className="hidden lg:flex items-center space-x-6 pr-4">
             {/* <a
               href=""
               className="py-4 px-3 text-white font-medium hover:text-[#ffd601]"
@@ -47,16 +47,16 @@ function Navbar() {
             </a> */}
 
             <div
-              onClick={() => setEnglish(!english)}
-              className="py-4 px-3 hover:cursor-pointer text-white font-medium hover:text-[#ffd601]"
+              onClick={() => router.locale === 'ar' ? router.push(`${router.asPath}`, undefined, { locale: 'en' }) : router.push(`${router.asPath}`, undefined, { locale: 'ar' }) }
+              className={`py-4 px-3 hover:cursor-pointer text-white font-medium hover:text-[#ffd601]`}
             >
-              {english ? "العربية" : "English"}
+              {i18n.language === 'en' ? "العربية" : "English"}
             </div>
             <p
-              className="py-2 px-3 text-white font-medium hover:text-[#ffd601] hover:cursor-pointer"
+              className={`py-2 px-3 text-white font-medium hover:text-[#ffd601] hover:cursor-pointer`}
               onClick={() => userInfo ? router.push("/profile/personal-details") : router.push('/signin')}
             >
-              {userInfo ? userInfo.user_metadata.name : 'Login/Register'}
+              {userInfo ? userInfo.user_metadata.name : t('login-register')}
             </p>
           </div>
           <div className="lg:hidden flex items-center pr-4">

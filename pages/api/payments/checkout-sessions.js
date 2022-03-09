@@ -81,8 +81,8 @@ export default async function handler(req, res) {
                 customer: data[0].stripe_customer_id,
 				payment_method_types: ['card'],
 				mode: 'payment',
-				success_url: `${req.headers.origin}/status/success?success=true&session_id={CHECKOUT_SESSION_ID}`,
-				cancel_url: `${req.headers.origin}/status/cancel?canceled=true`,
+				success_url: req.body.locale === 'ar' ? `${req.headers.origin}/ar/status/success?success=true` : `${req.headers.origin}/status/success?success=true`,
+				cancel_url: req.body.locale === 'ar' ? `${req.headers.origin}/ar/status/cancel` : `${req.headers.origin}/status/cancel`,
 			});
             console.log("session", session)
 

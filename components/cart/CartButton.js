@@ -1,8 +1,11 @@
 import CartRight from "./CartRight";
 import { useState } from "react";
 import { CartState } from "@/contexts/cart/CartContext";
+import { useTranslation } from "next-i18next";
 
 export default function CartButton() {
+  const  { t, i18n } = useTranslation()
+
   const [showCart, setshowCart] = useState();
   const [showButton, setshowButton] = useState(true);
   const handleMouseIn = () => {
@@ -19,7 +22,7 @@ export default function CartButton() {
             <div className="flex">
               <div className="bg-[#161616] py-4 px-4 backdrop-blur-sm bg-[#161616]/90 flex items-center justify-center relative text-white rounded-[15px]">
                 <button className="font-normal">
-                  <p className="hidden lg:flex">Shopping Cart</p>
+                  <p className="hidden lg:flex">{t('shopping-cart')}</p>
                 </button>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

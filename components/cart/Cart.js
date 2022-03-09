@@ -1,7 +1,10 @@
 import { CartState } from "@/contexts/cart/CartContext";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
+
 
 export default function Cart({ item }) {
+  const { t, i18n } = useTranslation()
 
   const { dispatch } = CartState();
 
@@ -28,7 +31,7 @@ export default function Cart({ item }) {
 
   return <div>
     {item ?
-      <div className="text-sm font-semibold text-white pl-6 pr-6 pt-2">
+      <div className={`text-sm font-semibold ${i18n.language === 'ar' ? null : 'px-6'} text-white pt-2`}>
         <div className="flex justify-between pt-4">
           <div className="cursor-pointer rounded-[15px] object-fit -left-2 relative w-24 h-24">
             <Image
@@ -37,19 +40,19 @@ export default function Cart({ item }) {
               alt="product logo"
             />
           </div>
-          <div className="flex pl-1">
+          <div className={`flex ${i18n.language === 'ar' ? 'pl-20' : 'pl-1'}`}>
             <div>
               <p className="text-normal font-bold">
-                {item?.GiftName.en}
+                {i18n.language === 'ar' ? item?.GiftName.ar : item?.GiftName.en}
               </p>
-              <p>{item?.ProductName.en}</p>
-              <p className="font-bold text-[#ffd601]">AED{item?.Price}.00</p>
+              <p>{i18n.language === 'ar' ? item?.ProductName.ar : item?.ProductName.en}</p>
+              <p className="font-bold text-[#ffd601]">{t('aed')} {item?.Price}.00</p>
               <div className="text-sm font-semibold text-green-500">
-              {item.donate === "true" ? '2 Coupons' : '1 Coupon'}
-                <span className="text-white font-normal"> per unit</span>
+              {item.donate === "true" ? t('2-coupons') : t('1-coupon')}
+                <span className="text-white font-normal"> {t('per-unit')}</span>
               </div>
             </div>
-            <div className="ml-20 leading-extra-loose">
+            <div className={`${i18n.language === 'ar' ? 'mr-8' : 'ml-20'} leading-extra-loose`}>
               <svg
                 onClick={AddQty}
                 xmlns="http://www.w3.org/2000/svg"

@@ -6,8 +6,10 @@ import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
 import { useUser } from '@/contexts/user/UserContext';
 import { toast } from "react-toastify";
+import { useTranslation } from "next-i18next"
 
 export default function Sidebar({ children }) {
+  const { t, i18n } = useTranslation()
   const router = useRouter();
   const { user, setUser } = useUser();
 
@@ -63,7 +65,7 @@ export default function Sidebar({ children }) {
                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
               />
             </svg>
-            <p className="pl-3">Personal Details</p>
+            <p className={`${i18n.language === 'ar' ? 'px-3' : 'pl-3'}`}>{t('personal-details')}</p>
           </div>
           <div className="lg:hidden flex p-4" onClick={() => router.push('/profile/personal-details')}>
             <svg
@@ -80,16 +82,16 @@ export default function Sidebar({ children }) {
                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
               />
             </svg>
-            <p className="pl-3">Personal Details</p>
+            <p className={`${i18n.language === 'ar' ? 'px-3' : 'pl-3'}`}>{t('personal-details')}</p>
           </div>
 
           <div className="hidden lg:flex p-4" onClick={() => router.push('/profile/active-coupons')}>
             <RiCoupon2Fill className="h-6 w-6" />
-            <p className="pl-3">Active coupons</p>
+            <p className={`${i18n.language === 'ar' ? 'px-3' : 'pl-3'}`}>{t('active-coupons')}</p>
           </div>
           <div className="lg:hidden flex p-4" onClick={() => router.push('/profile/active-coupons')}>
             <RiCoupon2Fill className="h-6 w-6" />
-            <p className="pl-3">Active coupons</p>
+            <p className={`${i18n.language === 'ar' ? 'px-3' : 'pl-3'}`}>{t('active-coupons')}</p>
           </div>
           <div className="hidden lg:flex p-4" onClick={() => router.push('/profile/change-password')}>
             <svg
@@ -112,7 +114,7 @@ export default function Sidebar({ children }) {
                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
-            <p className="pl-3">Change Password</p>
+            <p className={`${i18n.language === 'ar' ? 'px-3' : 'pl-3'}`}>{t('change-password')}</p>
           </div>
           <div className="lg:hidden flex p-4" onClick={() => router.push('/profile/change-password')}>
           <svg
@@ -135,21 +137,21 @@ export default function Sidebar({ children }) {
                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
-            <p className="pl-3">Change Password</p>
+            <p className={`${i18n.language === 'ar' ? 'px-3' : 'pl-3'}`}>{t('change-password')}</p>
           </div>
           <div className="hidden lg:flex p-4" onClick={() => router.push('/profile/shipping-address')}>
             <FaAddressCard className="h-6 w-6" />
-            <p className="pl-3">Shipping Address</p>
+            <p className={`${i18n.language === 'ar' ? 'px-3' : 'pl-3'}`}>{t('shipping-address')}</p>
           </div>
           <div className="lg:hidden flex p-4" onClick={() => router.push('/profile/shipping-address')}>
             <FaAddressCard className="h-6 w-6" />
-            <p className="pl-3">Shipping Address</p>
+            <p className={`${i18n.language === 'ar' ? 'px-3' : 'pl-3'}`}>{t('shipping-address')}</p>
           </div>
           <div className="flex p-4">
             <RiLogoutBoxRLine className="h-6 w-6"/>
-            <p className="pl-3"
+            <p className={`${i18n.language === 'ar' ? 'px-3' : 'pl-3'}`}
               onClick={SignOutUser}>
-              Logout
+              {t('logout')}
             </p>
           </div>
         </div>

@@ -5,14 +5,14 @@ import { map } from 'modern-async'
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY
 const supabase = createClient(supabaseUrl, supabaseSecretKey)
-let customerName, amount , display
+let  amount , display
 
 
 const mail = require('@sendgrid/mail')
 mail.setApiKey(process.env.SENDGRID_API_KEY)
 const fs = require('fs')
 var html_to_pdf = require('html-pdf-node');
-let options = { format: 'A3', path: './invoice.pdf' };
+let options = { format: 'A3' };
 const Handler = async (req, res) => {
     if (req.method !== 'POST') {
         return res.send({ success: false, message: 'Wrong request made' })
@@ -55,11 +55,6 @@ const Handler = async (req, res) => {
         const { data, error } = await supabase
             .from('profiles')
             .select('*')
-        data.map((i, index) => {
-            if (i.id === initiated_orders.data.user_id) {
-                customerName = i.name
-            }
-        })
         const header = `
             <!DOCTYPE html>
 <html lang="en">
@@ -109,7 +104,7 @@ const Handler = async (req, res) => {
             <div class="flex text-xs m-6 justify-between p-4">
                 <div>
                     <div>
-                        <h6 class="font-bold">Customer Name: <span class=" font-medium">${customerName}</span></h6>
+                        <h6 class="font-bold">Customer Name: <span class=" font-medium">${profile.data[0].name}</span></h6>
                     </div>
 
                     <h6 class="font-bold">Address : <span class=" font-medium"> United Arab Emirates</span></h6>
@@ -205,7 +200,7 @@ const Handler = async (req, res) => {
             <div class="flex text-xs m-6 justify-between p-4">
                 <div>
                     <div>
-                        <h6 class="font-bold">Customer Name: <span class=" font-medium">${customerName}</span></h6>
+                        <h6 class="font-bold">Customer Name: <span class=" font-medium">${profile.data[0].name}</span></h6>
                     </div>
 
                     <h6 class="font-bold">Address : <span class=" font-medium"> United Arab Emirates</span></h6>
@@ -333,9 +328,7 @@ const Handler = async (req, res) => {
         let file = { content: header + body1 + footer+ body2 }
         const pdfBuffer = await html_to_pdf.generatePdf(file, options)
         console.log("pdfBuffer", pdfBuffer) 
-        fs.readFile(('invoice.pdf'), async (err, datas) => {
-            console.log("datas", datas)
-            const data = {
+            const data1 = {
                 from: 'travo.socialmedia@gmail.com',
                 personalizations: [
                     {
@@ -347,7 +340,7 @@ const Handler = async (req, res) => {
                 content: [{ type: "text/html", value: header1 + body1 + footer+ body2},],
                 attachments: [
                     {
-                        content: datas.toString('base64'),
+                        content: pdfBuffer.toString('base64'),
                         filename: 'invoice.pdf',
                         type: 'application/pdf',
                         disposition: 'attachment',
@@ -355,10 +348,8 @@ const Handler = async (req, res) => {
                     },
                 ],
             }
-            const resp = await mail.send(data)
+            const resp = await mail.send(data1)
             console.log(resp)
-        })
-
         return res.send({ success: true, message: 'request has been made' })
     }
 }

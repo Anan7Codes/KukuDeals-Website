@@ -139,6 +139,11 @@ const webhookHandler = async (req, res) => {
 
             user_id = initiated_orders.data.user_id
             res_charge = charge
+            if (initiated_orders.data.promo_code_used === null) {
+                amount = initiated_orders.data.amount
+            } else {
+                amount = initiated_orders.data.final_amount
+            }
             const header = `
             <!DOCTYPE html>
 <html lang="en">
@@ -409,19 +414,11 @@ const webhookHandler = async (req, res) => {
           </div>`
                 )
             })
-
             let file = { content: header + body1 + footer + body2 }
             const pdfBuffer = await html_to_pdf.generatePdf(file, options)
             console.log("pdfBuffer", pdfBuffer)
-            let image = `
-       
-
-
-`;
-
-            fs.readFile(('invoice.pdf'), async (err, datas) => {
-                console.log("datas", datas)
-                const data = {
+        // let image = `<img class="items-center justify-center w-32 h-14" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9hpbDkb5HdKE1RLtaMig_Gs24n8VsRIJ7KStu3T_1mX4kDaM23z2RXm8Z5Gd31QftaM&usqp=CAU" alt="HTML tutorial" style="width:200px;height:200px;border:0">`;
+                const data1 = {
                     from: 'travo.socialmedia@gmail.com',
                     personalizations: [
                         {
@@ -435,7 +432,7 @@ const webhookHandler = async (req, res) => {
                     content: [{ type: "text/html", value: image + header1 + body1 + footer + body2 },],
                     attachments: [
                         {
-                            content: datas.toString('base64'),
+                            content: pdfBuffer.toString('base64'),
                             filename: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}.pdf`,
                             type: 'application/pdf',
                             disposition: 'attachment',
@@ -443,9 +440,8 @@ const webhookHandler = async (req, res) => {
                         },
                     ],
                 }
-                const resp = await mail.send(data)
+                const resp = await mail.send(data1)
                 console.log(resp)
-            })
             return res.send({ success: true, user_id, res_charge, mailres })
         } else {
             return res.send({ success: false, user_id, mailres, res_charge })

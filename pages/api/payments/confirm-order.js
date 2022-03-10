@@ -66,13 +66,9 @@ const webhookHandler = async (req, res) => {
                 .eq("verification_secret", charge.payment_intent)
                 // .eq("status", true)
                 .single()
-            console.log("Line 60 IO", initiated_orders)
-            console.log("cart", initiated_orders.data.cart)
             let completed_orders = await supabase
                 .from('completed_orders')
                 .select('*', { count: 'exact' })
-            console.log("completed_ordersdddd", completed_orders)
-
 
             let ordered_coupons = []
             let donated_coupons = []
@@ -100,7 +96,6 @@ const webhookHandler = async (req, res) => {
                         transaction_number: completed_orders.count + 1
                     },
                 ])
-            console.log("co", data)
             if (error) return res.send({ success: false, message: "Completed orders insertion error", error: data.error })
 
             let profile = await supabase
@@ -404,19 +399,18 @@ const webhookHandler = async (req, res) => {
                 </html>
             `
             const body2 = await map(coupons, async (items, index) => {
-                display = items.product_coupons
+                
                 return (`
                     <div class="m-4 grid grid-cols-5 gap-1 pt-6 text-sm">
                     <div>Product Name : ${items.name}</div>
                     <div>Qty : ${items.product_qty}</div>
                     <div>Price : ${items.product_price}</div>
-            <div class = "border border-black text-center py-4">Coupon No: ${display}</div>
+            
           </div>`
                 )
             })
             let file = { content: header + body1 + footer + body2 }
             const pdfBuffer = await html_to_pdf.generatePdf(file, options)
-            console.log("pdfBuffer", pdfBuffer)
         // let image = `<img class="items-center justify-center w-32 h-14" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9hpbDkb5HdKE1RLtaMig_Gs24n8VsRIJ7KStu3T_1mX4kDaM23z2RXm8Z5Gd31QftaM&usqp=CAU" alt="HTML tutorial" style="width:200px;height:200px;border:0">`;
                 const data1 = {
                     from: 'travo.socialmedia@gmail.com',
@@ -441,7 +435,7 @@ const webhookHandler = async (req, res) => {
                     ],
                 }
                 const resp = await mail.send(data1)
-                console.log(resp)
+                console.log("mail", resp)
             return res.send({ success: true, user_id, res_charge, mailres })
         } else {
             return res.send({ success: false, user_id, mailres, res_charge })

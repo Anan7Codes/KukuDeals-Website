@@ -4,7 +4,6 @@ import Stripe from 'stripe'
 import { map } from 'modern-async'
 const pdf = require("pdf-creator-node");
 const mail = require('@sendgrid/mail')
-const fs = require('fs')
 var options = {
     format: "A3",
     orientation: "portrait",

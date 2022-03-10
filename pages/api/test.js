@@ -14,14 +14,13 @@ const fs = require('fs')
 var html_to_pdf = require('html-pdf-node');
 let options = { format: 'A3' };
 const Handler = async (req, res) => {
-    if (req.method !== 'POST') {
+    if (req.method !== 'GET') {
         return res.send({ success: false, message: 'Wrong request made' })
     }
-    if (req.method === 'POST') {
+    if (req.method === 'GET') {
         let initiated_orders = await supabase
             .from('initiated_orders')
             .select('*')
-            // .eq("verification_secret", charge.payment_intent)
             .eq("verification_secret", "pi_3KajULLSsCUq84XE0HHU8kmn")
             .eq("status", true)
             .single()
@@ -332,7 +331,7 @@ const Handler = async (req, res) => {
                 from: 'travo.socialmedia@gmail.com',
                 personalizations: [
                     {
-                        to: 'mohammedhafizba@gmail.com',
+                        to: ['mohammedhafizba@gmail.com', 'anan07dhu@outlook.com'],
                         subject: 'Order Confirmation'
                     },
 

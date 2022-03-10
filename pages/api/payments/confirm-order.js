@@ -193,7 +193,7 @@ const webhookHandler = async (req, res) => {
             <div class="flex text-xs m-6 justify-between p-4">
                 <div>
                     <div>
-                        <h6 class="font-bold">Customer Name: <span class=" font-medium">${customerName}</span></h6>
+                        <h6 class="font-bold">Customer Name: <span class=" font-medium">${profile.data[0].name}</span></h6>
                     </div>
 
                     <h6 class="font-bold">Address : <span class=" font-medium"> United Arab Emirates</span></h6>

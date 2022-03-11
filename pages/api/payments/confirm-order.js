@@ -391,7 +391,6 @@ const webhookHandler = async (req, res) => {
                 }
             }
             console.log("doc", document)
-            // let image = `<img class="items-center justify-center w-32 h-14" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9hpbDkb5HdKE1RLtaMig_Gs24n8VsRIJ7KStu3T_1mX4kDaM23z2RXm8Z5Gd31QftaM&usqp=CAU" alt="HTML tutorial" style="width:200px;height:200px;border:0">`;
             console.log('start pdf')
             let pdfDoc = await pdfmake.createPdfKitDocument(document);
             var chunks = [];
@@ -404,15 +403,23 @@ const webhookHandler = async (req, res) => {
                 result = Buffer.concat(chunks);
                 bufferData = 'data:application/pdf;base64,' + result.toString('base64')
                 const data1 = {
-                    from: 'travo.socialmedia@gmail.com',
+                    from: 'KukuDeals <no-reply@kukudeals.com>',
+                    templateId: 'd-7ea5058b9a69441b961d23407bc143d3',
                     personalizations: [
                         {
-                            to: [`${profile.data[0].email}`, 'anandhu@rough-paper.com','mohammedhafizba@gmail.com'],
-                            subject: 'Order Confirmation'
+                            to: [`${profile.data[0].email}`,'kukudealsdev@gmail.com'],
+                            subject: 'Order Confirmation',
+                            dynamicTemplateData: {
+                                transactionNumber: `KUKU${String(7 + 1).padStart(7, '0')}`,
+                                purchaseDate: `${new Date().toLocaleString()}`,
+                                totalBeforeVat: `AED ${(amount*0.95).toString()}`,
+                                vatAmount: `AED ${(amount*0.05).toString()}`,
+                                total: `AED ${(amount).toString()}`,
+                            }
                         },
                     ],
                     // content: [{ type: "text/html", value: image + header1 + body1 + footer },],
-                    content: [{type: "text/html", value: "hey its temporory template" }],
+                    // content: [{type: "text/html", value: "hey its temporory template" }],
                     attachments: [
                         {
                             content: result.toString('base64'),

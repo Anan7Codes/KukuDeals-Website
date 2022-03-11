@@ -484,14 +484,22 @@ const Handler = async (req, res) => {
                 result = Buffer.concat(chunks);
                 buffer = 'data:application/pdf;base64,' + result.toString('base64')
                 const data1 = {
-                    from: 'travo.socialmedia@gmail.com',
+                    from: 'KukuDeals <no-reply@kukudeals.com>',
+                    templateId: 'd-7ea5058b9a69441b961d23407bc143d3',
                     personalizations: [
                         {
                             to: ['anandhu@rough-paper.com'],
-                            subject: 'Order Confirmation'
+                            subject: 'Order Confirmation',
+                            dynamicTemplateData: {
+                                transactionNumber: `KUKU${String(7 + 1).padStart(7, '0')}`,
+                                purchaseDate: `${new Date().toLocaleString()}`,
+                                totalBeforeVat: `AED ${(amount*0.95).toString()}`,
+                                vatAmount: `AED ${(amount*0.05).toString()}`,
+                                total: `AED ${(amount).toString()}`,
+                            }
                         },
                     ],
-                    content: [{ type: "text/html", value: image + header1 + body1 + footer },],
+                    // content: [{ type: "text/html", value: image + header1 + body1 + footer },],
                     // content: [{"type": "text/html", "value": document.toString() }],
                     attachments: [
                         {

@@ -16,7 +16,7 @@ export default function ForgotPassword() {
     const ResetPass = async ({ email }) => {
         try {
             const { data, error } = supabase.auth.api
-                .resetPasswordForEmail(email, { redirectTo: locale === 'ar' ? 'https://kukudeals.vercel.app/ar/reset-password' : 'https://kukudeals.vercel.app/reset-password' })
+                .resetPasswordForEmail(email, { redirectTo: locale === 'ar' ? 'https://kukudeals.com/ar/reset-password' : 'https://kukudeals.com/reset-password' })
             console.log("reset", data, error)
             if (error) {
                 toast.error(error.message, {

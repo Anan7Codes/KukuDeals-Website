@@ -166,25 +166,17 @@ function Navbar() {
               {/* <p className="font-medium text-sm text-white mb-2 hover:cursor-pointer hover:text-yellow-500">
                 Winners
               </p> */}
-              <p className="font-medium text-sm text-white mt-6 mb-2 hover:cursor-pointer hover:text-yellow-500">
-                Need Help? Contact Us
+              <p
+                onClick={() => router.locale === 'ar' ? router.push(`${router.asPath}`, undefined, { locale: 'en' }) : router.push(`${router.asPath}`, undefined, { locale: 'ar' }) } 
+                className="font-medium text-sm text-white mb-2 hover:cursor-pointer hover:text-yellow-500">
+                {i18n.language === 'en' ? "العربية" : "English"}
               </p>
-              <p className="font-medium text-sm text-[#ffd601] mb-2 hover:cursor-pointer hover:text-yellow-500">
-                Call 0800-KUKU
+              <p
+                className={`font-medium text-sm text-white mb-4 hover:cursor-pointer hover:text-yellow-500`}
+                onClick={() => userInfo ? router.push("/profile/personal-details") : router.push('/signin')}
+              >
+                {userInfo ? userInfo.user_metadata.name : t('login-register')}
               </p>
-              <p className="font-medium text-sm text-white mb-2 hover:cursor-pointer hover:text-yellow-500">
-                العربية
-              </p>
-              {userInfo ? (
-                <p onClick={() => router.push('/profile/personal-details')} className="font-medium text-sm text-white mb-4 hover:cursor-pointer hover:text-yellow-500">
-                  {userInfo.user_metadata.name}
-                </p>
-              ) : (
-                <p onClick={() => router.push('/signin')} className="font-medium text-sm text-white mb-4 hover:cursor-pointer hover:text-yellow-500">
-                  Login/Register
-                </p>
-              )}
-
 
               <svg
                 onClick={() => setShowMenu(false)}

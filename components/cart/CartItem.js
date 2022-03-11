@@ -47,7 +47,7 @@ export default function CartItem({ item }) {
         <div className="cursor-pointer rounded-[10px] object-fit -left-2 relative ml-4 lg:ml-10 mt-2 w-32 h-32">
           <Image src={item?.Image} layout="fill" alt="product logo" />
         </div>
-        <div className="flex flex-col lg:flex-row pl-1 pt-2">
+        <div className="flex flex-col lg:flex-row justify-between w-[100%] pl-1 pr-8 pt-2">
           <div>
             <p className=" text-sm sm:text-base text-[#ffd601] lg:text-xl font-semibold leading-2">
               {i18n.language === 'ar' ? item?.GiftName.ar : item?.GiftName.en}

@@ -28,7 +28,7 @@ export default function CartRight() {
           className="grid justify-items-end absolute"
           onMouseLeave={handleCart}
         >
-          <div className={`bg-[#161616] drop-shadow-lg container w-[25rem] max-h-[30rem] bottom-6 ${i18n.language === 'ar' ? 'left-2' : 'right-2'} rounded-[10px] fixed z-20`}>
+          <div className={`bg-[#161616] drop-shadow-lg container w-[95%] md:w-[25rem] max-h-[30rem] bottom-6 ${i18n.language === 'ar' ? 'left-2' : 'right-2'} rounded-[10px] fixed z-20`}>
             <div className="flex justify-between">
               <p className={`text-[#ffd601] font-bold ${i18n.language === 'ar' ? 'mr-4' : 'ml-4'} mt-4 text-2xl font-title`}>{t('items')}</p>
             </div>

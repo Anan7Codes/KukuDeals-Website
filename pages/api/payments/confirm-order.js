@@ -410,7 +410,7 @@ const webhookHandler = async (req, res) => {
                             to: [`${profile.data[0].email}`,'kukudealsdev@gmail.com'],
                             subject: 'Order Confirmation',
                             dynamicTemplateData: {
-                                transactionNumber: `KUKU${String(7 + 1).padStart(7, '0')}`,
+                                transactionNumber: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}`,
                                 purchaseDate: `${new Date().toLocaleString()}`,
                                 totalBeforeVat: `AED ${(amount*0.95).toString()}`,
                                 vatAmount: `AED ${(amount*0.05).toString()}`,

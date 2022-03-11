@@ -18,7 +18,7 @@ RUN npm run build
 FROM node:alpine AS runner
 WORKDIR /app
 ENV NODE_ENV production
-ENV NEXT_SHARP_PATH /app/tmp/node_modules/sharp next start
+ENV NEXT_SHARP_PATH /tmp/node_modules/sharp next start
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/next-i18next.config.js ./
 COPY --from=builder /app/public ./public

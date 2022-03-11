@@ -2,13 +2,18 @@ import { buffer } from 'micro'
 import { createClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
 import { map } from 'modern-async'
-const pdf = require("pdf-creator-node");
 const mail = require('@sendgrid/mail')
-var options = {
-    format: "A3",
-    orientation: "portrait",
-    border: "10mm",
+const Pdfmake = require('pdfmake');
+const fonts = require('pdfmake/build/vfs_fonts.js');
+const fontsDesc = {
+    Roboto: {
+        normal: Buffer.from(fonts.pdfMake.vfs['Roboto-Regular.ttf'], 'base64'),
+        bold: Buffer.from(fonts.pdfMake.vfs['Roboto-Medium.ttf'], 'base64'),
+        italics: Buffer.from(fonts.pdfMake.vfs['Roboto-Italic.ttf'], 'base64'),
+        bolditalics: Buffer.from(fonts.pdfMake.vfs['Roboto-Italic.ttf'], 'base64'),
+    }
 };
+let pdfmake = new Pdfmake(fontsDesc);
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2020-08-27' })
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
@@ -386,7 +391,7 @@ const webhookHandler = async (req, res) => {
                 }
             }
             console.log("doc", document)
-            let image = `<img class="items-center justify-center w-32 h-14" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9hpbDkb5HdKE1RLtaMig_Gs24n8VsRIJ7KStu3T_1mX4kDaM23z2RXm8Z5Gd31QftaM&usqp=CAU" alt="HTML tutorial" style="width:200px;height:200px;border:0">`;
+            // let image = `<img class="items-center justify-center w-32 h-14" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9hpbDkb5HdKE1RLtaMig_Gs24n8VsRIJ7KStu3T_1mX4kDaM23z2RXm8Z5Gd31QftaM&usqp=CAU" alt="HTML tutorial" style="width:200px;height:200px;border:0">`;
             console.log('start pdf')
             let pdfDoc = await pdfmake.createPdfKitDocument(document);
             var chunks = [];

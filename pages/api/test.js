@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { map } from 'modern-async'
 const pdf = require("pdf-creator-node");
+
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY
 const supabase = createClient(supabaseUrl, supabaseSecretKey)
@@ -227,8 +228,6 @@ const Handler = async (req, res) => {
       var document = {
         html: header + body1 + footer + body2,
         data: {
-        },
-        data: {
             coupons: coupons,
         },
         path: "./output.pdf",
@@ -258,10 +257,10 @@ const Handler = async (req, res) => {
                     },
                 ],
             }
-            try{
+            try {
                 const resp = await mail.send(data1)
                 console.log("mail",resp)
-            }catch (err){
+            } catch (err){
                return res.status(401).json({ status: 'Email sending failed' });
             }
         })

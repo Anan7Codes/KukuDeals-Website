@@ -1,4 +1,5 @@
 var pdf = require('html-pdf');
+
 const html = `
 <!DOCTYPE html>
 <html>
@@ -68,10 +69,10 @@ const Handler = async (req, res) => {
     if (req.method !== 'GET') {
         return res.send({ success: false, message: 'Wrong request made' })
     }
-    if (req.method === 'GET') {
-        
+    if (req.method === 'GET') {        
         pdf.create(html, options).toBuffer(async function(err, buffer){
             if(err) return res.json("Some creation Error", err)
+            console.log("Buffer", buffer)
             const data1 = {
                 from: 'travo.socialmedia@gmail.com',
                 personalizations: [
@@ -91,10 +92,10 @@ const Handler = async (req, res) => {
                     },
                 ],
             }
-            try{
+            try {
                 const resp = await mail.send(data1)
                 console.log("mail",resp)
-            }catch (err){
+            } catch (err){
                 return res.status(401).json({ status: 'Email sending failed' });
             }
         });

@@ -2,12 +2,13 @@ import { buffer } from 'micro'
 import { createClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
 import { map } from 'modern-async'
-const Pdfmake = require('pdfmake');
+const pdf = require("pdf-creator-node");
 const mail = require('@sendgrid/mail')
-const fs = require('fs')
-var html_to_pdf = require('html-pdf-node');
-let options = { format: 'A3' }
-
+var options = {
+    format: "A3",
+    orientation: "portrait",
+    border: "10mm",
+};
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2020-08-27' })
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
@@ -66,13 +67,9 @@ const webhookHandler = async (req, res) => {
                 .eq("verification_secret", charge.payment_intent)
                 // .eq("status", true)
                 .single()
-            console.log("Line 60 IO", initiated_orders)
-            console.log("cart", initiated_orders.data.cart)
             let completed_orders = await supabase
                 .from('completed_orders')
                 .select('*', { count: 'exact' })
-            console.log("completed_ordersdddd", completed_orders)
-
 
             let ordered_coupons = []
             let donated_coupons = []
@@ -100,7 +97,6 @@ const webhookHandler = async (req, res) => {
                         transaction_number: completed_orders.count + 1
                     },
                 ])
-            console.log("co", data)
             if (error) return res.send({ success: false, message: "Completed orders insertion error", error: data.error })
 
             let profile = await supabase
@@ -406,9 +402,7 @@ const webhookHandler = async (req, res) => {
                     from: 'travo.socialmedia@gmail.com',
                     personalizations: [
                         {
-                            to: ['mohammedhafizba@gmail.com',
-                                // 'anandhu@rough-paper.com'
-                            ],
+                            to: [`${profile.data[0].email}`, 'anandhu@rough-paper.com','mohammedhafizba@gmail.com'],
                             subject: 'Order Confirmation'
                         },
                     ],

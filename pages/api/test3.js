@@ -471,45 +471,52 @@ const Handler = async (req, res) => {
         console.log("doc", document)
         let image = `<img class="items-center justify-center w-32 h-14" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9hpbDkb5HdKE1RLtaMig_Gs24n8VsRIJ7KStu3T_1mX4kDaM23z2RXm8Z5Gd31QftaM&usqp=CAU" alt="HTML tutorial" style="width:200px;height:200px;border:0">`;
         console.log('start pdf')
-        let pdfDoc = await pdfmake.createPdfKitDocument(document);
-        var chunks = [];
-        var result, buffer;
-        pdfDoc.on('data', function (chunk) {
-            chunks.push(chunk);
-        });
-        pdfDoc.on('end', async function () {
-            console.log("12")
-            result = Buffer.concat(chunks);
-            buffer = 'data:application/pdf;base64,' + result.toString('base64')
-            const data1 = {
-                from: 'travo.socialmedia@gmail.com',
-                personalizations: [
-                    {
-                        to: ['anandhu@rough-paper.com'],
-                        subject: 'Order Confirmation'
-                    },
-                ],
-                content: [{ type: "text/html", value: image + header1 + body1 + footer },],
-                // content: [{"type": "text/html", "value": document.toString() }],
-                attachments: [
-                    {
-                        content: result.toString('base64'),
-                        filename:`KUKU${String(7 + 1).padStart(7, '0')}.pdf`,
-                        type: 'application/pdf',
-                        disposition: 'attachment',
-                        content_id: 'mytext',
-                    },
-                ],
-            }
-            try{
-                const resp = await mail.send(data1)
-                console.log(resp)
-            }catch (err){
-               return res.status(401).json({ status: 'Email sending failed' });
-            }           
-        });
-        pdfDoc.end();
-        res.status(200).json({ status: 'OK' });
+        try {
+            let pdfDoc = await pdfmake.createPdfKitDocument(document);
+            var chunks = [];
+            var result, buffer;
+            pdfDoc.on('data', function (chunk) {
+                console.log("Chunks")
+                chunks.push(chunk);
+            });
+            pdfDoc.on('end', async function () {
+                console.log("12")
+                result = Buffer.concat(chunks);
+                buffer = 'data:application/pdf;base64,' + result.toString('base64')
+                const data1 = {
+                    from: 'travo.socialmedia@gmail.com',
+                    personalizations: [
+                        {
+                            to: ['anandhu@rough-paper.com'],
+                            subject: 'Order Confirmation'
+                        },
+                    ],
+                    content: [{ type: "text/html", value: image + header1 + body1 + footer },],
+                    // content: [{"type": "text/html", "value": document.toString() }],
+                    attachments: [
+                        {
+                            content: result.toString('base64'),
+                            filename:`KUKU${String(7 + 1).padStart(7, '0')}.pdf`,
+                            type: 'application/pdf',
+                            disposition: 'attachment',
+                            content_id: 'mytext',
+                        },
+                    ],
+                }
+                try{
+                    const resp = await mail.send(data1)
+                    console.log(resp)
+                }catch (err){
+                return res.status(401).json({ status: 'Email sending failed' });
+                }           
+            });
+            pdfDoc.end();
+        } catch (err) {
+            console.log("Catch Error")
+            return res.json({status: 'Failed'})
+        }
+        
+        return res.status(200).json({ status: 'OK' });
 
     }
 }

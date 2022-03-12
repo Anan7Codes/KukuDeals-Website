@@ -12,11 +12,10 @@ export default function SignIn() {
   
   const SignInUser = async ({ email, password }) => {
     try {
-      const { user,error } = await supabase.auth.signIn({
+      const { user, error } = await supabase.auth.signIn({
         email,
         password,
       })
-      console.log(user)
       if (error) {
         toast.error(error.message, {
           position: "top-right",
@@ -67,7 +66,7 @@ export default function SignIn() {
                     password: yup
                         .string()
                         .min(6, 'Password should be atleast 6 chars.')
-                        .max(15, 'Password should not excced 15 chars.')
+                        .max(30, 'Password should not excced 30 chars.')
                         .required('Password is required'),
                 })}
             >

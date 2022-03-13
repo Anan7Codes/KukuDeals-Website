@@ -37,11 +37,7 @@ const Handler = async (req, res) => {
             .eq("status", true)
             .single()
         // console.log("initiated_orders", initiated_orders)
-        if (initiated_orders.data.promo_code_used === null) {
-            amount = initiated_orders.data.amount
-        } else {
-            amount = initiated_orders.data.final_amount
-        }
+        amount = initiated_orders.data.final_amount
         let coupons = [
             {
               product_id: 'ec3e130d-766e-4f3f-ace2-50ffee8ae458',

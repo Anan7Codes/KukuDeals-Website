@@ -33,11 +33,15 @@ const Handler = async (req, res) => {
             .from('initiated_orders')
             .select('*')
             // .eq("verification_secret", charge.payment_intent)
-            .eq("verification_secret", "pi_3Kb2vqLSsCUq84XE0feWSJ6l")
+            .eq("verification_secret", "pi_3KcUWVLSsCUq84XE13Qwhe5w")
             .eq("status", true)
             .single()
         // console.log("initiated_orders", initiated_orders)
-        amount = initiated_orders.data.final_amount
+        if (initiated_orders.data.promo_code_used === null) {
+            amount = initiated_orders.data.amount
+        } else {
+            amount = initiated_orders.data.final_amount
+        }
         let coupons = [
             {
               product_id: 'ec3e130d-766e-4f3f-ace2-50ffee8ae458',

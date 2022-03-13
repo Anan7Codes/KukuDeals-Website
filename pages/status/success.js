@@ -113,10 +113,9 @@ function Success() {
           <p className='text-[#fff] mt-4 text-md lg:text-lg'>{t('your-coupons-are')}:
           {latestOrder?.coupons.map(coupon => {
             return (
-              JSON.parse(coupon)?.product_coupons.map(ticket => {
-              console.log(ticket)
+              JSON.parse(coupon)?.product_coupons.map((ticket, i) => {
               return (
-                  <span className="font-bold px-1">{ticket}<br/></span>
+                  <span className="font-bold px-1" key={i}>{ticket}<br/></span>
                 )
               })
             )

@@ -59,8 +59,8 @@ function Navbar() {
               {userInfo ? userInfo.user_metadata.name : t('login-register')}
             </p>
           </div>
-          <div className="lg:hidden flex items-center pr-4">
-            <p className="pr-4 text-white font-medium cursor-pointer" onClick={() => { setIsOpen(true) }}>Download our App</p>
+          <div className={`lg:hidden flex items-center ${i18n.language === 'ar' ? 'pl-4' : 'pr-4'}`}>
+            <p className={`${i18n.language === 'ar' ? 'pl-4' : 'pr-4'} text-white font-medium cursor-pointer`} onClick={() => { setIsOpen(true) }}>{t('download-app')}</p>
             <svg
               onClick={() => setShowMenu(true)}
               xmlns="http://www.w3.org/2000/svg"
@@ -160,7 +160,7 @@ function Navbar() {
                 <Image
                   src="/icons/kukudeals-white.png"
                   layout="fill"
-                  alt="kuku logo"
+                  alt="Kuku logo"
                 />
               </div>
               {/* <p className="font-medium text-sm text-white mb-2 hover:cursor-pointer hover:text-yellow-500">
@@ -181,7 +181,7 @@ function Navbar() {
               <svg
                 onClick={() => setShowMenu(false)}
                 xmlns="http://www.w3.org/2000/svg"
-                className="absolute top-0 right-0 h-6 w-6 text-white hover:cursor-pointer hover:text-yellow-500"
+                className={`absolute top-0 ${i18n.language === 'ar' ? 'left-0' : 'right-0'} h-6 w-6 text-white hover:cursor-pointer hover:text-yellow-500`}
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >

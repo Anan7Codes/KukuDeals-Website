@@ -511,11 +511,11 @@ const Handler = async (req, res) => {
                         },
                     ],
                 }
-                try{
+                try {
                     const resp = await mail.send(data1)
                     console.log(resp)
-                }catch (err){
-                return res.status(401).json({ status: 'Email sending failed' });
+                } catch (err){
+                    return res.status(401).json({ status: 'Email sending failed' });
                 }           
             });
             pdfDoc.end();

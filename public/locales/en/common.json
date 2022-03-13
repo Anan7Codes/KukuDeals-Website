@@ -133,5 +133,10 @@
     "code": "Code",
     "get-code": "Get Code",
     "verify-phone": "Verify Phone",
-    "reset-password": "Reset Password"
+    "reset-password": "Reset Password",
+    "download-app": "Download our App",
+    "your-transaction-number": "Your transaction number is",
+    "total-amount-paid-is": "total amount paid is",
+    "your-coupons-are": "Your coupons are"
+
 }

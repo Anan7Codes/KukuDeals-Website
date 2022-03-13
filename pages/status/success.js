@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
 import SkeletonLayout from "@/components/SkeletonLayout";
 import { CartState } from "@/contexts/cart/CartContext";
+import { supabase } from '@/utils/supabaseClient';
 import { useUser } from '@/contexts/user/UserContext';
 import { useRouter } from 'next/router';
 import Confetti from 'react-confetti';
@@ -35,7 +36,6 @@ function useWindowSize() {
   }, []); 
   return windowSize;
 }
-
 function Success() {
   const { t, i18n } = useTranslation()
   const { locale } = useRouter()
@@ -52,6 +52,25 @@ function Success() {
     }
   }, [user])
 
+  const [ latestOrder, setLatestOrder] = useState()
+  useEffect(() => {
+    const GetLatestOrder = async () => {
+      try {
+        let { data: completed_orders, error } = await supabase
+          .from('completed_orders')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(1)
+          .single()
+        setLatestOrder(completed_orders)
+        console.log(completed_orders)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    GetLatestOrder() 
+  }, [])
+
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
     if (query.get('success')) {
@@ -65,7 +84,7 @@ function Success() {
     EmptyCart()
   }, []);
 
-  if(success) {
+  if(!success) {
     return (
     <div className={`bg-[#161616] overflow-x-hidden`} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <Head>
@@ -78,7 +97,7 @@ function Success() {
         recycle={false}
       />
       <Layout>
-        <div className='bg-[#2c2c2c] min-h-42 my-3 py-12 rounded-[15px] flex flex-col items-center justify-center'>
+        <div className='bg-[#2c2c2c] min-h-42 my-3 py-12 px-4 text-center rounded-[15px] flex flex-col items-center justify-center'>
           <Lottie
             animationData={SuccessAnimation}
             speed={1}
@@ -88,8 +107,22 @@ function Success() {
               width: 200
             }}
           />
-          <p className='font-title text-[#ffd601] text-5xl font-semibold'>{t('congratulations')}</p>
-          <p className='text-[#fff] text-2xl'>{t('order-success')}</p>
+          <p className='font-title text-[#ffd601] text-4xl lg:text-5xl font-semibold'>{t('congratulations')}</p>
+          <p className='text-[#fff] text-xl lg:text-2xl leading-tight'>{t('order-success')}</p>
+          <p className='text-[#fff] mt-4 text-md lg:text-lg'>{t('your-transaction-number')} <span className="font-bold">{`KUKU${String(latestOrder?.transaction_number).padStart(7, '0')}`}</span> &amp; {t('total-amount-paid-is')} <span className="font-bold">{t('aed')} {latestOrder?.final_amount}</span>.</p>
+          <p className='text-[#fff] mt-4 text-md lg:text-lg'>{t('your-coupons-are')}:
+          {latestOrder?.coupons.map(coupon => {
+            return (
+              JSON.parse(coupon)?.product_coupons.map(ticket => {
+              console.log(ticket)
+              return (
+                  <span className="font-bold px-1">{ticket}<br/></span>
+                )
+              })
+            )
+          })}
+          </p>
+          
         </div>
       </Layout>
     </div> 

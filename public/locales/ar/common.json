@@ -39,7 +39,7 @@
     "inclusive": "شامل ضريبة القيمة المضافة",
     "Home": "بيت",
     "Coupons": "كوبونات",
-    "Cart": "شنطة",
+    "cart": "شنطة",
     "purchased-on": "تم شراؤها على",
     "coupon-nos": "رقم القسيمة",
     "you-have-to-sign-in": "يجب عليك تسجيل الدخول",
@@ -133,5 +133,9 @@
     "code": "رمز",
     "get-code": "الحصول على رمز",
     "verify-phone": "تحقق من الهاتف",
-    "reset-password": "إعادة تعيين كلمة المرور"
+    "reset-password": "إعادة تعيين كلمة المرور",
+    "download-app": "قم بتنزيل تطبيقنا",
+    "your-transaction-number": "رقم معاملتك هو",
+    "total-amount-paid-is": "المبلغ الإجمالي المدفوع هو",
+    "your-coupons-are": "القسائم الخاصة بك"
 }

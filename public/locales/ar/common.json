@@ -120,5 +120,18 @@
     "email": "بريد الالكتروني",
     "gender": "جنس",
     "nationality": "جنسية",
-    "countryofresidence": "بلد الإقامة"
+    "countryofresidence": "بلد الإقامة",
+    "dont-have-an-account": "لا تملك حسابا حتى الآن؟ اضغط هنا للتسجيل",
+    "forgot-password-desc": "هل نسيت كلمة السر؟ انقر هنا لإعادة تعيين كلمة المرور",
+    "sign-up": "اشتراك",
+    "optional": "اختياري",
+    "existing-user": "مستخدم موجود؟ انقر هنا",
+    "forgot-password": "هل نسيت كلمة السر",
+    "send-email": "ارسل بريد الكتروني",
+    "verify-your-phone-number": "اكد على رقم هاتفك او جوالك",
+    "phone-number": "رقم التليفون",
+    "code": "رمز",
+    "get-code": "الحصول على رمز",
+    "verify-phone": "تحقق من الهاتف",
+    "reset-password": "إعادة تعيين كلمة المرور"
 }

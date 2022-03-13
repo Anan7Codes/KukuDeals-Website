@@ -120,5 +120,18 @@
     "email": "Email",
     "gender": "Gender",
     "nationality": "Nationality",
-    "countryofresidence": "Country of Residence"
+    "countryofresidence": "Country of Residence",
+    "dont-have-an-account": "Don't have an account yet?  Click here to Signup",
+    "forgot-password-desc": "Forgot Password? Click here to reset password",
+    "sign-up": "Sign Up",
+    "optional": "Optional",
+    "existing-user": "Existing User? Click here",
+    "forgot-password": "Forgot Password",
+    "send-email": "Send Email",
+    "verify-your-phone-number": "Verify Your Phone Number",
+    "phone-number": "Phone Number",
+    "code": "Code",
+    "get-code": "Get Code",
+    "verify-phone": "Verify Phone",
+    "reset-password": "Reset Password"
 }

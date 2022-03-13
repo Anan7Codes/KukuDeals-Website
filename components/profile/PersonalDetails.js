@@ -8,7 +8,6 @@ export default function PersonalDetails() {
   const { t, i18n } = useTranslation()
   const [email, setEmail] = useState()
   const [gender, setGender] = useState()
-  const [phoneNumber, setPhoneNumber] = useState()
   const [personalDetails, setPersonalDetails] = useState({})
   const [newPersonalDetails, setNewPersonalDetails] = useState({})
 
@@ -44,11 +43,7 @@ export default function PersonalDetails() {
     try{
       const { user, error } = await supabase.auth.update({ 
         data: { 
-          nationality: newPersonalDetails.nationality,
-          countryOfResidence: newPersonalDetails.countryOfResidence,
-          firstname: newPersonalDetails.firstname,
-          lastname: newPersonalDetails.lastname,
-          name: newPersonalDetails.firstname + " " +newPersonalDetails.lastname,           
+          countryOfResidence: newPersonalDetails.countryOfResidence,        
         } 
       })
 
@@ -77,90 +72,66 @@ export default function PersonalDetails() {
     }
   }
   return (
-    <div className="">
+    <div>
         <p className="text-3xl font-bold font-title text-[#ffd601]">
           {t('personal-details')}
         </p>
-        <form className="">
+        <div>
           <div className="lg:flex text-lg">
-            <input
-              placeholder="First Name"
-              className="text-white placeholder:text-xs placeholder:text-[#bebebe] bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none  rounded-[5px]  h-14  opacity-60 " disabled
-              value={newPersonalDetails.firstname} onChange={e => setNewPersonalDetails({ ...newPersonalDetails, firstname: e.target.value })}
-            />
-            <input
-              placeholder="Last Name"
-              className="text-white placeholder:text-xs placeholder:text-[#bebebe] bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none  rounded-[5px]  h-14  opacity-60 " disabled
-              value={newPersonalDetails.lastname} onChange={e => setNewPersonalDetails({ ...newPersonalDetails, lastname: e.target.value })}
-            />
+            <div className="flex flex-row items-center lg:w-[98%] w-full mt-4 bg-[#2c2c2c] rounded-[5px] h-14">
+              <p className={`text-[#bebebe] text-xs ${i18n.language === 'ar' ? 'mr-2' : 'ml-2'} font-semibold`}>{t('firstname')}:</p>
+              <div className="flex-1">
+                <input className="bg-[#2c2c2c] border-8 border-[#2c2c2c] text-[#bebebe] text-xs outline-none lg:w-[98%] w-full"
+                  value={newPersonalDetails.firstname} disabled/>
+              </div>
+            </div>
+            <div className="flex flex-row items-center lg:w-[98%] w-full mt-4 bg-[#2c2c2c] rounded-[5px] h-14 mx-2">
+              <p className={`text-[#bebebe] text-xs ${i18n.language === 'ar' ? 'mr-2' : 'ml-2'} font-semibold`}>{t('lastname')}:</p>
+              <div className="flex-1">
+                <input className="bg-[#2c2c2c] border-8 border-[#2c2c2c] text-[#bebebe] text-xs outline-none lg:w-[98%] w-full"
+                  value={newPersonalDetails.lastname} disabled/>
+              </div>
+            </div>
+          </div>
+          <div className="lg:flex text-lg">
+            <div className="flex flex-row items-center lg:w-[98%] w-full mt-4 bg-[#2c2c2c] rounded-[5px] h-14">
+              <p className={`text-[#bebebe] text-xs ${i18n.language === 'ar' ? 'mr-2' : 'ml-2'} font-semibold`}>{t('email')}:</p>
+              <div className="flex-1">
+                <input className="bg-[#2c2c2c] border-8 border-[#2c2c2c] text-[#bebebe] text-xs outline-none lg:w-[98%] w-full"
+                  value={email} disabled/>
+              </div>
+            </div>
+            <div className="flex flex-row items-center lg:w-[98%] w-full mt-4 bg-[#2c2c2c] rounded-[5px] h-14 mx-2">
+              <p className={`text-[#bebebe] text-xs ${i18n.language === 'ar' ? 'mr-2' : 'ml-2'} font-semibold`}>{t('gender')}:</p>
+              <div className="flex-1">
+                <input className="bg-[#2c2c2c] border-8 border-[#2c2c2c] text-[#bebebe] text-xs outline-none lg:w-[98%] w-full"
+                  value={gender ? 'Male' : 'Female'} disabled/>
+              </div>
+            </div>
           </div>
           <div className="flex flex-col">
-            <input
-              placeholder="Email"
-              className=" placeholder:text-xs placeholder:text-[#bebebe] bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-[96.5%] mt-4 outline-none  rounded-[5px] opacity-60 h-14 text-white "
-              value={email}
-              disabled
-            />
-          </div>
-          <div className="lg:flex ">
-            <CountryDropdown
-              defaultOptionLabel="Nationality"
-              className=" text-white bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none   rounded-[5px]  h-14 opacity-60 " disabled
-              value={newPersonalDetails.nationality} onChange={e => setNewPersonalDetails({ ...newPersonalDetails, nationality: e })}
-            />
-            <CountryDropdown
-              defaultOptionLabel="Country of Residence"
-              className=" text-white bg-[#2c2c2c] text-xs pl-3 mr-3 w-full lg:w-72 mt-4 outline-none   rounded-[5px]  h-14 "
-              value={newPersonalDetails.countryOfResidence} onChange={e => setNewPersonalDetails({ ...newPersonalDetails, countryOfResidence: e })}
-            />
-          </div>
-          <div className=" cursor-pointer pt-6 pb-4 opacity-60" disabled>
-            {gender ? (
-              <div className="flex justify-between items-center">
-                <div>
-                  <p
-                    className="text-black bg-[#ffd601] rounded-l-lg h-12 flex justify-center items-center w-[19rem] text-center drop-shadow-sm"
-                    value={true}
-                    onClick={(e) => setGender(true)}>
-                      Male
-                  </p>
-                </div>
-                <div className="mr-4">
-                  <p
-                    className="bg-black text-[#ffd601]  flex justify-center items-center rounded-r-lg h-12 w-[18rem] text-center drop-shadow-md"
-                    value={false}
-                    onClick={(e) => setGender(false)}>
-                    Female
-                  </p>
-                </div>
+            <div div className="flex flex-row items-center lg:w-[98%] w-full mt-4 bg-[#2c2c2c] rounded-[5px] h-14">
+              <p className={`text-[#bebebe] text-xs ${i18n.language === 'ar' ? 'mr-2' : 'ml-2'} font-semibold`}>{t('nationality')}:</p>
+              <div className="flex-1">
+                <input className="bg-[#2c2c2c] border-8 border-[#2c2c2c] text-[#bebebe] text-xs outline-none lg:w-[98%] w-full"
+                  value={newPersonalDetails.nationality} disabled/>
               </div>
-            ) : (
-              <div className="flex justify-between">
-                <div>
-                  <p
-                    className="bg-black text-[#ffd601] flex justify-center items-center rounded-l-lg h-12 w-[18rem] text-center drop-shadow-md"
-                    value={true}
-                    onClick={(e) => setGender(true)}
-                  >
-                    Male
-                  </p>
-                </div>
-                <div className="mr-4">
-                  <p
-                    className="text-black bg-[#ffd601] rounded-r-lg h-12 flex justify-center items-center w-[19rem] text-center drop-shadow-sm"
-                    value={false}
-                    onClick={(e) => setGender(false)}
-                  >
-                    Female
-                  </p>
-                </div>
+            </div>
+            <div className="flex flex-row items-center lg:w-[98%] w-full mt-4 bg-[#2c2c2c] rounded-[5px] h-14">
+              <p className={`text-[#bebebe] text-xs ${i18n.language === 'ar' ? 'mr-2' : 'ml-2'} font-semibold`}>{t('countryofresidence')}:</p>
+              <div className="flex-1">
+                <CountryDropdown
+                  defaultOptionLabel=""
+                  className="bg-[#2c2c2c] border-8 border-[#2c2c2c] text-white text-xs outline-none lg:w-[98%] w-full"
+                  value={newPersonalDetails.countryOfResidence} onChange={e => setNewPersonalDetails({ ...newPersonalDetails, countryOfResidence: e })}
+                /> 
               </div>
-            )}
+            </div>
           </div>
           <button onClick={InsertPersonalDetails} className="bg-[#ffd601] lg:justify-start w-full lg:w-40 h-12 mt-3 text-black hover:bg-[#dabd2c] font-semibold rounded-[15px]">
             {t('update')}
           </button>
-        </form>
+        </div>
     </div>
   );
 }

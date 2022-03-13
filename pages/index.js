@@ -106,62 +106,58 @@ export default function Home() {
             })
           }
         </div>
-        <div>
-          <div className="py-3">
-            <div className="bg-[#ffd601] rounded-[15px] px-6 py-8 text-black">
-              <div className="relative">
-                <div className={`flex justify-between`}>
-                  <p className="font-title font-bold text-3xl">{t('common:soldout')}</p>
-                </div>
-                <div className={`flex justify-between`}>
-                  <p className={`text-normal pt-4 lg:pt-0 font-medium lg:w-[450px]`}>{t('common:soldoutdesc')}</p>
-                </div>
-                <div className="mt-6 relative">
-                  <AliceCarousel
-                    mouseTracking
-                    responsive={responsive}
-                    onSlideChanged={(e) => {
-                      setIsSoldOutNextDisabled(e.isNextSlideDisabled)
-                      setIsSoldOutPrevDisabled(e.isPrevSlideDisabled)                      
-                    }}
-                    renderPrevButton={() => {                      
-                      return (
-                        <div className={`absolute flex ${i18n.language === 'ar' ? 'left-16' : 'right-20'} -top-32 lg:-top-28 ${isSoldOutPrevDisabled ? 'opacity-50' : null}`}>
-                          <ArrowL />
-                        </div>
+        <div className="py-3">
+          <div className="bg-[#ffd601] rounded-[15px] px-6 py-8 text-black">
+            <div className="relative">
+              <div className={`flex justify-between`}>
+                <p className="font-title font-bold text-3xl">{t('common:soldout')}</p>
+              </div>
+              <div className={`flex justify-between`}>
+                <p className={`text-normal pt-4 lg:pt-0 font-medium lg:w-[450px]`}>{t('common:soldoutdesc')}</p>
+              </div>
+              <div className="mt-6 relative">
+                <AliceCarousel
+                  mouseTracking
+                  responsive={responsive}
+                  onSlideChanged={(e) => {
+                    setIsSoldOutNextDisabled(e.isNextSlideDisabled)
+                    setIsSoldOutPrevDisabled(e.isPrevSlideDisabled)                      
+                  }}
+                  renderPrevButton={() => {                      
+                    return (
+                      <div className={`absolute flex ${i18n.language === 'ar' ? 'left-16 -top-32 lg:-top-24' : 'right-20 -top-40 lg:-top-28'}  ${isSoldOutPrevDisabled ? 'opacity-50' : null}`}>
+                        <ArrowL />
+                      </div>
+                  )}}
+                  renderNextButton={() => {
+                    return (
+                      <div className={`absolute flex ${i18n.language === 'ar' ? 'left-20 -top-32 lg:-top-24' : 'right-16 -top-40 lg:-top-28'} ${isSoldOutNextDisabled ? 'opacity-50' : null}`}>
+                        <ArrowR />
+                      </div>
                     )}}
-                    renderNextButton={() => {
-                      return (
-                        <div className={`absolute flex ${i18n.language === 'ar' ? 'left-20' : 'right-16'} -top-32 lg:-top-28 ${isSoldOutNextDisabled ? 'opacity-50' : null}`}>
-                          <ArrowR />
-                        </div>
-                      )}}
-                    disableDotsControls="true"
-                    controlsStrategy="alternate"
-                  >
-                    {campaigns?.filter((campaign) => campaign.SoldOut === true).map((campaign, i) => {
-                      return (
-                        <Soldout campaign={campaign} key={campaign.id} data-value={i}/>
-                      )
-                    })}
-                  </AliceCarousel>
-                </div>
+                  disableDotsControls="true"
+                  controlsStrategy="alternate"
+                >
+                  {campaigns?.filter((campaign) => campaign.SoldOut === true).map((campaign, i) => {
+                    return (
+                      <Soldout campaign={campaign} key={campaign.id} data-value={i}/>
+                    )
+                  })}
+                </AliceCarousel>
               </div>
             </div>
           </div>
         </div>
-        <div>
-          <div className="py-3">
-            <div className="bg-[#000000] rounded-[15px] px-6 py-5">
-              <div className="p-2 text-[#ffd601]">
-                <div className={`flex justify-between`}>
-                  <p className="font-title font-bold text-3xl">{t('common:winners')}</p>
-                </div>
-                <div className={`flex justify-between`}>
-                  <p className={`text-normal pt-4 lg:pt-0 font-medium lg:w-[450px]`}>{t('common:winners-desc')}</p>
-                </div>
+        <div className="py-3">
+          <div className="bg-black rounded-[15px] px-6 py-8 text-[#ffd601]">
+            <div className="relative">
+              <div className={`flex justify-between`}>
+                <p className="font-title font-bold text-3xl">{t('winners')}</p>
               </div>
-              <div className="mt-6 flex">
+              <div className={`flex justify-between`}>
+                <p className={`text-normal pt-4 lg:pt-0 font-medium lg:w-[450px]`}>{t('winners-desc')}</p>
+              </div>
+              <div className="mt-6 relative">
                 <AliceCarousel
                   mouseTracking
                   responsive={responsive}
@@ -171,13 +167,13 @@ export default function Home() {
                   }}
                   renderPrevButton={() => {
                     return (
-                      <div className={`absolute flex ${i18n.language === 'ar' ? 'left-16' : 'right-20'} -top-32 lg:-top-24`}>
+                      <div className={`absolute flex ${i18n.language === 'ar' ? 'left-16 -top-28 lg:-top-24' : 'right-20 -top-32 lg:-top-24'}`}>
                         <ArrowL item={true} isWinnerPrevDisabled={isWinnerPrevDisabled}/>
                       </div>
                   )}}
                   renderNextButton={() => {
                     return (
-                      <div className={`absolute flex ${i18n.language === 'ar' ? 'left-20' : 'right-16'} -top-32 lg:-top-24`}>
+                      <div className={`absolute flex ${i18n.language === 'ar' ? 'left-20 -top-28 lg:-top-24' : 'right-16 -top-32 lg:-top-24'}`}>
                         <ArrowR item={true} isWinnerNextDisabled={isWinnerNextDisabled}/>
                       </div>
                   )}}

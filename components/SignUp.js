@@ -234,8 +234,6 @@ function SignUp() {
                     <CountryDropdown
                       defaultOptionLabel=""
                       className="bg-[#2c2c2c] border-8 border-[#2c2c2c] text-white text-xs outline-none lg:w-[98%] w-full"
-                      // value={countryOfResidence}
-                      // onChange={(val) => setCountryOfResidence(val)}
                       value={values.countryOfResidence}
                       onChange={handleChange('countryOfResidence')}
                       onBlur={() => setFieldTouched('countryOfResidence')}

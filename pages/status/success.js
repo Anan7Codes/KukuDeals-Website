@@ -84,7 +84,7 @@ function Success() {
     EmptyCart()
   }, []);
 
-  if(!success) {
+  if(success) {
     return (
     <div className={`bg-[#161616] overflow-x-hidden`} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <Head>

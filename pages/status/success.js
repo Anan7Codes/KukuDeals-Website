@@ -63,7 +63,6 @@ function Success() {
           .limit(1)
           .single()
         setLatestOrder(completed_orders)
-        console.log(completed_orders)
       } catch (e) {
         console.log(e)
       }

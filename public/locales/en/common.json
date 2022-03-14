@@ -137,6 +137,8 @@
     "download-app": "Download our App",
     "your-transaction-number": "Your transaction number is",
     "total-amount-paid-is": "total amount paid is",
-    "your-coupons-are": "Your coupons are"
+    "your-coupons-are": "Your coupons are",
+    "verify": "verified",
+    "not-verified": "not verified"
 
 }

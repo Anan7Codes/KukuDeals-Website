@@ -105,7 +105,7 @@ export default function Sidebar({ children }) {
               <BsFillPhoneFill className="h-6 w-6" />
               <p className={`${i18n.language === 'ar' ? 'px-3' : 'pl-3'}`}>{t('phone-number')}</p>
             </div>
-            { phoneNumber ? <p className='bg-green-600 rounded-full px-3'>verified</p> : <p className='bg-yellow-500 rounded-full px-3'>not verified</p> }                      
+            { !phoneNumber ? <p className='bg-green-600 rounded-full px-3'>{t('verify')}</p> : <p className='bg-yellow-500 rounded-full px-3'>{t('not-verified')}</p> }                      
           </div>
           <div className="hidden lg:flex p-4" onClick={() => router.push('/profile/change-password')}>
             <svg

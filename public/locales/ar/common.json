@@ -137,5 +137,7 @@
     "download-app": "قم بتنزيل تطبيقنا",
     "your-transaction-number": "رقم معاملتك هو",
     "total-amount-paid-is": "المبلغ الإجمالي المدفوع هو",
-    "your-coupons-are": "القسائم الخاصة بك"
+    "your-coupons-are": "القسائم الخاصة بك",
+    "verify": "تحقق",
+    "not-verified": "لم يتم التحقق منها"
 }

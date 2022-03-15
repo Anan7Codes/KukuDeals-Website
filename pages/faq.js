@@ -95,7 +95,7 @@ export default function Faq() {
             <p className ="text-xl font-bold pb-2 text-[#ffd601]">Where can I collect my Kuku Deals prize?</p>
             <p className="leading-loose text-justify">
               Details on where to collect your prize will be sent to you (aka
-              the 'winner') via email.{" "}
+              the &aposwinner&apos) via email
             </p>
           </div>
 

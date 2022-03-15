@@ -48,6 +48,7 @@ export default function ForgotPassword() {
         <div className="bg-[#161616]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>    
             <Head>
                 <title>Forgot Password | Kuku Deals</title>
+                <link rel="icon" href={locale === 'ar' ? "../../icons/icon.png" : "../icons/icon.png"}/>
             </Head>    
             <Layout>
                 <div className="bg-[#2c2c2c] my-3 flex justify-center items-center rounded-[10px] w-full">

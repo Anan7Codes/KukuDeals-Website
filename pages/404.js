@@ -13,7 +13,7 @@ function Success() {
         <div className={`bg-[#161616] overflow-x-hidden`} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
           <Head>
               <title>404 | Kuku Deals</title>
-              <link rel="icon" href="./icons/icon.png" />
+              <link rel="icon" href={locale === 'ar' ? "../../icons/icon.png" : "../icons/icon.png"}/>
           </Head>
           <Layout>
             <div className='bg-[#2c2c2c] min-h-42 my-3 py-12 rounded-[15px] flex flex-col items-center justify-center'>

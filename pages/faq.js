@@ -14,7 +14,7 @@ export default function Faq() {
     <div className="bg-[#161616]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <Head>
         <title>FAQs | Kuku Deals</title>
-        <link rel="icon" href="./icons/icon.png"/>
+        <link rel="icon" href={locale === 'ar' ? "../../icons/icon.png" : "../icons/icon.png"}/>
       </Head>
       <Layout>
         <p className="text-[2.5rem] text-[#ffd601] pt-3 pb-5 font-bold font-title">{t('frequently-asked-questions')}</p>
@@ -28,7 +28,7 @@ export default function Faq() {
             </p>
           </div>
           <div>
-            <p className ="text-xl font-bold pb-2 text-[#ffd601]">I'm new to Kuku Deals, how does it work?</p>
+            <p className ="text-xl font-bold pb-2 text-[#ffd601]">I&apos;m new to Kuku Deals, how does it work?</p>
             <p className="leading-loose text-justify">
               All Kuku Deals products listed on the platform for sale are
               associated with a unique prize draw. When you purchase a product,
@@ -49,7 +49,7 @@ export default function Faq() {
           <div>
             <p className ="text-xl font-bold pb-2 text-[#ffd601]">How do I set up my Kuku Deals account?</p>
             <p className="leading-loose text-justify">
-              To create an account simply click 'Login/Register' in the top
+              To create an account simply click &apos;Login/Register&apos; in the top
               right hand corner of your screen and enter your details in the
               fields highlighted.
             </p>
@@ -110,8 +110,8 @@ export default function Faq() {
           <div>
             <p className ="text-xl font-bold pb-2 text-[#ffd601]">Can I send someone else to collect my Prize?</p>
             <p className="leading-loose text-justify">
-              Only the registered account holder, or any individual with 'Power
-              of Attorney' (POA) can collect the registered account holders'
+              Only the registered account holder, or any individual with &apos;Power
+              of Attorney&apos; (POA) can collect the registered account holders&apos;
               Kuku Deals Prize. Emirates ID or passport are the only acceptable
               forms of identification (please ensure your identification is up
               to date).
@@ -121,7 +121,7 @@ export default function Faq() {
           <div>
             <p className ="text-xl font-bold pb-2 text-[#ffd601]">How will I be notified about the status of the campaign?</p>
             <p className="leading-loose text-justify">
-              Kuku Deals will send 'Push Notifications'/emails to notify all
+              Kuku Deals will send &apos;Push Notifications&apos;/emails to notify all
               ticket holders as to the status of each campaign.
             </p>
           </div>
@@ -131,7 +131,7 @@ export default function Faq() {
             <p className="leading-loose text-justify">
               Kuku Deals does not store or save any sensitive Credit Card
               information on its servers. Credit Card details that are
-              registered with us are stored securely through the 'Stripe' secure
+              registered with us are stored securely through the &apos;Stripe&apos; secure
               online payment gateway.
             </p>
           </div>

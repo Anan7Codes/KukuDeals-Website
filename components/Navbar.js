@@ -20,6 +20,7 @@ function Navbar() {
             <div className="flex text-center p-2">
               <div className="flex items-center w-28 h-10 relative cursor-pointer" onClick={() => router.push('/')}>
                 <Image
+                  priority={true}
                   src="/icons/kukudeals-white.png"
                   layout="fill"
                   alt="kuku logo"

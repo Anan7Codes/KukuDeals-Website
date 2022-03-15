@@ -17,122 +17,89 @@ export default function Faq() {
         <link rel="icon" href={locale === 'ar' ? "../../icons/icon.png" : "../icons/icon.png"}/>
       </Head>
       <Layout>
-        <p className="text-[2.5rem] text-[#ffd601] pt-3 pb-5 font-bold font-title">{t('frequently-asked-questions')}</p>
-        <div className="grid grid-cols-1 lg:gap-8 lg:grid-cols-3 text-white">
+        <p className="text-[2.5rem] text-[#ffd601] my-3 font-bold font-title">{t('frequently-asked-questions')}</p>
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 text-white">
           <div>
-            <p className ="text-xl font-bold pb-2 text-[#ffd601]">What is Kuku Deals?</p>
+            <p className ="text-xl font-bold pb-2 text-[#ffd601]">{t('what-is-kuku-deals')}</p>
             <p className="leading-loose text-justify">
-              Kuku Deals is an online store that gives you a chance to win
-              amazing prizes. Our platform is aimed at rewarding you when you
-              buy one or more of our products.
+              {t('what-is-kuku-deals-ans')}
             </p>
           </div>
           <div>
-            <p className ="text-xl font-bold pb-2 text-[#ffd601]">I&apos;m new to Kuku Deals, how does it work?</p>
+            <p className ="text-xl font-bold pb-2 text-[#ffd601]">{t('how-does-kuku-work')}</p>
             <p className="leading-loose text-justify">
-              All Kuku Deals products listed on the platform for sale are
-              associated with a unique prize draw. When you purchase a product,
-              you will receive a ticket associated with a prize, whose winner
-              will be selected on the basis of a DED licensed draw.
+              {t('how-does-kuku-work-ans')}
             </p>
-            <p className="leading-loose text-justify">Kuku Deals is accessible globally. </p>
+            <p className="leading-loose text-justify">{t('kuku-access-global')}</p>
           </div>
 
           <div>
-            <p className ="text-xl font-bold pb-2 text-[#ffd601]">Why should I register an account with Kuku Deals?</p>
+            <p className ="text-xl font-bold pb-2 text-[#ffd601]">{t('why-register-an-account')}</p>
             <p className="leading-loose text-justify">
-              To complete a purchase with Kuku Deals you must have a registered
-              account. This is for your security and protection.
+              {t('why-register-an-account-ans')}
             </p>
           </div>
 
           <div>
-            <p className ="text-xl font-bold pb-2 text-[#ffd601]">How do I set up my Kuku Deals account?</p>
+            <p className ="text-xl font-bold pb-2 text-[#ffd601]">{t('how-do-I-set-up')}</p>
             <p className="leading-loose text-justify">
-              To create an account simply click &apos;Login/Register&apos; in the top
-              right hand corner of your screen and enter your details in the
-              fields highlighted.
+              {t('how-do-I-set-up-ans')}
             </p>
           </div>
 
           <div>
-            <p className ="text-xl font-bold pb-2 text-[#ffd601]">What Credit Cards does Kuku Deals accept?</p>
+            <p className ="text-xl font-bold pb-2 text-[#ffd601]">{t('what-credit-cards')}</p>
             <p className="leading-loose text-justify">
-              We accept all major credit/debits cards including (but not limited
-              to): Visa,MasterCard and Amex.
+              {t('what-credit-cards-ans')}
             </p>
           </div>
 
           <div>
-            <p className ="text-xl font-bold pb-2 text-[#ffd601]">What Credit Cards does Kuku Deals accept?</p>
+            <p className ="text-xl font-bold pb-2 text-[#ffd601]">{t('are-there-any-hidden-charges')}</p>
             <p className="leading-loose text-justify">
-              We accept all major credit/debits cards including (but not limited
-              to): Visa,MasterCard and Amex.
+              {t('are-there-any-hidden-charges-ans')}
             </p>
           </div>
 
           <div>
-            <p className ="text-xl font-bold pb-2 text-[#ffd601]">Are there any hidden charges I should be aware of?</p>
+            <p className ="text-xl font-bold pb-2 text-[#ffd601]">{t('what-currencies')}</p>
             <p className="leading-loose text-justify">
-              There are no hidden charges on any Idealz purchase. You should
-              however CHECK with your bank to see if they apply any
-              transaction/processing fees.
+              {t('what-currencies-ans')}
             </p>
           </div>
 
           <div>
-            <p className ="text-xl font-bold pb-2 text-[#ffd601]">What currencies can I use to purchase a Kuku Deals product?</p>
+            <p className ="text-xl font-bold pb-2 text-[#ffd601]">{t('can-I-cancel')}</p>
             <p className="leading-loose text-justify">
-              We currently only accept AED. You can make a purchase from Kuku
-              Deals via any bank account with any currency - however, we will
-              not accept responsibility for final billings which have been
-              affected by exchange rates or fees (hidden or otherwise) as
-              imposed by your banking partner.
+              {t('can-I-cancel-ans')}
             </p>
           </div>
 
           <div>
-            <p className ="text-xl font-bold pb-2 text-[#ffd601]">Can I cancel/refund a Kuku Deals purchase order?</p>
+            <p className ="text-xl font-bold pb-2 text-[#ffd601]">{t('where-can-I-collect')}</p>
             <p className="leading-loose text-justify">
-              All sales/purchases are final and no refunds are given under any
-              circumstances.
+              {t('where-can-I-collect-ans')}
             </p>
           </div>
 
           <div>
-            <p className ="text-xl font-bold pb-2 text-[#ffd601]">Where can I collect my Kuku Deals prize?</p>
+            <p className ="text-xl font-bold pb-2 text-[#ffd601]">{t('can-I-send-someone')}</p>
             <p className="leading-loose text-justify">
-              Details on where to collect your prize will be sent to you (aka
-              the &aposwinner&apos) via email
+              {t('can-I-send-someone-ans')}
             </p>
           </div>
 
           <div>
-            <p className ="text-xl font-bold pb-2 text-[#ffd601]">Can I send someone else to collect my Prize?</p>
+            <p className ="text-xl font-bold pb-2 text-[#ffd601]">{t('how-notify')}</p>
             <p className="leading-loose text-justify">
-              Only the registered account holder, or any individual with &apos;Power
-              of Attorney&apos; (POA) can collect the registered account holders&apos;
-              Kuku Deals Prize. Emirates ID or passport are the only acceptable
-              forms of identification (please ensure your identification is up
-              to date).
+              {t('how-notify-ans')}
             </p>
           </div>
 
           <div>
-            <p className ="text-xl font-bold pb-2 text-[#ffd601]">How will I be notified about the status of the campaign?</p>
+            <p className ="text-xl font-bold pb-2 text-[#ffd601]">{t('my-personal-details')}</p>
             <p className="leading-loose text-justify">
-              Kuku Deals will send &apos;Push Notifications&apos;/emails to notify all
-              ticket holders as to the status of each campaign.
-            </p>
-          </div>
-
-          <div>
-            <p className ="text-xl font-bold pb-2 text-[#ffd601]">Are my personal details secure with Kuku Deals?</p>
-            <p className="leading-loose text-justify">
-              Kuku Deals does not store or save any sensitive Credit Card
-              information on its servers. Credit Card details that are
-              registered with us are stored securely through the &apos;Stripe&apos; secure
-              online payment gateway.
+              {t('my-personal-details-ans')}
             </p>
           </div>
         </div>

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useTranslation } from "next-i18next";
 
 export default function Footer() {
-  const  { t, i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   return (
     <>

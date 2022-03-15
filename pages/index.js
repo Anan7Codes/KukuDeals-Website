@@ -79,10 +79,6 @@ export default function Home() {
     }
     FetchWinners()
   }, [])
-
-  const { data, error } = supabase
-  .rpc('total_amount_completed_orders')
-  console.log("checking",data, error)
  
   if(campaigns.length === 0 ) return (
     <SkeletonLayout>

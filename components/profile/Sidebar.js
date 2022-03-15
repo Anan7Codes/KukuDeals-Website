@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { FaAddressCard } from "react-icons/fa";
 import { RiCoupon2Fill, RiLogoutBoxRLine } from "react-icons/ri";
+import { BsFillPhoneFill } from 'react-icons/bs';
 import User from "./User";
 import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
@@ -12,11 +13,21 @@ export default function Sidebar({ children }) {
   const { t, i18n } = useTranslation()
   const router = useRouter();
   const { user, setUser } = useUser();
+  const [phoneNumber, setPhoneNumber] = useState(null)
 
   useEffect(() => {
     if(!user) {
       router.push('/signin')
     }
+    const FetchVerifyStatus = async () => {
+      let { data: phone_numbers, error } = await supabase
+        .from('phone_numbers')
+        .select('number')
+        .single()
+      console.log("phone", phone_numbers)
+      setPhoneNumber(phone_numbers.number)
+    }
+    FetchVerifyStatus()
   }, [user])
 
   const SignOutUser = async () => {
@@ -49,7 +60,7 @@ export default function Sidebar({ children }) {
   return (
     <div className="lg:grid grid-rows-2 grid-flow-col justify-start">
         <User />
-        <div className="row-span-2 col-span-2 bg-[#2c2c2c] text-white lg:w-[21rem] divide-y divide-[#161616] mb-3 h-72 rounded-[10px] text-sm cursor-pointer">
+        <div className="row-span-2 col-span-2 bg-[#2c2c2c] text-white lg:w-[21rem] divide-y divide-[#161616] mb-3 h-92 rounded-[10px] text-sm cursor-pointer">
           <div className="hidden lg:flex p-4" onClick={() => router.push('/profile/personal-details')}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -85,13 +96,16 @@ export default function Sidebar({ children }) {
             <p className={`${i18n.language === 'ar' ? 'px-3' : 'pl-3'}`}>{t('personal-details')}</p>
           </div>
 
-          <div className="hidden lg:flex p-4" onClick={() => router.push('/profile/active-coupons')}>
+          <div className="flex p-4" onClick={() => router.push('/profile/active-coupons')}>
             <RiCoupon2Fill className="h-6 w-6" />
             <p className={`${i18n.language === 'ar' ? 'px-3' : 'pl-3'}`}>{t('active-coupons')}</p>
           </div>
-          <div className="lg:hidden flex p-4" onClick={() => router.push('/profile/active-coupons')}>
-            <RiCoupon2Fill className="h-6 w-6" />
-            <p className={`${i18n.language === 'ar' ? 'px-3' : 'pl-3'}`}>{t('active-coupons')}</p>
+          <div className={`flex justify-between items-center p-4 ${phoneNumber ? 'hover:cursor-auto' : null}`} onClick={phoneNumber ? null : () => router.push('/profile/phone-verification')}>
+            <div className='flex items-center'>
+              <BsFillPhoneFill className="h-6 w-6" />
+              <p className={`${i18n.language === 'ar' ? 'px-3' : 'pl-3'}`}>{t('phone-number')}</p>
+            </div>
+            { phoneNumber ? <p className='bg-green-600 rounded-full px-3'>{t('verify')}</p> : <p className='bg-yellow-500 rounded-full px-3'>{t('not-verified')}</p> }                      
           </div>
           <div className="hidden lg:flex p-4" onClick={() => router.push('/profile/change-password')}>
             <svg

@@ -33,7 +33,7 @@ const Handler = async (req, res) => {
             .from('initiated_orders')
             .select('*')
             // .eq("verification_secret", charge.payment_intent)
-            .eq("verification_secret", "pi_3Kb2vqLSsCUq84XE0feWSJ6l")
+            .eq("verification_secret", "pi_3KcUWVLSsCUq84XE13Qwhe5w")
             .eq("status", true)
             .single()
         // console.log("initiated_orders", initiated_orders)
@@ -511,11 +511,11 @@ const Handler = async (req, res) => {
                         },
                     ],
                 }
-                try{
+                try {
                     const resp = await mail.send(data1)
                     console.log(resp)
-                }catch (err){
-                return res.status(401).json({ status: 'Email sending failed' });
+                } catch (err){
+                    return res.status(401).json({ status: 'Email sending failed' });
                 }           
             });
             pdfDoc.end();

@@ -53,7 +53,7 @@ export default function ForgotPassword() {
                 <div className="bg-[#2c2c2c] my-3 flex justify-center items-center rounded-[10px] w-full">
                     <div className="h-full w-full mt-20 lg:mt-16">
                         <div className="pt-4 text-center">
-                            <p className="text-3xl text-[#ffd601] font-bold font-title">Forgot Password</p>
+                            <p className="text-3xl text-[#ffd601] font-bold font-title">{t('forgot-password')}</p>
                         </div>
                         <div
                             className="flex justify-center pb-6 pt-2"
@@ -85,7 +85,7 @@ export default function ForgotPassword() {
                                 }
                                 <div className="pb-6 flex justify-between">
                                     <button onClick={isValid ? handleSubmit : null} type="submit" className="bg-[#ffd601] hover:bg-[#d1b736] mt-4 w-full lg:w-96 outline-none rounded-[5px] h-14 text-black font-semibold text-base">
-                                        Send Email
+                                        {t('send-email')}
                                     </button>
                                 </div>
                             </div>

@@ -69,10 +69,10 @@ export default function Campaign({ campaign }) {
           </div>
           <div className={`flex flex-col justify-center w-full mt-6 lg:mt-10 pb-2 lg:ml-12 lg:pb-0`}>
             <div className="text-center sm:pl-4 sm:pt-2 lg:text-justify	lg:text-3xl">
-              <p className={`text-md lg:text-2xl text-white ${i18n.language === 'ar' ? 'text-right' : null}`}>
+              <p className={`text-md lg:text-2xl text-white ${i18n.language === 'ar' ? 'text-center' : null}`}>
               {t('buy-a')} {i18n.language === 'ar' ? campaign?.ProductName.ar :  campaign?.ProductName.en} {t('for')}: <span className='font-bold'>{t('aed')} {campaign?.Price}</span>
               </p>                
-              <p className={`text-white lg:text-3xl font-bold ${i18n.language === 'ar' ? 'text-right' : null}`}>
+              <p className={`text-white lg:text-3xl font-bold ${i18n.language === 'ar' ? 'text-center' : null}`}>
                 <span className="lg:text-3xl font-title lg:pt-6 text-[#ffd601]">{t('win')} </span> 
                 {i18n.language === 'ar' ? campaign?.GiftName.ar : campaign?.GiftName.en}
               </p>

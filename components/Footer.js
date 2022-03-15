@@ -17,9 +17,11 @@ export default function Footer() {
                 </div>
                 <ul className="text-xs lg:text-base pt-3">
                   <li>
-                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
+                  <Link href="/faq">
+                    <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]" >
                       {t('faq')}
                     </a>
+                    </Link>
                   </li>
                   <li>
                     <Link href="/how-it-works">
@@ -29,9 +31,11 @@ export default function Footer() {
                     </Link>
                   </li>
                   <li>
+                  <Link href="/privacy-policy">
                     <a className="text-white text-xs cursor-pointer hover:text-[#ffd601]">
                       {t('privacy-policy')}
                     </a>
+                    </Link>
                   </li>
                 </ul>
               </div>

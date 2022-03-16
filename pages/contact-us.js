@@ -29,7 +29,7 @@ function ContactUs() {
               </div>
               <div className={`${i18n.language === "ar" ? 'flex-1' : null} flex flex-col py-12`}>
                   <p className="text-[#ffd601] font-title font-semibold text-4xl">{t('contact-us')}</p>
-                  <p className="text-white font-semibold text-lg">{t('contact-desc')}</p>
+                  <p className="text-white font-semibold text-lg lg:w-[50%]">{t('contact-desc')}</p>
                   <input
                     type="text"
                     className={`border placeholder:text-xs text-white placeholder:text-[#d3d3d3] text-xs font-semibold ${i18n.language === 'ar' ? 'pr-3 ml-3' : 'pl-3 mr-3'} w-full lg:w-96 mt-12 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c]`}

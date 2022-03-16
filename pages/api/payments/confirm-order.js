@@ -204,8 +204,8 @@ const webhookHandler = async (req, res) => {
 
             const document = {
                 pageMargins: [40, 155, 40, 55],
-                pageOrientation: 'landscape',
-
+                pageOrientation: 'portrait',
+                format: 'A4',
                 footer: function (currentPage, pageCount) {
                     return {
                         text: "support@kukudeals.com | 08909090 | www.kukudeals.com",

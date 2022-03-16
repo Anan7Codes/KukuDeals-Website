@@ -19,7 +19,7 @@ export default function SignIn() {
         password,
       })
       if (error) {
-        toast.error(error.message, {
+        toast.error(error.message === 'Email not confirmed' ? 'Check email to verify account' : error.message, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -75,7 +75,7 @@ export default function SignIn() {
                 })}
             >
             {({ values, handleChange, errors, touched, isValid, setFieldTouched, handleSubmit }) => (
-              <div className="flex flex-col text-[#ffff] ">
+              <div className="flex flex-col text-[#ffff]">
                 <input
                   type="text"
                   className={`border placeholder:text-xs placeholder:text-[#bebebe] text-xs font-semibold ${i18n.language === 'ar' ? 'pr-3 ml-3' : 'pl-3 mr-3'} w-full lg:w-96 mt-4 outline-none rounded-[5px] h-14 border-[#d3d3d3] bg-[#2c2c2c]`}

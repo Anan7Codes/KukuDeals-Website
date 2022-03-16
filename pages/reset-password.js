@@ -78,13 +78,13 @@ export default function ResetPassword() {
             <link rel="icon" href={locale === 'ar' ? "../../icons/icon.png" : "../icons/icon.png"}/>
         </Head>
         <Layout>
-            <div className="flex justify-center py-3 bg-[#161616]">
-                <div className="rounded-[25px] bg-[#2c2c2c] mb-6 px-16 py-12">
+            <div className="flex items-center justify-center py-3 bg-[#161616]">
+                <div className="rounded-[15px] bg-[#2c2c2c] w-[100%] px-16 py-12">
                     <div className="pt-4">
-                        <p className="text-3xl text-[#ffd601] font-bold">{t('reset-password')}</p>
+                        <p className="text-3xl text-[#ffd601] text-center font-bold">{t('reset-password')}</p>
                     </div>
                     <div
-                        className="flex justify-center pb-6 pt-2"
+                        className="flex justify-center py-2"
                     >
                         <div className="flex flex-col">
                             <input

@@ -25,7 +25,7 @@ export default function Sidebar({ children }) {
         .select('number')
         .single()
       console.log("phone", phone_numbers)
-      setPhoneNumber(phone_numbers.number)
+      setPhoneNumber(phone_numbers?.number)
     }
     FetchVerifyStatus()
   }, [user])

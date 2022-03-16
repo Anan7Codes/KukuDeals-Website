@@ -102,9 +102,7 @@ const Handler = async (req, res) => {
         }
         for (var i = 0; i < rows.length; i++) {
             var row = new Array();
-            console.log(i)
             row.push(i + 1)
-            console.log("check", rows[i].product_price.toString())
 
             row.push({ text: rows[i].name.toString(), style: 'tableValue' });
             row.push({ text: rows[i].product_qty.toString(), style: 'tableValue' });
@@ -361,7 +359,6 @@ const Handler = async (req, res) => {
                 columnGap: 20,
             }
         }
-        console.log("doc", document)
         console.log('start pdf')
         try {
             let pdfDoc = await pdfmake.createPdfKitDocument(document);

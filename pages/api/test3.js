@@ -368,7 +368,6 @@ const Handler = async (req, res) => {
             var chunks = [];
             var result, buffer;
             pdfDoc.on('data', function (chunk) {
-                console.log("Chunks")
                 chunks.push(chunk);
             });
             pdfDoc.on('end', async function () {

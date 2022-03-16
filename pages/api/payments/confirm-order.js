@@ -252,7 +252,7 @@ const webhookHandler = async (req, res) => {
                                 margin: [0, -120, -60, 0]
                             },
                             {
-                                text: String(completed_orders.count + 1).padStart(10, '0'),
+                                text: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}`,
                                 style: 'invoiceSubValue',
                                 alignment: 'right',
                                 margin: [0, -120, 80, 0]

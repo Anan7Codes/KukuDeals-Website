@@ -152,7 +152,7 @@ const webhookHandler = async (req, res) => {
             today = dd + '/' + mm + '/' + yyyy;
             var headers = {
                 fila_0: {
-                    col_1: { text: 'SL', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
+                    col_1: { text: 'SL', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [0, 10, 0, 0] },
                     col_2: { text: 'Product(s)', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
                     col_3: { text: 'Quantity', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
                     col_4: { text: 'UnitPrice', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
@@ -183,9 +183,7 @@ const webhookHandler = async (req, res) => {
             for (var i = 0; i < rows.length; i++) {
                 var row = new Array();
                 console.log(i)
-                row.push(i + 1)
-                console.log("check", rows[i].product_price.toString())
-
+                row.push({text:(i + 1),style:'tableValue'})
                 row.push({ text: rows[i].name.toString(), style: 'tableValue' });
                 row.push({ text: rows[i].product_qty.toString(), style: 'tableValue' });
                 row.push({ text: `AED${rows[i].product_price.toString()}`, style: 'tableValue' });
@@ -201,9 +199,8 @@ const webhookHandler = async (req, res) => {
                 body.push(row);
             }
 
-
             const document = {
-                pageMargins: [40, 155, 40, 55],
+                pageMargins: [30, 155, 40, 55],
                 pageOrientation: 'portrait',
                 format: 'A4',
                 footer: function (currentPage, pageCount) {
@@ -228,26 +225,26 @@ const webhookHandler = async (req, res) => {
                                 text: 'Customer Name:',
                                 style: 'invoiceSubTitle',
                                 alignment: 'left',
-                                margin: [-407, -110, 0, 0]
+                                margin: [-328, -110, 0, 0]
 
                             },
                             {
                                 text: profile.data[0].name,
                                 style: 'invoiceSubValue',
                                 alignment: 'left',
-                                margin: [-408, -110, 0, 0]
+                                margin: [-290, -110, 0, 0]
                             },
                             {
                                 text: 'Invoice No :',
                                 style: 'invoiceSubTitle',
                                 alignment: 'left',
-                                margin: [10, -120, -60, 0]
+                                margin: [-49, -110, 0, 0]
                             },
                             {
                                 text: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}`,
                                 style: 'invoiceSubValue',
                                 alignment: 'right',
-                                margin: [-200, -120, 5, 0]
+                                margin: [-200, -110, -11, 0]
                             },
                         ]
                     },
@@ -263,19 +260,19 @@ const webhookHandler = async (req, res) => {
                                 text: profile.data[0].email,
                                 style: 'invoiceSubValue',
                                 alignment: 'left',
-                                margin: [-156, -90, 0, 0]
+                                margin: [-102, -90, 0, 0]
                             },
                             {
                                 text: 'Invoice Date :',
                                 style: 'invoiceSubTitle',
                                 alignment: 'right',
-                                margin: [20, -100, -110, 0]
+                                margin: [0, -90, -68, 0]
                             },
                             {
                                 text: today,
                                 style: 'invoiceSubValue',
                                 alignment: 'right',
-                                margin: [0, -100, 25, 0]
+                                margin: [0, -90, 8, 0]
                             },
                         ]
                     },
@@ -286,13 +283,13 @@ const webhookHandler = async (req, res) => {
                                 text: 'Order Status:',
                                 style: 'invoiceSubTitle',
                                 alignment: 'right',
-                                margin: [0, -80, -306, 0]
+                                margin: [0, -70, -205, 0]
                             },
                             {
                                 text: 'Completed',
                                 style: 'invoiceSubValue',
                                 alignment: 'right',
-                                margin: [0, -80, 25, 0]
+                                margin: [0, -70, 7, 0]
                             },
 
                         ]
@@ -301,7 +298,7 @@ const webhookHandler = async (req, res) => {
                     {
                         style: 'tableExample',
                         table: {
-                            widths: [40, 200, '*', '*', '*', '*', '*'],
+                            widths: [24, 150, '*', '*', '*', 65, '*'],
                             headerRows: 2,
                             // keepWithHeaderRows: 1,
                             body: body
@@ -310,7 +307,7 @@ const webhookHandler = async (req, res) => {
                     {
                         table: {
                             headerRows: 0,
-                            widths: ['*', 80],
+                            widths: [442, 80],
 
                             body: [
 
@@ -353,13 +350,13 @@ const webhookHandler = async (req, res) => {
                     },
                     documentHeaderRightFirst: {
                         fontSize: 20,
-                        margin: [15, -200, -470, 15],
+                        margin: [15, -190, -276, 15],
                         alignment: 'right',
                         bold: true,
                     },
                     documentHeaderRightSecond: {
                         fontSize: 10,
-                        margin: [15, -170, -375, 15],
+                        margin: [15, -165, -221, 15],
                         alignment: 'right',
                         bold: true,
                     },
@@ -381,52 +378,53 @@ const webhookHandler = async (req, res) => {
                     },
                     // Items Footer (Subtotal, Total, Tax, etc)
                     itemsFooterSubTitle: {
-                        margin: [20, 55, 0, 5],
+                        margin: [20,55, 0, 5],
                         alignment: 'left',
                         fillColor: '#F0E2B6',
                     },
                     itemsFooterSubValue: {
-                        margin: [-40, 55, -20, 5],
+                        margin: [-20, 55, -20, 5],
                         bold: true,
                         alignment: 'left',
                         fillColor: '#F0E2B6',
                     },
                     tableExample: {
                         margin: [0, -60, 0, 50],
+                        fontSize: 9,
                         alignment: 'center',
-
+    
                     },
                     itemsFooterTotalValue: {
                         margin: [0, 5, 0, 5],
                         bold: true,
                         alignment: 'center',
                     },
-                    itemsFooterTotalTitle: {
-                        margin: [20, 10, 0, 105],
-                        bold: true,
-                        alignment: 'left',
-                        color: 'green',
-                        fontSize: 25,
-                        fillColor: '#F0E2B6',
-
+                    itemsFooterTotalTitle:{
+                         margin: [20, 10, 0, 40],
+                          bold: true,
+                          alignment: 'left',
+                          color:'green',
+                          fontSize: 25,
+                          fillColor: '#F0E2B6',
+    
                     },
-                    finalAmount: {
-                        margin: [0, 5, 0, 5],
-                        bold: true,
-                        alignment: 'center',
-                        color: '#E0A526',
+                    finalAmount:{
+                         margin: [0, 5, 0, 5],
+                          bold: true,
+                          alignment: 'center',
+                          color:'#E0A526',
                     },
-                    tableValue: {
-                        margin: [0, 5, 0, 5],
-                        alignment: 'center',
+                    tableValue:{
+                         margin: [0, 5, 0, 5],
+                          alignment: 'center',
                     },
-                    itemsFooterTotal: {
-                        fontSize: 25,
-                        margin: [-40, 5, -20, 5],
-                        bold: true,
-                        alignment: 'left',
-                        fillColor: '#F0E2B6',
-
+                    itemsFooterTotal:{
+                         fontSize: 25,
+                         margin: [-36, 10, -20, 5],
+                          bold: true,
+                          alignment: 'left',
+                          fillColor: '#F0E2B6',
+                          
                     },
                     center: {
                         alignment: 'center',

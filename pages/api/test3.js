@@ -314,7 +314,7 @@ const Handler = async (req, res) => {
                             margin: [0, -120, 0, 0]
                         },
                         {
-                            text: profile.data[0].name,
+                            text: "Customer name",
                             style: 'invoiceSubValue',
                             alignment: 'left',
                             margin: [-102, -120, 0, 0]
@@ -326,7 +326,7 @@ const Handler = async (req, res) => {
                             margin: [0, -120, -60, 0]
                         },
                         {
-                            text: String(completed_orders.count + 1).padStart(10, '0'),
+                            text: "000000001",
                             style: 'invoiceSubValue',
                             alignment: 'right',
                             margin: [0, -120, 80, 0]
@@ -342,7 +342,7 @@ const Handler = async (req, res) => {
                             margin: [0, -100, 0, 0]
                         },
                         {
-                            text: profile.data[0].email,
+                            text: "mohammedhafiz@gmail.com",
                             style: 'invoiceSubValue',
                             alignment: 'left',
                             margin: [-156, -100, 0, 0]
@@ -413,7 +413,7 @@ const Handler = async (req, res) => {
                                     style: 'itemsFooterTotalTitle'
                                 },
                                 {
-                                    text: `AED${amount.toString()}`,
+                                    text: "AED 500",
                                     style: 'itemsFooterTotal'
                                 }
                             ],
@@ -537,7 +537,7 @@ const Handler = async (req, res) => {
                     templateId: 'd-7ea5058b9a69441b961d23407bc143d3',
                     personalizations: [
                         {
-                            to: ['anandhu@rough-paper.com'],
+                            to: ['anandhu@rough-paper.com','mohammedhafizba@gmail.com'],
                             subject: 'Order Confirmation',
                             dynamicTemplateData: {
                                 transactionNumber: `KUKU${String(7 + 1).padStart(7, '0')}`,

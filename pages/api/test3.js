@@ -43,7 +43,7 @@ const Handler = async (req, res) => {
             {
               product_id: 'ec3e130d-766e-4f3f-ace2-50ffee8ae458',
               product_coupons: [ 'KUKU0000012-1O', 'KUKU0000012-1D' ],
-              product_qty: 1,
+              product_qty: 5,
               product_price: 15,
               name: 'Zorno Pencil/AED 10,000 Cash'
             },
@@ -64,7 +64,7 @@ const Handler = async (req, res) => {
             {
               product_id: 'a415a869-6ebe-4d67-901c-b92b7e02dbac',
               product_coupons: [ 'KUKU0000012-5O', 'KUKU0000012-5D' ],
-              product_qty: 1,
+              product_qty: 2,
               product_price: 55,
               name: 'Zorno Pencil/AED 10,000 Cash'
             }
@@ -79,7 +79,7 @@ const Handler = async (req, res) => {
         
         var headers = {
             fila_0: {
-                col_1: { text: 'SL', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
+                col_1: { text: 'SL No.', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
                 col_2: { text: 'Product(s)', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
                 col_3: { text: 'Quantity', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
                 col_4: { text: 'UnitPrice', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
@@ -109,9 +109,7 @@ const Handler = async (req, res) => {
         }
         for (var i = 0; i < rows.length; i++) {
             var row = new Array();
-            console.log(i)
             row.push(i + 1)
-            console.log("check", rows[i].product_price.toString())
             row.push({ text: rows[i].name.toString(), style: 'tableValue' });
             row.push({ text: rows[i].product_qty.toString(), style: 'tableValue' });
             row.push({ text: `AED${rows[i].product_price.toString()}`, style: 'tableValue' });
@@ -360,14 +358,12 @@ const Handler = async (req, res) => {
                 columnGap: 20,
             }
         }
-        console.log("doc", document)
         console.log('start pdf')
         try {
             let pdfDoc = await pdfmake.createPdfKitDocument(document);
             var chunks = [];
             var result, buffer;
             pdfDoc.on('data', function (chunk) {
-                console.log("Chunks")
                 chunks.push(chunk);
             });
             pdfDoc.on('end', async function () {

@@ -43,7 +43,7 @@ const Handler = async (req, res) => {
             {
               product_id: 'ec3e130d-766e-4f3f-ace2-50ffee8ae458',
               product_coupons: [ 'KUKU0000012-1O', 'KUKU0000012-1D' ],
-              product_qty: 1,
+              product_qty: 5,
               product_price: 15,
               name: 'Zorno Pencil/AED 10,000 Cash'
             },
@@ -64,164 +64,15 @@ const Handler = async (req, res) => {
             {
               product_id: 'a415a869-6ebe-4d67-901c-b92b7e02dbac',
               product_coupons: [ 'KUKU0000012-5O', 'KUKU0000012-5D' ],
-              product_qty: 1,
+              product_qty: 2,
               product_price: 55,
               name: 'Zorno Pencil/AED 10,000 Cash'
             }
         ]
 
-        const header1 = `
-        <!DOCTYPE html>
-        <html lang="en">
-         <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Tailwind CSS Invoce </title>
-            <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-        </head>
-        <body>
-            <div class="flex min-h-screen bg-gray-100">
-               <div class="w-full bg-white shadow-lg">
-                  <div class="flex justify-between m-6">
-                     <img src="https://i.postimg.cc/j2znKT6V/kukudealslogo-black.png"
-                     class="flex items-center w-28 h-10 relative cursor-pointer" layout="fill" alt="kuku logo" />
-                      <div class="">
-                        <ul class="flex">
-                             <li class="flex flex-col ">
-                        <span class="text-sm font-bold">
-                            kukudeals Enterprises LLC
-                        </span>
-                        <span class="text-xs">
-                            Address: Box Park, Al Wasl Rd, Dubai
-                        </span>
-                        <span class="text-xs">
-                            TRN: 1008786483676343
-                        </span>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <ul>
-                    <li class="flex flex-col ">
-                        <span class="text-base font-bold text-gray-700">
-                            Tax Invoice
-                        </span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <br />
-        <div class="flex text-xs m-6 justify-between p-4">
-            <div>
-                <div>
-                    <h6 class="font-bold">Customer Name: <span class=" font-medium">Test</span></h6>
-                </div>
-                <h6 class="font-bold">Address : <span class=" font-medium"> United Arab Emirates</span></h6>
-            </div>
-            <div class="">
-                <div>
-                    <h6 class="font-bold">Invoice No : <span class=" font-medium">1</span></h6>
-                    <h6 class="font-bold">Invoice Date : <span class=" font-medium"> ${new Date().toLocaleString()}</span></h6>
-                    <h6 class="font-bold">Order Status : <span class=" font-medium"> Completed</span></h6>
-                </div>
-            </div>
-        </div>
-        <div class=" justify-center ">
-            <div class="shadow m-6">
-                <table class=" table-fixed w-full">
-                    <thead class=" bg-gray-50">
-                        <tr>
-                            <th class="w-24 border-collapse border border-slate-500  py-2 text-xs text-gray-500 ">
-                                Sr.No
-                            </th>
-                            <th class=" border-collapse w-52 border border-slate-500  py-2 text-xs text-gray-500 ">
-                                Product(s)
-                            </th>
-                            <th class=" border-collapse border border-slate-500  py-2 text-xs text-gray-500 ">
-                                Quantity
-                            </th>
-                            <th class=" border-collapse border border-slate-500  py-2 text-xs text-gray-500 ">
-                                UnitPrice
-                            </th>
-                            <th class=" border-collapse border border-slate-500  py-2 text-xs text-gray-500 ">
-                                Amount Excluding Tax
-                            </th>
-                            <th class=" border-collapse border border-slate-500  py-2 text-xs text-gray-500 ">
-                                Tax Rate %
-                            </th>
-                            <th class=" border-collapse border border-slate-500  py-2 text-xs text-gray-500 ">
-                                Tax Payable
-                            </th>
-                            <th class=" border-collapse border border-slate-500  py-2 text-xs text-gray-500 ">
-                                Amount Including Tax
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white text-xs text-center">`
-        const body1 = await map(coupons, async (item, i) => {
-            return (
-                `<tr class="border-collapse border  border-slate-500 whitespace-nowrap ">
-                <td class="  border-collapse border border-slate-500  py-4 text-sm text-gray-500">
-                    ${i + 1}
-                </td>np
-                <td class="border-collapse border border-slate-500  py-4">
-                    <div class=" text-gray-900">
-                        ${item.name}
-                    </div>
-                </td>
-                <td class=" border-collapse border border-slate-500   py-4 text-sm text-gray-500">
-                ${item.product_qty}
-                </td>
-                <td class=" border-collapse border border-slate-500   py-4">
-                    AED${item.product_qty * item.product_price * 0.95}
-                </td>
-                <td class=" border-collapse border border-slate-500   py-4">
-                AED${item.product_price}
-                </td>
-                <td class=" border-collapse border border-slate-500   py-4">
-                    5%
-                </td>
-                <td class=" border-collapse border border-slate-500   py-4">
-                AED${item.product_qty * item.product_price * 0.05}
-                </td>
-                <td class=" border-collapse border border-slate-500   py-4">
-                AED${item.product_qty * item.product_price}
-                </td>
-            </tr>    
-            `
-            )
-        })
-
-        const footer = `
-    <tr class="whitespace-nowrap border-2 border-black">
-        <td class=" border-collapse border border-slate-500  py-4  text-gray-500">
-            Grand Total
-        </td>
-        <td class=" border-collapse border border-slate-500  py-4 text-sm text-gray-500">
-        </td>
-        <td class=" border-collapse border border-slate-500  py-4">
-        </td>
-        <td class=" border-collapse border border-slate-500  py-4">
-        </td>
-        <td class=" border-collapse border border-slate-500  py-4">
-        </td>
-        <td class=" border-collapse border border-slate-500  py-4">
-        </td>
-        <td class=" border-collapse border border-slate-500  py-4">
-    </tr>
-        </tbody>
-            </table>
-            </div>
-            </div>
-            </div>
-        </div>
-        </body>
-    </html>
-        `
         var headers = {
             fila_0: {
-                col_1: { text: 'SL', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
+                col_1: { text: 'SL No.', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
                 col_2: { text: 'Product(s)', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
                 col_3: { text: 'Quantity', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
                 col_4: { text: 'UnitPrice', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
@@ -254,14 +105,6 @@ const Handler = async (req, res) => {
             console.log(i)
             row.push(i + 1)
             console.log("check", rows[i].product_price.toString())
-
-            // row.push(rows[i].name.toString());
-            // row.push(rows[i].product_qty.toString());
-            // row.push(`AED${rows[i].product_price.toString()}`);
-            // row.push(`AED${rows[i].product_price.toString() * rows[i].product_qty.toString() * 0.95}`);
-            // row.push("5%");
-            // row.push(`AED${rows[i].product_price.toString() * rows[i].product_qty.toString()}`);
-            // body.push(row);
 
             row.push({ text: rows[i].name.toString(), style: 'tableValue' });
             row.push({ text: rows[i].product_qty.toString(), style: 'tableValue' });

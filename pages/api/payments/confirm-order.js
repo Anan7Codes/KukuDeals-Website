@@ -147,7 +147,7 @@ const webhookHandler = async (req, res) => {
             }
             var headers = {
                 fila_0: {
-                    col_1: { text: 'Sr.No', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
+                    col_1: { text: 'SL', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
                     col_2: { text: 'Product(s)', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
                     col_3: { text: 'Quantity', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
                     col_4: { text: 'UnitPrice', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
@@ -180,12 +180,27 @@ const webhookHandler = async (req, res) => {
                 console.log(i)
                 row.push(i + 1)
                 console.log("check", rows[i].product_price.toString())
-                row.push(rows[i].name.toString());
-                row.push(rows[i].product_qty.toString());
-                row.push(`AED${rows[i].product_price.toString()}`);
-                row.push(`AED${rows[i].product_price.toString() * rows[i].product_qty.toString() * 0.95}`);
-                row.push("5%");
-                row.push(`AED${rows[i].product_price.toString() * rows[i].product_qty.toString()}`);
+
+                // row.push(rows[i].name.toString());
+                // row.push(rows[i].product_qty.toString());
+                // row.push(`AED${rows[i].product_price.toString()}`);
+                // row.push(`AED${rows[i].product_price.toString() * rows[i].product_qty.toString() * 0.95}`);
+                // row.push("5%");
+                // row.push(`AED${rows[i].product_price.toString() * rows[i].product_qty.toString()}`);
+                // body.push(row);
+
+                row.push({ text: rows[i].name.toString(), style: 'tableValue' });
+                row.push({ text: rows[i].product_qty.toString(), style: 'tableValue' });
+                row.push({ text: `AED${rows[i].product_price.toString()}`, style: 'tableValue' });
+                row.push({
+                    text: `AED${rows[i].product_price.toString() * rows[i].product_qty.toString() * 0.95}`,
+                    style: 'tableValue'
+                });
+                row.push({ text: "5%", style: 'tableValue' });
+                row.push({
+                    text: `AED${rows[i].product_price.toString() * rows[i].product_qty.toString()}`,
+                    style: 'finalAmount'
+                });
                 body.push(row);
             }
 
@@ -201,15 +216,18 @@ const webhookHandler = async (req, res) => {
                             width: 120,
                             style: 'documentHeaderLeft'
                         },
-                        {
-                            text: 'Shivon General Trading LLC\nBur Dubai, Dubai\n',
-                            style: 'documentHeaderCenter'
-                        },
-                        { text: 'Tax Invoice', style: 'documentHeaderRight' }
+                        // {
+                        //     text: 'Shivon General Trading LLC\nBur Dubai, Dubai\n',
+                        //     style: 'documentHeaderCenter'
+                        // },
+
+                        { text: 'TAX INVOICE ', style: 'documentHeaderRightFirst' },
+                        { text: 'Shivon General Trading LLC\nBur Dubai, Dubai\n', style: 'documentHeaderRightSecond' }
                     ]
                 },
                 footer: function (currentPage, pageCount) {
-                    return { text: 'Page' + currentPage.toString() + ' of ' + pageCount, alignment: 'center', margin: [0, 30, 0, 0] };
+                    return { text: "support@kukudeals.com | 08909090 | www.kukudeals.com" ,
+                    alignment: 'center', margin: [0, 30, 0, 0] ,color:"#674736"};
                 },
                 content: [
                     '\n\n\n\n',
@@ -219,25 +237,25 @@ const webhookHandler = async (req, res) => {
                                 text: 'Customer Name:',
                                 style: 'invoiceSubTitle',
                                 alignment: 'left',
-
+                                margin: [0, -120, 0, 0]
                             },
                             {
                                 text: profile.data[0].name,
                                 style: 'invoiceSubValue',
                                 alignment: 'left',
-                                margin: [-100, 0, 0, 0]
+                                margin: [-102, -120, 0, 0]
                             },
                             {
                                 text: 'Invoice No :',
                                 style: 'invoiceSubTitle',
                                 alignment: 'right',
-                                margin: [0, 0, -56, 0]
+                                margin: [0, -120, -60, 0]
                             },
                             {
                                 text: String(completed_orders.count + 1).padStart(10, '0'),
                                 style: 'invoiceSubValue',
                                 alignment: 'right',
-                                margin: [0, 0, 60, 0]
+                                margin: [0, -120, 80, 0]
                             },
                         ]
                     },
@@ -247,24 +265,25 @@ const webhookHandler = async (req, res) => {
                                 text: 'Email :',
                                 style: 'invoiceSubTitle',
                                 alignment: 'left',
+                                margin: [0, -100, 0, 0]
                             },
                             {
                                 text: profile.data[0].email,
                                 style: 'invoiceSubValue',
                                 alignment: 'left',
-                                margin: [-135, 0, 0, 0]
+                                margin: [-156, -100, 0, 0]
                             },
                             {
                                 text: 'Invoice Date :',
                                 style: 'invoiceSubTitle',
                                 alignment: 'right',
-                                margin: [0, 0, -65, 0]
+                                margin: [0, -100, -69, 0]
                             },
                             {
                                 text: new Date().toLocaleString(),
                                 style: 'invoiceSubValue',
                                 alignment: 'right',
-                                margin: [0, 0, 10, 0]
+                                margin: [0, -100, 0, 0]
                             },
                         ]
                     },
@@ -275,13 +294,13 @@ const webhookHandler = async (req, res) => {
                                 text: 'Order Status:',
                                 style: 'invoiceSubTitle',
                                 alignment: 'right',
-                                margin: [0, 0, -257, 0]
+                                margin: [0, -80, -266, 0]
                             },
                             {
                                 text: 'Completed',
                                 style: 'invoiceSubValue',
                                 alignment: 'right',
-                                margin: [0, 0, 65, 0]
+                                margin: [0, -80, 65, 0]
                             },
 
                         ]
@@ -305,23 +324,23 @@ const webhookHandler = async (req, res) => {
 
                                 [
                                     {
-                                        text: '',
+                                        text: 'ORDER STATUS',
                                         style: 'itemsFooterSubTitle'
                                     },
                                     {
-                                        text: '',
+                                        text: 'GRAND TOTAL',
                                         style: 'itemsFooterSubValue'
                                     }
                                 ],
 
                                 [
                                     {
-                                        text: 'GRAND TOTAL',
+                                        text: 'COMPLETED',
                                         style: 'itemsFooterTotalTitle'
                                     },
                                     {
                                         text: `AED${amount.toString()}`,
-                                        style: 'itemsFooterTotalTitle'
+                                        style: 'itemsFooterTotal'
                                     }
                                 ],
                             ]
@@ -332,7 +351,7 @@ const webhookHandler = async (req, res) => {
                 styles: {
                     documentHeaderLeft: {
                         fontSize: 10,
-                        margin: [15, 15, 15, 15],
+                        margin: [35, 15, 15, 15],
                         alignment: 'left'
                     },
                     documentHeaderCenter: {
@@ -340,9 +359,15 @@ const webhookHandler = async (req, res) => {
                         margin: [75, 15, 15, 15],
                         alignment: 'center'
                     },
-                    documentHeaderRight: {
+                    documentHeaderRightFirst: {
                         fontSize: 20,
-                        margin: [15, 15, 30, 15],
+                        margin: [15, 15, -320, 15],
+                        alignment: 'right',
+                        bold: true,
+                    },
+                    documentHeaderRightSecond: {
+                        fontSize: 10,
+                        margin: [15, 40, 40, 15],
                         alignment: 'right',
                         bold: true,
                     },
@@ -364,23 +389,52 @@ const webhookHandler = async (req, res) => {
                     },
                     // Items Footer (Subtotal, Total, Tax, etc)
                     itemsFooterSubTitle: {
-                        margin: [0, 5, 0, 5],
-                        bold: true,
-                        alignment: 'right',
+                        margin: [20,55, 0, 5],
+                        alignment: 'left',
+                        fillColor: '#F0E2B6',
                     },
                     itemsFooterSubValue: {
-                        margin: [0, 5, 0, 5],
+                        margin: [-40, 55, -20, 5],
                         bold: true,
-                        alignment: 'center',
+                        alignment: 'left',
+                        fillColor: '#F0E2B6',
                     },
                     tableExample: {
-                        margin: [0, 0, 0, 50],
+                        margin: [0, -60, 0, 50],
                         alignment: 'center',
+    
                     },
                     itemsFooterTotalValue: {
                         margin: [0, 5, 0, 5],
                         bold: true,
                         alignment: 'center',
+                    },
+                    itemsFooterTotalTitle:{
+                         margin: [20, 10, 0, 105],
+                          bold: true,
+                          alignment: 'left',
+                          color:'green',
+                          fontSize: 25,
+                          fillColor: '#F0E2B6',
+    
+                    },
+                    finalAmount:{
+                         margin: [0, 5, 0, 5],
+                          bold: true,
+                          alignment: 'center',
+                          color:'#E0A526',
+                    },
+                    tableValue:{
+                         margin: [0, 5, 0, 5],
+                          alignment: 'center',
+                    },
+                    itemsFooterTotal:{
+                         fontSize: 25,
+                         margin: [-40, 5, -20, 5],
+                          bold: true,
+                          alignment: 'left',
+                          fillColor: '#F0E2B6',
+                          
                     },
                     center: {
                         alignment: 'center',
@@ -394,7 +448,7 @@ const webhookHandler = async (req, res) => {
             console.log('start pdf')
             let pdfDoc = await pdfmake.createPdfKitDocument(document);
             var chunks = [];
-            var result,bufferData;
+            var result, bufferData;
             pdfDoc.on('data', function (chunk) {
                 chunks.push(chunk);
             });
@@ -407,13 +461,13 @@ const webhookHandler = async (req, res) => {
                     templateId: 'd-7ea5058b9a69441b961d23407bc143d3',
                     personalizations: [
                         {
-                            to: [`${profile.data[0].email}`,'kukudealsdev@gmail.com'],
+                            to: [`${profile.data[0].email}`, 'kukudealsdev@gmail.com'],
                             subject: 'Order Confirmation',
                             dynamicTemplateData: {
                                 transactionNumber: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}`,
                                 purchaseDate: `${new Date().toLocaleString()}`,
-                                totalBeforeVat: `AED ${(amount*0.95).toString()}`,
-                                vatAmount: `AED ${(amount*0.05).toString()}`,
+                                totalBeforeVat: `AED ${(amount * 0.95).toString()}`,
+                                vatAmount: `AED ${(amount * 0.05).toString()}`,
                                 total: `AED ${(amount).toString()}`,
                             }
                         },

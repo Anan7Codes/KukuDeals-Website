@@ -67,6 +67,13 @@ const Handler = async (req, res) => {
               product_qty: 2,
               product_price: 55,
               name: 'Zorno Pencil/AED 10,000 Cash'
+            },
+            {
+              product_id: 'a415a869-6ebe-4d67-901c-b92b7e02dbac',
+              product_coupons: [ 'KUKU0000012-5O', 'KUKU0000012-5D' ],
+              product_qty: 3,
+              product_price: 15,
+              name: 'Zorno Pencil/AED 10,000 Cash'
             }
         ]
         let today = new Date();

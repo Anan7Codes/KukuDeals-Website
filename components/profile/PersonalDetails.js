@@ -29,8 +29,8 @@ export default function PersonalDetails() {
   async function InsertPersonalDetails(e) {
     e.preventDefault()
     if (JSON.stringify(personalDetails) === JSON.stringify(newPersonalDetails)) {
-      toast.info("No change in PersonalDetails", {
-        position: "top-right",
+      toast.info(t("no-change-in-personal"), {
+        position: i18n.language === 'ar' ? "top-left" : "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -49,7 +49,7 @@ export default function PersonalDetails() {
 
       if(error) {
         return toast.error(error, {
-          position: "top-right",
+          position: i18n.language === 'ar' ? "top-left" : "top-right",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -58,8 +58,8 @@ export default function PersonalDetails() {
           progress: undefined,
         })
       }
-      toast.success("Succesfully Updated", {
-        position: "top-right",
+      toast.success(t("update-success"), {
+        position: i18n.language === 'ar' ? "top-left" : "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,

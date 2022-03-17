@@ -10,8 +10,8 @@ export default function CartItem({ item }) {
 
   const AddQty = () => {
     if(item.qty >= (item.TotalCoupons - item.SoldOutCoupons)) {
-      return toast.error("Sorry but there are no more available coupons.", {
-        position: "top-right",
+      return toast.error(t("sorry-no-coupons"), {
+        position: i18n.language === 'ar' ? "top-left" : "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,

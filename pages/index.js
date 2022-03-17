@@ -41,7 +41,7 @@ export default function Home() {
         let { data, error } = await supabase.from('campaigns').select('*')
         if (error) {
           toast.error(error.message, {
-            position: "top-right",
+            position: i18n.language === 'ar' ? "top-left" : "top-right",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -53,7 +53,7 @@ export default function Home() {
         }
         setCampaigns(data)
       } catch (e) {
-        console.log(e)
+        alert(e)
       }
     }
     FetchCampaigns()
@@ -63,7 +63,7 @@ export default function Home() {
         let { data, error } = await supabase.from('winners').select('*')
         if (error) {
           toast.error(error.message, {
-            position: "top-right",
+            position: i18n.language === 'ar' ? "top-left" : "top-right",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -75,7 +75,7 @@ export default function Home() {
         }
         setWinners(data)
       } catch (e) {
-        console.log(e)
+        alert(e)
       }
     }
     FetchWinners()

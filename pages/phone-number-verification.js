@@ -44,8 +44,8 @@ export default function PhoneNumber() {
             code
         })
         if(!res.data.success) {
-            toast.success("Something went wrong!", {
-                position: "top-right",
+            toast.success(t("something-went-wrong"), {
+                position: i18n.language === 'ar' ? "top-left" : "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -56,8 +56,8 @@ export default function PhoneNumber() {
             setLoading(false)
             return
         }
-        toast.success("Verification Successful", {
-            position: "top-right",
+        toast.success(t("verification-successful"), {
+            position: i18n.language === 'ar' ? "top-left" : "top-right",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,

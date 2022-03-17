@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps, router }) {
               transition={animations[0].transition}
             >
               <Component {...pageProps} />
-              <ToastContainer theme='dark'/>
+              <ToastContainer theme='dark' rtl/>
             </m.div>
           </AnimatePresence>
         </LazyMotion>

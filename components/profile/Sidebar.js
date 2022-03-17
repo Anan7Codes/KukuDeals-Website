@@ -24,7 +24,6 @@ export default function Sidebar({ children }) {
         .from('phone_numbers')
         .select('number')
         .single()
-      console.log("phone", phone_numbers)
       setPhoneNumber(phone_numbers?.number)
     }
     FetchVerifyStatus()
@@ -34,7 +33,7 @@ export default function Sidebar({ children }) {
     const { error } = await supabase.auth.signOut()
     if (error) {
       toast.error(error.message, {
-        position: "top-right",
+        position: i18n.language === 'ar' ? "top-left" : "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -45,8 +44,8 @@ export default function Sidebar({ children }) {
       return
     }
     setUser(null)
-    toast.success("Signed out successfully", {
-      position: "top-right",
+    toast.success(t("signed-out-success"), {
+      position: i18n.language === 'ar' ? "top-left" : "top-right",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,

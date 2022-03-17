@@ -39,8 +39,8 @@ export default function Campaign({ campaign }) {
   
     const AddQty = () => {
       if(qty >= (campaign.TotalCoupons - campaign.SoldOutCoupons)) {
-        return toast.error("Sorry but there are no more available coupons.", {
-          position: "top-right",
+        return toast.error(t("sorry-no-coupons"), {
+          position: i18n.language === 'ar' ? "top-left" : "top-right",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,

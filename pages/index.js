@@ -57,6 +57,7 @@ export default function Home() {
       }
     }
     FetchCampaigns()
+    
     const FetchWinners = async () => {
       try {
         let { data, error } = await supabase.from('winners').select('*')
@@ -78,6 +79,7 @@ export default function Home() {
       }
     }
     FetchWinners()
+    
   }, [])
  
   if(campaigns.length === 0 ) return (

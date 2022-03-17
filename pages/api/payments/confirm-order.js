@@ -260,19 +260,19 @@ const webhookHandler = async (req, res) => {
                                 text: profile.data[0].email,
                                 style: 'invoiceSubValue',
                                 alignment: 'left',
-                                margin: [-102, -90, 0, 0]
+                                margin: [-99, -90, 0, 0]
                             },
                             {
                                 text: 'Invoice Date :',
                                 style: 'invoiceSubTitle',
                                 alignment: 'right',
-                                margin: [0, -90, -68, 0]
+                                margin: [0, -90, -72, 0]
                             },
                             {
                                 text: today,
                                 style: 'invoiceSubValue',
                                 alignment: 'right',
-                                margin: [0, -90, 8, 0]
+                                margin: [0, -90, 4, 0]
                             },
                         ]
                     },
@@ -420,7 +420,7 @@ const webhookHandler = async (req, res) => {
                     },
                     itemsFooterTotal:{
                          fontSize: 25,
-                         margin: [-36, 10, -20, 5],
+                         margin: [-23, 10, -20, 5],
                           bold: true,
                           alignment: 'left',
                           fillColor: '#F0E2B6',

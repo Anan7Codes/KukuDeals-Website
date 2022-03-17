@@ -10,7 +10,7 @@ ENV NODE_ENV production
 ENV NEXT_PUBLIC_SUPABASE_URL https://jipvpsiwfwiyqyxpssli.supabase.co
 ENV NEXT_PUBLIC_SUPABASE_ANON_KEY eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImppcHZwc2l3ZndpeXF5eHBzc2xpIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDQzMDM2ODksImV4cCI6MTk1OTg3OTY4OX0.ilai08nJ5jagxfHb44YUxh45N1EscZa1byqaiqmaWZA
 ENV NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY pk_test_51KRJzOLSsCUq84XEojDuFkxATpL69P5SXRFLUhzUPDM12BUq72348s5RmHimVDIKcCJewAjb1i0Ap5Aypgmxqpg000pnA04yO9
-ENV NEXT_PUBLIC_API_URL https://website-service-kgttvhb7xa-de.a.run.app/api
+ENV NEXT_PUBLIC_API_URL https://kukudeals.com/api
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 RUN npm run build

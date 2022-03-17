@@ -92,7 +92,7 @@ export default function PhoneNumber() {
                                 placeholder="Start with country code. Eg: 971507878787"
                             />                          
                         </div>
-                        { !enterCode ?                    
+                        { enterCode ?                    
                             <div className="flex flex-col lg:w-[35%] w-[300px] mt-4 h-16 bg-[#2c2c2c] border rounded-[5px] border-[#d3d3d3]">
                                 <p className="text-[#bebebe] text-xs mx-2 mt-2 font-semibold">{t('code')}:</p>
                                 <input className="bg-[#2c2c2c] border-8 border-[#2c2c2c] text-white text-sm outline-none w-full"

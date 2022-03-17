@@ -15,6 +15,12 @@ function Navbar() {
   return (
     <nav className="pb-2 relative">
       <div className="bg-[#2c2c2c] mx-auto rounded-[10px]">
+        <div className="flex items-center justify-center bg-red-200 py-3 rounded-t-[15px]">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <p className="pl-2 text-red-900">The website is in test mode right now. It will be available for you to use very soon!</p>
+        </div>
         <div className={`flex justify-between text-sm`}>
           <div className={`flex space-x-6 pl-2`}>
             <div className="flex text-center p-2">

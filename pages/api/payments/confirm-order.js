@@ -222,7 +222,7 @@ const webhookHandler = async (req, res) => {
                             { text: 'TAX INVOICE ', style: 'documentHeaderRightFirst' },
                             { text: 'Shivon General Trading LLC\nBur Dubai, Dubai\n', style: 'documentHeaderRightSecond' },
                             {
-                                text: 'Customer Name:',
+                                text: 'Customer Name: ',
                                 style: 'invoiceSubTitle',
                                 alignment: 'left',
                                 margin: [-328, -110, 0, 0]
@@ -235,7 +235,7 @@ const webhookHandler = async (req, res) => {
                                 margin: [-290, -110, 0, 0]
                             },
                             {
-                                text: 'Invoice No :',
+                                text: 'Invoice No: ',
                                 style: 'invoiceSubTitle',
                                 alignment: 'left',
                                 margin: [-49, -110, 0, 0]
@@ -244,14 +244,14 @@ const webhookHandler = async (req, res) => {
                                 text: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}`,
                                 style: 'invoiceSubValue',
                                 alignment: 'right',
-                                margin: [-200, -110, -11, 0]
+                                margin: [-200, -110, -9, 0]
                             },
                         ]
                     },
                     {
                         columns: [
                             {
-                                text: 'Email :',
+                                text: 'Email: ',
                                 style: 'invoiceSubTitle',
                                 alignment: 'left',
                                 margin: [0, -90, 0, 0]
@@ -263,7 +263,7 @@ const webhookHandler = async (req, res) => {
                                 margin: [-99, -90, 0, 0]
                             },
                             {
-                                text: 'Invoice Date :',
+                                text: 'Invoice Date: ',
                                 style: 'invoiceSubTitle',
                                 alignment: 'right',
                                 margin: [0, -90, -72, 0]
@@ -280,7 +280,7 @@ const webhookHandler = async (req, res) => {
                         columns: [
 
                             {
-                                text: 'Order Status:',
+                                text: 'Order Status: ',
                                 style: 'invoiceSubTitle',
                                 alignment: 'right',
                                 margin: [0, -70, -205, 0]

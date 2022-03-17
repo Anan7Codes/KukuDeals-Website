@@ -29,7 +29,7 @@ function Navbar() {
                   priority={true}
                   src="/icons/kukudeals-white.png"
                   layout="fill"
-                  alt="kuku logo"
+                  alt="KukuDeals logo"
                 />
               </div>
             </div>
@@ -167,7 +167,7 @@ function Navbar() {
                 <Image
                   src="/icons/kukudeals-white.png"
                   layout="fill"
-                  alt="Kuku logo"
+                  alt="KukuDeals logo"
                 />
               </div>
               {/* <p className="font-medium text-sm text-white mb-2 hover:cursor-pointer hover:text-yellow-500">

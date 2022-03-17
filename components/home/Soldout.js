@@ -14,7 +14,7 @@ export default function Soldout({ campaign }) {
               <Image
                 src={campaign?.Image}
                 layout="fill"
-                alt="product logo"
+                alt="soldout product image"
                 placeholder="blur"
                 blurDataURL={campaign?.Image}
               />
@@ -25,8 +25,7 @@ export default function Soldout({ campaign }) {
               <Image
                 src="/icons/soldout/soldout.png"
                 layout="fill"
-                alt="product logo"
-                placeholder="blur"
+                alt="soldout placeholder"
               />
             </div>
           </div>

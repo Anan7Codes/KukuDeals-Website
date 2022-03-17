@@ -124,18 +124,28 @@ const webhookHandler = async (req, res) => {
             await map(coupons, async (item, i) => {
                 const campaign_for_qty = await supabase
                     .from('campaigns')
-                    .select('SoldOutCoupons')
+                    .select('SoldOutCoupons,TotalCoupons')
                     .eq("id", item.product_id)
                     .single()
 
                 if (campaign_for_qty.error) return res.send({ success: false, message: "Campaign Doesn't Exist", error: campaign_for_qty.error })
 
-                const campaign_update_qty = await supabase
+                if(campaign_for_qty.data.SoldOutCoupons + item.product_qty >= campaign_for_qty.data.TotalCoupons) {
+                    const campaign_update_qty = await supabase
+                    .from('campaigns')
+                    .update({ SoldOutCoupons: campaign_for_qty.data.SoldOutCoupons + item.product_qty, SoldOut: true })
+                    .eq("id", item.product_id)
+
+                    if (campaign_update_qty.error) return res.send({ success: false, message: "Campaign Qty Doesn't Exist", error: campaign_update_qty.error })
+                } else {
+                    const campaign_update_qty = await supabase
                     .from('campaigns')
                     .update({ SoldOutCoupons: campaign_for_qty.data.SoldOutCoupons + item.product_qty })
                     .eq("id", item.product_id)
 
-                if (campaign_update_qty.error) return res.send({ success: false, message: "Campaign Qty Doesn't Exist", error: campaign_update_qty.error })
+                    if (campaign_update_qty.error) return res.send({ success: false, message: "Campaign Qty Doesn't Exist", error: campaign_update_qty.error })
+                }
+                
             })
 
             user_id = initiated_orders.data.user_id

@@ -131,7 +131,7 @@ export default function Footer() {
                     <Image
                       src="/icons/footerIcons/appstore.svg"
                       layout="fill"
-                      alt="googleplay logo"
+                      alt="apple store logo"
                     />
                   </li>
                   <li className="h-24 w-36 relative hover:cursor-pointer">
@@ -156,11 +156,11 @@ export default function Footer() {
                 <Image
                   src="/icons/kukudeals-white.png"
                   layout="fill"
-                  alt="kuku logo"
+                  alt="KukuDeals logo"
                 />
               </div>
               <div className="w-full mt-1 lg:mt-0 flex space-x-1 lg:space-x-6 text-[9px] lg:text-xs">
-                <p className="pr-[6px] pl-[6px] text-white">© 2022. {t('all-rights')}</p>
+                <p className="pr-[6px] pl-[6px] text-white">© {new Date().getFullYear()}. {t('all-rights')}</p>
               </div>
             </div>
             <div className="md:flex text-[9px] lg:text-xs hidden">
@@ -184,7 +184,7 @@ export default function Footer() {
                   <Image
                     src="/icons/footerIcons/Mastercard.png"
                     layout="fill"
-                    alt="g pay logo"
+                    alt="mastercard logo"
                   />
                 </li>
                 <li className=" h-6 w-9 relative">

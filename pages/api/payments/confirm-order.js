@@ -205,7 +205,7 @@ const webhookHandler = async (req, res) => {
                 format: 'A4',
                 footer: function (currentPage, pageCount) {
                     return {
-                        text: "support@kukudeals.com | 08909090 | www.kukudeals.com",
+                        text: "support@kukudeals.com | +971 55 861 0111 | www.kukudeals.com",
                         alignment: 'center', margin: [0, 30, 0, 0], color: "#674736"
                     };
                 },
@@ -244,7 +244,7 @@ const webhookHandler = async (req, res) => {
                                 text: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}`,
                                 style: 'invoiceSubValue',
                                 alignment: 'right',
-                                margin: [-200, -110, -9, 0]
+                                margin: [-200, -110, -5, 0]
                             },
                         ]
                     },
@@ -266,7 +266,7 @@ const webhookHandler = async (req, res) => {
                                 text: 'Invoice Date: ',
                                 style: 'invoiceSubTitle',
                                 alignment: 'right',
-                                margin: [0, -90, -72, 0]
+                                margin: [0, -90, -68, 0]
                             },
                             {
                                 text: today,

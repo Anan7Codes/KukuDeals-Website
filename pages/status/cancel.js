@@ -11,6 +11,7 @@ import FailedAnimation from '@/public/failed-animation.json'
 function Cancel() {
   const { t } = useTranslation()
   const { locale } = useRouter()
+  const router = useRouter();
   const { user } = useUser()
 
   useEffect(() => {

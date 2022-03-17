@@ -64,7 +64,7 @@ export default function Campaign({ campaign }) {
         <div className={`flex flex-col items-center justify-around lg:flex-row h-full pb-6 bg-[#2c2c2c] cursor-pointer rounded-[15px] overflow-visible shadow-lg transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-[101%] duration-700`}>
           <div className={`mt-[60px] lg:mt-0 ${i18n.language === 'ar' ? 'lg:mr-24' : 'lg:ml-24'} flex justify-center items-center`}>
             <div className="relative lg:top-5 lg:w-64 lg:h-64 w-48 h-48">
-              <Image src={campaign?.Image} layout="fill" alt="Campaign Image" />
+              <Image src={campaign?.Image} layout="fill" alt="Campaign Image" placeholder='blur' blurDataURL={campaign?.Image} />
             </div>
           </div>
           <div className={`flex flex-col justify-center w-full mt-6 lg:mt-10 pb-2 lg:ml-12 lg:pb-0`}>
@@ -102,7 +102,7 @@ export default function Campaign({ campaign }) {
               }
               <div className={`flex items-center justify-center lg:justify-start my-4 text-left`}>
                 <div className="relative w-6 h-6 mx-2">
-                  <Image src="/icons/calendar.png" layout="fill" alt="Calendar Image" />
+                  <Image src="/icons/calendar.png" layout="fill" alt="Calendar Image" placeholder='blur' />
                 </div>
                 <div className='flex flex-col'>
                   <p className='text-white font-bold text-xs leading-3'>{t('max-date')}: {campaign?.DrawDate}</p>
@@ -201,6 +201,8 @@ export default function Campaign({ campaign }) {
                       src={ prizeDetails ? campaign?.ImageGift : campaign?.ImageProduct}
                       layout="fill"
                       alt="Campaign Image"
+                      placeholder='blur'
+                      blurDataURL={campaign?.ImageGift}
                     />
                   </div>
                   <div className="absolute -top-8 -left-5 bg-[#161616] w-32 p-2 rounded-full">

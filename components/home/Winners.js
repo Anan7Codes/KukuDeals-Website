@@ -15,6 +15,8 @@ export default function Winners({winner}) {
                                     src={winner?.image}
                                     layout="fill"
                                     alt="product logo"
+                                    placeholder='blur'
+                                    blurDataURL={winner?.Image}
                                 />
                             </div>
                         </div>

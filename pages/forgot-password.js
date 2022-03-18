@@ -17,10 +17,9 @@ export default function ForgotPassword() {
         try {
             const { data, error } = supabase.auth.api
                 .resetPasswordForEmail(email, { redirectTo: locale === 'ar' ? 'https://kukudeals.com/ar/reset-password' : 'https://kukudeals.com/reset-password' })
-            console.log("reset", data, error)
             if (error) {
                 toast.error(error.message, {
-                    position: "top-right",
+                    position: i18n.language === 'ar' ? "top-left" : "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -30,8 +29,8 @@ export default function ForgotPassword() {
                 });
                 return
             }
-            toast.success("Reset link sent successfully", {
-                position: "top-right",
+            toast.success(t("reset-link"), {
+                position: i18n.language === 'ar' ? "top-left" : "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,

@@ -24,7 +24,8 @@ export default function PhoneNumber() {
     setLoading(true)
     try {
         const res = await axios.post(`/api/verification/send-verification-code`, {
-            phoneNumber
+            phoneNumber,
+            lang: i18n.language
         })
         if(res.data.success) {
             setEnterCode(true)
@@ -44,8 +45,8 @@ export default function PhoneNumber() {
             code
         })
         if(!res.data.success) {
-            toast.success("Something went wrong!", {
-                position: "top-right",
+            toast.success(t("something-went-wrong"), {
+                position: i18n.language === 'ar' ? "top-left" : "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -56,8 +57,8 @@ export default function PhoneNumber() {
             setLoading(false)
             return
         }
-        toast.success("Verification Successful", {
-            position: "top-right",
+        toast.success(t("verification-successful"), {
+            position: i18n.language === 'ar' ? "top-left" : "top-right",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -92,11 +93,12 @@ export default function PhoneNumber() {
                                 placeholder="Start with country code. Eg: 971507878787"
                             />                          
                         </div>
-                        { !enterCode ?                    
+                        { enterCode ?                    
                             <div className="flex flex-col lg:w-[35%] w-[300px] mt-4 h-16 bg-[#2c2c2c] border rounded-[5px] border-[#d3d3d3]">
                                 <p className="text-[#bebebe] text-xs mx-2 mt-2 font-semibold">{t('code')}:</p>
                                 <input className="bg-[#2c2c2c] border-8 border-[#2c2c2c] text-white text-sm outline-none w-full"
                                     value={code}
+                                    autoComplete="one-time-code"
                                     onChange={e => setCode(e.target.value)}
                                     type="number"
                                     placeholder="Enter your 6 digit code"

@@ -12,8 +12,8 @@ export default function ChangePassword() {
   const ChangePasswordFunction = async ({ newPassword,confirmPassword }) => {
     try {
       if( newPassword !== confirmPassword ) {
-          return toast.error("Passwords do not match", {
-            position: "top-right",
+          return toast.error(t("passwords-do-not-match"), {
+            position: i18n.language === 'ar' ? "top-left" : "top-right",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -25,7 +25,7 @@ export default function ChangePassword() {
       const { error } = await supabase.auth.update({password: newPassword })
       if (error) {
         toast.error(error.message, {
-          position: "top-right",
+          position: i18n.language === 'ar' ? "top-left" : "top-right",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -35,8 +35,8 @@ export default function ChangePassword() {
         });
         return
       }
-      toast.success("Signed in successfully", {
-        position: "top-right",
+      toast.success(t("password-change-success"), {
+        position: i18n.language === 'ar' ? "top-left" : "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,

@@ -21,8 +21,8 @@ export default function ShippingAddress() {
 
   const UpdateShippingAddress = async (values) => {
     if (JSON.stringify(shippingAddress) === JSON.stringify(values)) {
-      toast.info("No change in Shipping Address", {
-        position: "top-right",
+      toast.info(t("no-change-in-address"), {
+        position: i18n.language === 'ar' ? "top-left" : "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -38,7 +38,7 @@ export default function ShippingAddress() {
       });
       if (error) {
         toast.error(error, {
-          position: "top-right",
+          position: i18n.language === 'ar' ? "top-left" : "top-right",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -48,8 +48,8 @@ export default function ShippingAddress() {
         });
         return;
       }
-      toast.success("Succesfully Updated", {
-        position: "top-right",
+      toast.success(t("update-success"), {
+        position: i18n.language === 'ar' ? "top-left" : "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,

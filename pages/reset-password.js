@@ -21,11 +21,9 @@ export default function ResetPassword() {
   const [ password, setPassword ] = useState('');
   const [ confirmPassword, setConfirmPassword ] = useState('');
   const [ accessToken, setAccessToken ] = useState('')
-//   useEffect(() => {
-//     console.log("query", window.location.hash)
-//     console.log('token', window.location.hash.match(new RegExp("#access_token=" + "(.*)" + "&expires"))[1])
-//     setAccessToken(window.location.hash.match(new RegExp("#access_token=" + "(.*)" + "&expires"))[1])
-//    },[])
+  useEffect(() => {
+    setAccessToken(window.location.hash.match(new RegExp("#access_token=" + "(.*)" + "&expires"))[1])
+   },[])
 
 
   const ResetPassword = async () => {
@@ -43,7 +41,6 @@ export default function ResetPassword() {
         }
         const { error, data } = await supabase.auth.api
             .updateUser(accessToken, { password : password })
-        console.log('resetted', error, data)
         if (error) {
             toast.error(error, {
                 position: "top-right",

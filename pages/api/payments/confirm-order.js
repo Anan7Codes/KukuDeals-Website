@@ -124,18 +124,28 @@ const webhookHandler = async (req, res) => {
             await map(coupons, async (item, i) => {
                 const campaign_for_qty = await supabase
                     .from('campaigns')
-                    .select('SoldOutCoupons')
+                    .select('SoldOutCoupons,TotalCoupons')
                     .eq("id", item.product_id)
                     .single()
 
                 if (campaign_for_qty.error) return res.send({ success: false, message: "Campaign Doesn't Exist", error: campaign_for_qty.error })
 
-                const campaign_update_qty = await supabase
+                if(campaign_for_qty.data.SoldOutCoupons + item.product_qty >= campaign_for_qty.data.TotalCoupons) {
+                    const campaign_update_qty = await supabase
+                    .from('campaigns')
+                    .update({ SoldOutCoupons: campaign_for_qty.data.SoldOutCoupons + item.product_qty, SoldOut: true })
+                    .eq("id", item.product_id)
+
+                    if (campaign_update_qty.error) return res.send({ success: false, message: "Campaign Qty Doesn't Exist", error: campaign_update_qty.error })
+                } else {
+                    const campaign_update_qty = await supabase
                     .from('campaigns')
                     .update({ SoldOutCoupons: campaign_for_qty.data.SoldOutCoupons + item.product_qty })
                     .eq("id", item.product_id)
 
-                if (campaign_update_qty.error) return res.send({ success: false, message: "Campaign Qty Doesn't Exist", error: campaign_update_qty.error })
+                    if (campaign_update_qty.error) return res.send({ success: false, message: "Campaign Qty Doesn't Exist", error: campaign_update_qty.error })
+                }
+                
             })
 
             user_id = initiated_orders.data.user_id
@@ -205,7 +215,7 @@ const webhookHandler = async (req, res) => {
                 format: 'A4',
                 footer: function (currentPage, pageCount) {
                     return {
-                        text: "support@kukudeals.com | 08909090 | www.kukudeals.com",
+                        text: "support@kukudeals.com | +971 55 861 0111 | www.kukudeals.com",
                         alignment: 'center', margin: [0, 30, 0, 0], color: "#674736"
                     };
                 },
@@ -222,7 +232,7 @@ const webhookHandler = async (req, res) => {
                             { text: 'TAX INVOICE ', style: 'documentHeaderRightFirst' },
                             { text: 'Shivon General Trading LLC\nBur Dubai, Dubai\n', style: 'documentHeaderRightSecond' },
                             {
-                                text: 'Customer Name:',
+                                text: 'Customer Name: ',
                                 style: 'invoiceSubTitle',
                                 alignment: 'left',
                                 margin: [-328, -110, 0, 0]
@@ -235,7 +245,7 @@ const webhookHandler = async (req, res) => {
                                 margin: [-290, -110, 0, 0]
                             },
                             {
-                                text: 'Invoice No :',
+                                text: 'Invoice No: ',
                                 style: 'invoiceSubTitle',
                                 alignment: 'left',
                                 margin: [-49, -110, 0, 0]
@@ -244,14 +254,14 @@ const webhookHandler = async (req, res) => {
                                 text: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}`,
                                 style: 'invoiceSubValue',
                                 alignment: 'right',
-                                margin: [-200, -110, -11, 0]
+                                margin: [-200, -110, -5, 0]
                             },
                         ]
                     },
                     {
                         columns: [
                             {
-                                text: 'Email :',
+                                text: 'Email: ',
                                 style: 'invoiceSubTitle',
                                 alignment: 'left',
                                 margin: [0, -90, 0, 0]
@@ -263,10 +273,10 @@ const webhookHandler = async (req, res) => {
                                 margin: [-99, -90, 0, 0]
                             },
                             {
-                                text: 'Invoice Date :',
+                                text: 'Invoice Date: ',
                                 style: 'invoiceSubTitle',
                                 alignment: 'right',
-                                margin: [0, -90, -72, 0]
+                                margin: [0, -90, -68, 0]
                             },
                             {
                                 text: today,
@@ -280,7 +290,7 @@ const webhookHandler = async (req, res) => {
                         columns: [
 
                             {
-                                text: 'Order Status:',
+                                text: 'Order Status: ',
                                 style: 'invoiceSubTitle',
                                 alignment: 'right',
                                 margin: [0, -70, -205, 0]

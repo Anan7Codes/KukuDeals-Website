@@ -19,8 +19,8 @@ export default function SignIn() {
         password,
       })
       if (error) {
-        toast.error(error.message === 'Email not confirmed' ? 'Check email to verify account' : error.message, {
-          position: "top-right",
+        toast.error(error.message === 'Email not confirmed' ? t('signed-in-successfully') : error.message, {
+          position: i18n.language === 'ar' ? "top-left" : "top-right",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -31,8 +31,8 @@ export default function SignIn() {
         setLoading(false)
         return
       }
-      toast.success("Signed in successfully", {
-        position: "top-right",
+      toast.success(t('signed-in-successfully'), {
+        position: i18n.language === 'ar' ? "top-left" : "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,

@@ -2,12 +2,24 @@ import Image from "next/image";
 import Switch from "react-switch";
 import { CartState } from "@/contexts/cart/CartContext";
 import { useTranslation } from "next-i18next";
+import { toast } from "react-toastify";
 
 export default function CartItem({ item }) {
   const { t, i18n } = useTranslation()
   const { dispatch } = CartState();
 
   const AddQty = () => {
+    if(item.qty >= (item.TotalCoupons - item.SoldOutCoupons)) {
+      return toast.error(t("sorry-no-coupons"), {
+        position: i18n.language === 'ar' ? "top-left" : "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      });
+    }
     dispatch({
       type: "ADD_QTY",
       payload: item,

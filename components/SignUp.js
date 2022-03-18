@@ -20,8 +20,8 @@ function SignUp() {
     setLoading(true)
     try {
       if (values.password !== values.confirmPassword) {
-        toast.error("Passwords does not match", {
-          position: "top-right",
+        toast.error(t('passwords-do-not-match'), {
+          position: i18n.language === 'ar' ? "top-left" : "top-right",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -51,7 +51,7 @@ function SignUp() {
       )
       if (error) {
         toast.error(error, {
-          position: "top-right",
+          position: i18n.language === 'ar' ? "top-left" : "top-right",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -62,8 +62,8 @@ function SignUp() {
         setLoading(false)
         return
       }
-      toast.success("Successfully signed up. You'll have to verify your email to continue", {
-        position: "top-right",
+      toast.success(t('success-sign-up'), {
+        position: i18n.language === 'ar' ? "top-left" : "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,

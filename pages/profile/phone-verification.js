@@ -38,7 +38,8 @@ export default function PhoneVerify() {
         setLoading(true)
         try {
             const res = await axios.post(`/api/verification/send-verification-code`, {
-                phoneNumber
+                phoneNumber,
+                lang: i18n.language
             })
             if(res.data.success) {
                 setEnterCode(true)
@@ -110,6 +111,7 @@ export default function PhoneVerify() {
                                 <p className="text-[#bebebe] text-xs ml-2 mt-2 mr-2 font-semibold">{t('code')}:</p>
                                 <input className="bg-[#2c2c2c] border-8 border-[#2c2c2c] text-white text-sm outline-none w-full"
                                     value={code}
+                                    autoComplete="one-time-code"
                                     onChange={e => setCode(e.target.value)}
                                     type="number"
                                     placeholder="Enter your 6 digit code"

@@ -14,7 +14,7 @@ export default function Winners({winner}) {
                                 <Image
                                     src={winner?.image}
                                     layout="fill"
-                                    alt="product logo"
+                                    alt="winner product image"
                                 />
                             </div>
                         </div>

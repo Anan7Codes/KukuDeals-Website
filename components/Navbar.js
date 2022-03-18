@@ -27,26 +27,10 @@ function Navbar() {
                 />
               </div>
             </div>
-            {/* <div className="hidden lg:flex items-center space-x-3">
-              <a
-                href=""
-                className="py-4 px-3 text-white font-bold hover:text-[#ffd601]"
-              >
-                WINNERS
-              </a>
-            </div> */}
+
           </div>
           <div className="hidden lg:flex items-center space-x-6 pr-4">
-            {/* <a
-              href=""
-              className="py-4 px-3 text-white font-medium hover:text-[#ffd601]"
-            >
-              Need Help? Contact us
-            </a>
-            <a href="" className="py-4 px-3 font-medium text-[#ffd601]">
-              <b>Call 0800-KUKU</b>
-            </a> */}
-
+   
             <div
               onClick={() => router.locale === 'ar' ? router.push(`${router.asPath}`, undefined, { locale: 'en' }) : router.push(`${router.asPath}`, undefined, { locale: 'ar' }) }
               className={`py-4 px-3 hover:cursor-pointer text-white font-medium hover:text-[#ffd601]`}

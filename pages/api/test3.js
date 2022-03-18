@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import { map } from 'modern-async'
+import { useEffect } from 'react'
 const mail = require('@sendgrid/mail')
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL

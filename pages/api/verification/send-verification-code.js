@@ -10,7 +10,7 @@ export default async function handler(req, res) {
         console.log(req.body)
         client.verify.services('VA9c35e8f467b51d0b2d49f3cc26f69718')
              .verifications
-             .create({to: `+${req.body.phoneNumber}`, channel: 'sms'})
+             .create({locale: req.body.lang === 'ar' ? 'ar' : 'en-GB', to: `+${req.body.phoneNumber}`, channel: 'sms'})
              .then(verification => console.log(verification));
         return res.send({ success: true })
     }

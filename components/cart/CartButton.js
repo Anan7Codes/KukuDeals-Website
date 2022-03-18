@@ -34,7 +34,7 @@ export default function CartButton() {
                 </svg>
                 { cart.length ?
                   <div className=" absolute -top-2 right-0 rounded-full bg-[#ffd601]">
-                    <p className="text-xs font-bold text-black px-2 py-1">{cart.length? cart.length : null}</p>  
+                    <p className="text-xs font-bold text-black px-2 py-1">{cart.length? cart.map(item => item.qty).reduce((tot, qty) => tot + qty) : null}</p>  
                   </div> 
                   :
                   null

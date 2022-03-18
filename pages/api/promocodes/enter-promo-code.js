@@ -34,7 +34,7 @@ const Handler = async (req, res) => {
         
         let promo_codes = await supabase
             .from('promo_codes')
-            .select('value,type,min_amount')
+            .select('value,type,min_amount,max_amount')
             .eq('name', req.body.promoCode)
             .single()
         if(promo_codes.error) {
@@ -51,16 +51,26 @@ const Handler = async (req, res) => {
             .select('promo_codes_used')
             .eq("id", req.body.user_id)
         if(profile.error) {
-            return res.send({ success: false, message: "Something went wrong! Contact Us!"})
+            return res.send({ success: false, message: "Something went wrong! Contact Us!" })
         }
-        if(profile.data[0].promo_codes_used.includes(req.body.promoCode)) {
-            return res.send({ success: false, message: "Promo code has already been used"})
-        }
+
+        let promo_codes_used = profile.data[0].promo_codes_used
+
+        if(profile.data[0].promo_codes_used.length !== 0) {
+            const index = promo_codes_used.findIndex(promo_code_qty => {
+                if (promo_code_qty.includes(req.body.promoCode)) {
+                  return true;
+                }
+            });
+
+            if(parseInt(promo_codes_used[index].split(':::')[1]) >= promo_codes.data.cap) {
+                return res.json({ success: false, messsage: "Promo Code usage limit has been reached" })
+            }
+        } 
 
         const { total, success } = await TotalPrice(req.body.cart)
         if(!success) return res.status(404).json({ success: false, message: "Failed to calculate total amount"})
         if(total < promo_codes.data.min_amount) return res.send({ success: false, message: `Minimum amount for this promo code is AED${promo_codes.data.min_amount}`})
-
         res.send({ success: true, message: `Apply promo code ${req.body.promoCode}?`, data: promo_codes.data})
     }
 }

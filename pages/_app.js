@@ -3,13 +3,14 @@ import { appWithTranslation } from 'next-i18next'
 import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion"
 import { ToastContainer } from 'react-toastify';
 import { animations } from "@/utils/animation"
+import { useTranslation } from "next-i18next";
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-loading-skeleton/dist/skeleton.css'
 import CartContext from '@/contexts/cart/CartContext';
 import UserProvider from '@/contexts/user/UserContext';
 
 function MyApp({ Component, pageProps, router }) {
-
+  const { i18n } = useTranslation()
   return (
     <UserProvider>
       <CartContext>
@@ -25,7 +26,8 @@ function MyApp({ Component, pageProps, router }) {
               transition={animations[0].transition}
             >
               <Component {...pageProps} />
-              <ToastContainer theme='dark' rtl/>
+              {i18n.language === 'ar' ? <ToastContainer theme='dark' rtl/> : <ToastContainer theme='dark'/> }
+              
             </m.div>
           </AnimatePresence>
         </LazyMotion>

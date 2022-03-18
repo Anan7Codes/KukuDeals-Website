@@ -43,9 +43,19 @@ export default function Payment() {
             if(confirm(`${res.data.message}`) == true) {
                 setPromoCodeApplied(true)
                 if(res.data.data.type) {
-                    setClientTotal(clientTotal - res.data.data.value)
+                    const tot = clientTotal - res.data.data.value
+                    if(tot < res.data.data.max_amount) {
+                        setClientTotal(tot)
+                    } else {
+                        setClientTotal(clientTotal - res.data.data.max_amount)
+                    }
                 } else {
-                    setClientTotal(clientTotal - (clientTotal * res.data.data.value / 100))
+                    const tot = clientTotal - (clientTotal * res.data.data.value / 100)
+                    if(tot < res.data.data.max_amount) {
+                        setClientTotal(tot)
+                    } else {
+                        setClientTotal(clientTotal - res.data.data.max_amount)
+                    }
                 }
             } else {
                 setPromoCodeApplied(false)

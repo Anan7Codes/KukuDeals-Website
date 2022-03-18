@@ -56,7 +56,7 @@ function SignUp() {
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
-          draggable: true,
+          draggable: true, 
           progress: undefined,
         });
         setLoading(false)
@@ -83,9 +83,7 @@ function SignUp() {
     <>
       <div className="bg-[#2c2c2c] my-3 flex justify-center items-center rounded-[15px] w-full h-full" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
         <div className="h-full w-full mt-20 lg:mt-16">
-          <div className="flex lg:justify-center">
-            <p className="text-3xl text-[#ffd601] font-semibold font-title text-center">{t('sign-up')}</p>
-          </div>
+          <p className="text-3xl text-[#ffd601] font-semibold font-title text-center">{t('sign-up')}</p>
           <div
             className="lg:flex lg:justify-center pb-6 m-4"
           >

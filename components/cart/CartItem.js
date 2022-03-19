@@ -56,7 +56,7 @@ export default function CartItem({ item }) {
   return (
     <div>
       <div className="bg-[#2c2c2c] flex items-center lg:justify-start h-44 rounded-t-[15px] mt-2">
-        <div className="cursor-pointer rounded-[10px] object-fit -left-2 relative ml-4 lg:ml-10 mt-2 w-32 h-32">
+        <div className="cursor-pointer rounded-[10px] object-fit -left-2 relative ml-4 lg:ml-10 mt-2 w-40 h-32">
           <Image src={item?.Image} layout="fill" alt="product logo" />
         </div>
         <div className="flex flex-col lg:flex-row justify-between w-[100%] pl-1 pr-8 pt-2">

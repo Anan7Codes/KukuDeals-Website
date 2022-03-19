@@ -17,12 +17,14 @@ export default function Payment() {
 
     const [ promoCode, setPromoCode ] = useState('')
     const [ promoCodeApplied, setPromoCodeApplied ] = useState(false)
+    const [ promoResp, setPromoResp ] = useState({}) 
     const [ total, setTotal ] = useState(0)
     const [ clientTotal, setClientTotal ] = useState(0)
     const { state: { cart } } = CartState();
-
     const [ loading, setLoading ] = useState(false);
     const [ promoLoading, setPromoLoading ] = useState(false);
+
+    
 
     const EnterPromoCode = async () => { 
         setPromoLoading(true)
@@ -32,6 +34,7 @@ export default function Payment() {
                 user_id: user.id,
                 cart: cart
             })
+            console.log("res", res)
             setPromoLoading(false)
             if(!res.data.success) {
                 alert(`Error: ${res.data.message}`)
@@ -42,6 +45,7 @@ export default function Payment() {
 
             if(confirm(`${res.data.message}`) == true) {
                 setPromoCodeApplied(true)
+                setPromoResp(res.data.data)
                 if(res.data.data.type) {
                     const tot = clientTotal - res.data.data.value
                     if(tot < res.data.data.max_amount) {
@@ -62,7 +66,7 @@ export default function Payment() {
             }
             setPromoLoading(false)
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
@@ -73,7 +77,25 @@ export default function Payment() {
 
     useEffect(() => {
         setTotal(cart.reduce((acc, curr) => acc + Number(curr.Price) * curr.qty, 0))
-        setClientTotal(cart.reduce((acc, curr) => acc + Number(curr.Price) * curr.qty, 0))
+        const CalculatePromoValue = async (total) => {
+            if(!total) return
+            if(promoResp.type) {
+                const tot = total - promoResp.value
+                if(tot < promoResp.max_amount) {
+                    setClientTotal(tot)
+                } else {
+                    setClientTotal(total - promoResp.max_amount)
+                }
+            } else {
+                const tot = total - (total * promoResp.value / 100)
+                if(tot < promoResp.max_amount) {
+                    setClientTotal(tot)
+                } else {
+                    setClientTotal(clientTotal - promoResp.max_amount)
+                }
+            }
+        }
+        promoCodeApplied ? CalculatePromoValue(cart.reduce((acc, curr) => acc + Number(curr.Price) * curr.qty, 0)) : setClientTotal(cart.reduce((acc, curr) => acc + Number(curr.Price) * curr.qty, 0))
     }, [cart])
 
     const CheckOutSession = async () => {
@@ -165,7 +187,7 @@ export default function Payment() {
                         <div className="flex items-center justify-center">
                             <input
                             placeholder="Promo Code"
-                            className={`border border-[#161616] bg-[#161616] text-white ${i18n.language === 'ar' ? 'pr-3' : 'pl-3'} my-4 outline-none text-xs rounded w-[70%] h-11`}
+                            className={`border border-[#161616] uppercase bg-[#161616] text-white ${i18n.language === 'ar' ? 'pr-3' : 'pl-3'} my-4 outline-none text-xs rounded w-[70%] h-11`}
                             value={promoCode}
                             onChange={e => setPromoCode(e.target.value)}
                             />

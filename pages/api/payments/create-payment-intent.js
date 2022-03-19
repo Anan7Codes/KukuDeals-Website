@@ -110,8 +110,8 @@ export default async function handler(req, res) {
             .insert([
                 { 
                     cart: req.body.cart, 
-                    amount: donated ? total : total + 35, 
-                    final_amount: donated ? finalTotal : finalTotal + 35,
+                    amount: donated ? total.toFixed() : total.toFixed() + 35, 
+                    final_amount: donated ? finalTotal.toFixed() : finalTotal.toFixed() + 35,
                     verification_secret: paymentIntent.id,
                     user_id: req.body.user_id,
                     promo_code_used: req.body.promoCode

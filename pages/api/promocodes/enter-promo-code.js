@@ -34,7 +34,7 @@ const Handler = async (req, res) => {
         
         let promo_codes = await supabase
             .from('promo_codes')
-            .select('value,type,min_amount,max_amount')
+            .select('value,type,min_amount,max_amount,cap')
             .eq('name', req.body.promoCode)
             .single()
         if(promo_codes.error) {
@@ -56,6 +56,7 @@ const Handler = async (req, res) => {
 
         let promo_codes_used = profile.data[0].promo_codes_used
 
+        console.log("epc length", profile.data[0].promo_codes_used.length)
         if(profile.data[0].promo_codes_used.length !== 0) {
             const index = promo_codes_used.findIndex(promo_code_qty => {
                 if (promo_code_qty.includes(req.body.promoCode)) {
@@ -63,8 +64,10 @@ const Handler = async (req, res) => {
                 }
             });
 
+            console.log("EPC index", index, "cap", parseInt(promo_codes_used[index].split(':::')[1]) >= promo_codes.data.cap)
+
             if(parseInt(promo_codes_used[index].split(':::')[1]) >= promo_codes.data.cap) {
-                return res.json({ success: false, messsage: "Promo Code usage limit has been reached" })
+                return res.json({ success: false, message: "Promo Code usage limit has been reached" })
             }
         } 
 

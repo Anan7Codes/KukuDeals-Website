@@ -112,22 +112,59 @@ const webhookHandler = async (req, res) => {
             if (initiated_orders.data.promo_code_used) {
 
                 let promo_codes_used = profile.data[0].promo_codes_used
-                promo_codes_used.push(initiated_orders.data.promo_code_used)
+                if(profile.data[0].promo_codes_used.length === 0) {
+                    promo_codes_used.push(initiated_orders.data.promo_code_used + ":::" + 1)
+                    console.log("pcu1", promo_codes_used)
+                    const { error } = await supabase
+                        .from('profiles')
+                        .update({ promo_codes_used: promo_codes_used })
+                        .eq('id', initiated_orders.data.user_id)
+                    if(error) {
+                        return res.json({ success: false, message: "Something went wrong while updating promo code"})
+                    }
+                } else {
+                    let promo_codes = await supabase
+                        .from('promo_codes')
+                        .select('value,type,min_amount,max_amount,cap')
+                        .eq('name', initiated_orders.data.promo_code_used)
+                        .single()
 
-                const updated_promo_codes = await supabase
-                    .from('profiles')
-                    .update({ promo_codes_used: promo_codes_used })
-                    .eq('id', initiated_orders.data.user_id)
-                if (updated_promo_codes.error) return res.send({ success: false, message: "Promo Code Update Error", error: updated_promo_codes.error })
+                    const index = promo_codes_used.findIndex(promo_code_qty => {
+                        if (promo_code_qty.includes(initiated_orders.data.promo_code_used)) {
+                          return true;
+                        }
+                    });
+        
+                    if(parseInt(promo_codes_used[index].split(':::')[1]) >= promo_codes.data.cap) {
+                        return res.json({ success: false, messsage: "Promo Code usage limit has been reached" })
+                    }
+        
+                    promo_codes_used[index] = promo_codes_used[index].split(':::')[0] + ":::" + (parseInt(promo_codes_used[index].split(':::')[1]) + 1)
+                    const { error } = await supabase
+                        .from('profiles')
+                        .update({ promo_codes_used: promo_codes_used })
+                        .eq('id', initiated_orders.data.user_id)
+                    if(error) {
+                        return res.json({ success: false, message: "Something went wrong while updating promo code" })
+                    }
+                }
+                // promo_codes_used.push(initiated_orders.data.promo_code_used)
+
+                // const updated_promo_codes = await supabase
+                //     .from('profiles')
+                //     .update({ promo_codes_used: promo_codes_used })
+                //     .eq('id', initiated_orders.data.user_id)
+                // if (updated_promo_codes.error) return res.send({ success: false, message: "Promo Code Update Error", error: updated_promo_codes.error })
             }
 
             await map(coupons, async (item, i) => {
+                console.log("item", item, "type", typeof(item))
                 const campaign_for_qty = await supabase
                     .from('campaigns')
                     .select('SoldOutCoupons,TotalCoupons')
                     .eq("id", item.product_id)
                     .single()
-
+                console.log("cfq", campaign_for_qty)
                 if (campaign_for_qty.error) return res.send({ success: false, message: "Campaign Doesn't Exist", error: campaign_for_qty.error })
 
                 if(campaign_for_qty.data.SoldOutCoupons + item.product_qty >= campaign_for_qty.data.TotalCoupons) {
@@ -136,6 +173,7 @@ const webhookHandler = async (req, res) => {
                     .update({ SoldOutCoupons: campaign_for_qty.data.SoldOutCoupons + item.product_qty, SoldOut: true })
                     .eq("id", item.product_id)
 
+                    console.log("cuq", campaign_update_qty)
                     if (campaign_update_qty.error) return res.send({ success: false, message: "Campaign Qty Doesn't Exist", error: campaign_update_qty.error })
                 } else {
                     const campaign_update_qty = await supabase
@@ -143,6 +181,7 @@ const webhookHandler = async (req, res) => {
                     .update({ SoldOutCoupons: campaign_for_qty.data.SoldOutCoupons + item.product_qty })
                     .eq("id", item.product_id)
 
+                    console.log("cuq2", campaign_update_qty)
                     if (campaign_update_qty.error) return res.send({ success: false, message: "Campaign Qty Doesn't Exist", error: campaign_update_qty.error })
                 }
                 
@@ -162,7 +201,7 @@ const webhookHandler = async (req, res) => {
             today = dd + '/' + mm + '/' + yyyy;
             var headers = {
                 fila_0: {
-                    col_1: { text: 'SL', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [0, 10, 0, 0] },
+                    col_1: { text: 'SL No.', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [0, 10, 0, 0] },
                     col_2: { text: 'Product(s)', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
                     col_3: { text: 'Quantity', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
                     col_4: { text: 'UnitPrice', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [10, 10, 10, 10] },
@@ -466,8 +505,8 @@ const webhookHandler = async (req, res) => {
                             dynamicTemplateData: {
                                 transactionNumber: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}`,
                                 purchaseDate: `${new Date().toLocaleString()}`,
-                                totalBeforeVat: `AED ${(amount * 0.95).toString()}`,
-                                vatAmount: `AED ${(amount * 0.05).toString()}`,
+                                totalBeforeVat: `AED ${(amount * 0.95).toFixed(2).toString()}`,
+                                vatAmount: `AED ${(amount * 0.05).toFixed(2).toString()}`,
                                 total: `AED ${(amount).toString()}`,
                             }
                         },

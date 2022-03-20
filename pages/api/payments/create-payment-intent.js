@@ -37,18 +37,27 @@ export default async function handler(req, res) {
         // if(!user) return res.status(401).send({ success: false, message: "Unauthorized"})
 
         const { total, success, donated } = await TotalPrice(req.body.cart)
-        if(!success) return res.status(404).json({ success: false, message: "Failed to calculate total amount"})
+        if(!success) return res.status(404).json({ success: false, message: "Failed to calculate total amount" })
 
         let finalTotal = total
         if(req.body.promoCode) {
             let promo_code = await supabase
                 .from('promo_codes')
-                .select('type,value')
+                .select('type,value,max_amount')
                 .eq("name", req.body.promoCode)
             if(promo_code.data[0].type) {
-                finalTotal = total - promo_code.data[0].value
+                if((total - promo_code.data[0].value) < promo_code.data[0].max_amount) {
+                    finalTotal = total - promo_code.data[0].value
+                } else {
+                    finalTotal = total - promo_code.data[0].max_amount
+                }
+                
             } else {
-                finalTotal = total - (total * promo_code.data[0].value / 100)
+                if((finalTotal = total - (total * promo_code.data[0].value / 100)) < promo_code.data[0].max_amount) {
+                    finalTotal = total - (total * promo_code.data[0].value / 100)
+                } else {
+                    finalTotal = total - promo_code.data[0].max_amount
+                }                
             }
 
             let profile = await supabase
@@ -58,9 +67,19 @@ export default async function handler(req, res) {
             if(profile.error) {
                 return res.send({ success: false, message: "Something went wrong! Contact Us!"})
             }
-            if(profile.data[0].promo_codes_used.includes(req.body.promoCode)) {
-                return res.send({ success: false, message: "Promo code has already been used"})
-            }
+
+            let promo_codes_used = profile.data[0].promo_codes_used
+            if(profile.data[0].promo_codes_used.length !== 0) {
+                const index = promo_codes_used.findIndex(promo_code_qty => {
+                    if (promo_code_qty.includes(req.body.promoCode)) {
+                      return true;
+                    }
+                });
+    
+                if(parseInt(promo_codes_used[index].split(':::')[1]) >= promo_code.data[0].cap) {
+                    return res.json({ success: false, messsage: "Promo Code usage limit has been reached" })
+                }
+            } 
         }
 
         console.log("Amount log" + total, success, donated, donated ? finalTotal.toFixed() * 100 : (finalTotal+35).toFixed() * 100)
@@ -91,8 +110,8 @@ export default async function handler(req, res) {
             .insert([
                 { 
                     cart: req.body.cart, 
-                    amount: donated ? total : total + 35, 
-                    final_amount: donated ? finalTotal : finalTotal + 35,
+                    amount: donated ? total.toFixed() : total.toFixed() + 35, 
+                    final_amount: donated ? finalTotal.toFixed() : finalTotal.toFixed() + 35,
                     verification_secret: paymentIntent.id,
                     user_id: req.body.user_id,
                     promo_code_used: req.body.promoCode

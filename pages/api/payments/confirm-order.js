@@ -76,6 +76,9 @@ const webhookHandler = async (req, res) => {
                 .from('completed_orders')
                 .select('*', { count: 'exact' })
 
+            let finished_orders = await supabase
+                .from('finished_draw_orders')
+                .select('*', { count: 'exact' })
             let ordered_coupons = []
             let donated_coupons = []
             let coupons = []
@@ -83,11 +86,11 @@ const webhookHandler = async (req, res) => {
             await map(initiated_orders.data.cart, async (order, index) => {
                 coupons.push({ product_id: JSON.parse(order).id, product_coupons: [], product_qty: JSON.parse(order).qty, product_price: JSON.parse(order).Price, name: JSON.parse(order).ProductName.en + "/" + JSON.parse(order).GiftName.en, image: JSON.parse(order).Image })
                 for (let i = 1; i <= JSON.parse(order).qty; i++) {
-                    ordered_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length + 1}O`)
-                    coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}O`)
+                    ordered_coupons.push(`KUKU${String(finished_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length + 1}O`)
+                    coupons[index].product_coupons.push(`KUKU${String(finished_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}O`)
                     if (JSON.parse(order).donate === "true") {
-                        donated_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}D`)
-                        coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}D`)
+                        donated_coupons.push(`KUKU${String(finished_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}D`)
+                        coupons[index].product_coupons.push(`KUKU${String(finished_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}D`)
                     }
                 }
             })
@@ -99,7 +102,7 @@ const webhookHandler = async (req, res) => {
                         coupons,
                         user_id: initiated_orders.data.user_id,
                         final_amount: initiated_orders.data.final_amount,
-                        transaction_number: completed_orders.count + 1
+                        transaction_number: finished_orders.count + 1
                     },
                 ])
             if (error) return res.send({ success: false, message: "Completed orders insertion error", error: data.error })
@@ -290,7 +293,7 @@ const webhookHandler = async (req, res) => {
                                 margin: [-49, -110, 0, 0]
                             },
                             {
-                                text: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}`,
+                                text: `KUKU${String(finished_orders.count + 1).padStart(7, '0')}`,
                                 style: 'invoiceSubValue',
                                 alignment: 'right',
                                 margin: [-200, -110, -5, 0]
@@ -503,7 +506,7 @@ const webhookHandler = async (req, res) => {
                             to: [`${profile.data[0].email}`, 'kukudealsdev@gmail.com'],
                             subject: 'Order Confirmation',
                             dynamicTemplateData: {
-                                transactionNumber: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}`,
+                                transactionNumber: `KUKU${String(finished_orders.count + 1).padStart(7, '0')}`,
                                 purchaseDate: `${new Date().toLocaleString()}`,
                                 totalBeforeVat: `AED ${(amount * 0.95).toFixed(2).toString()}`,
                                 vatAmount: `AED ${(amount * 0.05).toFixed(2).toString()}`,
@@ -514,7 +517,7 @@ const webhookHandler = async (req, res) => {
                     attachments: [
                         {
                             content: result.toString('base64'),
-                            filename: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}.pdf`,
+                            filename: `KUKU${String(finished_orders.count + 1).padStart(7, '0')}.pdf`,
                             type: 'application/pdf',
                             disposition: 'attachment',
                             content_id: 'mytext',

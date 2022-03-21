@@ -114,7 +114,7 @@ export default async function handler(req, res) {
                     { 
                         cart: req.body.cart, 
                         amount: donated ? total.toFixed() : total.toFixed() + 35, 
-                        final_amount: donated ? finalTotal.toFixed() : finalTotal.toFixed + 35,
+                        final_amount: donated ? finalTotal.toFixed() : finalTotal.toFixed() + 35,
                         verification_secret: session.payment_intent,
                         user_id: req.body.user_id,
                         promo_code_used: req.body.promoCode

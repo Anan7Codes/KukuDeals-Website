@@ -30,10 +30,9 @@ const Handler = async (req, res) => {
         // const { user } = await supabase.auth.api.getUserByCookie(req)
         // console.log("user cookie promo code", user)
         // if(!user) return res.status(401).send({ success: false, message: "Unauthorized"})
-        let completed_orders = await supabase
-                .from('completed_orders')
-                .select('*', { count: 'exact' })
-        return res.json({ completed_orders })
+        const date = new Date()
+
+        return res.json({ uaeDate: `${date.getFullYear()}` + `${date.getMonth()+1}` + `${date.getDate()}` })
     }
 }
 

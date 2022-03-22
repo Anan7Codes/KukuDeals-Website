@@ -22,9 +22,7 @@ export default function Payment() {
     const [ clientTotal, setClientTotal ] = useState(0)
     const { state: { cart } } = CartState();
     const [ loading, setLoading ] = useState(false);
-    const [ promoLoading, setPromoLoading ] = useState(false);
-
-    
+    const [ promoLoading, setPromoLoading ] = useState(false);   
 
     const EnterPromoCode = async () => { 
         setPromoLoading(true)
@@ -107,7 +105,7 @@ export default function Payment() {
                 cart: cart,
                 locale: locale
             })
-
+            console.log("cs", response)
             if(!response.data.success) return alert(response.data.message)
             router.push(response.data.url)
             setLoading(false)

@@ -103,7 +103,7 @@ const webhookHandler = async (req, res) => {
                         coupons,
                         user_id: initiated_orders.data.user_id,
                         final_amount: initiated_orders.data.final_amount,
-                        transaction_number: completed_orders.count + 1
+                        transaction_number: `${completed_orders.count + 1}-${todayDate}`
                     },
                 ])
             console.log("Completed orders insertion error", data, error)
@@ -115,7 +115,6 @@ const webhookHandler = async (req, res) => {
                 .eq("id", initiated_orders.data.user_id)
             console.log("profile", profile)
             if (initiated_orders.data.promo_code_used) {
-
                 let promo_codes_used = profile.data[0].promo_codes_used
                 if(profile.data[0].promo_codes_used.length === 0) {
                     promo_codes_used.push(initiated_orders.data.promo_code_used + ":::" + 1)
@@ -155,13 +154,6 @@ const webhookHandler = async (req, res) => {
                         return res.json({ success: false, message: "Something went wrong while updating promo code" })
                     }
                 }
-                // promo_codes_used.push(initiated_orders.data.promo_code_used)
-
-                // const updated_promo_codes = await supabase
-                //     .from('profiles')
-                //     .update({ promo_codes_used: promo_codes_used })
-                //     .eq('id', initiated_orders.data.user_id)
-                // if (updated_promo_codes.error) return res.send({ success: false, message: "Promo Code Update Error", error: updated_promo_codes.error })
             }
 
             await map(coupons, async (item, i) => {
@@ -297,7 +289,7 @@ const webhookHandler = async (req, res) => {
                                 margin: [-49, -110, 0, 0]
                             },
                             {
-                                text: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${todayDate}`,
+                                text: `${String(completed_orders.count + 1).padStart(4, '0')}-${todayDate}`,
                                 style: 'invoiceSubValue',
                                 alignment: 'right',
                                 margin: [-200, -110, -5, 0]

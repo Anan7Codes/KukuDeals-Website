@@ -105,12 +105,12 @@ export default function Payment() {
                 cart: cart,
                 locale: locale
             })
-            console.log("cs", response)
+
             if(!response.data.success) return alert(response.data.message)
             router.push(response.data.url)
             setLoading(false)
         } catch (e) {
-            console.log("checkout", e)
+            alert("checkout", e)
         }
     };
 
@@ -119,7 +119,7 @@ export default function Payment() {
             <div className="bg-[#2c2c2c] rounded-[15px] mb-4 mt-3 p-5 leading-extra-loose h-50">
                 <div className="flex text-2xl font-bold justify-between pb-6 text-white">
                     <p>{t('total')}</p>
-                    <p className="pt-2 text-white absolute pl-16 lg:pl-0 lg:mt-6 text-sm font-normal">
+                    <p className="pt-2 text-white absolute pl-16 lg:pl-0 lg:mt-6 text-xs lg:text-sm font-normal">
                         ({t('inclusive')})
                     </p>
                     <p>{t('aed')} {promoCodeApplied ? cart.some( c => c.donate === "false" ) ? (clientTotal + 35).toFixed(2) : clientTotal.toFixed(2) : cart.some( c => c.donate === "false" ) ? (total + 35).toFixed(2) : total.toFixed(2)}</p>

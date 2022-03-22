@@ -26,6 +26,7 @@ const TotalPrice = async (cart) => {
 
 export default async function handler(req, res) {
 	if (req.method === 'POST') {
+        console.log("cs req body", req.body)
 		try {
             if(req.body.user_id === '') return res.send({ success: false, message: "Unauthorized"})
 

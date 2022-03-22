@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import Head from 'next/head'
 import { appWithTranslation } from 'next-i18next'
 import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion"
 import { ToastContainer } from 'react-toastify';
@@ -25,6 +26,9 @@ function MyApp({ Component, pageProps, router }) {
               variants={animations[0].variants}
               transition={animations[0].transition}
             >
+              <Head>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+              </Head>
               <Component {...pageProps} />
               {i18n.language === 'ar' ? <ToastContainer theme='dark' rtl/> : <ToastContainer theme='dark'/> }
               

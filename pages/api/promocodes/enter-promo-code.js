@@ -25,7 +25,6 @@ const Handler = async (req, res) => {
         return res.send({ success: false, message: 'Wrong request made'})
     }
     if(req.method === 'POST') {
-        console.log(req.body)
         if(req.body.promoCode === '') return res.send({ success: false, message: "Please enter a value"})
         if(req.body.user_id === '') return res.send({ success: false, message: "Unauthorized"})
         // const { user } = await supabase.auth.api.getUserByCookie(req)

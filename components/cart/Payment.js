@@ -32,7 +32,6 @@ export default function Payment() {
                 user_id: user.id,
                 cart: cart
             })
-            console.log("res", res)
             setPromoLoading(false)
             if(!res.data.success) {
                 alert(`Error: ${res.data.message}`)

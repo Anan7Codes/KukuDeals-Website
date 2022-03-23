@@ -139,20 +139,36 @@ const webhookHandler = async (req, res) => {
                           return true;
                         }
                     });
-        
-                    if(parseInt(promo_codes_used[index].split(':::')[1]) >= promo_codes.data.cap) {
-                        return res.json({ success: false, messsage: "Promo Code usage limit has been reached" })
-                    }
-        
-                    promo_codes_used[index] = promo_codes_used[index].split(':::')[0] + ":::" + (parseInt(promo_codes_used[index].split(':::')[1]) + 1)
-                    const { error } = await supabase
-                        .from('profiles')
-                        .update({ promo_codes_used: promo_codes_used })
-                        .eq('id', initiated_orders.data.user_id)
+
+
+                    if(index !== -1) {
+                        if(parseInt(promo_codes_used[index].split(':::')[1]) >= promo_codes.data.cap) {
+                            return res.json({ success: false, messsage: "Promo Code usage limit has been reached" })
+                        }
+
+                        promo_codes_used[index] = promo_codes_used[index].split(':::')[0] + ":::" + (parseInt(promo_codes_used[index].split(':::')[1]) + 1)
+                        const { error } = await supabase
+                            .from('profiles')
+                            .update({ promo_codes_used: promo_codes_used })
+                            .eq('id', initiated_orders.data.user_id)
+                            console.log("Something went wrong while updating promo code", error)
+                        
+                        if(error) {
+                            return res.json({ success: false, message: "Something went wrong while updating promo code" })
+                        }
+                    } else {
+                        promo_codes_used.push(initiated_orders.data.promo_code_used + ":::" + 1)
+                        console.log("new pc push", promo_codes_used)
+                        const { error } = await supabase
+                            .from('profiles')
+                            .update({ promo_codes_used: promo_codes_used })
+                            .eq('id', initiated_orders.data.user_id)
                         console.log("Something went wrong while updating promo code", error)
-                    if(error) {
-                        return res.json({ success: false, message: "Something went wrong while updating promo code" })
-                    }
+                        if(error) {
+                            return res.json({ success: false, message: "Something went wrong while updating promo code"})
+                        }
+                    }                                      
+                    
                 }
             }
 

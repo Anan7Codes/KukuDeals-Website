@@ -46,12 +46,7 @@ export default async function handler(req, res) {
                 .select('type,value,max_amount')
                 .eq("name", req.body.promoCode)
             if(promo_code.data[0].type) {
-                if((total - promo_code.data[0].value) < promo_code.data[0].max_amount) {
-                    finalTotal = total - promo_code.data[0].value
-                } else {
-                    finalTotal = total - promo_code.data[0].max_amount
-                }
-                
+                finalTotal = total - promo_code.data[0].value                
             } else {
                 if((finalTotal = total - (total * promo_code.data[0].value / 100)) < promo_code.data[0].max_amount) {
                     finalTotal = total - (total * promo_code.data[0].value / 100)
@@ -76,9 +71,11 @@ export default async function handler(req, res) {
                     }
                 });
     
-                if(parseInt(promo_codes_used[index].split(':::')[1]) >= promo_code.data[0].cap) {
-                    return res.json({ success: false, messsage: "Promo Code usage limit has been reached" })
-                }
+                if(index !== -1) {
+                    if(parseInt(promo_codes_used[index].split(':::')[1]) >= promo_code.data[0].cap) {
+                        return res.json({ success: false, messsage: "Promo Code usage limit has been reached" })
+                    }
+                }                
             } 
         }
 

@@ -108,7 +108,7 @@ function Success() {
           />
           <p className='font-title text-[#ffd601] text-4xl lg:text-5xl font-semibold'>{t('congratulations')}</p>
           <p className='text-[#fff] text-xl lg:text-2xl leading-tight'>{t('order-success')}</p>
-          <p className='text-[#fff] mt-4 text-md lg:text-lg'>{t('your-transaction-number')} <span className="font-bold">{`KUKU${String(latestOrder?.transaction_number).padStart(7, '0')}`}</span> &amp; {t('total-amount-paid-is')} <span className="font-bold">{t('aed')} {latestOrder?.final_amount}</span>.</p>
+          <p className='text-[#fff] mt-4 text-md lg:text-lg'>{t('your-transaction-number')} <span className="font-bold">{`${String(latestOrder?.transaction_number).padStart(4, '0')}`}</span> &amp; {t('total-amount-paid-is')} <span className="font-bold">{t('aed')} {latestOrder?.final_amount}</span>.</p>
           <p className='text-[#fff] mt-4 text-md lg:text-lg'>{t('your-coupons-are')}:
           {latestOrder?.coupons.map(coupon => {
             return (

@@ -63,11 +63,15 @@ const Handler = async (req, res) => {
                 }
             });
 
-            console.log("EPC index", index, "cap", parseInt(promo_codes_used[index].split(':::')[1]) >= promo_codes.data.cap)
-
-            if(parseInt(promo_codes_used[index].split(':::')[1]) >= promo_codes.data.cap) {
-                return res.json({ success: false, message: "Promo Code usage limit has been reached" })
+            if(index !== -1) {
+                console.log("EPC index", index, "cap", parseInt(promo_codes_used[index].split(':::')[1]) >= promo_codes.data.cap)
+                
+                if(parseInt(promo_codes_used[index].split(':::')[1]) >= promo_codes.data.cap) {
+                    return res.json({ success: false, message: "Promo Code usage limit has been reached" })
+                }
             }
+
+            
         } 
 
         const { total, success } = await TotalPrice(req.body.cart)

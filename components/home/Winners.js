@@ -11,11 +11,7 @@ export default function Winners({winner}) {
                     <div className="relative">
                         <div className="cursor-pointer absolute top-0 left-14 hover:shadow-outline">
                             <div className="w-48 h-48 relative">
-                                <Image
-                                    src={winner?.image}
-                                    layout="fill"
-                                    alt="winner product image"
-                                />
+                                <Image src={winner?.image} layout="fill" alt="winner product image"/>
                             </div>
                         </div>
                     </div>

@@ -25,6 +25,8 @@ const endpointSecret = process.env.WEBHOOK_SECRET
 
 mail.setApiKey(process.env.SENDGRID_API_KEY)
 let amount
+const sysDate = new Date()
+const todayDate = `${sysDate.getFullYear()}` + `${sysDate.getMonth()+1}` + `${sysDate.getDate()}` 
 
 export const config = {
     api: {
@@ -72,22 +74,24 @@ const webhookHandler = async (req, res) => {
                 .eq("verification_secret", charge.payment_intent)
                 // .eq("status", true)
                 .single()
+            console.log("initiated orders", initiated_orders)
             let completed_orders = await supabase
                 .from('completed_orders')
                 .select('*', { count: 'exact' })
+            console.log("completed orders", completed_orders)
 
             let ordered_coupons = []
             let donated_coupons = []
             let coupons = []
 
             await map(initiated_orders.data.cart, async (order, index) => {
-                coupons.push({ product_id: JSON.parse(order).id, product_coupons: [], product_qty: JSON.parse(order).qty, product_price: JSON.parse(order).Price, name: JSON.parse(order).ProductName.en + "/" + JSON.parse(order).GiftName.en, image: JSON.parse(order).Image })
+                coupons.push({ product_id: JSON.parse(order).id, product_coupons: [], product_qty: JSON.parse(order).qty, product_price: JSON.parse(order).Price, name: JSON.parse(order).ProductName.en + "/" + JSON.parse(order).GiftName.en, image: JSON.parse(order).Image, donated: JSON.parse(order).donate })
                 for (let i = 1; i <= JSON.parse(order).qty; i++) {
-                    ordered_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length + 1}O`)
-                    coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}O`)
+                    ordered_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${todayDate}-${ordered_coupons.length + 1}O`)
+                    coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${todayDate}-${ordered_coupons.length}O`)
                     if (JSON.parse(order).donate === "true") {
-                        donated_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}D`)
-                        coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${ordered_coupons.length}D`)
+                        donated_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${todayDate}-${ordered_coupons.length}D`)
+                        coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${todayDate}-${ordered_coupons.length}D`)
                     }
                 }
             })
@@ -99,18 +103,18 @@ const webhookHandler = async (req, res) => {
                         coupons,
                         user_id: initiated_orders.data.user_id,
                         final_amount: initiated_orders.data.final_amount,
-                        transaction_number: completed_orders.count + 1
+                        transaction_number: `${completed_orders.count + 1}-${todayDate}`
                     },
                 ])
+            console.log("Completed orders insertion error", data, error)
             if (error) return res.send({ success: false, message: "Completed orders insertion error", error: data.error })
 
             let profile = await supabase
                 .from('profiles')
                 .select('promo_codes_used, name, email')
                 .eq("id", initiated_orders.data.user_id)
-
+            console.log("profile", profile)
             if (initiated_orders.data.promo_code_used) {
-
                 let promo_codes_used = profile.data[0].promo_codes_used
                 if(profile.data[0].promo_codes_used.length === 0) {
                     promo_codes_used.push(initiated_orders.data.promo_code_used + ":::" + 1)
@@ -119,6 +123,7 @@ const webhookHandler = async (req, res) => {
                         .from('profiles')
                         .update({ promo_codes_used: promo_codes_used })
                         .eq('id', initiated_orders.data.user_id)
+                    console.log("Something went wrong while updating promo code", error)
                     if(error) {
                         return res.json({ success: false, message: "Something went wrong while updating promo code"})
                     }
@@ -128,25 +133,42 @@ const webhookHandler = async (req, res) => {
                         .select('value,type,min_amount,max_amount,cap')
                         .eq('name', initiated_orders.data.promo_code_used)
                         .single()
-
+                    console.log("promo_codes", promo_codes)
                     const index = promo_codes_used.findIndex(promo_code_qty => {
                         if (promo_code_qty.includes(initiated_orders.data.promo_code_used)) {
                           return true;
                         }
                     });
-        
-                    if(parseInt(promo_codes_used[index].split(':::')[1]) >= promo_codes.data.cap) {
-                        return res.json({ success: false, messsage: "Promo Code usage limit has been reached" })
-                    }
-        
-                    promo_codes_used[index] = promo_codes_used[index].split(':::')[0] + ":::" + (parseInt(promo_codes_used[index].split(':::')[1]) + 1)
-                    const { error } = await supabase
-                        .from('profiles')
-                        .update({ promo_codes_used: promo_codes_used })
-                        .eq('id', initiated_orders.data.user_id)
-                    if(error) {
-                        return res.json({ success: false, message: "Something went wrong while updating promo code" })
-                    }
+
+
+                    if(index !== -1) {
+                        if(parseInt(promo_codes_used[index].split(':::')[1]) >= promo_codes.data.cap) {
+                            return res.json({ success: false, messsage: "Promo Code usage limit has been reached" })
+                        }
+
+                        promo_codes_used[index] = promo_codes_used[index].split(':::')[0] + ":::" + (parseInt(promo_codes_used[index].split(':::')[1]) + 1)
+                        const { error } = await supabase
+                            .from('profiles')
+                            .update({ promo_codes_used: promo_codes_used })
+                            .eq('id', initiated_orders.data.user_id)
+                            console.log("Something went wrong while updating promo code", error)
+                        
+                        if(error) {
+                            return res.json({ success: false, message: "Something went wrong while updating promo code" })
+                        }
+                    } else {
+                        promo_codes_used.push(initiated_orders.data.promo_code_used + ":::" + 1)
+                        console.log("new pc push", promo_codes_used)
+                        const { error } = await supabase
+                            .from('profiles')
+                            .update({ promo_codes_used: promo_codes_used })
+                            .eq('id', initiated_orders.data.user_id)
+                        console.log("Something went wrong while updating promo code", error)
+                        if(error) {
+                            return res.json({ success: false, message: "Something went wrong while updating promo code"})
+                        }
+                    }                                      
+                    
                 }
             }
 
@@ -283,7 +305,7 @@ const webhookHandler = async (req, res) => {
                                 margin: [-49, -110, 0, 0]
                             },
                             {
-                                text: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}`,
+                                text: `${String(completed_orders.count + 1).padStart(4, '0')}-${todayDate}`,
                                 style: 'invoiceSubValue',
                                 alignment: 'right',
                                 margin: [-200, -110, -5, 0]
@@ -494,7 +516,7 @@ const webhookHandler = async (req, res) => {
                             to: [`${profile.data[0].email}`, 'kukudealsdev@gmail.com'],
                             subject: 'Order Confirmation',
                             dynamicTemplateData: {
-                                transactionNumber: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}`,
+                                transactionNumber: `${String(completed_orders.count + 1).padStart(4, '0')}-${todayDate}`,
                                 purchaseDate: `${new Date().toLocaleString()}`,
                                 totalBeforeVat: `AED ${(amount * 0.95).toFixed(2).toString()}`,
                                 vatAmount: `AED ${(amount * 0.05).toFixed(2).toString()}`,
@@ -505,7 +527,7 @@ const webhookHandler = async (req, res) => {
                     attachments: [
                         {
                             content: result.toString('base64'),
-                            filename: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}.pdf`,
+                            filename: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${todayDate}.pdf`,
                             type: 'application/pdf',
                             disposition: 'attachment',
                             content_id: 'mytext',

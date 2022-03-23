@@ -30,83 +30,9 @@ const Handler = async (req, res) => {
         // const { user } = await supabase.auth.api.getUserByCookie(req)
         // console.log("user cookie promo code", user)
         // if(!user) return res.status(401).send({ success: false, message: "Unauthorized"})
-        let pc = "TEST50"
+        const date = new Date()
 
-        let promo_codes = await supabase
-            .from('promo_codes')
-            .select('value,type,min_amount,max_amount,cap')
-            .eq('name', pc)
-            .single()
-        if(promo_codes.error) {
-            console.log("Promo codes error:", promo_codes.error)
-            return res.send({ success: false, message: "Promo code does not exist"})
-        }
-        
-        if(promo_codes.data.length === 0) {
-            return res.send({ success: false, message: "Promo code does not exist"})
-        }  
-        
-        let profile = await supabase
-            .from('profiles')
-            .select('promo_codes_used')
-            .eq("id", "56ba79fb-2086-4118-8232-a5d78d61ef81")
-        if(profile.error) {
-            return res.send({ success: false, message: "Something went wrong! Contact Us!" })
-        }
-
-
-        let promo_codes_used = profile.data[0].promo_codes_used
-        if(profile.data[0].promo_codes_used.length === 0) {
-            promo_codes_used.push(pc + ":::" + 1)
-            console.log("pcu1", promo_codes_used)
-            const { error } = await supabase
-                .from('profiles')
-                .update({ promo_codes_used: promo_codes_used })
-                .eq('id', "56ba79fb-2086-4118-8232-a5d78d61ef81")
-            if(error) {
-                return res.json({ success: false, message: "Something went wrong while updating promo code"})
-            }
-        } else {
-            const index = promo_codes_used.findIndex(promo_code_qty => {
-                if (promo_code_qty.includes(pc)) {
-                  return true;
-                }
-            });
-
-            if(parseInt(promo_codes_used[index].split(':::')[1]) >= promo_codes.data.cap) {
-                return res.json({ success: false, messsage: "Promo Code usage limit has been reached" })
-            }
-
-            promo_codes_used[index] = promo_codes_used[index].split(':::')[0] + ":::" + (parseInt(promo_codes_used[index].split(':::')[1]) + 1)
-            const { error } = await supabase
-                .from('profiles')
-                .update({ promo_codes_used: promo_codes_used })
-                .eq('id', "56ba79fb-2086-4118-8232-a5d78d61ef81")
-            if(error) {
-                return res.json({ success: false, message: "Something went wrong while updating promo code" })
-            }
-        }
-
-        // const updated_promo_codes = await supabase
-        //     .from('profiles')
-        //     .update({ promo_codes_used: promo_codes_used })
-        //     .eq('id', "56ba79fb-2086-4118-8232-a5d78d61ef81")
-
-        
-        // const updated_promo_codes = await supabase
-        //     .from('profiles')
-        //     .update({ promo_codes_used: promo_codes_used })
-        //     .eq('id', "56ba79fb-2086-4118-8232-a5d78d61ef81")
-        // if(profile.data[0].promo_codes_used.includes(req.body.promoCode)) {
-        //     return res.send({ success: false, message: "Promo code has already been used" })
-        // }
-
-        // const { total, success } = await TotalPrice(req.body.cart)
-        // if(!success) return res.status(404).json({ success: false, message: "Failed to calculate total amount"})
-        // if(total < promo_codes.data.min_amount) return res.send({ success: false, message: `Minimum amount for this promo code is AED${promo_codes.data.min_amount}`})
-
-        // res.send({ success: true, message: `Apply promo code ${req.body.promoCode}?`, data: promo_codes.data})
-        res.send({ success: true, data: profile.data[0].promo_codes_used})
+        return res.json({ uaeDate: `${date.getFullYear()}` + `${date.getMonth()+1}` + `${date.getDate()}` })
     }
 }
 

@@ -26,6 +26,7 @@ const TotalPrice = async (cart) => {
 
 export default async function handler(req, res) {
 	if (req.method === 'POST') {
+        console.log("cs req body", req.body)
 		try {
             if(req.body.user_id === '') return res.send({ success: false, message: "Unauthorized"})
 
@@ -40,12 +41,7 @@ export default async function handler(req, res) {
                     .eq("name", req.body.promoCode)
                 console.log("cs promo code", promo_code)
                 if(promo_code.data[0].type) {
-                    if((total - promo_code.data[0].value) < promo_code.data[0].max_amount) {
-                        finalTotal = total - promo_code.data[0].value
-                    } else {
-                        finalTotal = total - promo_code.data[0].max_amount
-                    }
-                    
+                    finalTotal = total - promo_code.data[0].value                    
                 } else {
                     if((finalTotal = total - (total * promo_code.data[0].value / 100)) < promo_code.data[0].max_amount) {
                         finalTotal = total - (total * promo_code.data[0].value / 100)
@@ -54,10 +50,12 @@ export default async function handler(req, res) {
                     }                
                 }
 
+                console.log("final total", finalTotal)
                 let profile = await supabase
                     .from('profiles')
                     .select('promo_codes_used')
                     .eq("id", req.body.user_id)
+                console.log("profile", profile)
                 if(profile.error) {
                     return res.send({ success: false, message: "Something went wrong! Contact Us!"})
                 }
@@ -70,11 +68,14 @@ export default async function handler(req, res) {
                         }
                     });
                     
-                    console.log("CS index", index, "cap", parseInt(promo_codes_used[index].split(':::')[1]) >= promo_code.data[0].cap)
+                    if(index !== -1) {
+                        console.log("CS index", index, "cap", parseInt(promo_codes_used[index].split(':::')[1]) >= promo_code.data[0].cap)
 
-                    if(parseInt(promo_codes_used[index].split(':::')[1]) >= promo_code.data[0].cap) {
-                        return res.json({ success: false, messsage: "Promo Code usage limit has been reached" })
+                        if(parseInt(promo_codes_used[index].split(':::')[1]) >= promo_code.data[0].cap) {
+                            return res.json({ success: false, messsage: "Promo Code usage limit has been reached" })
+                        }
                     }
+                    
                 } 
             }
 
@@ -113,8 +114,8 @@ export default async function handler(req, res) {
                 .insert([
                     { 
                         cart: req.body.cart, 
-                        amount: donated ? total.toFixed() : total.toFixed() + 35, 
-                        final_amount: donated ? finalTotal.toFixed() : finalTotal.toFixed + 35,
+                        amount: donated ? total.toFixed() : (total+35).toFixed(), 
+                        final_amount: donated ? finalTotal.toFixed() : (finalTotal+35).toFixed(),
                         verification_secret: session.payment_intent,
                         user_id: req.body.user_id,
                         promo_code_used: req.body.promoCode

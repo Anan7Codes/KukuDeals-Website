@@ -25,7 +25,6 @@ const Handler = async (req, res) => {
         return res.send({ success: false, message: 'Wrong request made'})
     }
     if(req.method === 'POST') {
-        console.log(req.body)
         if(req.body.promoCode === '') return res.send({ success: false, message: "Please enter a value"})
         if(req.body.user_id === '') return res.send({ success: false, message: "Unauthorized"})
         // const { user } = await supabase.auth.api.getUserByCookie(req)
@@ -64,11 +63,15 @@ const Handler = async (req, res) => {
                 }
             });
 
-            console.log("EPC index", index, "cap", parseInt(promo_codes_used[index].split(':::')[1]) >= promo_codes.data.cap)
-
-            if(parseInt(promo_codes_used[index].split(':::')[1]) >= promo_codes.data.cap) {
-                return res.json({ success: false, message: "Promo Code usage limit has been reached" })
+            if(index !== -1) {
+                console.log("EPC index", index, "cap", parseInt(promo_codes_used[index].split(':::')[1]) >= promo_codes.data.cap)
+                
+                if(parseInt(promo_codes_used[index].split(':::')[1]) >= promo_codes.data.cap) {
+                    return res.json({ success: false, message: "Promo Code usage limit has been reached" })
+                }
             }
+
+            
         } 
 
         const { total, success } = await TotalPrice(req.body.cart)

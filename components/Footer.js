@@ -74,7 +74,7 @@ export default function Footer() {
               <div className="w-full pr-2">
                 <ul className="flex space-x-2 lg:space-x-4 justify-center">
                   <li>
-                    <a className="">
+                    <a className="https://www.facebook.com/kukudeals/">
                       <svg
                         width="53"
                         height="52"
@@ -85,10 +85,10 @@ export default function Footer() {
                     </a>
                   </li>
                   <li>
-                    <a className="">
+                    <a className="https://ae.linkedin.com/company/kukudeals">
                       <svg
                         width="52"
-                        height="51"
+                        height="52"
                         className="cursor-pointer fill-white hover:bg-[#ffd601] hover:fill-black rounded-full"
                       >
                         <path d="M17.17 10C15.255 10 14 11.404 14 13.25c0 1.805 1.218 3.25 3.097 3.25h.037c1.954 0 3.169-1.445 3.169-3.25-.037-1.846-1.215-3.25-3.132-3.25zM40 25.984V36h-5.42v-9.344c0-2.347-.783-3.949-2.745-3.949-1.498 0-2.387 1.079-2.78 2.123-.143.374-.18.892-.18 1.416V36h-5.42s.072-15.827 0-17.465h5.42v2.475c-.005.01-.01.018-.017.027a.326.326 0 00-.018.03h.035v-.057c.72-1.187 2.005-2.885 4.886-2.885 3.566 0 6.239 2.496 6.239 7.86zM19.515 36H14V18.937h5.515V36z"></path>
@@ -96,7 +96,7 @@ export default function Footer() {
                     </a>
                   </li>
                   <li>
-                    <a className="">
+                    <a className="https://www.instagram.com/kukudeals/?hl=en">
                       <svg
                         width="52"
                         height="52"

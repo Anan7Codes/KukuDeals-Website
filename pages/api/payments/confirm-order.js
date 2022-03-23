@@ -148,13 +148,6 @@ const webhookHandler = async (req, res) => {
                         return res.json({ success: false, message: "Something went wrong while updating promo code" })
                     }
                 }
-                // promo_codes_used.push(initiated_orders.data.promo_code_used)
-
-                // const updated_promo_codes = await supabase
-                //     .from('profiles')
-                //     .update({ promo_codes_used: promo_codes_used })
-                //     .eq('id', initiated_orders.data.user_id)
-                // if (updated_promo_codes.error) return res.send({ success: false, message: "Promo Code Update Error", error: updated_promo_codes.error })
             }
 
             await map(coupons, async (item, i) => {
@@ -483,8 +476,6 @@ const webhookHandler = async (req, res) => {
                     columnGap: 20,
                 }
             }
-            console.log("doc", document)
-            console.log('start pdf')
             let pdfDoc = await pdfmake.createPdfKitDocument(document);
             var chunks = [];
             var result, bufferData;

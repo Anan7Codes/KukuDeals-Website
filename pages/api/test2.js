@@ -30,9 +30,9 @@ const Handler = async (req, res) => {
         // const { user } = await supabase.auth.api.getUserByCookie(req)
         // console.log("user cookie promo code", user)
         // if(!user) return res.status(401).send({ success: false, message: "Unauthorized"})
-        const date = new Date()
+        const tn = "6-2022323"
 
-        return res.json({ uaeDate: `${date.getFullYear()}` + `${date.getMonth()+1}` + `${date.getDate()}` })
+        return res.json({ tn: tn.split("-")[0].padStart(4, '0')})
     }
 }
 

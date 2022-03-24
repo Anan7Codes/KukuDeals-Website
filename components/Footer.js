@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="p-4 sm:flex lg:flex justify-between">
             <div className="flex tracking-tight">
               <div className="pr-10 w-full">
-                <div className="text-sm lg:text-sm w-[150px] text-white font-semibold cursor-pointer hover:text-[#ffd601]">
+                <div className="text-sm lg:text-sm w-[150px] text-white font-semibold">
                   {t('customer-service')}
                 </div>
                 <ul className="text-xs lg:text-base pt-3">
@@ -41,7 +41,7 @@ export default function Footer() {
               </div>
 
               <div className="w-full pb-4">
-                <div className="font-semibold text-sm text-white cursor-pointer hover:text-[#ffd601]">
+                <div className="font-semibold text-sm text-white">
                   {t('quick-links')}
                 </div>
                 <ul className="text-xs lg:text-base pt-4">

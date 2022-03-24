@@ -79,7 +79,7 @@ export default async function handler(req, res) {
             } 
         }
 
-        console.log("Amount log" + total, success, donated, donated ? finalTotal.toFixed() * 100 : (finalTotal+35).toFixed() * 100)
+        console.log("Amount log" + total, success, donated, donated ? finalTotal.toFixed() * 100 : (finalTotal+20).toFixed() * 100)
         let { data, error } = await supabase
             .from('profiles')
             .select('stripe_customer_id')
@@ -92,7 +92,7 @@ export default async function handler(req, res) {
         );
 
         const paymentIntent = await stripe.paymentIntents.create({
-            amount: donated ? finalTotal.toFixed() * 100 : (finalTotal+35).toFixed() * 100,
+            amount: donated ? finalTotal.toFixed() * 100 : (finalTotal+20).toFixed() * 100,
             currency: 'AED',
             customer: data[0].stripe_customer_id,
             automatic_payment_methods: {
@@ -107,8 +107,8 @@ export default async function handler(req, res) {
             .insert([
                 { 
                     cart: req.body.cart, 
-                    amount: donated ? total.toFixed() : (total+35).toFixed(), 
-                    final_amount: donated ? finalTotal.toFixed() : (finalTotal+35).toFixed(),
+                    amount: donated ? total.toFixed() : (total+20).toFixed(), 
+                    final_amount: donated ? finalTotal.toFixed() : (finalTotal+20).toFixed(),
                     verification_secret: paymentIntent.id,
                     user_id: req.body.user_id,
                     promo_code_used: req.body.promoCode

@@ -26,7 +26,6 @@ export default function ActiveCoupons() {
         }
       }
       GetActiveOrders() 
-
     }, [])
 
     if(activeOrders.length === 0) return (

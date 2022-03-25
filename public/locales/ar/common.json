@@ -198,5 +198,6 @@
     "purchase-date": "تاريخ الشراء",
     "product/prize": "المنتج / الجائزة", 
     "send-message": "أرسل رسالة",
-    "form-submitted": "لقد تلقينا رسالتك بنجاح."  
+    "form-submitted": "لقد تلقينا رسالتك بنجاح.",
+    "total-coupons": "إجمالي القسائم"
 }

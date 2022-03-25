@@ -25,7 +25,7 @@ const Coupon = ({ campaign, activeOrders }) => {
             <div className='flex items-center justify-between bg-[#2c2c2c] px-4 py-2 mr-2 mb-4 rounded-[15px]'>
                 <div>
                     <p className='text-white font-semibold'>{i18n.language === 'ar' ? campaign?.GiftName.ar : campaign?.GiftName.en }</p>
-                    <p className='text-white text-sm'>Total Coupons: {count}</p>
+                    <p className='text-white text-sm'>{t('total-coupons')}: {count}</p>
                 </div>
                 {
                     show ?
@@ -47,20 +47,20 @@ const Coupon = ({ campaign, activeOrders }) => {
                     if(JSON.parse(coupon).product_id === campaign.id) {
                         return (JSON.parse(coupon)?.product_coupons.map((item, i) => {
                             return (
-                                <div className="h-[180px] lg:h-[150px] bg-[#2c2c2c] mr-2 pt-2 my-2 rounded-[15px] relative" key={i}>
+                                <div className="h-[180px] lg:h-[150px] bg-white mr-2 pt-2 my-2 rounded-[15px] relative" key={i}>
                                     <div className="flex">
                                         <div className="flex flex-col justify-between mx-4">
                                             <div>
-                                                <p className="font-semibold text-[12px] text-[#ffd601]">{t('coupon-no')}</p>
-                                                <p className="text-[10px] text-white font-semibold">{item}</p>
+                                                <p className="font-semibold text-[12px]">{t('coupon-no')}</p>
+                                                <p className="text-[10px] font-semibold">{item}</p>
                                             </div>
                                             <div>
-                                                <p className="font-semibold text-[12px] text-[#ffd601]">{t('purchase-date')}</p>
-                                                <p className="text-[10px] text-white font-semibold">{moment(order?.created_at).format('lll')}</p>
+                                                <p className="font-semibold text-[12px]">{t('purchase-date')}</p>
+                                                <p className="text-[10px] font-semibold">{moment(order?.created_at).format('lll')}</p>
                                             </div> 
                                             <div>
-                                                <p className="font-semibold text-[12px] text-[#ffd601]">{t('product/prize')}</p>
-                                                <p className="text-[10px] text-white font-semibold">{JSON.parse(coupon)?.name}</p>
+                                                <p className="font-semibold text-[12px] ">{t('product/prize')}</p>
+                                                <p className="text-[10px] font-semibold">{JSON.parse(coupon)?.name}</p>
                                             </div>
                                         </div>
                                         <div>
@@ -68,7 +68,7 @@ const Coupon = ({ campaign, activeOrders }) => {
                                                 <div className="relative w-24 h-8 mx-2">
                                                     <Image
                                                     priority={true}
-                                                    src="/kuku-white.png"
+                                                    src="/kuku-black.png"
                                                     layout="fill"
                                                     alt="KukuDeals logo"
                                                     />

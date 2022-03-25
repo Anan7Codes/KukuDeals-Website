@@ -196,5 +196,7 @@
     "trn": "TRN",
     "transaction-number": "Transaction Number",
     "purchase-date": "Purchase Date",
-    "product/prize": "Product/Prize"    
+    "product/prize": "Product/Prize",
+    "send-message": "Send Message",
+    "form-submitted": "We've successfully received your message." 
 }

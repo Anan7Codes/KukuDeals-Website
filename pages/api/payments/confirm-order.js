@@ -87,11 +87,11 @@ const webhookHandler = async (req, res) => {
             await map(initiated_orders.data.cart, async (order, index) => {
                 coupons.push({ product_id: JSON.parse(order).id, product_coupons: [], product_qty: JSON.parse(order).qty, product_price: JSON.parse(order).Price, name: JSON.parse(order).ProductName.en + "/" + JSON.parse(order).GiftName.en, image: JSON.parse(order).Image, donated: JSON.parse(order).donate })
                 for (let i = 1; i <= JSON.parse(order).qty; i++) {
-                    ordered_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}-${ordered_coupons.length + 1}O`)
-                    coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}-${ordered_coupons.length}O`)
+                    ordered_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(5, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}-${ordered_coupons.length + 1}O`)
+                    coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(5, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}-${ordered_coupons.length}O`)
                     if (JSON.parse(order).donate === "true") {
-                        donated_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}-${ordered_coupons.length}D`)
-                        coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}-${ordered_coupons.length}D`)
+                        donated_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(5, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}-${ordered_coupons.length}D`)
+                        coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(5, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}-${ordered_coupons.length}D`)
                     }
                 }
             })
@@ -529,7 +529,7 @@ const webhookHandler = async (req, res) => {
                     attachments: [
                         {
                             content: result.toString('base64'),
-                            filename: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}.pdf`,
+                            filename: `KUKU${String(completed_orders.count + 1).padStart(5, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}.pdf`,
                             type: 'application/pdf',
                             disposition: 'attachment',
                             content_id: 'mytext',

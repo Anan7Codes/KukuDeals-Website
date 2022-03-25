@@ -151,27 +151,27 @@ function Success() {
                     return (
                       JSON.parse(coupon)?.product_coupons.map((ticket, i) => {
                       return (
-                        <div className="h-[150px] bg-white mx-2 pt-2 my-2 rounded-[15px] relative" key={i}>
+                        <div className="h-[150px] bg-[#2c2c2c] mx-2 pt-2 my-2 rounded-[15px] relative" key={i}>
                           <div className="flex">
                             <div className="flex-1 text-[10px] px-2 flex flex-col space-y-2">
                               <div>
-                                <p className="font-bold">{t('coupon-no')}</p>
-                                <p className="text-[9px]">{ticket}</p>
+                                <p className="font-bold text-[#ffd601]">{t('coupon-no')}</p>
+                                <p className="text-[9px] text-white font-semibold">{ticket}</p>
                               </div>
                               <div>
-                                <p className="font-bold">{t('product/prize')}</p>
-                                <p className="text-[9px]">{JSON.parse(coupon)?.name}</p>
+                                <p className="font-bold text-[#ffd601]">{t('product/prize')}</p>
+                                <p className="text-[9px] text-white font-semibold">{JSON.parse(coupon)?.name}</p>
                               </div>
                               <div>
-                                <p className="font-bold">{t('purchased-on')}</p>
-                                <p className="text-[9px]">{moment(latestOrder?.created_at).format('lll')}</p>
+                                <p className="font-bold text-[#ffd601]">{t('purchased-on')}</p>
+                                <p className="text-[9px] text-white font-semibold">{moment(latestOrder?.created_at).format('lll')}</p>
                               </div>                     
                             </div>
                             <div className="flex flex-col justify-between">
                               <div className="relative w-24 h-8 mx-2">
                                 <Image
                                   priority={true}
-                                  src="/kuku-black.png"
+                                  src="/kuku-white.png"
                                   layout="fill"
                                   alt="KukuDeals logo"
                                 />

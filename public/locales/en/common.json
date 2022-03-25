@@ -135,9 +135,6 @@
     "verify-phone": "Verify Phone",
     "reset-password": "Reset Password",
     "download-app": "Download our App",
-    "your-transaction-number": "Your transaction number is",
-    "total-amount-paid-is": "total amount paid is",
-    "your-coupons-are": "Your coupons are",
     "verify": "verified",
     "not-verified": "not verified",
     "frequently-asked-questions": "Frequently Asked Questions",
@@ -192,5 +189,12 @@
     "update-success": "Successfully Updated",
     "no-change-in-address": "No change in Shipping Address",
     "no-change-in-personal": "No change in Personal Details",
-    "password-change-success": "Password changed successfully"
+    "password-change-success": "Password changed successfully",
+    "vat-amount": "VAT Amount",
+    "total-before-vat": "Total before VAT",
+    "tax-invoice": "Tax Invoice",
+    "trn": "TRN",
+    "transaction-number": "Transaction Number",
+    "purchase-date": "Purchase Date",
+    "product/prize": "Product/Prize"    
 }

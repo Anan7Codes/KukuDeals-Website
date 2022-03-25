@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image";
 import React, { useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
 import SkeletonLayout from "@/components/SkeletonLayout";
@@ -12,6 +13,7 @@ import SuccessAnimation from '@/public/success-animation.json'
 import Skeleton from 'react-loading-skeleton'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from "next-i18next"
+import moment from 'moment'
 
 function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
@@ -43,6 +45,8 @@ function Success() {
   const { width, height } = useWindowSize()
   const { user } = useUser()
 
+  const [tab, setTab] = useState('invoice')
+
   const [ success, setSuccess ] = useState(false)
   const { dispatch } = CartState();
 
@@ -52,7 +56,7 @@ function Success() {
     }
   }, [user])
 
-  const [ latestOrder, setLatestOrder] = useState()
+  const [ latestOrder, setLatestOrder] = useState([])
   useEffect(() => {
     const GetLatestOrder = async () => {
       try {
@@ -83,7 +87,7 @@ function Success() {
     EmptyCart()
   }, []);
 
-  if(success) {
+  if(success && latestOrder.length !== 0 ) {
     return (
     <div className={`bg-[#161616] overflow-x-hidden`} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <Head>
@@ -96,30 +100,92 @@ function Success() {
         recycle={false}
       />
       <Layout>
-        <div className='bg-[#2c2c2c] min-h-42 my-3 py-12 px-4 text-center rounded-[15px] flex flex-col items-center justify-center'>
-          <Lottie
-            animationData={SuccessAnimation}
-            speed={1}
-            style={{
-              height: 200,
-              width: 200
-            }}
-          />
-          <p className='font-title text-[#ffd601] text-4xl lg:text-5xl font-semibold'>{t('congratulations')}</p>
-          <p className='text-[#fff] text-xl lg:text-2xl leading-tight'>{t('order-success')}</p>
-          <p className='text-[#fff] mt-4 text-md lg:text-lg'>{t('your-transaction-number')} <span className="font-bold">{`${latestOrder?.transaction_number.split("-")[0].padStart(4, '0')}-${latestOrder?.transaction_number.split("-")[1]}`}</span> &amp; {t('total-amount-paid-is')} <span className="font-bold">{t('aed')} {latestOrder?.final_amount}</span>.</p>
-          <p className='text-[#fff] mt-4 text-md lg:text-lg'>{t('your-coupons-are')}:
-          {latestOrder?.coupons.map(coupon => {
-            return (
-              JSON.parse(coupon)?.product_coupons.map((ticket, i) => {
-              return (
-                  <span className="font-bold px-1" key={i}>{ticket}<br/></span>
-                )
-              })
-            )
-          })}
-          </p>
-          
+        <div className='min-h-42 my-3 bg-[#2c2c2c] flex flex-col items-center'>
+          <div className="max-w-[600px] rounded-[15px] px-4">
+            <div className="flex flex-col items-center justify-center pt-12 pb-8">
+              <Lottie
+                animationData={SuccessAnimation}
+                speed={1}
+                style={{
+                  height: 200,
+                  width: 200
+                }}
+              />
+              <p className='font-title text-[#ffd601] text-3xl lg:text-5xl font-semibold'>{t('congratulations')}</p>
+              <p className='text-[#fff] text-lg lg:text-2xl leading-tight'>{t('order-success')}</p>
+            </div>         
+
+            <div className="flex items-center justify-center mb-6">
+                <span onClick={() => setTab('invoice')} className={`${tab === 'invoice' ? 'bg-[#ffd601] text-black' : 'bg-black text-[#ffd601] opacity-50 cursor-pointer'} text-sm font-semibold ${i18n.language === 'ar' ? 'rounded-r-[50px] pl-2 py-2 pr-3' : 'rounded-l-[50px] pl-3 py-2 pr-2' }`}>{t('tax-invoice')}</span>
+                <span onClick={() => setTab('coupons')} className={`${tab === 'coupons' ? 'bg-[#ffd601] text-black' : 'bg-black text-[#ffd601] opacity-50 cursor-pointer'} text-sm font-semibold ${i18n.language === 'ar' ? 'rounded-l-[50px] pl-3 py-2 pr-2' : 'rounded-r-[50px] pr-3 py-2 pl-2' }`}>{t('Coupons')}</span>
+            </div>
+
+            {tab === 'invoice' ? 
+              <div className="pb-12">
+                <div className="flex flex-col font-bold text-white">
+                  <p className="text-2xl">{t('tax-invoice')}</p>
+                  <p className="mt-6">{t('trn')}: 100066261700003</p>
+                  <p>{t('transaction-number')}: {`${latestOrder?.transaction_number.split("-")[0].padStart(4, '0')}-${latestOrder?.transaction_number.split("-")[1]}`}</p>
+                  <p>{t('purchase-date')}: {moment(latestOrder?.created_at).format('lll')}</p>
+                </div>
+                <div className="flex items-center justify-between font-semibold text-white mt-6">
+                  <p>{t('total-before-vat')}</p>
+                  <p>{t('aed')} {latestOrder?.final_amount*0.95.toFixed(2)}</p>
+                </div>
+                <div className="flex items-center justify-between font-semibold text-white my-2">
+                  <p>{t('vat-amount')}</p>
+                  <p>{t('aed')} {latestOrder?.final_amount*0.05.toFixed(2)}</p>
+                </div>
+                <div className="flex items-center text-xl justify-between font-bold text-white">
+                  <p>{t('total')}</p>
+                  <p>{t('aed')} {latestOrder?.final_amount}</p>
+                </div>
+              </div> : null
+            }
+
+            {tab === 'coupons' ?
+              <div className="pb-12">
+                <p className="text-2xl text-white font-bold">{t('your-coupons')}</p>
+                <div className="grid grid-cols-1 lg:grid-cols-2">
+                  {latestOrder?.coupons.map(coupon => {
+                    return (
+                      JSON.parse(coupon)?.product_coupons.map((ticket, i) => {
+                      return (
+                        <div className="h-[150px] bg-white mx-2 pt-2 my-2 rounded-[15px] relative" key={i}>
+                          <div className="flex">
+                            <div className="flex-1 text-[10px] px-2 flex flex-col space-y-2">
+                              <div>
+                                <p className="font-bold">{t('coupon-no')}</p>
+                                <p className="text-[8px]">{ticket}</p>
+                              </div>
+                              <div>
+                                <p className="font-bold">{t('product/prize')}</p>
+                                <p className="text-[8px]">{JSON.parse(coupon)?.name}</p>
+                              </div>
+                              <div>
+                                <p className="font-bold">{t('purchased-on')}</p>
+                                <p className="text-[8px]">{moment(latestOrder?.created_at).format('lll')}</p>
+                              </div>                     
+                            </div>
+                            <div className="relative w-24 h-8 mx-2">
+                              <Image
+                                priority={true}
+                                src="/kuku-black.png"
+                                layout="fill"
+                                alt="KukuDeals logo"
+                              />
+                            </div>
+                            <div className="bg-[#ffd601] absolute bottom-0 min-h-[20px] h-[20px] w-full rounded-b-[15px] text-[#ffd601]">&nbsp;</div>
+                          </div>
+                        </div>
+                        )
+                      })
+                    )
+                  })}                  
+                </div> 
+              </div>: null
+            }          
+          </div>         
         </div>
       </Layout>
     </div> 

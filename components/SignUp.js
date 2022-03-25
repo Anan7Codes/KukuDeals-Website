@@ -76,7 +76,7 @@ function SignUp() {
       return
     }
     catch (e) {
-      console.log(e);
+      alert(e);
     }
   }
   return (

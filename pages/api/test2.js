@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import { map } from 'modern-async'
+import moment from 'moment'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY
@@ -30,9 +31,9 @@ const Handler = async (req, res) => {
         // const { user } = await supabase.auth.api.getUserByCookie(req)
         // console.log("user cookie promo code", user)
         // if(!user) return res.status(401).send({ success: false, message: "Unauthorized"})
-        const tn = "6-2022323"
+        const tn = moment(new Date().toLocaleString()).format('YYYYMMDD')
 
-        return res.json({ tn: tn.split("-")[0].padStart(4, '0')})
+        return res.json({ tn: tn})
     }
 }
 

@@ -46,7 +46,7 @@ export default function ChangePassword() {
       })
       return router.push('/')
     } catch (e) {
-        console.log(e)
+        alert(e)
     }
   }
   return (

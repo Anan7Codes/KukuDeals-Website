@@ -43,7 +43,7 @@ export default function SignIn() {
       setLoading(false)
       return router.push('/')
     } catch(e) {
-      console.log(e)
+      alert(e)
     }
   }
 

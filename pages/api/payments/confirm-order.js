@@ -2,6 +2,8 @@ import { buffer } from 'micro'
 import { createClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
 import { map } from 'modern-async'
+import moment from 'moment'
+
 const mail = require('@sendgrid/mail')
 const Pdfmake = require('pdfmake');
 const fonts = require('pdfmake/build/vfs_fonts.js');
@@ -25,8 +27,6 @@ const endpointSecret = process.env.WEBHOOK_SECRET
 
 mail.setApiKey(process.env.SENDGRID_API_KEY)
 let amount
-const sysDate = new Date()
-const todayDate = `${sysDate.getFullYear()}` + `${sysDate.getMonth()+1}` + `${sysDate.getDate()}` 
 
 export const config = {
     api: {
@@ -87,11 +87,11 @@ const webhookHandler = async (req, res) => {
             await map(initiated_orders.data.cart, async (order, index) => {
                 coupons.push({ product_id: JSON.parse(order).id, product_coupons: [], product_qty: JSON.parse(order).qty, product_price: JSON.parse(order).Price, name: JSON.parse(order).ProductName.en + "/" + JSON.parse(order).GiftName.en, image: JSON.parse(order).Image, donated: JSON.parse(order).donate })
                 for (let i = 1; i <= JSON.parse(order).qty; i++) {
-                    ordered_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${todayDate}-${ordered_coupons.length + 1}O`)
-                    coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${todayDate}-${ordered_coupons.length}O`)
+                    ordered_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}-${ordered_coupons.length + 1}O`)
+                    coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}-${ordered_coupons.length}O`)
                     if (JSON.parse(order).donate === "true") {
-                        donated_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${todayDate}-${ordered_coupons.length}D`)
-                        coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${todayDate}-${ordered_coupons.length}D`)
+                        donated_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}-${ordered_coupons.length}D`)
+                        coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}-${ordered_coupons.length}D`)
                     }
                 }
             })
@@ -103,7 +103,7 @@ const webhookHandler = async (req, res) => {
                         coupons,
                         user_id: initiated_orders.data.user_id,
                         final_amount: initiated_orders.data.final_amount,
-                        transaction_number: `${completed_orders.count + 1}-${todayDate}`
+                        transaction_number: `${completed_orders.count + 1}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}`
                     },
                 ])
             console.log("Completed orders insertion error", data, error)
@@ -305,7 +305,7 @@ const webhookHandler = async (req, res) => {
                                 margin: [-49, -110, 0, 0]
                             },
                             {
-                                text: `${String(completed_orders.count + 1).padStart(4, '0')}-${todayDate}`,
+                                text: `${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}`,
                                 style: 'invoiceSubValue',
                                 alignment: 'right',
                                 margin: [-200, -110, -5, 0]
@@ -518,8 +518,8 @@ const webhookHandler = async (req, res) => {
                             to: [`${profile.data[0].email}`, 'kukudealsdev@gmail.com'],
                             subject: 'Order Confirmation',
                             dynamicTemplateData: {
-                                transactionNumber: `${String(completed_orders.count + 1).padStart(4, '0')}-${todayDate}`,
-                                purchaseDate: `${new Date().toLocaleString()}`,
+                                transactionNumber: `${String(completed_orders.count + 1).padStart(4, '0')} - ${moment(new Date().toLocaleString()).format('YYYYMMDD')}`,
+                                purchaseDate: `${moment(new Date().toLocaleString()).format('lll')}`,
                                 totalBeforeVat: `AED ${(amount * 0.95).toFixed(2).toString()}`,
                                 vatAmount: `AED ${(amount * 0.05).toFixed(2).toString()}`,
                                 total: `AED ${(amount).toString()}`,
@@ -529,7 +529,7 @@ const webhookHandler = async (req, res) => {
                     attachments: [
                         {
                             content: result.toString('base64'),
-                            filename: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${todayDate}.pdf`,
+                            filename: `KUKU${String(completed_orders.count + 1).padStart(7, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}.pdf`,
                             type: 'application/pdf',
                             disposition: 'attachment',
                             content_id: 'mytext',

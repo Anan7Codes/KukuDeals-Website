@@ -68,7 +68,7 @@ function Success() {
           .single()
         setLatestOrder(completed_orders)
       } catch (e) {
-        console.log(e)
+        alert(e)
       }
     }
     GetLatestOrder() 
@@ -156,24 +156,34 @@ function Success() {
                             <div className="flex-1 text-[10px] px-2 flex flex-col space-y-2">
                               <div>
                                 <p className="font-bold">{t('coupon-no')}</p>
-                                <p className="text-[8px]">{ticket}</p>
+                                <p className="text-[9px]">{ticket}</p>
                               </div>
                               <div>
                                 <p className="font-bold">{t('product/prize')}</p>
-                                <p className="text-[8px]">{JSON.parse(coupon)?.name}</p>
+                                <p className="text-[9px]">{JSON.parse(coupon)?.name}</p>
                               </div>
                               <div>
                                 <p className="font-bold">{t('purchased-on')}</p>
-                                <p className="text-[8px]">{moment(latestOrder?.created_at).format('lll')}</p>
+                                <p className="text-[9px]">{moment(latestOrder?.created_at).format('lll')}</p>
                               </div>                     
                             </div>
-                            <div className="relative w-24 h-8 mx-2">
-                              <Image
-                                priority={true}
-                                src="/kuku-black.png"
-                                layout="fill"
-                                alt="KukuDeals logo"
-                              />
+                            <div className="flex flex-col justify-between">
+                              <div className="relative w-24 h-8 mx-2">
+                                <Image
+                                  priority={true}
+                                  src="/kuku-black.png"
+                                  layout="fill"
+                                  alt="KukuDeals logo"
+                                />
+                              </div>
+                              <div className="relative w-20 h-20 mx-auto">
+                                <Image
+                                  priority={true}
+                                  src={JSON.parse(coupon)?.image}
+                                  layout="fill"
+                                  alt="Product Logo"
+                                />
+                              </div>
                             </div>
                             <div className="bg-[#ffd601] absolute bottom-0 min-h-[20px] h-[20px] w-full rounded-b-[15px] text-[#ffd601]">&nbsp;</div>
                           </div>

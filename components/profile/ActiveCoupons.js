@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { supabase } from '@/utils/supabaseClient';
 import { useTranslation } from "next-i18next"
-import Coupon from "./Coupon";
+import Image from 'next/image'
+import moment from 'moment'
 
 export default function ActiveCoupons() {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
     const [ activeOrders, setActiveOrders ] = useState([])
+    const [ campaigns, setCampaigns ] = useState([])
     useEffect(() => {
       const GetActiveOrders = async () => {
         try {
@@ -14,11 +16,16 @@ export default function ActiveCoupons() {
             .select('*')
             .order('created_at', { ascending: false})
           setActiveOrders(completed_orders)
+          let campaigns = await supabase
+            .from('campaigns')
+            .select('*')
+          setCampaigns(campaigns.data)
         } catch (e) {
-          console.log(e)
+          alert(e)
         }
       }
       GetActiveOrders() 
+
     }, [])
 
     if(activeOrders.length === 0) return (
@@ -30,11 +37,69 @@ export default function ActiveCoupons() {
       <div>
         <p className="font-title text-[#ffd601] font-semibold pb-4 text-4xl">{t('your-tickets')}</p>
         <div className="overflow-y-auto scrollbar-thin scrollbar-thumb-yellow-400 scrollbar-track-gray-100 max-h-[600px] lg:min-w-[800px] px-4 lg:px-0 hover:cursor-all-scroll">
-          {activeOrders?.map(order => {              
-            return (
-              <Coupon order={order} key={order.id}/>              
-            )
-          })} 
+          <div className="mx-4">          
+            {
+              campaigns?.map(campaign => {
+                return (
+                  <>
+                    <p>{i18n.language === 'ar' ? campaign?.GiftName.ar : campaign?.GiftName.en }</p>
+                    <p>{123}</p>
+                    <div className="grid grid-cols-1 lg:grid-cols-2">
+                        {activeOrders.map(order => {
+                        return (order.coupons.map(coupon => {
+                        if(JSON.parse(coupon).product_id === campaign.id) {
+                            return (JSON.parse(coupon)?.product_coupons.map((item, i) => {
+                            return (
+                                <div className="h-[150px] bg-white mx-2 pt-2 my-2 rounded-[15px] relative" key={i}>
+                                <div className="flex">
+                                    <div className="flex flex-col justify-between mx-4">
+                                    <div>
+                                        <p className="font-semibold text-[12px]">{t('coupon-no')}</p>
+                                        <p className="text-[10px]">{item}</p>
+                                    </div>
+                                    <div>
+                                        <p className="font-semibold text-[12px]">{t('purchase-date')}</p>
+                                        <p className="text-[10px]">{moment(order?.created_at).format('lll')}</p>
+                                    </div>
+                                    <div>
+                                        <p className="font-semibold text-[12px]">{t('product/prize')}</p>
+                                        <p className="text-[10px]">{JSON.parse(coupon)?.name}</p>
+                                    </div>
+                                    </div>
+                                    <div>
+                                    <div className="flex flex-col justify-between">
+                                    <div className="relative w-24 h-8 mx-2">
+                                        <Image
+                                        priority={true}
+                                        src="/kuku-black.png"
+                                        layout="fill"
+                                        alt="KukuDeals logo"
+                                        />
+                                    </div>
+                                    <div className="relative w-20 h-20 mx-auto">
+                                        <Image
+                                        priority={true}
+                                        src={JSON.parse(coupon)?.image}
+                                        layout="fill"
+                                        alt="Product Logo"
+                                        />
+                                    </div>
+                                    </div>
+                                    </div>
+                                    <div className="bg-[#ffd601] absolute bottom-0 min-h-[20px] h-[20px] w-full rounded-b-[15px] text-[#ffd601]">&nbsp;</div>
+                                </div>
+                                </div>
+                            )
+                            }))                     
+                        }
+                        }))
+                    })}
+                    </div>
+                  </>
+                )
+              })
+            }
+          </div>
         </div>
       </div>
     )

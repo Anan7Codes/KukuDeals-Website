@@ -59,7 +59,7 @@ export default function ShippingAddress() {
       });
       setReload(user);
     } catch (e) {
-      console.log(e);
+      alert(e);
     }
   };
 

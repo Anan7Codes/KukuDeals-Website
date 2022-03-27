@@ -135,9 +135,6 @@
     "verify-phone": "تحقق من الهاتف",
     "reset-password": "إعادة تعيين كلمة المرور",
     "download-app": "قم بتنزيل تطبيقنا",
-    "your-transaction-number": "رقم معاملتك هو",
-    "total-amount-paid-is": "المبلغ الإجمالي المدفوع هو",
-    "your-coupons-are": "القسائم الخاصة بك",
     "verify": "تحقق",
     "not-verified": "لم يتم التحقق منها",
     "frequently-asked-questions": "أسئلة مكررة",
@@ -192,5 +189,15 @@
     "update-success": "تم التحديث بنجاح",
     "no-change-in-address": "لا تغيير في عنوان الشحن",
     "no-change-in-personal": "لا تغيير في التفاصيل الشخصية",
-    "password-change-success": "تم تغيير الرقم السري بنجاح"
+    "password-change-success": "تم تغيير الرقم السري بنجاح",
+    "vat-amount": "قيمة الضريبة",
+    "total-before-vat": "الإجمالي قبل ضريبة القيمة المضافة",
+    "tax-invoice": "فاتورة ضريبية",
+    "trn": "TRN",
+    "transaction-number": "رقم التحويلة",
+    "purchase-date": "تاريخ الشراء",
+    "product/prize": "المنتج / الجائزة", 
+    "send-message": "أرسل رسالة",
+    "form-submitted": "لقد تلقينا رسالتك بنجاح.",
+    "total-coupons": "إجمالي القسائم"
 }

@@ -68,7 +68,7 @@ export default function PersonalDetails() {
         progress: undefined,
       })
     }catch(e){
-      console.log(e);
+      alert(e);
     }
   }
   return (

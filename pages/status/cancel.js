@@ -31,7 +31,6 @@ function Cancel() {
           <Lottie
             animationData={FailedAnimation}
             speed={1}
-            loop
             style={{
               height: 200,
               width: 200

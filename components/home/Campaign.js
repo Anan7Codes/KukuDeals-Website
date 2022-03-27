@@ -114,7 +114,7 @@ export default function Campaign({ campaign }) {
               }
               <div className={`flex items-center justify-center lg:justify-start my-4 text-left`}>
                 <div className="relative w-6 h-6 mx-2">
-                  <Image src="/icons/calendar.png" layout="fill" alt="Calendar Image" />
+                  <Image src="/icons/calendar.png" layout="fill" alt="Calendar Image"/>
                 </div>
                 <div className='flex flex-col'>
                   <p className='text-white font-bold text-xs leading-3'>{t('max-date')}: {campaign?.DrawDate}</p>
@@ -123,33 +123,36 @@ export default function Campaign({ campaign }) {
               </div>
             </div>
 
-            <div className={`absolute -top-4 ${i18n.language === 'ar' ? '-left-4' : '-right-4'} h-28 w-28 lg:h-32 lg:w-32 p-2 bg-[#161616] rounded-full`}>
-              <CircularProgressbar
-                value={campaign?.SoldOutCoupons}
-                maxValue={campaign?.TotalCoupons}
-                strokeWidth={6}
-                styles={buildStyles({
-                  pathColor: "#ffd601",
-                  trailColor: "#161616",
-                  backgroundColor: "#2c2c2c"
-                })}
-                background={true}
-              />
-              <div className={`flex flex-col text-center absolute top-0 h-20 w-20 mt-7 ml-2 lg:ml-4 ${i18n.language === 'ar' ? 'mr-2 lg:mr-4' : null}`}>
-                <p className="text-lg lg:text-2xl font-semibold text-white leading-4 lg:leading-none">
-                  {campaign?.SoldOutCoupons}
-                </p>
-                <p className="text-[9px] font-semibold text-white leading-3 lg:leading-1">
-                  {t('sold_out')}
-                </p>
-                <p className="text-[9px] text-white leading-3 lg:leading-1">
-                  {t('total')}
-                </p>
-                <p className="text-md lg:text-xl font-normal text-white leading-4 lg:leading-none">
-                  {campaign?.TotalCoupons}
-                </p>
+            {campaign?.TotalCoupons === 99999 ?
+              null :
+              <div className={`absolute -top-4 ${i18n.language === 'ar' ? '-left-4' : '-right-4'} h-28 w-28 lg:h-32 lg:w-32 p-2 bg-[#161616] rounded-full`}>
+                <CircularProgressbar
+                  value={campaign?.SoldOutCoupons}
+                  maxValue={campaign?.TotalCoupons}
+                  strokeWidth={6}
+                  styles={buildStyles({
+                    pathColor: "#ffd601",
+                    trailColor: "#161616",
+                    backgroundColor: "#2c2c2c"
+                  })}
+                  background={true}
+                />
+                <div className={`flex flex-col text-center absolute top-0 h-20 w-20 mt-7 ml-2 lg:ml-4 ${i18n.language === 'ar' ? 'mr-2 lg:mr-4' : null}`}>
+                  <p className="text-lg lg:text-2xl font-semibold text-white leading-4 lg:leading-none">
+                    {campaign?.SoldOutCoupons}
+                  </p>
+                  <p className="text-[9px] font-semibold text-white leading-3 lg:leading-1">
+                    {t('sold_out')}
+                  </p>
+                  <p className="text-[9px] text-white leading-3 lg:leading-1">
+                    {t('total')}
+                  </p>
+                  <p className="text-md lg:text-xl font-normal text-white leading-4 lg:leading-none">
+                    {campaign?.TotalCoupons}
+                  </p>
+                </div>
               </div>
-            </div>
+            }
           </div>
         </div>
       </div>
@@ -217,33 +220,36 @@ export default function Campaign({ campaign }) {
                       blurDataURL={campaign?.ImageGift}
                     />
                   </div>
-                  <div className="absolute -top-8 -left-5 bg-[#161616] w-32 p-2 rounded-full">
-                    <CircularProgressbar
-                      value={campaign?.SoldOutCoupons}
-                      maxValue={campaign?.TotalCoupons}
-                      strokeWidth={6}
-                      styles={buildStyles({
-                        pathColor: "#ffd601",
-                        trailColor: "#161616",
-                        backgroundColor: "#2c2c2c"
-                      })}
-                      background={true}
-                    />
-                    <div className="flex flex-col text-center absolute top-2 left-4 h-20 w-20 mt-5 ml-2 ">
-                      <p className="text-lg lg:text-2xl font-semibold text-white leading-4 lg:leading-none">
-                        {campaign?.SoldOutCoupons}
-                      </p>
-                      <p className="text-[9px] font-semibold text-white leading-3 lg:leading-1">
-                        {t('sold_out')}
-                      </p>
-                      <p className="text-[9px] text-white leading-3 lg:leading-1">
-                        {t('total')}
-                      </p>
-                      <p className="text-md lg:text-xl font-normal text-white leading-4 lg:leading-none">
-                        {campaign?.TotalCoupons}
-                      </p>
+                  {campaign?.TotalCoupons === 99999 ?
+                    null :
+                    <div className="absolute -top-8 -left-5 bg-[#161616] w-32 p-2 rounded-full">
+                      <CircularProgressbar
+                        value={campaign?.SoldOutCoupons}
+                        maxValue={campaign?.TotalCoupons}
+                        strokeWidth={6}
+                        styles={buildStyles({
+                          pathColor: "#ffd601",
+                          trailColor: "#161616",
+                          backgroundColor: "#2c2c2c"
+                        })}
+                        background={true}
+                      />
+                      <div className="flex flex-col text-center absolute top-2 left-4 h-20 w-20 mt-5 ml-2 ">
+                        <p className="text-lg lg:text-2xl font-semibold text-white leading-4 lg:leading-none">
+                          {campaign?.SoldOutCoupons}
+                        </p>
+                        <p className="text-[9px] font-semibold text-white leading-3 lg:leading-1">
+                          {t('sold_out')}
+                        </p>
+                        <p className="text-[9px] text-white leading-3 lg:leading-1">
+                          {t('total')}
+                        </p>
+                        <p className="text-md lg:text-xl font-normal text-white leading-4 lg:leading-none">
+                          {campaign?.TotalCoupons}
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  }                  
                   <div className="flex justify-center py-4">
                     <button
                       onClick={() => setPrizeDetails(true)}

@@ -79,7 +79,7 @@ export default async function handler(req, res) {
                 } 
             }
 
-            console.log("Amount log" + total, success, donated, donated ? finalTotal.toFixed() * 100 : (finalTotal+35).toFixed() * 100)
+            console.log("Amount log" + total, success, donated, donated ? finalTotal.toFixed() * 100 : (finalTotal+20).toFixed() * 100)
 
             let { data, error } = await supabase
                 .from('profiles')
@@ -92,7 +92,7 @@ export default async function handler(req, res) {
                     {
                       price_data: {
                         currency: 'AED',
-                        unit_amount: donated ? finalTotal.toFixed() * 100 : (finalTotal+35).toFixed() * 100,
+                        unit_amount: donated ? finalTotal.toFixed() * 100 : (finalTotal+20).toFixed() * 100,
                         product_data: {
                             name: 'Kuku Deals Draw',
                         },
@@ -114,8 +114,8 @@ export default async function handler(req, res) {
                 .insert([
                     { 
                         cart: req.body.cart, 
-                        amount: donated ? total.toFixed() : (total+35).toFixed(), 
-                        final_amount: donated ? finalTotal.toFixed() : (finalTotal+35).toFixed(),
+                        amount: donated ? total.toFixed() : (total+20).toFixed(), 
+                        final_amount: donated ? finalTotal.toFixed() : (finalTotal+20).toFixed(),
                         verification_secret: session.payment_intent,
                         user_id: req.body.user_id,
                         promo_code_used: req.body.promoCode

@@ -214,6 +214,7 @@ const webhookHandler = async (req, res) => {
             let mm = String(today.getMonth() + 1).padStart(2, '0'); 
             let yyyy = today.getFullYear();
             today = dd + '/' + mm + '/' + yyyy;
+            
             var headers = {
                 fila_0: {
                     col_1: { text: 'SL No.', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [0, 10, 0, 0] },

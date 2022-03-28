@@ -294,194 +294,194 @@ const webhookHandler = async (req, res) => {
                 {
                     columns: [
                         
+                    {
+                        text: 'Customer Name:',
+                        style: 'invoiceSubTitle',
+                        alignment: 'left',
+                        margin: [0, -110, 0, 0]
+                    },
                         {
-                            text: 'Customer Name:',
+                            text: profile.data[0].name,
+                            style: 'invoiceSubValue',
+                            alignment: 'left',
+                            margin: [-76, -110, 0, 0]
+                        },
+                        {
+                            text: 'Invoice No: ',
                             style: 'invoiceSubTitle',
                             alignment: 'left',
-                            margin: [0, -110, 0, 0]
+                            margin: [-30, -110, 24, 0]
                         },
-                            {
-                                text: profile.data[0].name,
-                                style: 'invoiceSubValue',
-                                alignment: 'left',
-                                margin: [-76, -110, 0, 0]
-                            },
-                            {
-                                text: 'Invoice No: ',
-                                style: 'invoiceSubTitle',
-                                alignment: 'left',
-                                margin: [-30, -110, 24, 0]
-                            },
-                            {
-                                text: `${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}`,
-                                style: 'invoiceSubValue',
-                                alignment: 'right',
-                                margin: [-42, -110, 110, 0]
-                            },
+                        {
+                            text: `${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}`,
+                            style: 'invoiceSubValue',
+                            alignment: 'right',
+                            margin: [-42, -110, 110, 0]
+                        },
                     ]
                 },
-                    {
-                        columns: [
-                            {
-                                text: 'Email: ',
-                                style: 'invoiceSubTitle',
-                                alignment: 'left',
-                                margin: [0, -90, 0, 0]
-                            },
-                            {
-                                text: profile.data[0].email,
-                                style: 'invoiceSubValue',
-                                alignment: 'left',
-                                margin: [-101, -90, 0, 0]
-                            },
-                            {
-                                text: 'Invoice Date: ',
-                                style: 'invoiceSubTitle',
-                                alignment: 'right',
-                                margin: [0, -90, -83, 0]
-                            },
-                            {
-                                text: today,
-                                style: 'invoiceSubValue',
-                                alignment: 'right',
-                                margin: [-5, -90, -7, 0]
-                            },
+                {
+                    columns: [
+                        {
+                            text: 'Email: ',
+                            style: 'invoiceSubTitle',
+                            alignment: 'left',
+                            margin: [0, -90, 0, 0]
+                        },
+                        {
+                            text: profile.data[0].email,
+                            style: 'invoiceSubValue',
+                            alignment: 'left',
+                            margin: [-101, -90, 0, 0]
+                        },
+                        {
+                            text: 'Invoice Date: ',
+                            style: 'invoiceSubTitle',
+                            alignment: 'right',
+                            margin: [5, -90, -83, 0]
+                        },
+                        {
+                            text: today,
+                            style: 'invoiceSubValue',
+                            alignment: 'right',
+                            margin: [0, -90, -7, 0]
+                        },
+                    ]
+                },
+                {
+                    style: 'tableExample',
+                    table: {
+                        widths: [24, 100, '*', '*', '*', '*', '*','*'],
+                        headerRows: 2,
+                        // keepWithHeaderRows: 1,
+                        body: body
+                    }
+                },
+                {
+                    table: {
+                        headerRows: 0,
+                        widths: [442, 80],
+
+                        body: [
+                            [
+                                {
+                                    text: 'GRAND TOTAL',
+                                    style: 'itemsFooterTotalTitle'
+                                },
+                                {
+                                    text: `AED${amount.toString()}`,
+                                    style: 'itemsFooterTotal'
+                                }
+                            ],
                         ]
                     },
-                    {
-                        style: 'tableExample',
-                        table: {
-                            widths: [24, 100, '*', '*', '*', '*', '*','*'],
-                            headerRows: 2,
-                            // keepWithHeaderRows: 1,
-                            body: body
-                        }
-                    },
-                    {
-                        table: {
-                            headerRows: 0,
-                            widths: [442, 80],
-
-                            body: [
-                                [
-                                    {
-                                        text: 'GRAND TOTAL',
-                                        style: 'itemsFooterTotalTitle'
-                                    },
-                                    {
-                                        text: `AED${amount.toString()}`,
-                                        style: 'itemsFooterTotal'
-                                    }
-                                ],
-                            ]
-                        },
-                        layout: 'lightHorizontalLines'
-                    },
-                ],
-                styles: {
-                    documentHeaderLeft: {
-                       fontSize: 10,
-                       margin: [25, 15, 15, 15],
-                       alignment: 'left'
-                   },
-                   documentHeaderCenter: {
-                       fontSize: 10,
-                       margin: [75, 15, 15, 15],
-                       alignment: 'center'
-                   },
-                   documentHeaderRightFirst: {
-                       fontSize: 18,
-                       margin: [15, 16, -220, 15],
-                       alignment: 'right',
-                       bold: true,
-                   },
-                   documentHeaderRightSecond: {
-                       fontSize: 8,
-                       margin: [15, 40, 19, 15],
-                       alignment: 'right',
-                       bold: true,
-                   },
-                    documentHeaderRight: {
-                       fontSize: 10,
-                       margin: [15, 15, 30, 15],
-                       alignment: 'right',
-                       bold: true,
-       
-                   },
-                   // Invoice Title
-                   invoiceTitle: {
-                       fontSize: 22,
-                       bold: true,
-                       alignment: 'right',
-                       margin: [0, 0, 0, 15]
-                   },
-                   // Invoice Details
-                   invoiceSubTitle: {
-                       fontSize: 12,
-                       alignment: 'right'
-                   },
-                   invoiceSubValue: {
-                       fontSize: 12,
-                       alignment: 'right'
-                   },
-                   // Items Footer (Subtotal, Total, Tax, etc)
-                   itemsFooterSubTitle: {
-                       margin: [20,55, 0, 5],
-                       alignment: 'left',
-                       fillColor: '#F0E2B6',
-                   },
-                   itemsFooterSubValue: {
-                       margin: [-20, 55, -20, 5],
-                       bold: true,
-                       alignment: 'left',
-                       fillColor: '#F0E2B6',
-                   },
-                   tableExample: {
-                       margin: [0, -60, 0, 50],
-                       fontSize: 9,
-                       alignment: 'center',
-       
-                   },
-                   itemsFooterTotalValue: {
-                       margin: [0, 5, 0, 5],
-                       bold: true,
-                       alignment: 'center',
-                   },
-                   itemsFooterTotalTitle:{
-                        margin: [0, -30, 0, 40],
-                         bold: true,
-                         alignment: 'left',
-                       //   color:'green',
-                         fontSize: 20,
-                       //   fillColor: '#F0E2B6',
-       
-                   },
-                   finalAmount:{
-                        margin: [0, 5, 0, 5],
-                         bold: true,
-                         alignment: 'center',
-                         color:'#E0A526',
-                   },
-                   tableValue:{
-                        margin: [0, 5, 0, 5],
-                         alignment: 'center',
-                   },
-                   itemsFooterTotal:{
+                    layout: 'lightHorizontalLines'
+                },
+            ],
+            styles: {
+                documentHeaderLeft: {
+                    fontSize: 10,
+                    margin: [25, 15, 15, 15],
+                    alignment: 'left'
+                },
+                documentHeaderCenter: {
+                    fontSize: 10,
+                    margin: [75, 15, 15, 15],
+                    alignment: 'center'
+                },
+                documentHeaderRightFirst: {
+                    fontSize: 18,
+                    margin: [15, 16, -220, 15],
+                    alignment: 'right',
+                    bold: true,
+                },
+                documentHeaderRightSecond: {
+                    fontSize: 8,
+                    margin: [15, 40, 19, 15],
+                    alignment: 'right',
+                    bold: true,
+                },
+                documentHeaderRight: {
+                    fontSize: 10,
+                    margin: [15, 15, 30, 15],
+                    alignment: 'right',
+                    bold: true,
+    
+                },
+                // Invoice Title
+                invoiceTitle: {
+                    fontSize: 22,
+                    bold: true,
+                    alignment: 'right',
+                    margin: [0, 0, 0, 15]
+                },
+                // Invoice Details
+                invoiceSubTitle: {
+                    fontSize: 12,
+                    alignment: 'right'
+                },
+                invoiceSubValue: {
+                    fontSize: 12,
+                    alignment: 'right'
+                },
+                // Items Footer (Subtotal, Total, Tax, etc)
+                itemsFooterSubTitle: {
+                    margin: [20,55, 0, 5],
+                    alignment: 'left',
+                    fillColor: '#F0E2B6',
+                },
+                itemsFooterSubValue: {
+                    margin: [-20, 55, -20, 5],
+                    bold: true,
+                    alignment: 'left',
+                    fillColor: '#F0E2B6',
+                },
+                tableExample: {
+                    margin: [0, -60, 0, 50],
+                    fontSize: 9,
+                    alignment: 'center',
+    
+                },
+                itemsFooterTotalValue: {
+                    margin: [0, 5, 0, 5],
+                    bold: true,
+                    alignment: 'center',
+                },
+                itemsFooterTotalTitle:{
+                    margin: [0, -30, 0, 40],
+                        bold: true,
+                        alignment: 'left',
+                    //   color:'green',
                         fontSize: 20,
-                        margin: [-20, -30, -10, 5],
-                         bold: true,
-                         alignment: 'right',
-                       //   fillColor: '#F0E2B6',
-                         
-                   },
-                   center: {
-                       alignment: 'center',
-                   },
-               },
-               defaultStyle: {
-                   columnGap: 20,
-               }
+                    //   fillColor: '#F0E2B6',
+    
+                },
+                finalAmount:{
+                    margin: [0, 5, 0, 5],
+                        bold: true,
+                        alignment: 'center',
+                        color:'#E0A526',
+                },
+                tableValue:{
+                    margin: [0, 5, 0, 5],
+                        alignment: 'center',
+                },
+                itemsFooterTotal:{
+                    fontSize: 20,
+                    margin: [-20, -30, -10, 5],
+                        bold: true,
+                        alignment: 'right',
+                    //   fillColor: '#F0E2B6',
+                        
+                },
+                center: {
+                    alignment: 'center',
+                },
+            },
+            defaultStyle: {
+                columnGap: 20,
             }
+        }
             console.log('start pdf')
             let pdfDoc = await pdfmake.createPdfKitDocument(document);
             var chunks = [];

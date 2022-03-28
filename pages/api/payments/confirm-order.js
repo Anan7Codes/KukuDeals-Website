@@ -75,14 +75,17 @@ const webhookHandler = async (req, res) => {
                 // .eq("status", true)
                 .single()
             console.log("initiated orders", initiated_orders)
-            
-            
+            let completed_orders = await supabase
+                .from('completed_orders')
+                .select('*', { count: 'exact' })
+            console.log("completed orders", completed_orders)
+
             let ordered_coupons = []
             let donated_coupons = []
             let coupons = []
 
             await map(initiated_orders.data.cart, async (order, index) => {
-                coupons.push({ product_id: JSON.parse(order).id, product_coupons: [], product_qty: JSON.parse(order).qty, product_price: JSON.parse(order).Price, name: JSON.parse(order).ProductName.en + "/" + JSON.parse(order).GiftName.en, image: JSON.parse(order).Image, donated: JSON.parse(order).donate })
+                coupons.push({ product_id: JSON.parse(order).id, product_coupons: [], product_qty: JSON.parse(order).qty, product_price: JSON.parse(order).Price, name: JSON.parse(order).ProductName.en + "/" + JSON.parse(order).GiftName.en, image: JSON.parse(order).Image, donated: JSON.parse(order).donate, purchase_date: `${moment(new Date().toLocaleString()).format('ll')}`})
                 for (let i = 1; i <= JSON.parse(order).qty; i++) {
                     ordered_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(5, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}-${ordered_coupons.length + 1}O`)
                     coupons[index].product_coupons.push(`KUKU${String(completed_orders.count + 1).padStart(5, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}-${ordered_coupons.length}O`)
@@ -206,246 +209,12 @@ const webhookHandler = async (req, res) => {
             } else {
                 amount = initiated_orders.data.final_amount
             }
-            let transaction_number = await supabase
-            .from('completed_orders')
-            .select('transaction_number')
-            .eq("user_id",user_id)
-            transaction_number = transaction_number.data
-
             let today = new Date();
             let dd = String(today.getDate()).padStart(2, '0');
             let mm = String(today.getMonth() + 1).padStart(2, '0'); 
             let yyyy = today.getFullYear();
-            let display
             today = dd + '/' + mm + '/' + yyyy;
 
-            const template = `
-            <!DOCTYPE html>
-            <html>
-            <head>
-              <meta charset="utf-8">
-              <meta http-equiv="x-ua-compatible" content="ie=edge">
-              <title>KUKU Email Invoice</title>
-              <meta name="viewport" content="width=device-width, initial-scale=1">
-              <style type="text/css">
-            
-              @media screen {
-                @font-face {
-                  font-family: 'Source Sans Pro';
-                  font-style: normal;
-                  font-weight: 400;
-                  src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v10/ODelI1aHBYDBqgeIAH2zlBM0YzuT7MdOe03otPbuUS0.woff) format('woff');
-                }
-            
-                @font-face {
-                  font-family: 'Source Sans Pro';
-                  font-style: normal;
-                  font-weight: 700;
-                  src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(https://fonts.gstatic.com/s/sourcesanspro/v10/toadOcfmlt9b38dHJxOBGFkQc6VGVFSmCnC_l7QZG60.woff) format('woff');
-                }
-              }
-              @media only screen and (max-width: 900px) and (min-width: 200px) {
-                #fadeshow1 {
-                    display: none;
-                }
-            }
-            @media only screen and (min-width: 901px) {
-                #fadeshow1 {
-                    display: none;
-                }
-            }
-              body,
-              table,
-              td,
-              a {
-                -ms-text-size-adjust: 100%; 
-                -webkit-text-size-adjust: 100%; 
-              }
-            
-              table,
-              img {
-                -ms-interpolation-mode: bicubic;
-              }
-            
-              a[x-apple-data-detectors] {
-                font-family: inherit !important;
-                font-size: inherit !important;
-                font-weight: inherit !important;
-                line-height: inherit !important;
-                color: inherit !important;
-                text-decoration: none !important;
-              }
-              div[style*="margin: 16px 0;"] {
-                margin: 0 !important;
-              }
-            
-              body {
-                width: 100% !important;
-                height: 100% !important;
-                padding: 0 !important;
-                margin: 0 !important;
-              }
-            
-              table {
-                border-collapse: collapse !important;
-              }
-            
-              a {
-                color: #2c2c2c;
-              }
-            
-              img {
-                height: auto;
-                line-height: 100%;
-                text-decoration: none;
-                border: 0;
-                outline: none;
-              }
-              </style>
-            
-            </head>
-            <body style="background-color: #161616;">
-              <div class="preheader" style="display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;">
-                A preheader is the short summary text that follows the subject line when an email is viewed in the inbox.
-              </div>
-              <table border="0" cellpadding="0" cellspacing="0" width="100%">
-            
-                <tr>
-                  <td align="center" bgcolor="#161616">
-                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;background-color:#2c2c2c">
-                      <tr>
-                        <td align="center" valign="top" style="padding: 36px 24px;">
-                          <div>
-                            <img src="https://kukudeals.com/kuku-white.png" style="width: 40%;  padding: 20px 0 20px 0;"
-                                layout="fill" alt="kuku logo" />
-                        </div>
-                        <div>
-                            <img src="https://kukudeals.com/tick.png" style="width: 18%;padding-bottom: 10px;" layout="fill"
-                            alt="tick logo" />
-                        </div>
-                        <span style="color:#ffd601;font-weight: bold;font-size: x-large;padding:10px 0 0 0">Congratulations!</span><br>
-                        <span style="padding:5px 0 20px 0;text-align:center;line-height: 1.5;color:white">Thank you for placing your order
-                            <br> Please find your invoice below</span>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-               
-                <tr>
-                  <td align="center" bgcolor="#161616">
-                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
-                      <tr>
-                        <td align="left" bgcolor="#161616" style="color:white;padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                         
-                            <table id="fadeshow2" border="0" cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                              <td align="left" bgcolor="#161616" width="100%" style="padding: 0px 0px 0px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 26px; line-height: 32px;"><strong>Tax Invoice</strong></td>
-                              <!-- <b style="font-size: 26px; padding: 12px;">Tax Invoice</b><br> -->
-                            </tr>
-                            <tr>`
-                            {coupons.map((item,i) => {
-                                return (
-                                    `<td colspan="2" style="line-height: 32px;font-size:16px;padding:5px 15px 0 12px;">
-                                    <b>TRN:</b> 100066261700003<br>
-                                    <b>Transaction Number:</b> ${transaction_number}<br>
-                                    <b>Purachse Date:</b> ${today}
-                                 </td>                
-                                </tr>
-                                <tr>
-                                    <td align="left" width="10%" style="padding: 10px 0px 0px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">Total before VAT</td>
-                                    <td align="right" width="90%" style="padding: 10px 0px 0px 0px;min-width:150px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 16px;">AED${item[i].product_price* rows[i].product_qty * 0.95}</td>
-                                  </tr>
-                                <tr>
-                                    <td align="left" width="10%" style="padding: 10px 0px 10px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">VAT Amount</td>
-                                    <td align="right" width="90%" style="padding: 10px 0px 10px 0px;min-width:150px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 16px;">AED${item[i].product_price* rows[i].product_qty * 0.05}</td>
-                                  </tr>
-                                <tr>
-                                    <td align="left" width="10%" style="border-top: 2px dashed #D2C7BA; border-bottom: 2px dashed #D2C7BA;padding: 10px 0px 10px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 24px; line-height: 24px;"><b>Total</b></td>
-
-                                    <td align="right" width="90%" style="padding: 10px 0px 10px 0px;min-width:150px;border-top: 2px dashed #D2C7BA; border-bottom: 2px dashed #D2C7BA;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 24px; line-height: 24px;"><b>AED${amount.toString()}</b></td>
-                                  </tr>`
-                            )})}
-
-                               
-                               ` <tr>
-                                    <td align="left" width="10%" style="padding: 40px 0px 0px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 26px; line-height: 24px;"><b>Your Coupons</b></td>
-                                  </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table> 
-                  </td>
-                </tr>
-                <tr>
-                  <td align="center" bgcolor="#161616">
-                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
-                      <tr>
-                        <td align="left" bgcolor="#2c2c2c" style="color:white;padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">        
-                          <table  border="0" cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                              <!-- <td align="left" bgcolor="#161616" width="100%" style="padding: 0px 0px 10px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 26px; line-height: 32px;"><strong>Your Coupons</strong></td> -->
-                            </tr>`
-                            {coupons.map((items,i) => {
-                                display = items.product_coupons
-                                return (
-                                    `<tr>
-                                    <td colspan="2"bgcolor="#2c2c2c" style="color:white;line-height: 2px;font-size:16px;padding:5px 15px 0 12px;">
-                                      <img src="https://kukudeals.com/kuku-white.png" style="width: 25%;padding:0px 0px 20px 0;"
-                                      layout="fill" alt="kuku logo" />
-                                      <p><b>Product: </b><span>${items.name}</span></p><br>
-                                      <img align="right" bgcolor="#2c2c2c" src="https://jipvpsiwfwiyqyxpssli.supabase.in/storage/v1/object/public/campaigns/5kgold-crypto.webp" style="width:15%;padding:-20px 30px 0px 0px;" alt="">
-                                      <p><b>Prize: </b><span>Iphone SE</span></p><br>
-                                      <p><b>Purchased on: </b><span>23/03/2022</span></p><br><hr>
-                                      <p align="right" bgcolor="#161616" width="75%" style="font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 2px;">Coupon No.<strong>${display}</strong></p>
-                                     </td>       
-                                     <td>
-                                     </td>      
-                                </tr>`
-                                )})}
-                          `</table>
-                        </td>
-                      </tr>
-                    </table> 
-                  </td>
-                </tr>
-            
-                <tr>
-                  <td align="center" bgcolor="#161616" style="padding: 24px;">
-                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
-                      <tr>
-                        <td align="center" bgcolor="#2c2c2c" style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
-                            <img src="https://kukudeals.com/appstore.png" style="width:25%; padding: 10px 10px 0px"
-                            alt="appstore">
-                        <img src="https://kukudeals.com/playstore.png" style
-                        ="width:25%;padding:10px 0 0px 10px"
-                            alt="playstore">            
-                        </td>
-                      </tr>
-                      <tr>
-                        <td align="center" bgcolor="#2c2c2c" style="padding: 2px 24px;padding-bottom: 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
-                            <a target="_blank" href="https://www.facebook.com/kukudeals/">
-                                <img src="https://kukudeals.com/facebook.png " style="width:5%;padding-left: 10px;color: #2c2c2c;" alt="">
-                            </a>
-                            <a target="_blank" href="https://www.twitter.com/kukudeals/">
-                                <img src="https://kukudeals.com/twitter.png " style="width:5%;padding-left: 10px;color: #2c2c2c;" alt="">
-                            </a>
-                            <a target="_blank" href="https://www.instagram.com/kukudeals/?hl=en">
-                                <img src="https://kukudeals.com/instagram.png " style="width:5%;padding-left: 10px;color: #2c2c2c;" alt="">
-                            </a>
-                            <a target="_blank" href="https://ae.linkedin.com/company/kukudeals">
-                                <img src="https://kukudeals.com/linkedin.png " style="width:5%;padding-left: 10px ;color: #2c2c2c;" alt="">
-                            </a>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </body>
-            </html>
-           `
-            
             var headers = {
                 fila_0: {
                     col_1: { text: 'SL', style: 'tableHeader', rowSpan: 2, alignment: 'center', margin: [0, 10, 0, 0] },
@@ -525,194 +294,195 @@ const webhookHandler = async (req, res) => {
                 {
                     columns: [
                         
+                    {
+                        text: 'Customer Name:',
+                        style: 'invoiceSubTitle',
+                        alignment: 'left',
+                        margin: [0, -110, 0, 0]
+                    },
                         {
-                            text: 'Customer Name:',
+                            text: profile.data[0].name,
+                            style: 'invoiceSubValue',
+                            alignment: 'left',
+                            margin: [-76, -110, 0, 0]
+                        },
+                        {
+                            text: 'Invoice No: ',
                             style: 'invoiceSubTitle',
                             alignment: 'left',
-                            margin: [0, -110, 0, 0]
+                            margin: [-30, -110, 24, 0]
                         },
-                            {
-                                text: profile.data[0].name,
-                                style: 'invoiceSubValue',
-                                alignment: 'left',
-                                margin: [-76, -110, 0, 0]
-                            },
-                            {
-                                text: 'Invoice No: ',
-                                style: 'invoiceSubTitle',
-                                alignment: 'left',
-                                margin: [0, -110, 24, 0]
-                            },
-                            {
-                                text: `${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}`,
-                                style: 'invoiceSubValue',
-                                alignment: 'right',
-                                margin: [-42, -110, 110, 0]
-                            },
-                        ]
-                    },
-                    {
-                        columns: [
-                            {
-                                text: 'Email: ',
-                                style: 'invoiceSubTitle',
-                                alignment: 'left',
-                                margin: [0, -90, 0, 0]
-                            },
-                            {
-                                text: profile.data[0].email,
-                                style: 'invoiceSubValue',
-                                alignment: 'left',
-                                margin: [-101, -90, 0, 0]
-                            },
-                            {
-                                text: 'Invoice Date: ',
-                                style: 'invoiceSubTitle',
-                                alignment: 'right',
-                                margin: [0, -90, -83, 0]
-                            },
-                            {
-                                text: today,
-                                style: 'invoiceSubValue',
-                                alignment: 'right',
-                                margin: [0, -90, -7, 0]
-                            },
-                        ]
-                    },
-                    {
-                        style: 'tableExample',
-                        table: {
-                            widths: [24, 100, '*', '*', '*', '*', '*','*'],
-                            headerRows: 2,
-                            // keepWithHeaderRows: 1,
-                            body: body
-                        }
-                    },
-                    {
-                        table: {
-                            headerRows: 0,
-                            widths: [442, 80],
+                        {
+                            text: `${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}`,
+                            style: 'invoiceSubValue',
+                            alignment: 'right',
+                            margin: [-42, -110, 110, 0]
+                        },
+                    ]
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Email: ',
+                            style: 'invoiceSubTitle',
+                            alignment: 'left',
+                            margin: [0, -90, 0, 0]
+                        },
+                        {
+                            text: profile.data[0].email,
+                            style: 'invoiceSubValue',
+                            alignment: 'left',
+                            margin: [-101, -90, 0, 0]
+                        },
+                        {
+                            text: 'Invoice Date: ',
+                            style: 'invoiceSubTitle',
+                            alignment: 'right',
+                            margin: [5, -90, -83, 0]
+                        },
+                        {
+                            text: today,
+                            style: 'invoiceSubValue',
+                            alignment: 'right',
+                            margin: [0, -90, -7, 0]
+                        },
+                    ]
+                },
+                {
+                    style: 'tableExample',
+                    table: {
+                        widths: [24, 100, '*', '*', '*', '*', '*','*'],
+                        headerRows: 2,
+                        // keepWithHeaderRows: 1,
+                        body: body
+                    }
+                },
+                {
+                    table: {
+                        headerRows: 0,
+                        widths: [442, 80],
 
-                            body: [
-                                [
-                                    {
-                                        text: 'GRAND TOTAL',
-                                        style: 'itemsFooterTotalTitle'
-                                    },
-                                    {
-                                        text: `AED${amount.toString()}`,
-                                        style: 'itemsFooterTotal'
-                                    }
-                                ],
-                            ]
-                        },
-                        layout: 'lightHorizontalLines'
+                        body: [
+                            [
+                                {
+                                    text: 'GRAND TOTAL',
+                                    style: 'itemsFooterTotalTitle'
+                                },
+                                {
+                                    text: `AED${amount.toString()}`,
+                                    style: 'itemsFooterTotal'
+                                }
+                            ],
+                        ]
                     },
-                ],
-                styles: {
-                    documentHeaderLeft: {
-                       fontSize: 10,
-                       margin: [25, 15, 15, 15],
-                       alignment: 'left'
-                   },
-                   documentHeaderCenter: {
-                       fontSize: 10,
-                       margin: [75, 15, 15, 15],
-                       alignment: 'center'
-                   },
-                   documentHeaderRightFirst: {
-                       fontSize: 18,
-                       margin: [15, 16, -220, 15],
-                       alignment: 'right',
-                       bold: true,
-                   },
-                   documentHeaderRightSecond: {
-                       fontSize: 8,
-                       margin: [15, 40, 19, 15],
-                       alignment: 'right',
-                       bold: true,
-                   },
-                    documentHeaderRight: {
-                       fontSize: 10,
-                       margin: [15, 15, 30, 15],
-                       alignment: 'right',
-                       bold: true,
-       
-                   },
-                   // Invoice Title
-                   invoiceTitle: {
-                       fontSize: 22,
-                       bold: true,
-                       alignment: 'right',
-                       margin: [0, 0, 0, 15]
-                   },
-                   // Invoice Details
-                   invoiceSubTitle: {
-                       fontSize: 12,
-                       alignment: 'right'
-                   },
-                   invoiceSubValue: {
-                       fontSize: 12,
-                       alignment: 'right'
-                   },
-                   // Items Footer (Subtotal, Total, Tax, etc)
-                   itemsFooterSubTitle: {
-                       margin: [20,55, 0, 5],
-                       alignment: 'left',
-                       fillColor: '#F0E2B6',
-                   },
-                   itemsFooterSubValue: {
-                       margin: [-20, 55, -20, 5],
-                       bold: true,
-                       alignment: 'left',
-                       fillColor: '#F0E2B6',
-                   },
-                   tableExample: {
-                       margin: [0, -60, 0, 50],
-                       fontSize: 9,
-                       alignment: 'center',
-       
-                   },
-                   itemsFooterTotalValue: {
-                       margin: [0, 5, 0, 5],
-                       bold: true,
-                       alignment: 'center',
-                   },
-                   itemsFooterTotalTitle:{
-                        margin: [0, -30, 0, 40],
-                         bold: true,
-                         alignment: 'left',
-                       //   color:'green',
-                         fontSize: 20,
-                       //   fillColor: '#F0E2B6',
-       
-                   },
-                   finalAmount:{
-                        margin: [0, 5, 0, 5],
-                         bold: true,
-                         alignment: 'center',
-                         color:'#E0A526',
-                   },
-                   tableValue:{
-                        margin: [0, 5, 0, 5],
-                         alignment: 'center',
-                   },
-                   itemsFooterTotal:{
+                    layout: 'lightHorizontalLines'
+                },
+            ],
+            styles: {
+                documentHeaderLeft: {
+                    fontSize: 10,
+                    margin: [25, 15, 15, 15],
+                    alignment: 'left'
+                },
+                documentHeaderCenter: {
+                    fontSize: 10,
+                    margin: [75, 15, 15, 15],
+                    alignment: 'center'
+                },
+                documentHeaderRightFirst: {
+                    fontSize: 18,
+                    margin: [15, 16, -220, 15],
+                    alignment: 'right',
+                    bold: true,
+                },
+                documentHeaderRightSecond: {
+                    fontSize: 8,
+                    margin: [15, 40, 19, 15],
+                    alignment: 'right',
+                    bold: true,
+                },
+                documentHeaderRight: {
+                    fontSize: 10,
+                    margin: [15, 15, 30, 15],
+                    alignment: 'right',
+                    bold: true,
+    
+                },
+                // Invoice Title
+                invoiceTitle: {
+                    fontSize: 22,
+                    bold: true,
+                    alignment: 'right',
+                    margin: [0, 0, 0, 15]
+                },
+                // Invoice Details
+                invoiceSubTitle: {
+                    fontSize: 12,
+                    alignment: 'right'
+                },
+                invoiceSubValue: {
+                    fontSize: 12,
+                    alignment: 'right'
+                },
+                // Items Footer (Subtotal, Total, Tax, etc)
+                itemsFooterSubTitle: {
+                    margin: [20,55, 0, 5],
+                    alignment: 'left',
+                    fillColor: '#F0E2B6',
+                },
+                itemsFooterSubValue: {
+                    margin: [-20, 55, -20, 5],
+                    bold: true,
+                    alignment: 'left',
+                    fillColor: '#F0E2B6',
+                },
+                tableExample: {
+                    margin: [0, -60, 0, 50],
+                    fontSize: 9,
+                    alignment: 'center',
+    
+                },
+                itemsFooterTotalValue: {
+                    margin: [0, 5, 0, 5],
+                    bold: true,
+                    alignment: 'center',
+                },
+                itemsFooterTotalTitle:{
+                    margin: [0, -30, 0, 40],
+                        bold: true,
+                        alignment: 'left',
+                    //   color:'green',
                         fontSize: 20,
-                        margin: [-20, -30, -10, 5],
-                         bold: true,
-                         alignment: 'right',
-                       //   fillColor: '#F0E2B6',
-                         
-                   },
-                   center: {
-                       alignment: 'center',
-                   },
-               },
-               defaultStyle: {
-                   columnGap: 20,
-               }
-           }
+                    //   fillColor: '#F0E2B6',
+    
+                },
+                finalAmount:{
+                    margin: [0, 5, 0, 5],
+                        bold: true,
+                        alignment: 'center',
+                        color:'#E0A526',
+                },
+                tableValue:{
+                    margin: [0, 5, 0, 5],
+                        alignment: 'center',
+                },
+                itemsFooterTotal:{
+                    fontSize: 20,
+                    margin: [-20, -30, -10, 5],
+                        bold: true,
+                        alignment: 'right',
+                    //   fillColor: '#F0E2B6',
+                        
+                },
+                center: {
+                    alignment: 'center',
+                },
+            },
+            defaultStyle: {
+                columnGap: 20,
+            }
+        }
+            console.log('start pdf')
             let pdfDoc = await pdfmake.createPdfKitDocument(document);
             var chunks = [];
             var result, bufferData;
@@ -725,14 +495,21 @@ const webhookHandler = async (req, res) => {
                 bufferData = 'data:application/pdf;base64,' + result.toString('base64')
                 const data1 = {
                     from: 'KukuDeals <no-reply@kukudeals.com>',
+                    templateId: 'd-7ea5058b9a69441b961d23407bc143d3',
                     personalizations: [
                         {
                             to: [`${profile.data[0].email}`, 'kukudealsdev@gmail.com'],
                             subject: 'Order Confirmation',
-            
+                            dynamicTemplateData: {
+                                transactionNumber: `${String(completed_orders.count + 1).padStart(4, '0')} - ${moment(new Date().toLocaleString()).format('YYYYMMDD')}`,
+                                purchaseDate: `${moment(new Date().toLocaleString()).format('ll')}`,
+                                totalBeforeVat: `AED ${(amount * 0.95).toFixed(2).toString()}`,
+                                vatAmount: `AED ${(amount * 0.05).toFixed(2).toString()}`,
+                                total: `AED ${(amount).toString()}`,
+                                coupons: coupons,
+                            }
                         },
                     ],
-                    content: [{ type: "text/html", value: template },],
                     attachments: [
                         {
                             content: result.toString('base64'),

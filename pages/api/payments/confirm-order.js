@@ -309,14 +309,14 @@ const webhookHandler = async (req, res) => {
                         {
                             text: 'Invoice No: ',
                             style: 'invoiceSubTitle',
-                            alignment: 'left',
-                            margin: [-30, -110, 24, 0]
+                            alignment: 'right',
+                            margin: [0, -110, 24, 0]
                         },
                         {
                             text: `${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}`,
                             style: 'invoiceSubValue',
                             alignment: 'right',
-                            margin: [-42, -110, 110, 0]
+                            margin: [-42, -110, 105, 0]
                         },
                     ]
                 },
@@ -338,13 +338,13 @@ const webhookHandler = async (req, res) => {
                             text: 'Invoice Date: ',
                             style: 'invoiceSubTitle',
                             alignment: 'right',
-                            margin: [5, -90, -83, 0]
+                            margin: [0, -90, -78, 0]
                         },
                         {
                             text: today,
                             style: 'invoiceSubValue',
                             alignment: 'right',
-                            margin: [0, -90, -7, 0]
+                            margin: [0, -90, -9, 0]
                         },
                     ]
                 },

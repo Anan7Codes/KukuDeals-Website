@@ -111,7 +111,9 @@ export default async function handler(req, res) {
                     final_amount: donated ? finalTotal.toFixed() : (finalTotal+20).toFixed(),
                     verification_secret: paymentIntent.id,
                     user_id: req.body.user_id,
-                    promo_code_used: req.body.promoCode
+                    promo_code_used: req.body.promoCode,
+                    platform: req.body.platform,
+                    locale: req.body.locale
                 },
             ])
         console.log("initiated_orders pi", initiated_orders_response)

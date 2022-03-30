@@ -12,9 +12,9 @@ const TotalPrice = async (cart) => {
     let donated = true
     await map(cart, async (item) => {
         let { data, error } = await supabase
-        .from('campaigns')
-        .select('Price')
-        .eq("id", item.id)
+            .from('campaigns')
+            .select('Price')
+            .eq("id", item.id)
         if(error) return success = false
         total += data[0].Price * item.qty
         if(item.donate === 'false') {
@@ -118,7 +118,9 @@ export default async function handler(req, res) {
                         final_amount: donated ? finalTotal.toFixed() : (finalTotal+20).toFixed(),
                         verification_secret: session.payment_intent,
                         user_id: req.body.user_id,
-                        promo_code_used: req.body.promoCode
+                        promo_code_used: req.body.promoCode,
+                        platform: req.body.platform,
+                        locale: req.body.locale
                     },
                 ])
 

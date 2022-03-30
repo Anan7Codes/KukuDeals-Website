@@ -495,7 +495,7 @@ const webhookHandler = async (req, res) => {
                 bufferData = 'data:application/pdf;base64,' + result.toString('base64')
                 const data1 = {
                     from: 'KukuDeals <no-reply@kukudeals.com>',
-                    templateId: 'd-7ea5058b9a69441b961d23407bc143d3',
+                    templateId: initiated_orders.data.locale === 'ar' ? 'd-63bd1301547c477babb36b48abf1b80e' : 'd-7ea5058b9a69441b961d23407bc143d3',
                     personalizations: [
                         {
                             to: [`${profile.data[0].email}`, 'kukudealsdev@gmail.com'],
@@ -503,9 +503,9 @@ const webhookHandler = async (req, res) => {
                             dynamicTemplateData: {
                                 transactionNumber: `${String(completed_orders.count + 1).padStart(4, '0')} - ${moment(new Date().toLocaleString()).format('YYYYMMDD')}`,
                                 purchaseDate: `${moment(new Date().toLocaleString()).format('ll')}`,
-                                totalBeforeVat: `AED ${(amount * 0.95).toFixed(2).toString()}`,
-                                vatAmount: `AED ${(amount * 0.05).toFixed(2).toString()}`,
-                                total: `AED ${(amount).toString()}`,
+                                totalBeforeVat: initiated_orders.data.locale === 'ar' ? `${(amount * 0.95).toFixed(2).toString()} درهم` : `AED ${(amount * 0.95).toFixed(2).toString()}`,
+                                vatAmount: initiated_orders.data.locale === 'ar' ? `${(amount * 0.05).toFixed(2).toString()} درهم` : `AED ${(amount * 0.05).toFixed(2).toString()}`,
+                                total: initiated_orders.data.locale === 'ar' ? `${(amount).toString()} درهم` : `AED ${(amount).toString()}`,
                                 coupons: coupons,
                             }
                         },

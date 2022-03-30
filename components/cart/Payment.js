@@ -99,7 +99,8 @@ export default function Payment() {
                 promoCode: promoCodeApplied ? promoCode : null,
                 user_id: user.id,
                 cart: cart,
-                locale: locale
+                locale: i18n.language,
+                platform: "Website"
             })
 
             if(!response.data.success) return alert(response.data.message)

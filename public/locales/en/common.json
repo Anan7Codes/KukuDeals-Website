@@ -199,5 +199,7 @@
     "product/prize": "Product/Prize",
     "send-message": "Send Message",
     "form-submitted": "We've successfully received your message.",
-    "total-coupons": "Total Coupons" 
+    "total-coupons": "Total Coupons",
+    "early-bird-offer": "Early bird offer",
+    "early-bird-desc": "Early bird offer will give you an extra coupon after checkout." 
 }

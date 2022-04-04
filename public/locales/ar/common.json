@@ -199,5 +199,7 @@
     "product/prize": "المنتج / الجائزة", 
     "send-message": "أرسل رسالة",
     "form-submitted": "لقد تلقينا رسالتك بنجاح.",
-    "total-coupons": "إجمالي القسائم"
+    "total-coupons": "إجمالي القسائم",
+    "early-bird-offer": "عرض الطيور المبكرة",
+    "early-bird-desc": "سيمنحك عرض الحجز المبكر قسيمة إضافية بعد الدفع." 
 }

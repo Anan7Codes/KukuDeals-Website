@@ -5,6 +5,7 @@ import Image from "next/image";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { Dialog, Transition } from "@headlessui/react";
 import { CartState } from '@/contexts/cart/CartContext';
+import EarlyBird from './EarlyBird';
 
 export default function Campaign({ campaign }) {
     const  { t, i18n } = useTranslation()
@@ -12,7 +13,7 @@ export default function Campaign({ campaign }) {
     const [isOpen, setIsOpen] = useState(false);
     const [prizeDetails, setPrizeDetails] = useState(true);
     const [qty, setQty] = useState(0)
-  
+
     function closeModal() {
       setIsOpen(false);
     }
@@ -121,6 +122,7 @@ export default function Campaign({ campaign }) {
                   <p className='text-white text-xs'>{t('sold-out-rule')}</p>
                 </div>
               </div>
+              <EarlyBird expiryTimestamp={campaign?.created_at} value={campaign?.EarlyBirdValue} freq={campaign?.EarlyBirdFrequency}/>
             </div>
 
             {campaign?.TotalCoupons === 99999 ?

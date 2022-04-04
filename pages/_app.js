@@ -1,5 +1,7 @@
 import '../styles/globals.css'
 import Head from 'next/head'
+import { useEffect } from 'react';
+import TagManager from 'react-gtm-module';
 import { appWithTranslation } from 'next-i18next'
 import { ToastContainer } from 'react-toastify';
 import { useTranslation } from "next-i18next";
@@ -11,6 +13,10 @@ import UserProvider from '@/contexts/user/UserContext';
 
 function MyApp({ Component, pageProps }) {
   const { i18n } = useTranslation()
+  useEffect(() => {
+    TagManager.initialize({ gtmId: 'GTM-TX2G7LG' });
+  }, []);
+
   return (
     <UserProvider>
       <CartContext>

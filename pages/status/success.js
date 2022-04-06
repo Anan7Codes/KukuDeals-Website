@@ -132,11 +132,11 @@ function Success() {
                     </div>
                     <div className="flex items-center justify-between font-semibold text-white mt-6">
                       <p>{t('total-before-vat')}</p>
-                      <p>{t('aed')} {latestOrder?.final_amount*0.95.toFixed(2)}</p>
+                      <p>{t('aed')} {(latestOrder?.final_amount*0.95).toFixed(2)}</p>
                     </div>
                     <div className="flex items-center justify-between font-semibold text-white my-2">
                       <p>{t('vat-amount')}</p>
-                      <p>{t('aed')} {latestOrder?.final_amount*0.05.toFixed(2)}</p>
+                      <p>{t('aed')} {(latestOrder?.final_amount*0.05).toFixed(2)}</p>
                     </div>
                     <div className="flex items-center text-xl justify-between font-bold text-white">
                       <p>{t('total')}</p>

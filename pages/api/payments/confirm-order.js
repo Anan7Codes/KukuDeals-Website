@@ -3,8 +3,8 @@ import { createClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
 import { map } from 'modern-async'
 import moment from 'moment'
+const postmark = require("postmark")
 
-const mail = require('@sendgrid/mail')
 const Pdfmake = require('pdfmake');
 const fonts = require('pdfmake/build/vfs_fonts.js');
 const fontsDesc = {
@@ -23,9 +23,10 @@ const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY
 
 const supabase = createClient(supabaseUrl, supabaseSecretKey)
 
+const client = new postmark.ServerClient(process.env.POSTMARK_SERVER_API)
+
 const endpointSecret = process.env.WEBHOOK_SECRET
 
-mail.setApiKey(process.env.SENDGRID_API_KEY)
 let amount
 
 export const config = {
@@ -508,15 +509,15 @@ const webhookHandler = async (req, res) => {
             });
             pdfDoc.on('end', async function () {
                 result = Buffer.concat(chunks);
-                bufferData = 'data:application/pdf;base64,' + result.toString('base64')
-                const data1 = {
-                    from: 'KukuDeals <no-reply@kukudeals.com>',
-                    templateId: initiated_orders.data.locale === 'ar' ? 'd-63bd1301547c477babb36b48abf1b80e' : 'd-7ea5058b9a69441b961d23407bc143d3',
-                    personalizations: [
+                bufferData = 'data:application/pdf;base64,' + result.toString('base64')                
+                try {
+                    client.sendEmailWithTemplate(
                         {
-                            to: [`${profile.data[0].email}`, 'kukudealsdev@gmail.com'],
-                            subject: 'Order Confirmation',
-                            dynamicTemplateData: {
+                            From: "KukuDeals <no-reply@kukudeals.com>",
+                            To: `${profile.data[0].email}, kukudealsdev@gmail.com`,
+                            TemplateId: initiated_orders.data.locale === 'ar' ? 27554836 : 27553659,
+                            TemplateModel: {
+                                name: `${profile.data[0].name}`,
                                 transactionNumber: `${String(completed_orders.count + 1).padStart(4, '0')} - ${moment(new Date().toLocaleString()).format('YYYYMMDD')}`,
                                 purchaseDate: `${moment(new Date().toLocaleString()).format('ll')}`,
                                 totalBeforeVat: initiated_orders.data.locale === 'ar' ? `${(amount * 0.95).toFixed(2).toString()} درهم` : `AED ${(amount * 0.95).toFixed(2).toString()}`,
@@ -524,29 +525,22 @@ const webhookHandler = async (req, res) => {
                                 total: initiated_orders.data.locale === 'ar' ? `${(amount).toString()} درهم` : `AED ${(amount).toString()}`,
                                 coupons: coupons,
                             }
-                        },
-                    ],
-                    attachments: [
-                        {
-                            content: result.toString('base64'),
-                            filename: `KUKU${String(completed_orders.count + 1).padStart(5, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}.pdf`,
-                            type: 'application/pdf',
-                            disposition: 'attachment',
-                            content_id: 'mytext',
-                        },
-                    ],
-                }
-                try {
-                    const resp = await mail.send(data1)
-                    console.log(resp)
-                } catch (err) {
-                    return res.status(401).json({ status: 'Email sending failed' });
+                        }
+                    ).then(response => {
+                        console.log(response.To);
+                        console.log(response.SubmittedAt);
+                        console.log(response.Message);
+                        console.log(response.MessageID);
+                        console.log(response.ErrorCode);
+                    });
+                } catch(e) {
+                    return res.json({ success: false, message: "Email did not deliver" })
                 }
             });
             pdfDoc.end();
-            return res.send({ success: true, user_id, res_charge, mailres })
+            return res.send({ success: true, user_id})
         } else {
-            return res.send({ success: false, user_id, mailres, res_charge })
+            return res.send({ success: false, user_id })
         }
 
     }

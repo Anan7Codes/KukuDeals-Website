@@ -49,7 +49,7 @@ const Coupon = ({ campaign, activeOrders }) => {
                             return (
                                 <div className="h-[180px] lg:h-[150px] bg-white mr-2 pt-2 my-2 rounded-[15px] relative" key={i}>
                                     <div className="flex">
-                                        <div className="flex flex-col justify-between mx-4">
+                                        <div className="flex flex-col justify-between w-full mx-4">
                                             <div>
                                                 <p className="font-semibold text-[12px]">{t('coupon-no')}</p>
                                                 <p className="text-[10px] font-semibold">{item}</p>

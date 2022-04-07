@@ -3,9 +3,10 @@ import { createClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
 import { map } from 'modern-async'
 import moment from 'moment'
-const mailgun = require("mailgun-js");
-const DOMAIN = 'kukudeals.com';
-const mg = mailgun({apiKey: process.env.MAILGUN_KEY, domain: DOMAIN, host: "api.eu.mailgun.net"});
+const formData = require('form-data');
+const Mailgun = require('mailgun.js');
+const mailgun = new Mailgun(formData);
+const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_KEY, url: 'https://api.eu.mailgun.net'});
 
 const Pdfmake = require('pdfmake');
 const fonts = require('pdfmake/build/vfs_fonts.js');
@@ -503,40 +504,39 @@ const webhookHandler = async (req, res) => {
             console.log('start pdf')
             let pdfDoc = await pdfmake.createPdfKitDocument(document);
             var chunks = [];
-            var result, bufferData;
+            var result
             pdfDoc.on('data', function (chunk) {
                 chunks.push(chunk);
             });
             pdfDoc.on('end', async function () {
-                result = Buffer.concat(chunks);
-                bufferData = 'data:application/pdf;base64,' + result.toString('base64')                
-                try {
-                    const data = {
-                        from: 'KukuDeals <no-reply@kukudeals.com>',
-                        to: `${profile.data[0].email}, kukudealsdev@gmail.com`,
-                        subject: initiated_orders.data.locale === 'ar' ? `${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}تأكيد الطلب - ` : `Order Confirmation - ${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}` ,
-                        template: initiated_orders.data.locale === 'ar' ? 'receipt-arabic' : 'receipt',
-                        'h:X-Mailgun-Variables': JSON.stringify({
-                            name: `${profile.data[0].name}`,
-                            transactionNumber: `${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}`,
-                            purchaseDate: `${moment(new Date().toLocaleString()).format('ll')}`,
-                            totalBeforeVat: initiated_orders.data.locale === 'ar' ? `${(amount * 0.95).toFixed(2).toString()} درهم` : `AED ${(amount * 0.95).toFixed(2).toString()}`,
-                            vatAmount: initiated_orders.data.locale === 'ar' ? `${(amount * 0.05).toFixed(2).toString()} درهم` : `AED ${(amount * 0.05).toFixed(2).toString()}`,
-                            total: initiated_orders.data.locale === 'ar' ? `${(amount).toString()} درهم` : `AED ${(amount).toString()}`,
-                            coupons: coupons,
-                        }),
-                        attachments: [
-                            {
-                                filename: `${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}.pdf`,
-                                path: result.toString('base64'),
-                                contentType: 'application/pdf'
-                            }
-                        ]
-                    };
-                    await mg.messages().send(data, function (error, body) {
-                        console.log("Email Delivery Error", error)
-                        console.log("Email Delivery Body", body)
-                    });
+                result = Buffer.concat(chunks);  
+                const data = {
+                    from: 'KukuDeals <no-reply@kukudeals.com>',
+                    to: `${profile.data[0].email}, kukudealsdev@gmail.com`,
+                    subject: initiated_orders.data.locale === 'ar' ? `${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}تأكيد الطلب - ` : `Order Confirmation - ${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}` ,
+                    template: initiated_orders.data.locale === 'ar' ? 'receipt-arabic' : 'receipt',
+                    'h:X-Mailgun-Variables': JSON.stringify({
+                        name: `${profile.data[0].name}`,
+                        transactionNumber: `${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}`,
+                        purchaseDate: `${moment(new Date().toLocaleString()).format('ll')}`,
+                        totalBeforeVat: initiated_orders.data.locale === 'ar' ? `${(amount * 0.95).toFixed(2).toString()} درهم` : `AED ${(amount * 0.95).toFixed(2).toString()}`,
+                        vatAmount: initiated_orders.data.locale === 'ar' ? `${(amount * 0.05).toFixed(2).toString()} درهم` : `AED ${(amount * 0.05).toFixed(2).toString()}`,
+                        total: initiated_orders.data.locale === 'ar' ? `${(amount).toString()} درهم` : `AED ${(amount).toString()}`,
+                        coupons: coupons,
+                    }),
+                    attachment: [
+                        {
+                            filename: `${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}.pdf`,
+                            data: result,
+
+                        }
+                    ]
+                };            
+                try {                    
+                    await mg.messages.create("kukudeals.com", data)
+                    .then((res) => {
+                        console.log("Email Delivery", res)
+                    })
                 } catch(e) {
                     return res.json({ success: false, message: "Email did not deliver" })
                 }

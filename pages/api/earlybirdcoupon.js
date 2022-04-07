@@ -1,7 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
-const mailgun = require("mailgun-js");
-const DOMAIN = 'kukudeals.com';
-const mg = mailgun({apiKey: process.env.MAILGUN_KEY, domain: DOMAIN, host: "api.eu.mailgun.net"});
+const formData = require('form-data');
+const Mailgun = require('mailgun.js');
+const mailgun = new Mailgun(formData);
+const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_KEY, url: 'https://api.eu.mailgun.net'});
 const Pdfmake = require('pdfmake');
 const fonts = require('pdfmake/build/vfs_fonts.js');
 const fontsDesc = {
@@ -291,47 +292,46 @@ const webhookHandler = async (req, res) => {
     console.log('start pdf')
     let pdfDoc = await pdfmake.createPdfKitDocument(document);
     var chunks = [];
-    var result, bufferData;
+    var result
     pdfDoc.on('data', function (chunk) {
         chunks.push(chunk);
     });
     pdfDoc.on('end', async function () {
-        result = Buffer.concat(chunks);    
-        console.log(result)    
-        try {
-            const data = {
-                from: 'KukuDeals <no-reply@kukudeals.com>',
-                to: `anandhu@rough-paper.com`,
-                subject: `00040-20220312تأكيد الطلب - ` ,
-                template: 'receipt',
-                'h:X-Mailgun-Variables': JSON.stringify({
-                    name: "name_Value",
-                    transactionNumber: "transactionNumber_Value",
-                    purchaseDate: "purchaseDate_Value",
-                    totalBeforeVat: "totalBeforeVat_Value",
-                    vatAmount: "vatAmount_Value",
-                    total: "total_Value",
-                    coupons: [
-                        {
-                            name: "name_Value",
-                            purchase_date: "purchase_date_Value",
-                            product_coupons: [
-                                "product_coupons_1",
-                                "product_coupons_2",
-                                "product_coupons_3"
-                            ]
-                        }
-                    ],
-                }),
-                attachments: new mg.Attachment({
-                    data: result,
-                    filename: "Test"
-                })
-            };
-            await mg.messages().send(data, function (error, body) {
-                console.log("Email Delivery Error", error)
-                console.log("Email Delivery Body", body)
-            });
+        result = Buffer.concat(chunks);      
+        const data = {
+            from: 'KukuDeals <no-reply@kukudeals.com>',
+            to: `anandhu@rough-paper.com`,
+            subject: `00040-20220312تأكيد الطلب - ` ,
+            template: 'receipt',
+            'h:X-Mailgun-Variables': JSON.stringify({
+                name: "name_Value",
+                transactionNumber: "transactionNumber_Value",
+                purchaseDate: "purchaseDate_Value",
+                totalBeforeVat: "totalBeforeVat_Value",
+                vatAmount: "vatAmount_Value",
+                total: "total_Value",
+                coupons: [
+                    {
+                        name: "name_Value",
+                        purchase_date: "purchase_date_Value",
+                        product_coupons: [
+                            "product_coupons_1",
+                            "product_coupons_2",
+                            "product_coupons_3"
+                        ]
+                    }
+                ],
+            }),
+            attachment: [{
+                data: result,
+                filename: "TEst"
+            }]
+        }; 
+        try {            
+            await mg.messages.create("kukudeals.com", data)
+            .then((res) => {
+                console.log("Email Delivery", res)
+            })
         } catch(e) {
             return res.json({ success: false, message: "Email did not deliver" })
         }

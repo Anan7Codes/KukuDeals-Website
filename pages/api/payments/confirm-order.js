@@ -3,7 +3,9 @@ import { createClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
 import { map } from 'modern-async'
 import moment from 'moment'
-const postmark = require("postmark")
+const mailgun = require("mailgun-js");
+const DOMAIN = 'kukudeals.com';
+const mg = mailgun({apiKey: process.env.MAILGUN_KEY, domain: DOMAIN, host: "api.eu.mailgun.net"});
 
 const Pdfmake = require('pdfmake');
 const fonts = require('pdfmake/build/vfs_fonts.js');
@@ -22,8 +24,6 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY
 
 const supabase = createClient(supabaseUrl, supabaseSecretKey)
-
-const client = new postmark.ServerClient(process.env.POSTMARK_SERVER_API)
 
 const endpointSecret = process.env.WEBHOOK_SECRET
 
@@ -511,27 +511,31 @@ const webhookHandler = async (req, res) => {
                 result = Buffer.concat(chunks);
                 bufferData = 'data:application/pdf;base64,' + result.toString('base64')                
                 try {
-                    client.sendEmailWithTemplate(
-                        {
-                            From: "KukuDeals <no-reply@kukudeals.com>",
-                            To: `${profile.data[0].email}, kukudealsdev@gmail.com`,
-                            TemplateId: initiated_orders.data.locale === 'ar' ? 27554836 : 27553659,
-                            TemplateModel: {
-                                name: `${profile.data[0].name}`,
-                                transactionNumber: `${String(completed_orders.count + 1).padStart(4, '0')} - ${moment(new Date().toLocaleString()).format('YYYYMMDD')}`,
-                                purchaseDate: `${moment(new Date().toLocaleString()).format('ll')}`,
-                                totalBeforeVat: initiated_orders.data.locale === 'ar' ? `${(amount * 0.95).toFixed(2).toString()} درهم` : `AED ${(amount * 0.95).toFixed(2).toString()}`,
-                                vatAmount: initiated_orders.data.locale === 'ar' ? `${(amount * 0.05).toFixed(2).toString()} درهم` : `AED ${(amount * 0.05).toFixed(2).toString()}`,
-                                total: initiated_orders.data.locale === 'ar' ? `${(amount).toString()} درهم` : `AED ${(amount).toString()}`,
-                                coupons: coupons,
+                    const data = {
+                        from: 'KukuDeals <no-reply@kukudeals.com>',
+                        to: `${profile.data[0].email}, kukudealsdev@gmail.com`,
+                        subject: initiated_orders.data.locale === 'ar' ? `${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}تأكيد الطلب - ` : `Order Confirmation - ${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}` ,
+                        template: initiated_orders.data.locale === 'ar' ? 'receipt-arabic' : 'receipt',
+                        'h:X-Mailgun-Variables': JSON.stringify({
+                            name: `${profile.data[0].name}`,
+                            transactionNumber: `${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}`,
+                            purchaseDate: `${moment(new Date().toLocaleString()).format('ll')}`,
+                            totalBeforeVat: initiated_orders.data.locale === 'ar' ? `${(amount * 0.95).toFixed(2).toString()} درهم` : `AED ${(amount * 0.95).toFixed(2).toString()}`,
+                            vatAmount: initiated_orders.data.locale === 'ar' ? `${(amount * 0.05).toFixed(2).toString()} درهم` : `AED ${(amount * 0.05).toFixed(2).toString()}`,
+                            total: initiated_orders.data.locale === 'ar' ? `${(amount).toString()} درهم` : `AED ${(amount).toString()}`,
+                            coupons: coupons,
+                        }),
+                        attachments: [
+                            {
+                                filename: `${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}.pdf`,
+                                path: result.toString('base64'),
+                                contentType: 'application/pdf'
                             }
-                        }
-                    ).then(response => {
-                        console.log(response.To);
-                        console.log(response.SubmittedAt);
-                        console.log(response.Message);
-                        console.log(response.MessageID);
-                        console.log(response.ErrorCode);
+                        ]
+                    };
+                    await mg.messages().send(data, function (error, body) {
+                        console.log("Email Delivery Error", error)
+                        console.log("Email Delivery Body", body)
                     });
                 } catch(e) {
                     return res.json({ success: false, message: "Email did not deliver" })

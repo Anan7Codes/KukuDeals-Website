@@ -272,15 +272,15 @@ const webhookHandler = async (req, res) => {
                 row.push({text:(i + 1),style:'tableValue'})
                 row.push({ text: rows[i].name.toString(), style: 'tableValue' });
                 row.push({ text: rows[i].product_qty.toString(), style: 'tableValue' });
-                row.push({ text: `AED${rows[i].product_price.toString()}`, style: 'tableValue' });
+                row.push({ text: `AED${(rows[i].product_price).toFixed(2).toString()}`, style: 'tableValue' });
                 row.push({
-                    text: `AED${rows[i].product_price.toString() * rows[i].product_qty.toString() * 0.95}`,
+                    text: `AED${(rows[i].product_price * rows[i].product_qty * 0.95).toFixed(2).toString()}`,
                     style: 'tableValue'
                 });
                 row.push({ text: "5%", style: 'tableValue' });
-                row.push({text:`AED${rows[i].product_price* rows[i].product_qty * 0.05}`,style:'tableValue'});
+                row.push({ text:`AED${(rows[i].product_price* rows[i].product_qty * 0.05).toFixed(2).toString()}`,style:'tableValue' });
                 row.push({
-                    text: `AED${rows[i].product_price.toString() * rows[i].product_qty.toString()}`,
+                    text: `AED${(rows[i].product_price * rows[i].product_qty).toFixed(2).toString()}`,
                     style: 'finalAmount'
                 });
                 body.push(row);
@@ -297,10 +297,6 @@ const webhookHandler = async (req, res) => {
                         width: 120,
                         style: 'documentHeaderLeft'
                     },
-                        // {
-                        //     text: 'Shivon General Trading LLC\nBur Dubai, Dubai\n',
-                        //     style: 'documentHeaderCenter'
-                        // },
                     { text: 'TAX INVOICE ', style: 'documentHeaderRightFirst' },
                     { text: 'Shivon General Trading LLC\nBur Dubai, Dubai\n', style: 'documentHeaderRightSecond' },                    ]
                 },
@@ -521,7 +517,7 @@ const webhookHandler = async (req, res) => {
                         purchaseDate: `${moment(new Date().toLocaleString()).format('ll')}`,
                         totalBeforeVat: initiated_orders.data.locale === 'ar' ? `${(amount * 0.95).toFixed(2).toString()} درهم` : `AED ${(amount * 0.95).toFixed(2).toString()}`,
                         vatAmount: initiated_orders.data.locale === 'ar' ? `${(amount * 0.05).toFixed(2).toString()} درهم` : `AED ${(amount * 0.05).toFixed(2).toString()}`,
-                        total: initiated_orders.data.locale === 'ar' ? `${(amount).toString()} درهم` : `AED ${(amount).toString()}`,
+                        total: initiated_orders.data.locale === 'ar' ? `${(amount).toFixed(2).toString()} درهم` : `AED ${(amount).toFixed(2).toString()}`,
                         coupons: coupons,
                     }),
                     attachment: [

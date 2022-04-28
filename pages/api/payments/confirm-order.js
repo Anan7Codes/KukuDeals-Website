@@ -508,7 +508,8 @@ const webhookHandler = async (req, res) => {
                 result = Buffer.concat(chunks);  
                 const data = {
                     from: 'KukuDeals <no-reply@kukudeals.com>',
-                    to: `${profile.data[0].email}, kukudealsdev@gmail.com`,
+                    to: `${profile.data[0].email}`,
+                    bcc: 'kukudealsdev@gmail.com',
                     subject: initiated_orders.data.locale === 'ar' ? `${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}تأكيد الطلب - ` : `Order Confirmation - ${String(completed_orders.count + 1).padStart(4, '0')}-${moment(new Date().toLocaleString()).format('YYYYMMDD')}` ,
                     template: initiated_orders.data.locale === 'ar' ? 'receipt-arabic' : 'receipt',
                     'h:X-Mailgun-Variables': JSON.stringify({

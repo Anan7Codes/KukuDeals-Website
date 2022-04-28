@@ -24,6 +24,7 @@ export default function Home() {
   const { locale } = useRouter()
   const [campaigns, setCampaigns] = useState([])
   const [winners, setWinners] = useState([])
+  const [loading, setLoading] = useState(true)
   const [isSoldOutNextDisabled, setIsSoldOutNextDisabled] = useState(false)
   const [isSoldOutPrevDisabled, setIsSoldOutPrevDisabled] = useState(true)
   const [isWinnerNextDisabled, setIsWinnerNextDisabled] = useState(false)
@@ -52,6 +53,7 @@ export default function Home() {
           return
         }
         setCampaigns(data)
+        setLoading(false)
       } catch (e) {
         alert(e)
       }
@@ -82,7 +84,7 @@ export default function Home() {
     
   }, [])
  
-  if(campaigns.length === 0 ) return (
+  if(campaigns.length === 0 && (loading === true)) return (
     <SkeletonLayout>
       <Skeleton className="h-96" style={{borderRadius: 15}} />
       <Skeleton className="h-60 mt-6" style={{borderRadius: 15}} />
